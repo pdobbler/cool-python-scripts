@@ -118,6 +118,10 @@ for i in range(1, len(sequences)):
                 s.setCluster(seed.getCluster(), False, similarity)
                 found = True
                 break
+        else:
+            if show_alignments:
+                print("SEED: "+seed.title+" vs. "+s.title+" seed-len: "+str(seed.getLen())+" s-len: "+str(s.getLen()) + " >>> omitting alignment - similarity based on length: " + str(lensim))
+                print("")
     if not found:
         cluster += 1
         s.setCluster(cluster, True, 100.0)
