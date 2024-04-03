@@ -32,6 +32,7 @@ awk -F'\t' '{print $2}' samples.txt > fwd_tags.txt
 awk -F'\t' '{print $3}' samples.txt > rev_tags.txt
 ```
 
+
 ### CREATE AWK SCRIPT
 
 `nano vlookup.awk`
@@ -70,6 +71,7 @@ paste -d'\t' cols_sample.txt cols_fwd.txt cols_rev.txt > barcode_table.txt
 paste <(awk -F'\t' '{print $1}' samples.txt) <(awk -v col='3' -f vlookup.awk barcoded_primers_fwd.txt fwd_tags.txt) <(awk -v col='3' -f vlookup.awk barcoded_primers_rev.txt rev_tags.txt)
 ```
 
+
 ### DEMULTIPLEXING
 
 **move data to a new folder**
@@ -82,3 +84,63 @@ cd demulti/
 ```
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/Amplicons/Course_MB140P94/demultiplexing_fastq.py`
+
+`python2.7 demultiplexing_fastq.py barcode_table.txt BAC_R1.fastq BAC_R2.fastq`
+
+**count sample sequences**
+
+`grep '^@M' BAC_R1.fastq.cut | awk -F'|' '{print $2}' | sort | uniq -c > bacteria_counts.txt`
+
+
+### JOINNING PAIRED-ENDS - fastq-join
+
+**move data to a new folder**
+
+```
+mkdir joining
+mv *.cut joining/
+cd joining/
+```
+
+`fastq-join -v " " -p 15 -m 40 BAC_R1.fastq.cut BAC_R2.fastq.cut -o BAC_joined`
+
+
+### QUALITY FILTERING
+
+**average quality qreater or equal than treshold**
+
+`seqkit seq -Q 30  BAC_joinedjoin > BAC_joined_qm30.fq`
+
+**convert FASTQ to FASTA**
+
+`seqkit fq2fa BAC_joined_qm30.fq > BAC_joined_qm30.fa`
+
+
+### TRIMM Bacterial 16S - rest of primers & lenght restriction 
+
+```
+mkdir trimm
+mv BAC_joined_qm30.fa trimm/
+cd trimm/
+```
+
+**nucleotides only - Max**
+
+`awk 'NR % 2 == 0' BAC_joined_qm30.fa | wc -L`
+
+**nucleotides only - Min**
+
+`awk 'NR % 2 == 0' BAC_joined_qm30.fa | awk '{print length}' | sort -n | head -n1`
+
+**average length**
+
+```
+chars=$(awk 'NR % 2 == 0' BAC_joined_qm30.fa | wc -c)
+words=$(awk 'NR % 2 == 0' BAC_joined_qm30.fa | wc -w)
+avg_word_size=$(( ${chars} / ${words} ))
+echo "average length $avg_word_size"
+```
+
+**median**
+
+`sort -n <(awk 'NR % 2 == 0' BAC_joined_qm30.fa | awk '{ print length }') |awk '{a[NR]=$0}END{print(NR%2==1)?a[int(NR/2)+1]:(a[NR/2]+a[NR/2+1])/2}'`
