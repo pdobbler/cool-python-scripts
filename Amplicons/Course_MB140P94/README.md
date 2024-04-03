@@ -46,4 +46,39 @@ FNR==NR{
 ```
 
 **Ctrl+o & Enter (save)**
+
 **Ctrl+x         (exit)**
+
+
+
+**run the script**
+```
+awk -v col='3' -f vlookup.awk barcoded_primers_fwd.txt fwd_tags.txt > cols_fwd.txt
+awk -v col='3' -f vlookup.awk barcoded_primers_rev.txt rev_tags.txt > cols_rev.txt
+awk -F'\t' '{print $1}' samples.txt > cols_sample.txt
+```
+
+**function "paste" joins the columns of the table**
+
+```
+paste -d'\t' cols_sample.txt cols_fwd.txt cols_rev.txt > barcode_table.txt
+```
+
+**or**
+
+```
+paste <(awk -F'\t' '{print $1}' samples.txt) <(awk -v col='3' -f vlookup.awk barcoded_primers_fwd.txt fwd_tags.txt) <(awk -v col='3' -f vlookup.awk barcoded_primers_rev.txt rev_tags.txt)
+```
+
+### DEMULTIPLEXING
+
+**move data to a new folder**
+
+```
+mkdir demulti
+mv barcode_table.txt demulti/
+mv *.fastq demulti/
+cd demulti/
+```
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/Amplicons/Course_MB140P94/demultiplexing_fastq.py`
