@@ -180,3 +180,31 @@ awk 'NR % 2 == 0' BAC_joined_qm30_trimmed_linear.fa | wc -L
 awk 'NR % 2 == 0' BAC_joined_qm30_trimmed_linear.fa | awk '{print length}' | sort -n | head -n1
 ```
 
+
+### remove AMBIGUOUS sequences
+
+```
+mkdir polishing
+mv BAC_joined_qm30_trimmed_linear.fa polishing/
+cd polishing/
+```
+
+`seqkit grep -s -v -p 'N' BAC_joined_qm30_trimmed_linear.fa |  seqkit seq -w 0 > BAC_joined_qm30_trimmed_linear_noamb.fa`
+
+
+### CLUSTERING - UPARSE
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/Amplicons/Course_MB140P94/USEARCH64_v11.0.667_CLUSTER_97SIM.py`
+
+**CLUSTERING 97% similarity threshold**
+`python2.7 USEARCH64_v11.0.667_CLUSTER_97SIM.py BAC_joined_qm30_trimmed_linear_noamb.fa BAC_joined_qc_trimmed_clustered97sim.fasta`
+
+**OTUTABLE from sequences**
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/Amplicons/Course_MB140P94/GET_OTUTAB_FROM_SEQUENCES.py`
+
+`python2.7 GET_OTUTAB_FROM_SEQUENCES.py *_clustered97sim.fasta otu_table.txt`
+
+**Representative - Most abundant sequences**
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/Amplicons/Course_MB140P94/GET_MOST_ABUND_SEQUNCES.py`
+
+`python2.7 GET_MOST_ABUND_SEQUNCES.py *_clustered97sim.fasta otus_most_abundant.fa`
