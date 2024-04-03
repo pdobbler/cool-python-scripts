@@ -144,3 +144,33 @@ echo "average length $avg_word_size"
 **median**
 
 `sort -n <(awk 'NR % 2 == 0' BAC_joined_qm30.fa | awk '{ print length }') |awk '{a[NR]=$0}END{print(NR%2==1)?a[int(NR/2)+1]:(a[NR/2]+a[NR/2+1])/2}'`
+
+
+### trimm primer residuals
+
+**16S - primers: 515F & 806R**
+**284 - (15 + 16) = 253 +- 8 bp > length range**
+
+
+**remove first 15 bases - forward primer residual**
+`seqkit subseq -r 16:-1 BAC_joined_qm30.fa > BAC_joined_qm30_f.fa`
+
+**remove last 16 bases - reverse primer residual**
+`seqkit subseq -r 1:-17 BAC_joined_qm30_f.fa > BAC_joined_qm30_fr.fa`
+
+**sequences shorter than or equal to the maximum length**
+`seqkit seq -g -m 245 BAC_joined_qm30_fr.fa > BAC_joined_qm30_fr_min245.fa`
+
+**sequences longer than or equal to the minimum length**
+`seqkit seq -g -M 261 BAC_joined_qm30_fr_min245.fa > BAC_joined_qm30_fr_min245_max261.fa`
+
+**linearize**
+`seqkit seq -w 0 BAC_joined_qm30_fr_min245_max261.fa > BAC_joined_qm30_trimmed_linear.fa`
+
+
+**length Max & Min**
+```
+awk 'NR % 2 == 0' BAC_joined_qm30_trimmed_linear.fa | wc -L
+awk 'NR % 2 == 0' BAC_joined_qm30_trimmed_linear.fa | awk '{print length}' | sort -n | head -n1
+```
+
