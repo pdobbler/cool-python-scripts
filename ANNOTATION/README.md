@@ -10,7 +10,17 @@ GET FUNGAL LIST - abreviation vs. organism
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/ANNOTATION/abr_list_2024.txt`
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/ANNOTATION/replace_fungal_annot_by_taxname.py`
+
+`python2.7 replace_fungal_annot_by_taxname.py genecalling_JGI_FUN_20240403_best.txt abr_list_2024.txt genecalling_JGI_FUN_best_reformate.txt D`
+
+
+**UPDATE THE TABLE**
+
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/ANNOTATION/abr_list_2024.txt`
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/ANNOTATION/replace_fungal_annot_by_taxname.py`
 
-`python2.7 replace_fungal_annot_by_taxname.py genecalling_JGI_FUN_20240403_best.txt abr_list_2024.txt genecalling_JGI_FUN_best_reformate.txt`
+`python2.7 replace_fungal_annot_by_taxname.py genecalling_JGI_FUN_20240403_best.txt abr_list_2024.txt genecalling_JGI_FUN_best_reformate.txt U`
+
