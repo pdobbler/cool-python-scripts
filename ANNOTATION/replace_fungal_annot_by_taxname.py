@@ -34,7 +34,7 @@ for line in open(annotation):
             else:
                 print('Taxa abreciation was not found - '+tax)
                 new_line = new_line + '\t' + vals[i]
-            if outtype == U:
+            if outtype == 'U':
                 new_line += '|' + vals[i].split('|')[3]
         else:
             new_line = new_line + '\t' + vals[i]
