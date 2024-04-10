@@ -24,3 +24,9 @@ GET FUNGAL LIST - abreviation vs. organism
 
 `python2.7 replace_fungal_annot_by_taxname.py genecalling_JGI_FUN_20240403_best.txt abr_list_2024.txt genecalling_JGI_FUN_best_reformate.txt U`
 
+GET TAXONOMY FOR A NEW HITS
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/ANNOTATION/taxonomy_2024.txt`
+
+
+
