@@ -61,7 +61,7 @@ for line in open(original_table):
             else:
                 taxons_ori[hit_vals[0]] = 1
         else:
-            taxons_ori[tax_column] = 2
+            taxons_ori[vals[tax_column]] = 2
     # write to a new table...
     out_file.write('\t'.join(vals) + "\n")
 out_file.close()
