@@ -42,13 +42,14 @@ for line in open(tax_tree):
 print("original tax tree loaded...")
 
 uinfo = open("update_info.txt", "w")
+uinfo.write("ori_taxon\tnew_taxon\tori_bitscore\tnew_bitscore\tori_KOG\tnew_KOG\tori_eval\tnew_eval\n")
 out_file = open(original_table + ".updated", "w")
 for line in open(original_table):
     vals = line.rstrip().split('\t')
     if gene_hits.has_key(vals[0]):
         hit_vals = gene_hits[vals[0]].split('|')
         if float(vals[tax_column-1])<float(hit_vals[1]):
-            uinfo.write("replacing original value: " + vals[tax_column] + " by " + hit_vals[0]+" bitscore " + vals[tax_column-1] + " vs " +  hit_vals[1]+" | KOG> "+vals[KOG_column] +" vs ["+ hit_vals[2]+"] evalue "+vals[KOG_column-1] + " vs " + hit_vals[3]+ "\n")
+            uinfo.write(vals[tax_column] + "\t" + hit_vals[0]+"\t" + vals[tax_column-1] + "\t" +  hit_vals[1]+"\t"+vals[KOG_column] +"\t["+ hit_vals[2]+"]\t"+vals[KOG_column-1] + "\t" + hit_vals[3]+ "\n")
             #print("replacing original value: " + vals[tax_column] + " by " + hit_vals[0]+" bitscore " + vals[tax_column-1] + " vs " +  hit_vals[1]+" | KOG> "+vals[KOG_column] +" vs ["+ hit_vals[2]+"] evalue "+vals[KOG_column-1] + " vs " + hit_vals[3])
             vals[tax_column] = hit_vals[0]
             vals[tax_column-1] = hit_vals[1]
