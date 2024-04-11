@@ -213,3 +213,11 @@ cd polishing/
 
 
 `python2.7 GET_MOST_ABUND_SEQUNCES.py *_clustered97sim.fasta otus_most_abundant.fa`
+
+
+
+## ITS (specific steps for ITS amplicons)
+
+'wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/Amplicons/Course_MB140P94/dereplicate_FASTA.py'
+'wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/Amplicons/Course_MB140P94/rereplicate_FASTA.py'
+
