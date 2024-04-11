@@ -20,6 +20,8 @@ outputs:
 
 ### GROUPING QUALIFIED SEQUENCES
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/group_qualified_sequences_fast.py`
+
 ```
 python group_qualified_sequences_fast.py REL4_ITS2_COMPLETE_CLEAN_FUNGAL_AND_NOHIT_FINAL_noReplicated.fa.gz.qualified 97.0
 python group_qualified_sequences_fast.py REL4_ITS2_COMPLETE_CLEAN_FUNGAL_AND_NOHIT_FINAL_noReplicated.fa.gz.qualified 98.5
