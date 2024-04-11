@@ -216,8 +216,28 @@ cd polishing/
 
 
 
-## ITS (specific steps for ITS amplicons)
+## ITS (specific steps for ITS amplicons - after QUALITY FILTERING)
 
-'wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/Amplicons/Course_MB140P94/dereplicate_FASTA.py'
-'wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/Amplicons/Course_MB140P94/rereplicate_FASTA.py'
+**Dereplicate sequences**
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/Amplicons/Course_MB140P94/dereplicate_FASTA.py`
+
+`python2.7 dereplicate_FASTA.py Fungi_joined_qm30.fa Fungi_joined_qm30_dereplicated.fasta Fungi_joined_qm30_mapping.table`
+
+
+### ITSx - ITS extraction
+
+'ITSx -i Fungi_joined_qm30_dereplicated.fasta --cpu 64 --only_full T -t F -o itsx_Fungi_joined_qm30_dereplicated'
+
+
+**Dereplicate sequences**
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/Amplicons/Course_MB140P94/rereplicate_FASTA.py`
+
+`python2.7 rereplicate_FASTA.py itsx_Fungi_joined_qm30_dereplicated.ITS2.fasta Fungi_joined_qm30_mapping.table Fungi_joined_qm30_ITS2.fa`
+
+**Then continue -> remove AMBIGUOUS sequences**
+
+
+
 
