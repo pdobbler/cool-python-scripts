@@ -56,7 +56,10 @@ for line in open(original_table):
             vals[KOG_column] = "[" + hit_vals[2] + "]"
             vals[KOG_column-1] = hit_vals[3]
             # update tax tree...
-            if not taxons_ori.has_key(hit_vals[0]):
+            if taxons_ori.has_key(hit_vals[0]):
+                if taxons_ori[hit_vals[0]] == 0:
+                    taxons_ori[hit_vals[0]] = 2
+            else:
                 taxons_ori[hit_vals[0]] = 1
         else:
             taxons_ori[vals[tax_column]] = 2
