@@ -227,9 +227,7 @@ cd polishing/
 
 ### ITSx - ITS extraction
 
-ITSx is an open source software utility to extract the highly variable ITS1 and ITS2 subregions from ITS sequences, which is commonly used as a molecular barcode for e.g. fungi.
-
-[ITSx](https://microbiology.se/software/itsx/)
+ITSx is an open source software utility to extract the highly variable ITS1 and ITS2 subregions from ITS sequences, which is commonly used as a molecular barcode for e.g. fungi. [ITSx](https://microbiology.se/software/itsx/)
 
 `ITSx -i Fungi_joined_qm30_dereplicated.fasta --cpu 64 --only_full T -t F -o itsx_Fungi_joined_qm30_dereplicated`
 
