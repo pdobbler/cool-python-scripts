@@ -30,7 +30,12 @@ GET TAXONOMY FOR A NEW HITS
 
 UPDATE TABLE AND TAX TREE
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/ANNOTATION/update_taxonomy_by_fungal_hits.py`
+
 `python2.7 update_taxonomy_by_fungal_hits.py MG_MAPTAB_NORMPERSAMPLE_GENES_BESTTAX_CAZy_KOG_KO.tab 18 22 ga0566199_proteins_nolinebreaksJGI_FUNGAL_PROT_20240403_best_reformate_update.txt taxonomy_2024.txt TAX_tree.tab`
+
+
+
 
 
 
