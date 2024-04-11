@@ -238,7 +238,7 @@ ITSx is an open source software utility to extract the highly variable ITS1 and 
 
 `python2.7 rereplicate_FASTA.py itsx_Fungi_joined_qm30_dereplicated.ITS2.fasta Fungi_joined_qm30_mapping.table Fungi_joined_qm30_ITS2.fa`
 
-**Then continue -> remove AMBIGUOUS sequences**
+**Then continue -> remove AMBIGUOUS sequences & CLUSTERING**
 
 
 
