@@ -123,5 +123,46 @@ done > cut_short.sh
 
 `head stats_cut_seqs.txt`
 
+## extracting paired ends from the interleaved files
+
+### activate khmer environment
+
+`conda activate khmerEnv`
+
+```
+for file in *.qc.cut
+do
+   echo "extract-paired-reads.py ${file}"
+done > extract_command.sh
+```
+
+`cat extract_command.sh | parallel`
 
 
+`mkdir mapping`
+
+`mv *.qc.cut mapping`
+
+### mapping - these reads will be mapped
+
+## rename files and merging se file
+
+`mkdir renaming`
+
+`mv *.qc.cut.* renaming`
+
+```
+for file in *.pe
+do
+   sample=${file%%.pe.tr.qc.cut.pe}
+   mv ${file} ${sample}.pe.fq
+done
+```
+
+```
+for file in *.se
+do
+   sample=${file%%.pe.tr.qc.cut.se}
+   mv ${file} ${sample}.se.fq
+done
+```
