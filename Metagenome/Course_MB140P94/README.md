@@ -28,13 +28,17 @@ done > interleave.sh
 rm *.fastq
 
 ### get stats
+
 `seqkit stats *.pe.fq > stats_raw_seqs.txt`
+
 `head stats_raw_seqs.txt`
 
 ## REMOVE ADAPTERS & SHORT READS
 
 ### [cutadapt](https://cutadapt.readthedocs.io/en/stable/)
+
 `conda activate cutadaptenv`
+
 `cutadapt --version`
 
 ### [Index 1 (i7) Adapters](https://support-docs.illumina.com/SHARE/AdapterSeq/Content/SHARE/AdapterSeq/TruSeq/CDIndexes.htm)
@@ -42,7 +46,9 @@ rm *.fastq
 ### ATCTCGTATGCCGTCTTCTGCTTG
 
 Check if they are there...
+
 `grep 'GATCGGAAGAGCACACGTCTGAACTCCAGTCAC' Sample01.pe.fq`
+
 `grep 'ATCTCGTATGCCGTCTTCTGCTTG' Sample01.pe.fq`
 
 ```
@@ -56,7 +62,9 @@ done > trimming.sh
 `cat trimming.sh | parallel &> out_trimming.txt`
            
 ### get stats
+
 `seqkit stats *.pe.tr.fq > stats_trimmed_seqs.txt`
+
 `head stats_trimmed_seqs.txt`
 
 
@@ -80,17 +88,23 @@ done > qual_filter.sh
 `cat qual_filter.sh | parallel &> out_qual.txt`
 
 ### Inspect read quality profiles after quality filtering
+
 `fastx_quality_stats -Q33 -i Sample01.pe.tr.qc.fq -o Sample01_qc.qstats.txt`
+
 `fastq_quality_boxplot_graph.sh -i Sample01_qc.qstats.txt -o Sample01_qc.qstats.png`
 
 ## remove short sequences
 
 `mkdir filtered`
+
 `mv *.qc.fq filtered`
+
 `cd filtered/` 
 
 ### get stats
+
 `seqkit stats *.qc.fq > stats_qc_seqs.txt`
+
 `head stats_qc_seqs.txt`
 
 ```
@@ -104,7 +118,9 @@ done > cut_short.sh
 `cat cut_short.sh | parallel &> out_cut.txt`
 
 ### get stats
+
 `seqkit stats *.qc.cut > stats_cut_seqs.txt`
+
 `head stats_cut_seqs.txt`
 
 
