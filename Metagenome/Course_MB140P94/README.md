@@ -151,6 +151,9 @@ done > extract_command.sh
 
 `mv *.qc.cut.* renaming`
 
+`cd renaming`
+
+
 ```
 for file in *.pe
 do
