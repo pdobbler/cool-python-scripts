@@ -37,8 +37,9 @@ rm *.fastq
 `conda activate cutadaptenv`
 `cutadapt --version`
 
-### https://support-docs.illumina.com/SHARE/AdapterSeq/Content/SHARE/AdapterSeq/TruSeq/CDIndexes.htm
-### Index 1 (i7) Adapters
+### [Index 1 (i7) Adapters](https://support-docs.illumina.com/SHARE/AdapterSeq/Content/SHARE/AdapterSeq/TruSeq/CDIndexes.htm)
+<a href="https://www.openai.com" target="_blank">OpenAI</a>
+
 ### GATCGGAAGAGCACACGTCTGAACTCCAGTCAC
 ### ATCTCGTATGCCGTCTTCTGCTTG
 
