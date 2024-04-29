@@ -1,5 +1,6 @@
 # Metagenome data
 
+
 ## GET THE DATA
 
 `wget -O MG_DATA.tar.gz "http://www.biomed.cas.cz/mbu/lbwrf/example/mg_samples.tar.gz"`
@@ -9,6 +10,7 @@ tar -xvzf MG_DATA.tar.gz
 rm MG_DATA.tar.gz
 cd mg_samples/
 ```
+
 
 ## INTERLEAVE
 
@@ -32,6 +34,7 @@ rm *.fastq
 `seqkit stats *.pe.fq > stats_raw_seqs.txt`
 
 `head stats_raw_seqs.txt`
+
 
 ## REMOVE ADAPTERS & SHORT READS
 
@@ -93,6 +96,7 @@ done > qual_filter.sh
 
 `fastq_quality_boxplot_graph.sh -i Sample01_qc.qstats.txt -o Sample01_qc.qstats.png`
 
+
 ## remove short sequences
 
 `mkdir filtered`
@@ -123,6 +127,7 @@ done > cut_short.sh
 
 `head stats_cut_seqs.txt`
 
+
 ## extracting paired ends from the interleaved files
 
 ### activate khmer environment
@@ -144,6 +149,7 @@ done > extract_command.sh
 `mv *.qc.cut mapping`
 
 ### mapping - these reads will be mapped
+
 
 ## rename files and merging se file
 
@@ -169,3 +175,196 @@ do
    mv ${file} ${sample}.se.fq
 done
 ```
+
+
+## digital normalisation (OPTIONAL)
+
+`normalize-by-median.py -p -k 20 -C 20 -N 4 -x 4e9 -s normC20k20.ct *.pe.qc.fq`
+
+`normalize-by-median.py -C 20 -l normC20k20.ct -s normC20k20.ct *.se.qc.fq`
+
+`filter-abund.py --variable-coverage normC20k20.ct --threads 8 *.keep`
+
+
+## prepare for assembly
+
+```
+for file in *.pe.fq
+do
+   echo "split-paired-reads.py ${file}"
+done > split_command.sh
+```
+
+`cat split_command.sh | parallel`
+
+`mkdir forassembly`
+
+`cat *.1 > forassembly/all.pe.fq.1`
+
+`cat *.2 > forassembly/all.pe.fq.2`
+
+`cat *.se.fq > forassembly/all.se.fq`
+
+
+## assembly - [MEGAHIT](https://github.com/voutcn/megahit)
+         
+`cd forassembly`
+
+`megahit -m 0.75 -t 8 -1 all.pe.fq.1 -2 all.pe.fq.2 -r all.se.fq -o all.Megahit.assembly`
+
+
+## evaluating an assembly - [quast](https://github.com/ablab/quast)
+
+`quast  final.contigs.fa -o report`
+
+
+## mapping reads to assembly
+
+### making reference database
+cp final.contigs.fa mapping/
+cd mapping
+
+mkdir build
+bowtie2-build final.contigs.fa build/final.contigs.build
+
+### aligning
+
+```
+for file in *.cut
+do
+ sample=${file%%.pe.tr.qc.cut}
+ echo "bowtie2 -p 8 -x build/final.contigs.build -q ${file} -S ${sample}.sam"
+done > align.sh
+```
+
+`cat align.sh | parallel`
+
+### sam to bam
+
+```
+for file in *.sam
+do
+  sample=${file%%.sam}
+  samtools view -Sb ${file} > ${sample}.bam
+  rm -rf ${file}
+done
+```
+
+### statistics
+
+```
+for file in *.bam
+do
+  sample=${file%%.bam}
+  echo processing ${sample}...
+  samtools view -c -f 4 ${file} > ${sample}.reads-unmapped.count.txt
+  samtools view -c -F 4 ${file} > ${sample}.reads-mapped.count.txt
+  samtools sort -T ${sample}.sorted -o ${sample}.sorted.bam ${file}
+  samtools index ${sample}.sorted.bam
+  samtools idxstats ${sample}.sorted.bam > ${sample}.reads.by.contigs.txt
+done
+```
+
+### mapped/unmapped reads
+
+```
+echo "sample;mapped;unmapped" > mapping_stats.txt
+for file in *.reads-mapped.count.txt
+do
+  sample=${file%%.reads-mapped.count.txt}
+  mapped=`less ${file}`
+  unmapped=`less ${sample}.reads-unmapped.count.txt`
+  echo "${sample};${mapped};${unmapped}" >> mapping_stats.txt
+done
+```
+
+## GENECALLING - FragGeneScan
+
+### Link creation
+`ln -s /home/ubuntu/miniconda3/pkgs/fraggenescan-1.31-hec16e2b_4/bin/train/ ./`
+
+### run
+`FragGeneScan -s final.contigs.fa -w 1 -o final.contigs_fgs -t complete -p 8`
+
+
+## MAKE ANNOTATION TABLE
+
+### make raw table
+
+`gdrive_download 1HDB2EF-pq-EJxQxsI1uv1-iVjTl6tAlo count-up-mapped-from-results-txt-with-ctg-length.py`
+
+`python2.7 count-up-mapped-from-results-txt-with-ctg-length.py *.reads.by.contigs.txt`
+
+### 2a NORMALISE MAPPING TABLE PER BASE
+
+`gdrive_download 1w0bfttjXFZ64NHD8bP7UDaQcS1yd20qR normalize-mapping-table-by-read-length-and-ctg-length.py`
+
+`python2.7 normalize-mapping-table-by-read-length-and-ctg-length.py summary-count-mapped.tsv 250 table_normalised.txt`
+
+### 2b NORMALISE MAPPING TABLE PER SAMPLE
+
+`gdrive_download 1c_fD520xtrCNlUIq9VqqqSvY2OryMXTU normalize_table_by_columns.py`
+
+`python2.7 normalize_table_by_columns.py table_normalised.txt 2 1000000 table_normalised_per_sample.txt`
+
+### MULTIPLY BY GENECALL
+
+`gdrive_download 1DakO7roc9C2GJ-SkZuy8AZKTV3QHan14 contig_mapping_to_genecall_mapping.py`
+
+`python2.7 contig_mapping_to_genecall_mapping.py final.contigs_fgs.faa table_normalised_per_sample.txt`
+
+
+## CONTINUE WITH ANNOTATION...
+
+### get annotated metagenome
+
+`wget -O SeqMe_assembly.zip "http://www.biomed.cas.cz/mbu/lbwrf/example/SeqMe_assembly.zip"`
+
+
+`cd SeqMe_assembly/`
+
+`gdrive_download 198TDGsV1cBfLEZorb5znFHysG47XEj5t link_simple_table_to_mapping_table.py`
+
+
+`python2.7 link_simple_table_to_mapping_table.py MG_mapping_normalised_per_sample_genecall.txt TAXONOMY_BEST_OF_SIMPLE.txt TAX bitscore MG_NORM_TAX.tab`
+
+`python2.7 link_simple_table_to_mapping_table.py MG_NORM_TAX.tab FOAM_KO_SIMPLE_MULTI.txt KEGG e-val MG_NORM_TAX_FOAM.tab`
+
+`python2.7 link_simple_table_to_mapping_table.py MG_NORM_TAX_FOAM.tab CAZy_BEST_SIMPLE.txt CAZy e-val MG_NORM_TAX_FOAM_CAZy.tab`
+
+```
+mkdir FINAL_TABLE
+mv MG_NORM_TAX_FOAM_CAZy.tab FINAL_TABLE/
+mv *_tree.tab FINAL_TABLE/
+cd FINAL_TABLE/
+```
+
+
+## ANNOTATION EXPLORER
+
+`wget -O TABLE_EXPLORER_LINUX.zip "http://www.biomed.cas.cz/mbu/lbwrf/example/TABLE_EXPLORER_LINUX.zip"`
+
+```
+unzip TABLE_EXPLORER_LINUX.zip
+cd TABLE_EXPLORER_LINUX/
+bash run.sh
+```
+
+## binning contigs to genomes (BONUS)
+
+```
+for file in *.cut
+do
+  echo "${file}"
+done > reads_list_file.txt
+```
+
+### run MaxBin2
+
+`mkdir maxbin2_output`
+
+`run_MaxBin.pl -contig final.contigs.fa -reads_list reads_list_file.txt -out maxbin2_output/maxbin2`
+
+
+
+
