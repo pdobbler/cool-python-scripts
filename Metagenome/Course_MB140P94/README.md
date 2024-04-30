@@ -221,6 +221,7 @@ done > split_command.sh
 
 `quast  final.contigs.fa -o report`
 
+### Check the report folder
 
 ## mapping reads to assembly
 
