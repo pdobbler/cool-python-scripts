@@ -177,17 +177,6 @@ done
 ```
 
 
-## digital normalisation (OPTIONAL)
-
-`normalize-by-median.py -p -k 20 -C 20 -N 4 -x 4e9 -s normC20k20.ct *.pe.qc.fq`
-
-`normalize-by-median.py -C 20 -l normC20k20.ct -s normC20k20.ct *.se.qc.fq`
-
-`filter-abund.py --variable-coverage normC20k20.ct --threads 8 *.keep`
-
-### Then you can proceed with the *.keep files...
-
-
 ## prepare for assembly
 
 ```
