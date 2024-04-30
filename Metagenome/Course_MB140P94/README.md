@@ -185,6 +185,8 @@ done
 
 `filter-abund.py --variable-coverage normC20k20.ct --threads 8 *.keep`
 
+### Then you can proceed with the *.keep files...
+
 
 ## prepare for assembly
 
