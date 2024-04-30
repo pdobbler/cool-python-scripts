@@ -289,25 +289,25 @@ done
 
 ### make raw table
 
-`gdrive_download 1HDB2EF-pq-EJxQxsI1uv1-iVjTl6tAlo count-up-mapped-from-results-txt-with-ctg-length.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/Metagenome/Course_MB140P94/count-up-mapped-from-results-txt-with-ctg-length.py`
 
 `python2.7 count-up-mapped-from-results-txt-with-ctg-length.py *.reads.by.contigs.txt`
 
 ### 2a NORMALISE MAPPING TABLE PER BASE
 
-`gdrive_download 1w0bfttjXFZ64NHD8bP7UDaQcS1yd20qR normalize-mapping-table-by-read-length-and-ctg-length.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/Metagenome/Course_MB140P94/normalize-mapping-table-by-read-length-and-ctg-length.py`
 
 `python2.7 normalize-mapping-table-by-read-length-and-ctg-length.py summary-count-mapped.tsv 250 table_normalised.txt`
 
 ### 2b NORMALISE MAPPING TABLE PER SAMPLE
 
-`gdrive_download 1c_fD520xtrCNlUIq9VqqqSvY2OryMXTU normalize_table_by_columns.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/Metagenome/Course_MB140P94/normalize_table_by_columns.py`
 
 `python2.7 normalize_table_by_columns.py table_normalised.txt 2 1000000 table_normalised_per_sample.txt`
 
 ### MULTIPLY BY GENECALL
 
-`gdrive_download 1DakO7roc9C2GJ-SkZuy8AZKTV3QHan14 contig_mapping_to_genecall_mapping.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/Metagenome/Course_MB140P94/contig_mapping_to_genecall_mapping.py`
 
 `python2.7 contig_mapping_to_genecall_mapping.py final.contigs_fgs.faa table_normalised_per_sample.txt`
 
@@ -321,7 +321,7 @@ done
 
 `cd SeqMe_assembly/`
 
-`gdrive_download 198TDGsV1cBfLEZorb5znFHysG47XEj5t link_simple_table_to_mapping_table.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/Metagenome/Course_MB140P94/link_simple_table_to_mapping_table.py`
 
 
 `python2.7 link_simple_table_to_mapping_table.py MG_mapping_normalised_per_sample_genecall.txt TAXONOMY_BEST_OF_SIMPLE.txt TAX bitscore MG_NORM_TAX.tab`
