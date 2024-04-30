@@ -217,6 +217,8 @@ done > split_command.sh
 
 ## evaluating an assembly - [quast](https://github.com/ablab/quast)
 
+`cd all.Megahit.assembly`
+
 `quast  final.contigs.fa -o report`
 
 
