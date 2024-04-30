@@ -318,6 +318,7 @@ done
 
 `wget -O SeqMe_assembly.zip "http://www.biomed.cas.cz/mbu/lbwrf/example/SeqMe_assembly.zip"`
 
+`unzip SeqMe_assembly.zip`
 
 `cd SeqMe_assembly/`
 
@@ -338,7 +339,7 @@ cd FINAL_TABLE/
 ```
 
 
-## ANNOTATION EXPLORER
+## ANNOTATION EXPLORER (Linux with Graphical interface needed / or do it  Windows)
 
 `wget -O TABLE_EXPLORER_LINUX.zip "http://www.biomed.cas.cz/mbu/lbwrf/example/TABLE_EXPLORER_LINUX.zip"`
 
