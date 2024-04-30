@@ -223,14 +223,18 @@ done > split_command.sh
 
 ### Check the report folder
 
+
 ## mapping reads to assembly
 
 ### making reference database
-cp final.contigs.fa mapping/
-cd mapping
 
-mkdir build
-bowtie2-build final.contigs.fa build/final.contigs.build
+`cp final.contigs.fa ~/mg_samples/filtered/mapping/`
+`cd  ~/mg_samples/filtered/mapping/`
+
+
+`mkdir build`
+
+`bowtie2-build final.contigs.fa build/final.contigs.build`
 
 ### aligning
 
