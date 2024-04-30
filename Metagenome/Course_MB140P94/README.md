@@ -355,9 +355,8 @@ bash run.sh
 
 [TABLE_EXPLORER_WINDOWS](http://www.biomed.cas.cz/mbu/lbwrf/example/TABLE_EXPLORER_WINDOWS.zip)
 
-Double click to:
+Unzip the folder, open and double click to: BigTabViewer.bat
 
-BigTabViewer.bat
 
 ## binning contigs to genomes (BONUS)
 
