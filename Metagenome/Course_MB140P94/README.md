@@ -341,6 +341,8 @@ cd FINAL_TABLE/
 
 ## ANNOTATION EXPLORER (Linux with Graphical interface needed / or do it  Windows)
 
+### Linux
+
 `wget -O TABLE_EXPLORER_LINUX.zip "http://www.biomed.cas.cz/mbu/lbwrf/example/TABLE_EXPLORER_LINUX.zip"`
 
 ```
@@ -348,6 +350,14 @@ unzip TABLE_EXPLORER_LINUX.zip
 cd TABLE_EXPLORER_LINUX/
 bash run.sh
 ```
+
+### Windows
+
+[TABLE_EXPLORER_WINDOWS](http://www.biomed.cas.cz/mbu/lbwrf/example/TABLE_EXPLORER_WINDOWS.zip)
+
+Double click to:
+
+BigTabViewer.bat
 
 ## binning contigs to genomes (BONUS)
 
