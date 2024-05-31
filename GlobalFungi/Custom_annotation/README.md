@@ -68,5 +68,7 @@ done > sorting.sh
 ## SPECIAL CASE WHEN ANOTATED DEREP SEQUENCES FROM SEED INSTEAD OF PROCESSED VARIANTS 
 ### generate otu-table from mapping file
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/Custom_annotation/GET_TABLE_FROM_PROCESSEDBL_AND_DEREPFILES.py`
+
 `python2.7 GET_TABLE_FROM_PROCESSEDBL_AND_DEREPFILES.py NAKI_castleparks_vlk_corrected_derep.map NAKI_castleparks_clean_UNITE10_PROCESSED.txt NAKI_OTU_TAB_s98_5_c95.txt 98.5 95.0`
 
