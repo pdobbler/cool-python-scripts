@@ -52,11 +52,14 @@ done > sorting.sh
 
 ### get processed blast file
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/Custom_annotation/PROCESS_BLAST_RESULTS_SIMPLE.py`
+
 `python2.7 PROCESS_BLAST_RESULTS_SIMPLE.py GF5_RAW_TABLE_PROCESSED_VARIANTS_ErMF_NCBI.fa GF5_RAW_TABLE_PROCESSED_VARIANTS_ErMF_NCBI_best.txt GF5_RAW_TABLE_PROCESSED_VARIANTS_ErMF_NCBI_PROCESSED.txt`
 
 
 ### generate otu-table
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/Custom_annotation/GET_TABLE_FROM_PROCESSEDBL_AND_VARSTAB.py`
 
 `python2.7 GET_TABLE_FROM_PROCESSEDBL_AND_VARSTAB.py GF5_RAW_TABLE_PROCESSED.txt.gz ErMF_NCBI/GF5_RAW_TABLE_PROCESSED_VARIANTS_ErMF_NCBI_PROCESSED.txt ErMF_NCBI/ErMF_NCBI_ABUND_TABLE.txt 98.5 98.0 GF5_RAW_TABLE_SAMPLES.txt.gz`
 
