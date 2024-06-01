@@ -1,6 +1,8 @@
 
 ### split variants into groups
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/Custom_annotation/split_fasta_by_group_size.py`
+
 `python2.7 split_fasta_by_group_size.py GF5_RAW_TABLE_PROCESSED_VARIANTS.fa 2400000`
 
 
