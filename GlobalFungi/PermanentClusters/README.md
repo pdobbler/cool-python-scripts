@@ -18,7 +18,8 @@ outputs:
 - GF5_ALL_SAMPLES.fa.its2.gz.qualified
 
 
-### GROUPING QUALIFIED SEQUENCES
+### GROUPING QUALIFIED SEQUENCES (IMPORTANT - biopython must be Version: 1.78!!!)
+`pip show biopython`
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/group_qualified_sequences_fast.py`
 
