@@ -38,6 +38,7 @@ BLASTn results processed - GF5_RAW_TABLE_PROCESSED_VARIANTS_UNITE10_PROCESSED.tx
 
 It generates "UPDATED_TAX_TABLE.txt" containing reduced taxonomy table...
 
+
 ### GET TAXONOMY TABLES
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/UNITE10_re-anotation/get_taxa_table.py`
@@ -47,3 +48,8 @@ It generates "UPDATED_TAX_TABLE.txt" containing reduced taxonomy table...
 `python2.7 get_taxa_table.py GF5_RAW_TABLE_PROCESSED_UNITE10.txt UPDATED_TAX_TABLE.txt GF5_RAW_TABLE_TAB_UNITE10_GENUS.txt 6`
 
 `python2.7 get_taxa_table.py GF5_RAW_TABLE_PROCESSED_UNITE10.txt UPDATED_TAX_TABLE.txt GF5_RAW_TABLE_TAB_UNITE10_SPECIES.txt 7`
+
+
+### GET TAXONOMY TABLES
+
+`**wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/UNITE10_re-anotation/get_taxa_table_for_marker.py**`
