@@ -21,7 +21,8 @@ BLASTn results processed - GF5_RAW_TABLE_PROCESSED_VARIANTS_UNITE10_PROCESSED.tx
 `python2.7 update_table_processed.py GF5_RAW_TABLE_PROCESSED.txt.gz GF5_RAW_TABLE_PROCESSED_VARIANTS_UNITE10_PROCESSED.txt.gz GF5_RAW_TABLE_PROCESSED_UNITE10.txt 98.5 90.0 unite10_complete_taxonomy.txt`
 
 
-Output table looks like this...(HEADER IS NOT PART OF THE TABLE)
+**Output table looks like this...(HEADER IS NOT PART OF THE TABLE)**
+
 
 | QUERY                          | SAMPLES              | ABUNDANCES      | MARKER | SH       | SEQUENCE |
 |--------------------------------|----------------------|-----------------|--------|----------|----------|
