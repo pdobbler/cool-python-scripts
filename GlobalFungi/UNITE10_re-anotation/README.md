@@ -52,4 +52,4 @@ It generates "UPDATED_TAX_TABLE.txt" containing reduced taxonomy table...
 
 ### GET TAXONOMY TABLES
 
-`**wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/UNITE10_re-anotation/get_taxa_table_for_marker.py**`
+**`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/UNITE10_re-anotation/get_taxa_table_for_marker.py`**
