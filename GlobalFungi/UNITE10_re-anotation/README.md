@@ -21,8 +21,10 @@ BLASTn results processed - GF5_RAW_TABLE_PROCESSED_VARIANTS_UNITE10_PROCESSED.tx
 `python2.7 update_table_processed.py GF5_RAW_TABLE_PROCESSED.txt.gz GF5_RAW_TABLE_PROCESSED_VARIANTS_UNITE10_PROCESSED.txt.gz GF5_RAW_TABLE_PROCESSED_UNITE10.txt 98.5 90.0 unite10_complete_taxonomy.txt`
 
 
-Output table looks like this...
+Output table looks like this...(HEADER IS NOT PART OF THE TABLE)
 
+| QUERY                          | SAMPLES              | ABUNDANCES      | MARKER | SH       | SEQUENCE |
+|--------------------------------|----------------------|-----------------|--------|----------|----------|
 | 95e494b4061325c3d39e5f304528191d | 29                   | 1               | ITS1   | 0        | AAAAA... |
 | 0fa49bed213860e0db1c33527cfd098f | 30;31;32;33;34;35;36;37;38;39 | 1;1;1;1;1;1;3;1;1;1 | ITS1   | 5        | CCGAG... |
 | d2a2561d72610a4dea34c77bd6f3cfc2 | 40                   | 1               | ITS2   | 0        | ACACC... |
