@@ -1,6 +1,6 @@
 ### GET UNITE 10 All eukaryotes sh dynamic 04042024 complete taxonomy
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/UNITE10_re-anotation/unite10_complete_taxonomy.txt`
+**`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/UNITE10_re-anotation/unite10_complete_taxonomy.txt`**
 
 
 ### UPDATE ORIGINAL TABLE
@@ -16,7 +16,7 @@ BLASTn results processed - GF5_RAW_TABLE_PROCESSED_VARIANTS_UNITE10_PROCESSED.tx
 
 
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/UNITE10_re-anotation/update_table_processed.py`
+**`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/UNITE10_re-anotation/update_table_processed.py`**
 
 `python2.7 update_table_processed.py GF5_RAW_TABLE_PROCESSED.txt.gz GF5_RAW_TABLE_PROCESSED_VARIANTS_UNITE10_PROCESSED.txt.gz GF5_RAW_TABLE_PROCESSED_UNITE10.txt 98.5 90.0 unite10_complete_taxonomy.txt`
 
@@ -41,7 +41,7 @@ It generates "UPDATED_TAX_TABLE.txt" containing reduced taxonomy table...
 
 ### GET TAXONOMY TABLES
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/UNITE10_re-anotation/get_taxa_table.py`
+**`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/UNITE10_re-anotation/get_taxa_table.py`**
 
 `python2.7 get_taxa_table.py GF5_RAW_TABLE_PROCESSED_UNITE10.txt UPDATED_TAX_TABLE.txt GF5_RAW_TABLE_TAB_UNITE10_SH.txt 0`
 
@@ -53,3 +53,7 @@ It generates "UPDATED_TAX_TABLE.txt" containing reduced taxonomy table...
 ### GET TAXONOMY TABLES
 
 **`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/UNITE10_re-anotation/get_taxa_table_for_marker.py`**
+
+`python2.7 get_taxa_table.py GF5_RAW_TABLE_PROCESSED_UNITE10.txt UPDATED_TAX_TABLE.txt GF5_RAW_TABLE_TAB_UNITE10_SH_ITS1.txt 0 ITS1`
+
+`python2.7 get_taxa_table.py GF5_RAW_TABLE_PROCESSED_UNITE10.txt UPDATED_TAX_TABLE.txt GF5_RAW_TABLE_TAB_UNITE10_SH_ITS2.txt 0 ITS2`
