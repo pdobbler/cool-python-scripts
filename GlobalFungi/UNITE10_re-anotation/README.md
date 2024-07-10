@@ -50,10 +50,39 @@ It generates "UPDATED_TAX_TABLE.txt" containing reduced taxonomy table...
 `python2.7 get_taxa_table.py GF5_RAW_TABLE_PROCESSED_UNITE10.txt UPDATED_TAX_TABLE.txt GF5_RAW_TABLE_TAB_UNITE10_SPECIES.txt 7`
 
 
-### GET TAXONOMY TABLES
+### GET TAXONOMY TABLES FOR SPECIFIC MARKER
 
 **`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/UNITE10_re-anotation/get_taxa_table_for_marker.py`**
 
 `python2.7 get_taxa_table_for_marker.py GF5_RAW_TABLE_PROCESSED_UNITE10.txt UPDATED_TAX_TABLE.txt GF5_RAW_TABLE_TAB_UNITE10_SH_ITS1.txt 0 ITS1`
 
 `python2.7 get_taxa_table_for_marker.py GF5_RAW_TABLE_PROCESSED_UNITE10.txt UPDATED_TAX_TABLE.txt GF5_RAW_TABLE_TAB_UNITE10_SH_ITS2.txt 0 ITS2`
+
+
+### RECALCULATE TABLE FOR distribution modelling
+
+Make abundance table...
+
+**`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/OTU_and_SH_tables/TABLE_BY_SAMPLES_AND_SHS.py`**
+
+`python2.7 TABLE_BY_SAMPLES_AND_SHS.py GF5_RAW_TABLE_TAB_UNITE10_SH_ITS1.txt GF5_RAW_TABLE_SAMPLES.txt.gz ELIGIBLE_SAMPLES_ITS1.txt -`
+
+
+- For each SH, samples where its abundance is > 1 (nonsingletons) AND abundances is > 0.00005 are added to the list where SH is present ("1")
+- For each SH, samples where its abundance is = 0 are added to the list where SH is absent ("0")
+- For each SH, all other samples (i.e., those where the SH was a local singleton or had very low abundance) are excluded from the sample list ("NA"); it is unclear if their low sequence abundance represents a presence or cross-contamination
+
+
+Structure of file ELIGIBLE_SAMPLES_ITS1.txt
+| PERMANENT_ID | SEQ.COUNTS  |
+|--------------|-------------|
+| GF01000550S  | 1943        |
+| GF01000709S  | 58066       |
+| GF01000712S  | 15301       |
+
+
+
+**`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/UNITE10_re-anotation/calculate_table.py`**
+
+
+`python2.7 calculate_table.py ELIGIBLE_SAMPLES_ITS1_OUTPUT_TAB.txt ELIGIBLE_SAMPLES_ITS1.txt ELIGIBLE_SAMPLES_ITS1_OUTPUT_DISTR_TAB.txt 0.00005`
