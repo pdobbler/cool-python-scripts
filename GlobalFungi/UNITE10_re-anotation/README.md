@@ -54,6 +54,6 @@ It generates "UPDATED_TAX_TABLE.txt" containing reduced taxonomy table...
 
 **`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/UNITE10_re-anotation/get_taxa_table_for_marker.py`**
 
-`python2.7 get_taxa_table.py GF5_RAW_TABLE_PROCESSED_UNITE10.txt UPDATED_TAX_TABLE.txt GF5_RAW_TABLE_TAB_UNITE10_SH_ITS1.txt 0 ITS1`
+`python2.7 get_taxa_table_for_marker.py GF5_RAW_TABLE_PROCESSED_UNITE10.txt UPDATED_TAX_TABLE.txt GF5_RAW_TABLE_TAB_UNITE10_SH_ITS1.txt 0 ITS1`
 
-`python2.7 get_taxa_table.py GF5_RAW_TABLE_PROCESSED_UNITE10.txt UPDATED_TAX_TABLE.txt GF5_RAW_TABLE_TAB_UNITE10_SH_ITS2.txt 0 ITS2`
+`python2.7 get_taxa_table_for_marker.py GF5_RAW_TABLE_PROCESSED_UNITE10.txt UPDATED_TAX_TABLE.txt GF5_RAW_TABLE_TAB_UNITE10_SH_ITS2.txt 0 ITS2`
