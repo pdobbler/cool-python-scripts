@@ -34,7 +34,7 @@ for line in openfile(samples_file):
     vals = line.rstrip().split('\t')
     samples_counts[vals[0]] = int(vals[1])
 
-pritn("sample counts were loaded... " + str(len(samples_counts)))
+print("sample counts were loaded... " + str(len(samples_counts)))
 
 #############################################
 # compute a new tab!
