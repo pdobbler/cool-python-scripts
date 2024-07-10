@@ -51,11 +51,10 @@ for n, line in enumerate(openfile(sh_tab)):
             counts_list.append(samples_counts[vals[i]])
     else:
         for i in range(1, len(vals)):
-            abund = counts_list[i]/float(vals[i])
-            print(abund)
             if int(vals[i]) == 0:
                 vals[i] = "0"
             else:
+                abund = counts_list[i]/float(vals[i])
                 if int(vals[i]) > 1 and abund > abund_thr:
                     vals[i] = "1"
                 else:
