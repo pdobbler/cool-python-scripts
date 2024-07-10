@@ -54,7 +54,7 @@ for n, line in enumerate(openfile(sh_tab)):
             if int(vals[i]) == 0:
                 vals[i] = "0"
             else:
-                abund = vals[i]/float(counts_list[i])
+                abund = float(vals[i])/float(counts_list[i])
                 if int(vals[i]) > 1 and abund > abund_thr:
                     vals[i] = "1"
                 else:
