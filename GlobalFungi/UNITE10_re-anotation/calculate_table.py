@@ -16,8 +16,6 @@ abund_thr = float(sys.argv[4])  # 0.00005
 # For each SH, all other samples (i.e., those where the SH was a local singleton or had very low abundance) are excluded from the sample list ("NA"); it is unclear if their low sequence abundance represents a presence or cross-contamination
 
 
-print("Taxa laevel: "+str(taxa_level))
-
 #############################################
 # GZIP OPENING
 #############################################
