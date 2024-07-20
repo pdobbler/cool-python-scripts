@@ -9,7 +9,7 @@
 ```
 for file in *.fas.gz
 do  
- echo "gzip -dc ${file} | blastn -query - -db UNITEv10_sh_99_s_all -out ${file%%.fas.gz}.UNITEv10_sh_99_s_all.txt -evalue 1E-5 -outfmt 6 -num_threads 1 -max_target_seqs 10"
+ echo "gzip -dc ${file} | blastn -query - -db UNITEv10_sh_99_s_all -evalue 1E-5 -outfmt 6 -num_threads 1 -max_target_seqs 10 | gzip > ${file%%.fas.gz}.UNITEv10_sh_99_s_all.txt.gz"
 done > blast_command.sh
 ```
 
