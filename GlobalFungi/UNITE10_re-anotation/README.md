@@ -1,3 +1,35 @@
+### BLAST
+
+- make database
+
+`makeblastdb -in UNITEv10_sh_99_s_all.fasta -dbtype 'nucl' -out UNITEv10_sh_99_s_all`
+
+- run blast
+
+```
+for file in *.fas.gz
+do  
+ echo "gzip -dc ${file} | blastn -query - -db UNITEv10_sh_99_s_all -out ${file%%.fas.gz}.UNITEv10_sh_99_s_all.txt -evalue 1E-5 -outfmt 6 -num_threads 1 -max_target_seqs 10"
+done > blast_command.sh
+```
+
+
+`cat blast_command.sh | parallel`
+
+
+- get the best hits
+
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+for file in *.txt
+do  
+ sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr ${file} | sort -u -k1,1 --merge > ${file%%.txt}_best.tab
+done
+
+- process blast best hits
+
+
 ### GET UNITE 10 All eukaryotes sh dynamic 04042024 complete taxonomy
 
 **`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/UNITE10_re-anotation/unite10_complete_taxonomy.txt`**
