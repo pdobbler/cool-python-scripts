@@ -19,13 +19,18 @@ done > blast_command.sh
 
 - get the best hits
 
+```
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+```
 
+```
 for file in *.txt
 do  
  sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr ${file} | sort -u -k1,1 --merge > ${file%%.txt}_best.tab
 done
+```
+
 
 - process blast best hits
 
