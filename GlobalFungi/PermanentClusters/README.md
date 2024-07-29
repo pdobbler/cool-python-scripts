@@ -35,8 +35,8 @@ outputs:
 
 
 performance:
-group_qualified_sequences_faster.py - # clusters 633435 total time 4223531.893308 sec (1173.2h)
-group_qualified_sequences_fastest.py - # clusters 633435 total time 2380216.499521 sec (661.2h)
+- group_qualified_sequences_faster.py - # clusters 633435 total time 4223531.893308 sec (1173.2h)
+- group_qualified_sequences_fastest.py - # clusters 633435 total time 2380216.499521 sec (661.2h)
 
 
 
