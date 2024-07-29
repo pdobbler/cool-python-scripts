@@ -38,6 +38,9 @@ performance:
 - group_qualified_sequences_faster.py - # clusters 633435 total time 4223531.893308 sec (1173.2h)
 - group_qualified_sequences_fastest.py - # clusters 633435 total time 2380216.499521 sec (661.2h)
 
+fast:
+- 29.7. - 11:11 - Cluster created 589105 - seqs remains: 1312048 seed name 414921f4641f58eab56466b8fdb81a18|V_16|S_16|P_1|r_1.04884676021e-05
+
 
 
 ### SEEDS IDENTIFICATION
