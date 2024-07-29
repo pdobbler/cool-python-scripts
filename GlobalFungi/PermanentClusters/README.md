@@ -33,6 +33,13 @@ outputs:
 - GF5_ALL_SAMPLES.fa.its2.gz.qualified.clustered2
 - GF5_ALL_SAMPLES.fa.its2.gz.qualified.seeds2
 
+
+performance:
+group_qualified_sequences_faster.py - # clusters 633435 total time 4223531.893308 sec (1173.2h)
+group_qualified_sequences_fastest.py - # clusters 633435 total time 2380216.499521 sec (661.2h)
+
+
+
 ### SEEDS IDENTIFICATION
 
 ```
