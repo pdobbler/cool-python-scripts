@@ -1,7 +1,9 @@
 __author__ = 'vetrot'
 
 import sys
+import os
 import gzip
+import zipfile
 
 variants_table = sys.argv[1] # GF5_RAW_TABLE_PROCESSED_UNITE10.txt.gz
 taxonomy_table = sys.argv[2] # GF5_UNITE10_TAXONOMY_TABLE.txt.gz
@@ -15,6 +17,17 @@ def openfile(filename, mode='r'):
         return gzip.open(filename, mode)
     else:
         return open(filename, mode)
+
+#############################################
+
+def zip_file(file_path):
+    # Remove the .fas extension and add .zip extension
+    zip_filename = os.path.splitext(file_path)[0] + '.zip'
+    with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED) as zipf:
+        # Add file to the zip file without directory paths
+        zipf.write(file_path, os.path.basename(file_path))
+    # Remove the original file
+    os.remove(file_path)
 
 #############################################
 
@@ -101,6 +114,7 @@ for name in sh_vars:
             fp.write(sequences[index] + "\n")
             i += 1
     fp.close()
+    zip_file(output_dir + "SH_" + name + ".fas")
 
 print("SH variants were written...")
 
@@ -117,6 +131,7 @@ for name in sp_vars:
                 fp.write(sequences[index] + "\n")
                 i += 1
         fp.close()
+        zip_file(output_dir + "species_" + name + ".fas")
     else:
         print("Ignored: "+name)
 
@@ -134,6 +149,7 @@ for name in gen_vars:
             fp.write(sequences[index] + "\n")
             i += 1
     fp.close()
+    zip_file(output_dir + "genus_" + name + ".fas")
 
 print("Genus variants were written...")
 
