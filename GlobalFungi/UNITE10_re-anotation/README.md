@@ -36,9 +36,16 @@ done
 
 ### get processed blast file
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/Custom_annotation/PROCESS_BLAST_RESULTS_SIMPLE.py`
+**`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/Custom_annotation/PROCESS_BLAST_RESULTS_SIMPLE.py`**
 
 `python2.7 PROCESS_BLAST_RESULTS_SIMPLE.py GF5_RAW_TABLE_PROCESSED_VARIANTS.fa.gz GF5_RAW_TABLE_PROCESSED_VARIANTS_UNITEv10_sh_99_s_all_BEST_ALL.gz GF5_RAW_TABLE_PROCESSED_VARIANTS_UNITEv10_sh_99_s_all_PROCESSED.txt`
+
+
+### get sh table based on new PROCESSED blast
+
+**`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/UNITE10_re-anotation/get_sh_table_from_processed.py`**
+
+`python2.7 get_sh_table_from_processed.py GF5_RAW_TABLE_PROCESSED.txt.gz GF5_RAW_TABLE_PROCESSED_VARIANTS_UNITEv10_sh_99_s_all_PROCESSED.txt.gz GF5_UNITEv10_sh_99_s_all_SH_TABLE_TAB.txt 98.5 90.0`
 
 
 ### GET UNITE 10 All eukaryotes sh dynamic 04042024 complete taxonomy
