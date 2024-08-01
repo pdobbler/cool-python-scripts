@@ -38,7 +38,7 @@ done
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/Custom_annotation/PROCESS_BLAST_RESULTS_SIMPLE.py`
 
-`python2.7 PROCESS_BLAST_RESULTS_SIMPLE.py UNITEv10_sh_99_s_all.fasta GF5_RAW_TABLE_PROCESSED_VARIANTS_UNITEv10_sh_99_s_all_BEST_ALL.gz GF5_RAW_TABLE_PROCESSED_VARIANTS_UNITEv10_sh_99_s_all_PROCESSED.txt`
+`python2.7 PROCESS_BLAST_RESULTS_SIMPLE.py GF5_RAW_TABLE_PROCESSED_VARIANTS.fa.gz GF5_RAW_TABLE_PROCESSED_VARIANTS_UNITEv10_sh_99_s_all_BEST_ALL.gz GF5_RAW_TABLE_PROCESSED_VARIANTS_UNITEv10_sh_99_s_all_PROCESSED.txt`
 
 
 ### GET UNITE 10 All eukaryotes sh dynamic 04042024 complete taxonomy
