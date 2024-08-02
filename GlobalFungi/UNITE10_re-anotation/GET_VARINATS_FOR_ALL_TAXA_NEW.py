@@ -23,7 +23,7 @@ def openfile(filename, mode='r'):
 def zip_file(file_path):
     # Remove the .fas extension and add .zip extension
     zip_filename = os.path.splitext(file_path)[0] + '.zip'
-    with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED) as zipf:
+    with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED, allowZip64=True) as zipf:
         # Add file to the zip file without directory paths
         zipf.write(file_path, os.path.basename(file_path))
     # Remove the original file
