@@ -59,7 +59,13 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
 sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr GF5_ALL_SAMPLES.fa.its2.gz.qualified.seeds2_unite9.0.txt | sort -u -k1,1 --merge > GF5_ALL_SAMPLES.fa.its2.gz.qualified.seeds2_unite9.0_best.txt
+```
 
+
+wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/PROCESS_BLAST_RESULT.py
+
+
+```
 python2.7 PROCESS_BLAST_RESULT.py GF5_ALL_SAMPLES.fa.its2.gz.qualified.seeds2 GF5_ALL_SAMPLES.fa.its2.gz.qualified.seeds2_unite9.0_best.txt GF5_ALL_SAMPLES.fa.its2.gz.qualified.seeds2_unite9.0_PROCESSED.txt ITS2
 ```
 
