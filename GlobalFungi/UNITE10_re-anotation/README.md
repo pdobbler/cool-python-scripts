@@ -100,6 +100,19 @@ It generates "UPDATED_TAX_TABLE.txt" containing reduced taxonomy table...
 `python2.7 get_taxa_table.py GF5_RAW_TABLE_PROCESSED_UNITE10.txt UPDATED_TAX_TABLE.txt GF5_RAW_TABLE_TAB_UNITE10_SPECIES.txt 7`
 
 
+- count sequences in each taxon
+```
+awk -F'\t' '{
+    n = split($3, nums, ";");
+    sum = 0;
+    for (i = 1; i <= n; i++) {
+        sum += nums[i];
+    }
+    print $1 "\t" sum;
+}' GF5_RAW_TABLE_TAB_UNITE10_SH.txt > SH_SEQ_COUNTS.txt
+```
+
+
 ### GET TAXONOMY TABLES FOR SPECIFIC MARKER
 
 **`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/UNITE10_re-anotation/get_taxa_table_for_marker.py`**
