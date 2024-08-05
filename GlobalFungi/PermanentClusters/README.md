@@ -145,6 +145,10 @@ python2.7 bin_fasta_to_CLUSTERS_by_processed_blast_const.py GF5_ALL_SAMPLES.fa.i
 
 ### CLUSTER STATS
 
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/count_clusters.py`
+
+
 ```
 for file in *.fa
 do  
