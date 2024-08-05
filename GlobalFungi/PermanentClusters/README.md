@@ -71,6 +71,10 @@ python2.7 PROCESS_BLAST_RESULT.py GF5_ALL_SAMPLES.fa.its2.gz.qualified.seeds2 GF
 
 ### BINNING TO SEEDS
 
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/split_fasta_by_group_size.py`
+
+
 ```
 python2.7 split_fasta_by_group_size.py REL4_ITS2_COMPLETE_CLEAN_FUNGAL_AND_NOHIT_FINAL_noReplicated.fa.gz.nonqualified 1297870
 python2.7 split_fasta_by_group_size.py GF5_ALL_SAMPLES.fa.its2.gz.nonqualified 1565100
