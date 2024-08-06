@@ -3,6 +3,10 @@ Scripts for creating PERMANENT CLUSTERS for GlobalFungi
 
 ### PROCESS SEQUENCES TO GET SV RANK
 
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/generate_SV_ranks.py`
+
+
 `python2.7 generate_SV_ranks.py GF5_ALL_SAMPLES.fa.its2.gz`
 
 input formate (FASTA):
