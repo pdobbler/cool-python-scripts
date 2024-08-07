@@ -112,6 +112,12 @@ awk -F'\t' '{
 }' GF5_RAW_TABLE_TAB_UNITE10_SH.txt > SH_SEQ_COUNTS.txt
 ```
 
+### GET SAMPLES TO SH TABLE
+
+**`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/UNITE10_re-anotation/get_samples_to_sh_table.py`**
+
+`python2.7 get_samples_to_sh_table.py GF5_RAW_TABLE_PROCESSED_UNITE10.txt GF5_RAW_TABLE_TAB_UNITE10_SAMPLES_TO_SH.txt`
+
 
 ### GET TAXONOMY TABLES FOR SPECIFIC MARKER
 
