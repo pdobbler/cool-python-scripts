@@ -53,6 +53,7 @@ fast:
 - 5.8. - 11:01 - Cluster created 612890 - seqs remains: 1041649 seed name 164ac5efc6cb1df04c206e46f4fdf79c|V_5|S_5|P_1|r_9.5683027325e-06
 - 6.8. - 11:42 - Cluster created 613951 - seqs remains: 984760 seed name 8208c23d2b71125412fbd19ebbd5ee7a|V_7|S_6|P_1|r_9.31780953903e-06
 - 7.8. - 11:03 - Cluster created 614935 - seqs remains: 929720 seed name 55e937204b91ed125a42198e42eacedb|V_9|S_5|P_1|r_9.07719056457e-06
+- 8.8. - 15:07 - Cluster created 616073 - seqs remains: 869287 seed name f73852a3a5b16b332d98d70b7c990f0b|V_6|S_6|P_1|r_8.81453994655e-06
 
 
 
