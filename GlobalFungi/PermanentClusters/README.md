@@ -124,6 +124,9 @@ cat sort_command.sh | parallel
 ```
 # make blast shorter
 ```
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/update_blast_results.py`
+
 ```
 python2.7 update_blast_results.py REL4_ITS2_COMPLETE_CLEAN_FUNGAL_AND_NOHIT_FINAL_noReplicated_nonqualified_seeds_best.txt
 ```
