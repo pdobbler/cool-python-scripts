@@ -136,6 +136,10 @@ python2.7 update_blast_results.py REL4_ITS2_COMPLETE_CLEAN_FUNGAL_AND_NOHIT_FINA
 # binning
 ```
 
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/PROCESS_BLAST_RESULT.py`
+
+
 ```
 python2.7 PROCESS_BLAST_RESULT.py REL4_ITS2_nonqualified.fa REL4_ITS2_COMPLETE_CLEAN_FUNGAL_AND_NOHIT_FINAL_noReplicated_nonqualified_seeds_best.txt.shorter.txt REL4_ITS2_nonqualified_PROCESSED.txt ITS2
 ```
