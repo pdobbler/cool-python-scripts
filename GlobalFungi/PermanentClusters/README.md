@@ -39,24 +39,9 @@ outputs:
 
 
 performance:
-- group_qualified_sequences_faster.py - # clusters 633435 total time 4223531.893308 sec (1173.2h)
+- group_qualified_sequences_fast.py    - # clusters 633435 total time 11931499.46307 sec (3314.3h)
+- group_qualified_sequences_faster.py  - # clusters 633435 total time 4223531.893308 sec (1173.2h)
 - group_qualified_sequences_fastest.py - # clusters 633435 total time 2380216.499521 sec (661.2h)
-
-fast:
-- 29.7. - 11:11 - Cluster created 589105 - seqs remains: 1312048 seed name 414921f4641f58eab56466b8fdb81a18|V_16|S_16|P_1|r_1.04884676021e-05
-- 30.7. - 11:04 - Cluster created 595289 - seqs remains: 1292337 seed name 6763f5870c3866703496cdb8d1288d67|V_16|S_16|P_1|r_1.04884676021e-05
-- 31.7. - 12:00 - Cluster created 601411 - seqs remains: 1271778 seed name 636465349231782ca9a38351674efa02|V_16|S_16|P_1|r_1.04884676021e-05
-- 1.8. - 11:00 - Cluster created 606864 - seqs remains: 1253158 seed name c6721186573cb740ea17b156012fef64|V_16|S_16|P_1|r_1.04884676021e-05
-- 2.8. - 17:58 - Cluster created 609896 - seqs remains: 1195544 seed name 9e665c7e0e6ee2c7de5e0881cc69c6b3|V_9|S_5|P_1|r_1.02568835154e-05
-- 3.8. - 16:10 - Cluster created 610897 - seqs remains: 1142124 seed name b06bd7434f611a38e211f4ab3ee6a353|V_8|S_8|P_1|r_1.0013227919e-05
-- 4.8. - 11:07 - Cluster created 611734 - seqs remains: 1097499 seed name 75d864cb7901cfa468cf5c888a386230|V_7|S_7|P_1|r_9.8146005849e-06
-- 5.8. - 11:01 - Cluster created 612890 - seqs remains: 1041649 seed name 164ac5efc6cb1df04c206e46f4fdf79c|V_5|S_5|P_1|r_9.5683027325e-06
-- 6.8. - 11:42 - Cluster created 613951 - seqs remains: 984760 seed name 8208c23d2b71125412fbd19ebbd5ee7a|V_7|S_6|P_1|r_9.31780953903e-06
-- 7.8. - 11:03 - Cluster created 614935 - seqs remains: 929720 seed name 55e937204b91ed125a42198e42eacedb|V_9|S_5|P_1|r_9.07719056457e-06
-- 8.8. - 15:07 - Cluster created 616073 - seqs remains: 869287 seed name f73852a3a5b16b332d98d70b7c990f0b|V_6|S_6|P_1|r_8.81453994655e-06
-- 9.8. - 13:21 - Cluster created 616949 - seqs remains: 821996 seed name 81a23b2e8034c00c8e8d40c60ce09c0f|V_6|S_5|P_1|r_8.61177130041e-06
-
-
 
 ### SEEDS IDENTIFICATION
 
