@@ -176,11 +176,16 @@ blastn -query REL4_ITS2_FINAL_qualified_clustered_seed.fa -db /mnt/DATA/DATABASE
 
 3.7G Nov 14 08:47 REL4_ITS2_FINAL_qualified_clustered_seed_unite8.2_all_euk_forSH.txt
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/get_SHs_from_complete_blast.py`
+
 ```
-python2.7 get_SHs_from_complete_blast.py REL4_ITS2_FINAL_qualified_clustered_seed.fa REL4_ITS2_FINAL_qualified_clustered_seed_unite8.2_all_euk_forSH.txt 197.0
+python2.7 get_SHs_from_complete_blast.py REL4_ITS2_FINAL_qualified_clustered_seed.fa REL4_ITS2_FINAL_qualified_clustered_seed_unite8.2_all_euk_forSH.txt 198.5
 ```
 
 ### GET CLUSTERS FOR SHs
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/get_clusters_for_SHs.py`
+
 
 ```
 python2.7 get_clusters_for_SHs.py REL4_ITS2_FINAL_qualified_clustered_seed.fa.shs
@@ -188,6 +193,8 @@ python2.7 get_clusters_for_SHs.py REL4_ITS2_FINAL_qualified_clustered_seed.fa.sh
 
 
 ### GET SAMPLES AND STUDIES FOR CLUSTERS
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/get_samples_and_studies_for_clustered_vars.py`
 
 ```
 python2.7 get_samples_and_studies_for_clustered_vars.py FINAL/REL4_ITS2_FINAL_qualified_clustered_and_binned.fa REL4_ITS2_COMPLETE_CLEAN_FUNGAL_AND_NOHIT_FINAL_noReplicated.fa.gz
