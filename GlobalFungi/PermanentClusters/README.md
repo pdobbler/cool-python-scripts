@@ -55,7 +55,7 @@ sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr GF5_ALL_SAMPLES.fa.its2.gz.qualifi
 ```
 
 
-wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/PROCESS_BLAST_RESULT.py
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/PROCESS_BLAST_RESULT.py`
 
 
 ```
@@ -138,6 +138,8 @@ FOUND BLAST RESULTS FOR 315998292 SEQUENCES OUT OF 324467145
 # gdrive_download 1DJLiuxMmQkig8zWC4jg7-A8yvFtSk5xN bin_fasta_to_OTU_by_processed_blast.py
 https://drive.google.com/file/d/1V7mLOgpU4A0sYsMjw-9oNfy31OLjKBDq/view?usp=sharing
 ```
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/bin_fasta_to_CLUSTERS_by_processed_blast_const.py`
 
 ```
 python2.7 bin_fasta_to_CLUSTERS_by_processed_blast_const.py GF5_ALL_SAMPLES.fa.its2.gz.nonqualified.gz GF5_ALL_SAMPLES_its2_nonqualified_seedsblast_PROCESSED.txt 198.5
