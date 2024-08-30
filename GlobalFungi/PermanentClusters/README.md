@@ -25,7 +25,7 @@ outputs:
 ### GROUPING QUALIFIED SEQUENCES (IMPORTANT - biopython must be Version: 1.78 or 1.79!!!)
 `pip show biopython`
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/group_qualified_sequences_fast.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/group_qualified_sequences_fastest_improved.py`
 
 ```
 python group_qualified_sequences_fast.py REL4_ITS2_COMPLETE_CLEAN_FUNGAL_AND_NOHIT_FINAL_noReplicated.fa.gz.qualified 97.0 false
