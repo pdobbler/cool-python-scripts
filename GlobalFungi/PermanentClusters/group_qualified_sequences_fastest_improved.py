@@ -151,9 +151,9 @@ words = generate_all_combinations('ACTG', 4)
 #
 ###
 #reset file for storing cluster seeds
-fp = open(fasta_file + ".seed_seqs4", 'w')
+fp = open(fasta_file + "." + sys.argv[2] + ".seed_seqs", 'w')
 fp.close()
-fp = open(fasta_file + ".seed_seqs4", 'a')
+fp = open(fasta_file + "." + sys.argv[2] + ".seed_seqs", 'a')
 #
 seeds = []
 cluster = 1
@@ -211,8 +211,8 @@ t2 = datetime.datetime.now()
 dif = t2-t1
 print("Done - # clusters "+str(cluster)+" total time "+str(dif.total_seconds())+" sec")
 
-fpC = open(fasta_file + ".clustered4", 'w')
-fpS = open(fasta_file + ".seeds4", 'w')
+fpC = open(fasta_file + "." + sys.argv[2] + ".clustered", 'w')
+fpS = open(fasta_file + "." + sys.argv[2] + ".seeds", 'w')
 name_max = len(str(cluster))
 for s in sequences:
     cname = str(s.getCluster())
