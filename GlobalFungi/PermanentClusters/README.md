@@ -233,6 +233,7 @@ zgrep --no-group-separator -A 1 -F -f CL018450_titles_space.txt Sun_2021_PK_qm20
 
 ### UNITE 9
 
+
 ```
 makeblastdb -in UNITEv9_sh_dynamic_all_tax_final.fas -dbtype 'nucl' -out UNITE9_dyn_tax
 
@@ -243,6 +244,8 @@ export LANG=en_US.UTF-8
 
 sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr REL4_ITS2_FINAL_qualified_clustered_seed_unite9_dyn_tax.txt | sort -u -k1,1 --merge > REL4_ITS2_FINAL_qualified_clustered_seed_unite9_dyn_tax_best.txt
 ```
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/PROCESS_BLAST_RESULT.py`
 
 ```
 python2.7 PROCESS_BLAST_RESULT.py REL4_ITS2_FINAL_qualified_clustered_seed.fa REL4_ITS2_FINAL_qualified_clustered_seed_unite9_dyn_tax_best.txt REL4_ITS2_seed_unite9_dyn_tax_PROCESSED.txt ITS2
