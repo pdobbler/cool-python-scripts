@@ -6,6 +6,14 @@ import hashlib
 import gzip
 
 fasta_file = sys.argv[1]
+split = sys.argv[2].lower() == 'true'  # Convert the string to a boolean
+
+if split == true:
+    print("Daset will be split to Qualified and Nonqualified sequences...")
+else:
+    print("No split applied!")
+
+
 
 def openfile(filename, mode='r'):
     if filename.endswith('.gz'):
@@ -125,20 +133,29 @@ print("Writing sorted files...")
 sum = 0
 q = 0
 n = 0
-fpQ = open(fasta_file+".qualified", 'w')
-fpN = open(fasta_file+".nonqualified", 'w')
-for v in ut:
-    if v.isQualified():
-        fpQ.write(">"+v.getInfo()+"\n")
+if split:
+    fpQ = open(fasta_file+".qualified", 'w')
+    fpN = open(fasta_file+".nonqualified", 'w')
+    for v in ut:
+        if v.isQualified():
+            fpQ.write(">"+v.getInfo()+"\n")
+            fpQ.write(v.getSeq() + "\n")
+            q += 1
+        else:
+            fpN.write(">" + v.getInfo() + "\n")
+            fpN.write(v.getSeq() + "\n")
+            n += 1
+        sum += v.getSize()
+    fpN.close()
+    fpQ.close()
+else:
+    fpQ = open(fasta_file+".all", 'w')
+    for v in ut:
+        fpQ.write(">"+v.getInfo(max_var_size, max_sample_size, max_paper_size)+"\n")
         fpQ.write(v.getSeq() + "\n")
         q += 1
-    else:
-        fpN.write(">" + v.getInfo() + "\n")
-        fpN.write(v.getSeq() + "\n")
-        n += 1
-    sum += v.getSize()
-fpN.close()
-fpQ.close()
+        sum += v.getSize()
+    fpQ.close()
 
 print("Sequence saved: "+str(sum)+" qualified variants: "+str(q)+" non-qualified variant: "+str(n))
 
