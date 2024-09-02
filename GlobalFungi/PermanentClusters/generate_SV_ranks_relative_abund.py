@@ -151,7 +151,7 @@ if split:
 else:
     fpQ = open(fasta_file+".all", 'w')
     for v in ut:
-        fpQ.write(">"+v.getInfo(max_var_size, max_sample_size, max_paper_size)+"\n")
+        fpQ.write(">"+v.getInfo()+"\n")
         fpQ.write(v.getSeq() + "\n")
         q += 1
         sum += v.getSize()
