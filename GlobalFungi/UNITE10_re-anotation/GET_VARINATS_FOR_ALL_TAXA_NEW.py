@@ -8,6 +8,7 @@ import zipfile
 variants_table = sys.argv[1] # GF5_RAW_TABLE_PROCESSED_UNITE10.txt.gz
 taxonomy_table = sys.argv[2] # GF5_UNITE10_TAXONOMY_TABLE.txt.gz
 output_dir = sys.argv[3]
+samples_map = sys.argv[4] # GF5_RAW_TABLE_SAMPLES.txt.gz
 
 #############################################
 # GZIP OPENING
@@ -28,6 +29,15 @@ def zip_file(file_path):
         zipf.write(file_path, os.path.basename(file_path))
     # Remove the original file
     os.remove(file_path)
+
+#############################################
+
+samples_mapping = {}
+for line in openfile(samples_map):
+    vals = line.rstrip().split('\t')
+    samples_mapping[vals[0]] = vals[1]
+
+print("Samples mapping loaded... (" + str(len(samples_mapping)) + ")")
 
 #############################################
 
@@ -110,7 +120,7 @@ for name in sh_vars:
         for i in range(len(samples[index])):
             s = samples[index][i]
             a = abundances[index][i]
-            fp.write(">" + hash_md5[index] + "|SampleID_" + s + "|sh_" + name + "|marker_" + markers[index] + "|abund_"  + a +"_total_" + str(total[s]) + "\n")
+            fp.write(">" + hash_md5[index] + "|SampleID_" + samples_mapping[s] + "|sh_" + name + "|marker_" + markers[index] + "|abund_"  + a +"_total_" + str(total[s]) + "\n")
             fp.write(sequences[index] + "\n")
             i += 1
     fp.close()
@@ -127,7 +137,7 @@ for name in sp_vars:
             for i in range(len(samples[index])):
                 s = samples[index][i]
                 a = abundances[index][i]
-                fp.write(">" + hash_md5[index] + "|SampleID_" + s + "|species_" + name + "|marker_" + markers[index] + "|abund_" + a + "_total_" + str(total[s]) + "\n")
+                fp.write(">" + hash_md5[index] + "|SampleID_" + samples_mapping[s] + "|species_" + name + "|marker_" + markers[index] + "|abund_" + a + "_total_" + str(total[s]) + "\n")
                 fp.write(sequences[index] + "\n")
                 i += 1
         fp.close()
@@ -145,7 +155,7 @@ for name in gen_vars:
         for i in range(len(samples[index])):
             s = samples[index][i]
             a = abundances[index][i]
-            fp.write(">" + hash_md5[index] + "|SampleID_" + s + "|genus_" + name + "|marker_" + markers[index] + "|abund_" + a + "_total_" + str(total[s]) + "\n")
+            fp.write(">" + hash_md5[index] + "|SampleID_" + samples_mapping[s] + "|genus_" + name + "|marker_" + markers[index] + "|abund_" + a + "_total_" + str(total[s]) + "\n")
             fp.write(sequences[index] + "\n")
             i += 1
     fp.close()
