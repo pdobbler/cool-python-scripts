@@ -8,7 +8,7 @@ import gzip
 fasta_file = sys.argv[1]
 split = sys.argv[2].lower() == 'true'  # Convert the string to a boolean
 
-if split == true:
+if split:
     print("Daset will be split to Qualified and Nonqualified sequences...")
 else:
     print("No split applied!")
