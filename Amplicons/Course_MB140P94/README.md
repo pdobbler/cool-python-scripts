@@ -232,7 +232,7 @@ ITSx is an open source software utility to extract the highly variable ITS1 and 
 `ITSx -i Fungi_joined_qm30_dereplicated.fasta --cpu 64 --only_full T -t F -o itsx_Fungi_joined_qm30_dereplicated`
 
 
-**Dereplicate sequences**
+**Rereplicate sequences**
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/Amplicons/Course_MB140P94/rereplicate_FASTA.py`
 
