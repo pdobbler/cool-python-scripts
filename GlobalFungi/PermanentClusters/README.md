@@ -210,6 +210,12 @@ Sequences processed... total: 2884581662 clustered: 2787623835 non-clustered: 96
 DONE. 250272474
 
 
+**statistic in selected samples**
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/get_samples_and_studies_for_clustered_vars_with_list.py`
+
+`python2.7 get_samples_and_studies_for_clustered_vars_with_list.py FINAL/GF5_ALL_SAMPLES_its2_nonqualified_clustered_and_binned.fa.gz GF5_ALL_SAMPLES.fa.its2.gz Eligible_samples_ITS2_clusters.txt`
+
 ### SUSPICIOUS CLUSTERS - PARTS OF ITS
 
 ```
