@@ -291,6 +291,9 @@ END {
 
 ### SAMPLES - BINNED+CL vs NOT
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/get_sample_binned_proportion.py`
+
+
 ```
 python2.7 get_sample_binned_proportion.py /mnt/DATA/projects/avetrot/REL4_RAW_and_CLUSTERING_FINAL/RELEASE4_RAW/REL4_ITS2_COMPLETE_CLEAN_FUNGAL_AND_NOHIT_FINAL_noReplicated.fa.gz REL4_ITS2_FINAL_qualified_clustered_and_binned.fa SAMPLES_BINNEDANDCL_VS_NOT.txt
 ```
