@@ -55,7 +55,7 @@ for line in openfile(RAW_GF_FASTA, 'r'):
                 cl_size += 1
                 sample_name = title.split('|')[0]
                 paper_name = title.split('|')[1]
-                if sample_set.has_key(sample_name):
+                if sample_name in sample_set:
                     cl_name = vars[hash]
                     cl_names.add(cl_name)
                     if cl_name in samples_map:
