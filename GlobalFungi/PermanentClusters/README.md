@@ -322,3 +322,17 @@ python2.7 count_clusters.py REL4_ITS2_COMPLETE_CLEAN_FUNGAL_AND_NOHIT_FINAL_noRe
 ```
 
 Sequences loaded 245860863 clusters found 211559
+
+
+
+### NON-BINNED PROCESSING
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/split_by_sample_size.py`
+
+`python2.7 split_by_sample_size.py GF5_ALL_SAMPLES.fa.its2.gz.nonqualified.gz.notbinned.gz 4`
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/sort_by_SV_ranks.py`
+
+`python2.7 sort_by_SV_ranks.py GF5_ALL_SAMPLES.fa.its2.gz.nonqualified.gz.notbinned.gz.qualified`
+
+
