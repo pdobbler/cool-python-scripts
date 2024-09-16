@@ -92,10 +92,6 @@ makeblastdb -in REL4_ITS2_COMPLETE_CLEAN_FUNGAL_AND_NOHIT_FINAL_noReplicated.fa.
 ```
 
 ```
-# BLAST AND BEST HITS
-```
-
-```
 # export LC_ALL=en_US.UTF-8
 # export LANG=en_US.UTF-8
 
@@ -106,6 +102,8 @@ makeblastdb -in REL4_ITS2_COMPLETE_CLEAN_FUNGAL_AND_NOHIT_FINAL_noReplicated.fa.
 
 # cat sort_command.sh | parallel
 ```
+
+# BLAST AND BEST HITS
 
 ```
 export LC_ALL=en_US.UTF-8
