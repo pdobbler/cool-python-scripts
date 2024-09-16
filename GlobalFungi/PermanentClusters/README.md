@@ -116,7 +116,7 @@ do
 done > blast_and_sort_command.sh
 
 mkdir tmp
-TMPDIR=./tmp cat blast_and_sort_command.sh | parallel
+TMPDIR=/mnt/DATA1/RELEASE5/FOR_BLAST_UNITE9_COMPLETE/MAKE_TABLE_DIR/GF5_ALL_SAMPLES/PERMANENT_CLUSTERS_ITS2_NEW/FINAL/NOT_BINNED_CLUSTERING/NONQUALIFIED_S4_PARTS/tmp cat blast_and_sort_command.sh | parallel
 ```
 
 ```
