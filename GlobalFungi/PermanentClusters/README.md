@@ -83,28 +83,40 @@ makeblastdb -in REL4_ITS2_COMPLETE_CLEAN_FUNGAL_AND_NOHIT_FINAL_noReplicated.fa.
 ```
 
 ```
-for file in *.fas
-do  
- echo "blastn -query ${file} -db REL5_ITS2_QUALIFIED_SEEDS -out ${file%%.fas}.seeds.txt -evalue 1E-5 -outfmt 6 -num_threads 2 -max_target_seqs 10"
-done > blast_command.sh
+# for file in *.fas
+# do  
+#  echo "blastn -query ${file} -db REL5_ITS2_QUALIFIED_SEEDS -out ${file%%.fas}.seeds.txt -evalue 1E-5 -outfmt 6 -num_threads 2 -max_target_seqs 10"
+# done > blast_command.sh
 
-cat blast_command.sh | parallel
+# cat blast_command.sh | parallel
 ```
 
 ```
-# BEST HITS
+# BLAST AND BEST HITS
+```
+
+```
+# export LC_ALL=en_US.UTF-8
+# export LANG=en_US.UTF-8
+
+# for file in *.txt
+# do  
+#  echo "sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr ${file} | sort -u -k1,1 --merge > ${file%%.txt}_best.tab"
+# done > sort_command.sh
+
+# cat sort_command.sh | parallel
 ```
 
 ```
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-for file in *.txt
-do  
- echo "sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr ${file} | sort -u -k1,1 --merge > ${file%%.txt}_best.tab"
-done > sort_command.sh
+for file in *.fas
+do
+ echo "blastn -query ${file} -db REL5_ITS2_QUALIFIED_SEEDS -outfmt 6 -evalue 1E-5 -num_threads 2 -max_target_seqs 10 | sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr | sort -u -k1,1 --merge > ${file%%.fas}_best.tab"
+done > blast_and_sort_command.sh
 
-cat sort_command.sh | parallel
+cat blast_and_sort_command.sh | parallel
 ```
 
 ```
