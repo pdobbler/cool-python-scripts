@@ -115,7 +115,8 @@ do
  echo "blastn -query ${file} -db REL5_ITS2_QUALIFIED_SEEDS -outfmt 6 -evalue 1E-5 -num_threads 2 -max_target_seqs 10 | sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr | sort -u -k1,1 --merge > ${file%%.fas}_best.tab"
 done > blast_and_sort_command.sh
 
-cat blast_and_sort_command.sh | parallel
+mkdir tmp
+TMPDIR=./tmp cat blast_and_sort_command.sh | parallel
 ```
 
 ```
