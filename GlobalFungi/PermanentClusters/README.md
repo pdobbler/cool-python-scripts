@@ -349,3 +349,8 @@ Sequences loaded 245860863 clusters found 211559
 `python2.7 sort_by_SV_ranks.py GF5_ALL_SAMPLES.fa.its2.gz.nonqualified.gz.notbinned.gz.qualified`
 
 
+### GET TABLE FROM CLUSTERED VARIANTS
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/get_table_from_clustered_variants.py`
+
+`python2.7 get_table_from_clustered_variants.py SSU_PERMCLUSTERED_97_AMF_SELECTION.fa SSU_qm20_renamed_PRIMARY_FORBIN_NO_DUPL_AND_AMB.fa.multi.gz`
