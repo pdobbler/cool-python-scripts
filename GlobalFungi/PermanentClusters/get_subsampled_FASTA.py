@@ -1,6 +1,7 @@
 __author__ = 'vetrot'
 
 import sys
+import random
 
 fasta_file = sys.argv[1]
 size = int(sys.argv[2])
