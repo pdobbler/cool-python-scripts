@@ -354,3 +354,20 @@ Sequences loaded 245860863 clusters found 211559
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/get_table_from_clustered_variants.py`
 
 `python2.7 get_table_from_clustered_variants.py SSU_PERMCLUSTERED_97_AMF_SELECTION.fa SSU_qm20_renamed_PRIMARY_FORBIN_NO_DUPL_AND_AMB.fa.multi.gz`
+
+```
+awk 'NR == 1 { for (i = 2; i <= NF; i++) {header[i] = $i;}} 
+NR > 1 {
+  for (i = 2; i <= NF; i++) {
+    if ($i != 0) nonzero[i]++;
+    sum[i] += $i;
+    if ($i == 1) ones[i]++;
+    if ($i == 2) twos[i]++;
+  }
+}
+END {
+  for (i = 2; i <= NF; i++) {
+    print header[i], "non-zero:", nonzero[i] + 0, "sum:", sum[i] + 0, "ones:", ones[i] + 0, "twos:", twos[i] + 0;
+  }
+}' SSU_PERMCLUSTERED_97_AMF_SELECTION.fa.TABLE.txt > SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_stats.txt
+```
