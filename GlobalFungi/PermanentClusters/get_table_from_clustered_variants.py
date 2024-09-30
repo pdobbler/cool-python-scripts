@@ -31,7 +31,7 @@ print("Sequence variants loaded... "+str(len(variants)))
 # >GF4S07047b|Sun_2021_PK|ERR4887914.1283241
 
 titleRead = False
-samples = set()
+samples_set = set()
 for line in openfile(RAW_GF_FASTA, 'r'):
     ch = line[0]
     if ch == '>':
@@ -43,7 +43,7 @@ for line in openfile(RAW_GF_FASTA, 'r'):
             md5 = hashlib.md5(line.strip().encode()).hexdigest()
             if variants.has_key(md5):
                 sample_name = title.split('|')[0]
-                samples.add(sample_name)
+                samples_set.add(sample_name)
                 samples = clusters[variants[md5]]
                 if samples.has_key(sample_name):
                     samples[sample_name] += 1
@@ -52,7 +52,7 @@ for line in openfile(RAW_GF_FASTA, 'r'):
                 clusters[variants[md5]] = samples
 
 # Convert the set to a list
-samples_list = list(samples)
+samples_list = list(samples_set)
 
 # save output
 fp = open(CLUSTERED_VARS+".TABLE.txt", 'w')
@@ -62,7 +62,7 @@ for sample_name in samples_list:
 fp.write(line + '\n')
 
 for cl_name in clusters:
-    line = "cluster_name"
+    line = cl_name
     for sample_name in samples_list:
         samples = clusters[sample_name]
         if samples.has_key(sample_name):
