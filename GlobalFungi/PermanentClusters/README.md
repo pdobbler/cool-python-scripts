@@ -355,6 +355,8 @@ Sequences loaded 245860863 clusters found 211559
 
 `python2.7 get_table_from_clustered_variants.py SSU_PERMCLUSTERED_97_AMF_SELECTION.fa SSU_qm20_renamed_PRIMARY_FORBIN_NO_DUPL_AND_AMB.fa.multi.gz`
 
+- For each sample in Table, calculate: the total number of clusters, the total number of sequences, the total number of singletons (within the sample), the total number of doubletons (within the sample):
+
 ```
 awk 'NR == 1 { for (i = 2; i <= NF; i++) {header[i] = $i;}} 
 NR > 1 {
@@ -371,3 +373,21 @@ END {
   }
 }' SSU_PERMCLUSTERED_97_AMF_SELECTION.fa.TABLE.txt > SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_stats.txt
 ```
+
+- Remove all samples from the table that have fewer than 1000 sequences, and randomly subsample all samples so that they have exactly 1000 sequences:
+
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/filter_columns.awk`
+
+`chmod +x filter_columns.awk`
+
+`awk -f filter_columns.awk SSU_PERMCLUSTERED_97_AMF_SELECTION.fa.TABLE.txt > SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_1000seqs.txt`
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/reconstruct_virtual_dataset.py`
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/get_subsampled_FASTA.py`
+
+`python2.7 reconstruct_virtual_dataset.py SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_1000seqs.txt SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_1000seqs.fa`
+
+`python2.7 get_subsampled_FASTA.py SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_1000seqs.fa 1000 SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_1000SUBSAMPLED.txt`
+
