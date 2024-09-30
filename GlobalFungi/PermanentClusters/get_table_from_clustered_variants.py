@@ -63,8 +63,8 @@ fp.write(line + '\n')
 
 for cl_name in clusters:
     line = cl_name
+    samples = clusters[cl_name]
     for sample_name in samples_list:
-        samples = clusters[sample_name]
         if samples.has_key(sample_name):
             line += "\t" + str(samples[sample_name])
         else:
