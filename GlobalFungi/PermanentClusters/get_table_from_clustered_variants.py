@@ -22,7 +22,7 @@ for line in openfile(CLUSTERED_VARS, 'r'):
     if ch == '>':
         parts = line[1:].strip().split('|')
         variants[parts[1]] = parts[0]
-        if not clusters.has_key(parts[0])
+        if not clusters.has_key(parts[0]):
             clusters[parts[0]] = {}
 
 print("Sequence variants loaded... "+str(len(variants)))
