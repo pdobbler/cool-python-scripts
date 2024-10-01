@@ -1,11 +1,19 @@
 #!/usr/bin/awk -f
 
 BEGIN {
-    FS="\t";  # Set input field separator to tab
-    OFS="\t"; # Set output field separator to tab
+    FS = "\t";  # Set input field separator to tab
+    OFS = "\t"; # Set output field separator to tab
+
+    # Set default threshold to 1000 if not provided
+    threshold = 1000;
+    if (ARGC > 1) {
+        threshold = ARGV[1];
+        ARGC--;  # Decrease ARGC to ignore the threshold parameter in input file processing
+        ARGV[1] = ARGV[2];  # Shift ARGV to ignore the first argument (threshold) and use the input file
+    }
 }
 
-# This block runs on the header line to select columns with sum >= 1000
+# This block runs on the header line to store header names
 NR == 1 {
     for (i = 2; i <= NF; i++) {
         header[i] = $i;
@@ -18,17 +26,17 @@ NR == 1 {
     for (i = 2; i <= NF; i++) {
         column_sum[i] += $i;
     }
-    
+
     # Store each row for later output
     data[NR] = $0;
 }
 
 # END block to print selected columns and filter rows
 END {
-    # Select columns with sum >= 1000
+    # Select columns based on the sum compared to the threshold
     selected_columns[1] = 1;  # Always keep the first column (cluster_name)
     for (i = 2; i <= NF; i++) {
-        if (column_sum[i] >= 1000) {
+        if (column_sum[i] >= threshold) {
             selected_columns[i] = 1;
         }
     }
