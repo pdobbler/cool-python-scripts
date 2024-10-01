@@ -391,3 +391,11 @@ END {
 
 `python2.7 get_subsampled_FASTA.py SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_1000seqs.fa 1000 SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_1000SUBSAMPLED.txt`
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/get_subsampled_table_from_FASTA.py`
+
+`python2.7 get_subsampled_table_from_FASTA.py`
+
+
+
+
+
