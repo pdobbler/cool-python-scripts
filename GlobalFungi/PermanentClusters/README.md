@@ -381,19 +381,17 @@ END {
 
 `chmod +x filter_columns.awk`
 
-`awk -f filter_columns.awk SSU_PERMCLUSTERED_97_AMF_SELECTION.fa.TABLE.txt > SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_1000seqs.txt`
+`awk -f filter_columns.awk 500 SSU_PERMCLUSTERED_97_AMF_SELECTION.fa.TABLE.txt > SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_min500seqs.txt`
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/reconstruct_virtual_dataset.py`
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/get_subsampled_FASTA.py`
 
-`python2.7 reconstruct_virtual_dataset.py SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_1000seqs.txt SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_1000seqs.fa`
-
-`python2.7 get_subsampled_FASTA.py SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_1000seqs.fa 1000 SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_1000SUBSAMPLED.txt`
+`python2.7 reconstruct_virtual_dataset.py SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_min500seqs.txt SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_min500seqs.fa`
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/get_subsampled_table_from_FASTA.py`
 
-`python2.7 get_subsampled_table_from_FASTA.py`
+`python2.7 get_subsampled_table_from_FASTA.py SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_min500seqs.fa 500 SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_SUBSAMPLED_500.txt`
 
 
 
