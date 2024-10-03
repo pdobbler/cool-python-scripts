@@ -14,9 +14,9 @@
 ### blast
 
 ```
-for file in *.fas
+for file in *.fas.gz
 do  
- echo "blastn -query ${file} -db ErMF_isolates_seq_NCBI -out ${file%%.fas}.ErMF_NCBI.txt -evalue 1E-5 -outfmt 6 -num_threads 1 -max_target_seqs 10"
+ echo "gunzip -c ${file} | blastn -query - -db ErMF_isolates_seq_NCBI -out ${file%%.fas.gz}.ErMF_NCBI.txt -evalue 1E-5 -outfmt 6 -num_threads 1 -max_target_seqs 10"
 done > blast_command.sh
 ```
 
