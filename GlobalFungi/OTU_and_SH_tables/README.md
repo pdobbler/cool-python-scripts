@@ -20,3 +20,12 @@
 
 `python2.7 TABLE_BY_SAMPLES_AND_SHS.py GF5_RAW_TABLE_TAB_SH.txt.gz GF5_RAW_TABLE_SAMPLES.txt.gz test_samples.txt test_shs.txt`
 
+
+### GET OTUTABLE FROM CLUSTERED FASTA
+
+header e.g.: >GF05023557S|Fernan_2020_JZ12|e7c017be559f77ec|OTU0027655
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/OTU_and_SH_tables/GET_OTUTAB_FROM_SEQUENCES.py`
+
+`python2.7 GET_OTUTAB_FROM_SEQUENCES.py GF5_ALL_SAMPLES_ITS2_CLUSTERED_ECTO.fa GF5_ALL_SAMPLES_ITS2_CLUSTERED_ECTO_OTUTABLE.txt`
+
