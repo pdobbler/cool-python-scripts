@@ -7,7 +7,7 @@ import gzip
 
 fasta_file = sys.argv[1]
 no_singletons = sys.argv[2]
-selected_otus = sys.argv[3]
+selected_otus = sys.argv[3] # or '-' to ignore
 
 
 def openfile(filename, mode='r'):
@@ -26,13 +26,15 @@ else:
     print('output will not ignore singletons')
 
 otus_list = {}
-for line in open(selected_otus):
-    otus_list[line.rstrip()] = 0
-print("OTU list size: "+str(len(otus_list)))
+if selected_otus == "-":
+    print('all OTUs will be used')
+else:
+    for line in open(selected_otus):
+        otus_list[line.rstrip()] = 0
+    print("OTU list size: "+str(len(otus_list)))
 
 # >GF4S04647b|Sun_2021_PK|ERR4885514.335925.|.|.|OTU0000002
 
-#>M03794:13:000000000-AKG7U:1:2108:23385:21267|STE046|OTU023795
 # fill table...
 tab_dict_otus = {}
 tab_dict_samples = {}
@@ -41,8 +43,15 @@ for line in openfile(fasta_file):
         vals = line[1:].rstrip().split('|')
         # sum otus...
         otu_name = vals[len(vals)-1]
-        if otus_list.has_key(otu_name):
-            otus_list[otu_name] += 1
+        if otus_list.has_key(otu_name) or not otus_list:
+            # count otu hits...
+            if not otus_list:
+                if otus_list.has_key(otu_name):
+                    otus_list[otu_name] += 1
+                else:
+                    otus_list[otu_name] = 0
+            else:
+                otus_list[otu_name] += 1
             #print("OTU: "+otu_name)
             # sum samples...
             sample_name = vals[0]
