@@ -28,12 +28,16 @@ else:
 otus_list = {}
 if selected_otus == "-":
     print('all OTUs will be used')
+    check_specific_OTUs = False
 else:
     for line in open(selected_otus):
         otus_list[line.rstrip()] = 0
     print("OTU list size: "+str(len(otus_list)))
+    check_specific_OTUs = True
 
 # >GF4S04647b|Sun_2021_PK|ERR4885514.335925.|.|.|OTU0000002
+
+
 
 # fill table...
 tab_dict_otus = {}
@@ -43,13 +47,13 @@ for line in openfile(fasta_file):
         vals = line[1:].rstrip().split('|')
         # sum otus...
         otu_name = vals[len(vals)-1]
-        if otus_list.has_key(otu_name) or not otus_list:
+        if otus_list.has_key(otu_name) or not check_specific_OTUs:
             # count otu hits...
-            if not otus_list:
+            if not check_specific_OTUs:
                 if otus_list.has_key(otu_name):
                     otus_list[otu_name] += 1
                 else:
-                    otus_list[otu_name] = 0
+                    otus_list[otu_name] = 1
             else:
                 otus_list[otu_name] += 1
             #print("OTU: "+otu_name)
@@ -105,6 +109,7 @@ for otu_name in tab_dict_otus:
 fp.close()
 
 print("...processed seqs "+str(sum_tot)+" global singletons: "+str(len(single_otus)))
+print("...OTUs to samples :)")
 
 # write table...
 fp = open("commpressed_otu_tab.samples_to_otus.nosingle_"+str(nosingle)+".txt", "w")
@@ -121,7 +126,7 @@ for sample_name in tab_dict_samples:
         fp.write(sample_name + "\t" + ";".join(oo) + "\t" + ";".join(bb) + "\n")
 fp.close()
 
-print("Done :)")
+print("...samples to OTUs :)")
 
 for otu_name in otus_list:
     if otus_list[otu_name] == 0:
