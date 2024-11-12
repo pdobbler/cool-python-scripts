@@ -38,5 +38,5 @@ header e.g.: >GF05028373S|Chen12_2022_AKD1|c4327a8b28d158a0|OTU0096999
 
 all clusters and singletons included (no_singletons:false;-:means no selected OTUs list provided)
 
-`python2.7 GET_OTUTAB_FROM_SEQUENCES_REDUCED_FORMATE.py test_cl_fasta.fa false -`
+`python2.7 GET_OTUTAB_FROM_SEQUENCES_REDUCED_FORMATE.py GF5_ALL_SAMPLES_ITS2_CLUSTERED.fa.gz false -`
 
