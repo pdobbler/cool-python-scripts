@@ -389,6 +389,15 @@ END {
 
 `python2.7 reconstruct_virtual_dataset.py SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_min500seqs.txt SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_min500seqs.fa`
 
+### VARIANTS IN TWO SAMPLES
+
+`awk -F '\t' '$3 ~ /k__Fungi/ && $4 >= 85.0 {print $3}' GF5_ALL_SAMPLES_its2_S2_EukaryomITS_best_PROCESSED.txt | awk -F';' '{print $4}' | sort | uniq -c > fungal_classes_above85sim.txt`
+
+`grep -v "k__Fungi" GF5_ALL_SAMPLES_its2_S2_EukaryomITS_best_PROCESSED.txt | awk -F '\t' '{print $2}' > GF5_ALL_SAMPLES_its2_S2_NONFUNGAL_varaint_names.txt`
+
+
+
+
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/get_subsampled_table_from_FASTA.py`
 
 `python2.7 get_subsampled_table_from_FASTA.py SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_min500seqs.fa 500 SSU_PERMCLUSTERED_97_AMF_SELECTION_TABLE_SUBSAMPLED_500.txt`
