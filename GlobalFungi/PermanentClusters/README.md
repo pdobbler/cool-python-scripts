@@ -402,6 +402,18 @@ END {
 
 
 
+### GET TABLE FROM CLUSTERED VARIANTS
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/add_text_to_fasta_title.py`
+
+`python2.7 add_text_to_fasta_title.py S2_Sordariomycetes_varaints.fa.sorted.98.5.clustered S2_Sord`
+
+`python2.7 add_text_to_fasta_title.py S2_Sordariomycetes_varaints.fa.sorted.98.5.seeds S2_Sord`
+
+
+
+
+
 
 
 
