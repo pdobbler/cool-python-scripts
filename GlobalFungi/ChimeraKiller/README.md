@@ -1,8 +1,5 @@
 ### REFERENCE BASED
 
-`vsearch --uchime_ref input.fasta --db reference_db.fasta --nonchimeras output.fasta`
-
-
 `vsearch --uchime_ref TEST.fa --db REFERENCE.fa --nonchimeras chimclean.fasta`
 
 vsearch v2.21.2_linux_x86_64, 5948.9GB RAM, 1152 cores
