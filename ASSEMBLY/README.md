@@ -23,11 +23,11 @@ for file in *.sorted.bam; do
     unmapped=$(samtools view -c -f 4 "$file")
     mapped=$(samtools view -c -F 4 "$file")
 
-    # Reads by contig file
-    samtools idxstats ${file} > ${sample}.reads.by.contigs.txt
-
     # Append the results to the table
     echo -e "${sample}\t${mapped}\t${unmapped}" >> "$OUTPUT_TABLE"
+
+    # Reads by contig file
+    samtools idxstats ${file} > ${sample}.reads.by.contigs.txt
 done
 
 echo "Summary table created: $OUTPUT_TABLE"
