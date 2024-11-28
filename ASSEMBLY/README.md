@@ -6,7 +6,9 @@
 ## using DBCAN3 for cazy annotation::
 
 # split fasta #
-python2.7  /mnt/DATA1/priscila/scripts_metagenome/split_fasta_by_group_size.py  /mnt/DATA/projects/priscila/bartek_reads_for_ass/gene_prediction/all_predicted_metagenemark_renamed2_2.faa 83000
+wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/split_fasta_by_group_size.py
+
+python2.7  split_fasta_by_group_size.py  Margaux_MG_Megahit_genecalling_fgs.faa 103000
 
 mkdir SPLIT 
 mv *.fas SPLIT
