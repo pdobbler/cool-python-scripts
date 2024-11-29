@@ -53,7 +53,8 @@ paste -d"\t" all_dbCAN_best_gene_eval.txt hmm_names.txt > CAZy_BEST_SIMPLE.txt
 
 
 ####### USE THIS to get MULTI CAZy per gene
-dbcan_CAZy_multi_simple.py
+wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/ASSEMBLY/dbcan_CAZy_multi_simple.py
+
 python dbcan_CAZy_multi_simple.py all_dbCAN.txt all_dbCAN_simple_MULTI.txt
 
 ## add to big table
