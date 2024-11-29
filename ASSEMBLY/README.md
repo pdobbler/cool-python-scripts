@@ -56,7 +56,7 @@ paste -d"\t" all_dbCAN_best_gene_eval.txt hmm_names.txt > CAZy_BEST_SIMPLE.txt
 dbcan_CAZy_multi_simple.py
 python dbcan_CAZy_multi_simple.py all_dbCAN.txt all_dbCAN_simple_MULTI.txt
 
-## add to bit table
+## add to big table
 
 python2.7 /mnt/DATA1/priscila/scripts_metagenome/link_simple_table_to_mapping_table.py BY_GENE_NORMALISED_per_GENECALL_TAX_LCA_SSU_ITS_MAG_CAZy_KOfam_KOG.tab all_dbCAN_simple_MULTI.txt CAZyme e-value BY_GENE_NORMALISED_per_GENECALL_TAX_LCA_SSU_ITS_MAG_CAZy_KOfam_KOG_multiCAZY.tab
 ```
