@@ -118,4 +118,11 @@ echo "Summary table created: $OUTPUT_TABLE"
 
 `python2.7 normalize-mapping-table-by-read-length-and-ctg-length.py summary-count-mapped.tsv 150 TABLE_normalised.txt`
 
+### NORMALISE MAPPING TABLE PER SAMPLE
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/ASSEMBLY/normalize_table_by_columns.py`
+
+`python2.7 normalize_table_by_columns.py TABLE_normalised.txt 2 1000000 TABLE_normalised_per_sample.txt`
+
+
 
