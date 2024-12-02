@@ -1,5 +1,15 @@
 ### MT+MG ASSEMBLY
 
+
+### GENECALLING - FGS
+
+`conda activate base`
+
+`ln -s /home/kdanielmorais/bioinformatics/tools/fraggenescan/FragGeneScan1.31/train/ ./`
+
+`FragGeneScan -s MG_Megahit.fa -w 1 -o MG_Megahit_genecalling_fgs -t complete -p 512`
+
+
 ### CAZy
 
 ```
@@ -100,3 +110,12 @@ echo "Summary table created: $OUTPUT_TABLE"
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/ASSEMBLY/count-up-mapped-from-results-txt-with-ctg-length.py`
 
 `python2.7 count-up-mapped-from-results-txt-with-ctg-length.py *.reads.by.contigs.txt`
+
+
+### NORMALISE MAPPING TABLE PER BASE
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/ASSEMBLY/normalize-mapping-table-by-read-length-and-ctg-length.py`
+
+`python2.7 normalize-mapping-table-by-read-length-and-ctg-length.py summary-count-mapped.tsv 125 TABLE_normalised.txt`
+
+
