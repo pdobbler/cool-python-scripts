@@ -96,3 +96,7 @@ done
 
 echo "Summary table created: $OUTPUT_TABLE"
 ```
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/ASSEMBLY/count-up-mapped-from-results-txt-with-ctg-length.py`
+
+`python2.7 count-up-mapped-from-results-txt-with-ctg-length.py *.reads.by.contigs.txt`
