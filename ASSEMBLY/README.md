@@ -116,6 +116,6 @@ echo "Summary table created: $OUTPUT_TABLE"
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/ASSEMBLY/normalize-mapping-table-by-read-length-and-ctg-length.py`
 
-`python2.7 normalize-mapping-table-by-read-length-and-ctg-length.py summary-count-mapped.tsv 125 TABLE_normalised.txt`
+`python2.7 normalize-mapping-table-by-read-length-and-ctg-length.py summary-count-mapped.tsv 150 TABLE_normalised.txt`
 
 
