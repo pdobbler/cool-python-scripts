@@ -134,6 +134,10 @@ echo "Summary table created: $OUTPUT_TABLE"
 
 `(head -1 TABLE_normalised_per_sample.txt_genecall.txt | awk -F'\t' '{printf $1"\t"$2 ; for(i=3; i<=NF; ++i) printf "\t%s", "#"$i; printf "\n"}' && tail -n +2 TABLE_normalised_per_sample.txt_genecall.txt) > TABLE_NORM_SAMPLES_GENECALL.txt`
 
+### NCBI DIAMOND NEW DATABASE WITH TAXID
+
+`diamond blastp -d ncbi_nr_09_2022.dmnd -q test2.faa -e 1E-5 -o result_test_LCA2.txt -f 6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore staxids -p 512 -b12 -c1`
+
 
 
 
