@@ -402,13 +402,17 @@ END {
 
 
 
-### GET TABLE FROM CLUSTERED VARIANTS
-
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/add_text_to_fasta_title.py`
 
 `python2.7 add_text_to_fasta_title.py S2_Sordariomycetes_varaints.fa.sorted.98.5.clustered S2_Sord`
 
 `python2.7 add_text_to_fasta_title.py S2_Sordariomycetes_varaints.fa.sorted.98.5.seeds S2_Sord`
+
+### GET TABLE FROM CLUSTERED VARIANTS
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/get_otutab_for_clusters_REDUCED_FORMATE.py`
+
+`python2.7 get_otutab_for_clusters_REDUCED_FORMATE.py PERMANENT_CLUSTERS/GF5_ALL_SAMPLES.fa.its2.gz FINAL/GF5_ALL_SAMPLES_ITS2_CLUSTANDBINNED.fa.gz GF5_ALL_SAMPLES_ITS2_PERM_OTUTAB_REDUCED_FORMATE.txt`
 
 
 
