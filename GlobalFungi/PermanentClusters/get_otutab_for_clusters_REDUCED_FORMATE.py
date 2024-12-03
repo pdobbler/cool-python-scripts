@@ -26,12 +26,15 @@ def openfile(filename, mode='r'):
 # >CL192043|8645414f339ccc92e0cd08b6f081f469|V_1|S_1|P_1|r_0.00024882711719|BINNED_198.5
 # >CL000001|82780436adb026d0faf0ab5680b15b13|V_10502756|S_22243|P_404|r_358.89364931|100.0
 variants = {}
+clusters = {}
 for line in openfile(clustered_variants):
         ch = line[0]
 	if ch == '>':
 		title = line[1:].strip()
 		vals = title.split('|')
 		variants[vals[1]] = vals[0]
+		if not clusters.has_key(vals[0]):
+			clusters[vals[0]] = {}
 
 print("Variants were selected... (" + str(len(variants)) + ")")
 
