@@ -10,6 +10,11 @@
 `FragGeneScan -s MG_Megahit.fa -w 1 -o MG_Megahit_genecalling_fgs -t complete -p 512`
 
 
+### TAXONOMY NCBI
+
+`/home/kdanielmorais/bioinformatics/tools/diamond blastp -d /mnt/DATA/DATABASES/NCBI_nr_dmnd_09_2022/ncbi_nr_09_2022.dmnd -q Margaux_MG_Megahit_genecalling_fgs.faa -e 1E-5 -o Margaux_MG_Megahit_genecalling_NCBI_092022.txt -f 6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore staxids -p 512 -b12 -c1`
+
+
 ### CAZy
 
 ```
