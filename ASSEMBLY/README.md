@@ -124,5 +124,17 @@ echo "Summary table created: $OUTPUT_TABLE"
 
 `python2.7 normalize_table_by_columns.py TABLE_normalised.txt 2 1000000 TABLE_normalised_per_sample.txt`
 
+### MULTIPLY BY GENECALL
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/ASSEMBLY/contig_mapping_to_genecall_mapping.py`
+
+`python2.7 contig_mapping_to_genecall_mapping.py Margaux_MG_Megahit_genecalling_fgs.faa TABLE_normalised_per_sample.txt`
+
+### ADD "#" TO SAMPLE NAMES
+
+`(head -1 TABLE_normalised_per_sample.txt_genecall.txt | awk -F'\t' '{printf $1"\t"$2 ; for(i=3; i<=NF; ++i) printf "\t%s", "#"$i; printf "\n"}' && tail -n +2 TABLE_normalised_per_sample.txt_genecall.txt) > TABLE_NORM_SAMPLES_GENECALL.txt`
+
+
+
 
 
