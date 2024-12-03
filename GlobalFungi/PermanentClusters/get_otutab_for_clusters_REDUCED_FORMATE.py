@@ -6,7 +6,7 @@ import hashlib
 import gzip
 
 ITS2_fasta = sys.argv[1] # PERMANENT_CLUSTERS/GF5_ALL_SAMPLES.fa.its2.gz
-clustered_variants = sys.argv[2] # FINAL/GF5_ALL_SAMPLES_ITS2_CLUSTANDBINNED.fa
+clustered_variants = sys.argv[2] # FINAL/GF5_ALL_SAMPLES_ITS2_CLUSTANDBINNED.fa.gz
 out_tab = sys.argv[3]
 
 #############################################
@@ -63,7 +63,7 @@ print("Sequences were examined... (" + str(i) + ")")
 
 
 # write table...
-fp = open(clustered_variants + ".samples_to_otus_REDUCED.txt", "w")
+fp = open(out_tab, "w")
 fp.write("OTU\tsample\tabundance\n")
 for otu_name in clusters:
 	samples = clusters[otu_name]
