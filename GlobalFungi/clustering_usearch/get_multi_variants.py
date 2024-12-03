@@ -19,6 +19,7 @@ def openfile(filename, mode='r'):
 # >UniqXXX;size=1
 
 fp = open(FASTA_in+".multi", 'w')
+fs = open(FASTA_in+".single", 'w')
 variants={}
 filled = False
 for n, line in enumerate(openfile(FASTA_in)):
@@ -29,10 +30,14 @@ for n, line in enumerate(openfile(FASTA_in)):
             r1_1 = line.rstrip()
             filled = True
     if filled:
-        if not r1_0.split(';')[0] == "size=1":
+        if r1_0.split(';')[0] == "size=1":
+            fs.write(r1_0 + '\n')
+            fs.write(r1_1 + '\n')
+        else
             fp.write(r1_0 + '\n')
             fp.write(r1_1 + '\n')
         filled = False
 fp.close()
+fs.close()
 print("Done :)")
 
