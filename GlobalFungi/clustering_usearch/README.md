@@ -1,8 +1,12 @@
-#`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/clustering_usearch/remove_singletons.py`
-
-#`python2.7 remove_singletons.py GF5_ALL_SAMPLES.fa.its1.gz`
+### MAKE VARIANTS WITH SIZE INFO
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/clustering_usearch/make_uniques.py`
 
 `python2.7 make_uniques.py GF5_ALL_SAMPLES.fa.its1.gz` 
+
+### SEPARATE SINGLE AND MULTIVARIANTS
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/clustering_usearch/get_multi_variants.py`
+
+`python2.7 get_multi_variants.py GF5_ALL_SAMPLES.fa.its1.gz.uniq.gz` 
 
