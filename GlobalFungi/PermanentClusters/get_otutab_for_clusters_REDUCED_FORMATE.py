@@ -74,7 +74,7 @@ for otu_name in clusters:
 	value_list = []
 	for key, value in samples.iteritems():
 		key_list.append(key)
-		value_list.append(value)
+		value_list.append(str(value))
 	fp.write(otu_name + "\t" + ";".join(key_list) + "\t" + ";".join(value_list) + "\n")
 fp.close()
 
