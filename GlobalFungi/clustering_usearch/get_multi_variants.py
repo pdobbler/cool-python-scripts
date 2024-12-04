@@ -30,7 +30,7 @@ for n, line in enumerate(openfile(FASTA_in)):
             r1_1 = line.rstrip()
             filled = True
     if filled:
-        if r1_0.split(';')[0] == "size=1":
+        if r1_0.split(';')[1] == "size=1":
             fs.write(r1_0 + '\n')
             fs.write(r1_1 + '\n')
         else:
