@@ -14,6 +14,11 @@
 
 `/home/kdanielmorais/bioinformatics/tools/diamond blastp -d /mnt/DATA/DATABASES/NCBI_nr_dmnd_09_2022/ncbi_nr_09_2022.dmnd -q Margaux_MG_Megahit_genecalling_fgs.faa -e 1E-5 -o Margaux_MG_Megahit_genecalling_NCBI_092022.txt -f 6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore staxids -p 512 -b12 -c1`
 
+```
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr Margaux_MG_Megahit_genecalling_NCBI_092022.txt | sort -u -k1,1 --merge > Margaux_MG_Megahit_genecalling_NCBI_092022_best.txt
+```
 
 ### CAZy
 
