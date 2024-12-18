@@ -41,7 +41,7 @@ makeblastdb -in GF5_ALL_SAMPLES_ITS1_CLUSTERED_MOST_ABUND.fa -dbtype 'nucl' -out
 ```
 for file in *.fas
 do  
- echo "blastn -query ${file} -db GF5_ALL_SAMPLES_ITS2_CLUSTERS -out ${file%%.fas}.GF5_ALL_SAMPLES_ITS2_CLUSTERS.txt -evalue 1E-5 -outfmt 6 -num_threads 2 -max_target_seqs 10"
+ echo "blastn -query ${file} -db ITS1_CLUSTERS -out ${file%%.fas}.GF5_ALL_SAMPLES_ITS1_CLUSTERS.txt -evalue 1E-5 -outfmt 6 -num_threads 2 -max_target_seqs 10"
 done > blast_command.sh
 
 cat blast_command.sh | parallel
