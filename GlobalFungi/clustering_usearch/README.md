@@ -31,3 +31,19 @@ Unclustered singletons: 179571168
 mkdir SPLIT
 makeblastdb -in GF5_ALL_SAMPLES_ITS1_CLUSTERED_MOST_ABUND.fa -dbtype 'nucl' -out SPLIT/ITS1_CLUSTERS
 ```
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/split_fasta_by_group_size.py`
+
+`mv GF5_ALL_SAMPLES_ITS1_minsize2_CLUSTERED.fa.gz.singletons GF5_ALL_SAMPLES_ITS1_minsize2_CLUSTERED_singletons.gz`
+
+`python2.7 split_fasta_by_group_size.py GF5_ALL_SAMPLES_ITS1_minsize2_CLUSTERED_singletons.gz 900000`
+
+```
+for file in *.fas
+do  
+ echo "blastn -query ${file} -db GF5_ALL_SAMPLES_ITS2_CLUSTERS -out ${file%%.fas}.GF5_ALL_SAMPLES_ITS2_CLUSTERS.txt -evalue 1E-5 -outfmt 6 -num_threads 2 -max_target_seqs 10"
+done > blast_command.sh
+
+cat blast_command.sh | parallel
+```
+
