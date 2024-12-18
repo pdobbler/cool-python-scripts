@@ -18,10 +18,10 @@
 
 `python2.7 PROCESS_UPARSE_v11.0.667_RESULTS.py GF5_ALL_SAMPLES.fa.its1.gz GF5_ALL_SAMPLES_ITS1_minsize2_CLUSTERED.fa.gz GF5_ALL_SAMPLES.fa.its1.gz.uniq.gz.multi GF5_ALL_SAMPLES_its1_minsize2_uparse.txt`
 
-Sequences were renamed based on the generated OTUs - total: 1264305616
-Clustered to OTUs     : 1067936446
-Removed chimeras      : 16798002
-Unclustered singletons: 179571168
+Sequences were renamed based on the generated OTUs - total: 1264305616  
+Clustered to OTUs     : 1067936446  
+Removed chimeras      : 16798002  
+Unclustered singletons: 179571168  
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/clustering_usearch/GET_OTUS_MOST_ABUND_SEQUNCES.py`
 
