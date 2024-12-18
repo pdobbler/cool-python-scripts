@@ -3,16 +3,23 @@ __author__ = 'vetrot'
 import sys
 import operator
 import collections
+import gzip
 
 fasta_file = sys.argv[1]
 fasta_most = sys.argv[2]
+
+def openfile(filename, mode='r'):
+    if filename.endswith('.gz'):
+        return gzip.open(filename, mode)
+    else:
+        return open(filename, mode)
 
 print("Loading sequences...")
 
 groups = {}
 otu_sums = {}
 filled = False
-for n, line in enumerate(open(fasta_file)):
+for n, line in enumerate(openfile(fasta_file)):
     if n % 200000 == 0:
         print(str(n / 2))
     if n % 2 == 0:
