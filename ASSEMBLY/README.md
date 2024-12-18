@@ -148,6 +148,10 @@ echo "Summary table created: $OUTPUT_TABLE"
 
 `diamond blastp -d ncbi_nr_09_2022.dmnd -q test2.faa -e 1E-5 -o result_test_LCA2.txt -f 6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore staxids -p 512 -b12 -c1`
 
+### JGI FUNGAL PROTEINS
+
+`diamond blastp -d /mnt/DATA/DATABASES/FUNGAL_PROTEINS_JGI/JGI_FUNGAL_PROTEINS_ANNOTATED_20240403 -q Margaux_MG_Megahit_genecalling_fgs.faa -e 1E-5 -o Margaux_MG_Megahit_genecalling_JGI_FUN_20220905.txt -f 6 -p 256 -b12 -c1`
+
 
 
 
