@@ -13,7 +13,7 @@ def openfile(filename, mode='r'):
     else:
         return open(filename, mode)
 
-print("name to add to start of titles: " + sample_name)
+print("name to add to start of titles: " + text)
 
 i = 0
 filled = False
