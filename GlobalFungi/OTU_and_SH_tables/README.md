@@ -90,50 +90,48 @@ END {
 ```
 awk -F'\t' '
 BEGIN {
-    srand(); # initialization of the random number generator
+    srand(); # Initialization of the random number generator
 }
 NR == 1 {
-    # save header
+    # Save header
     for (i = 1; i <= NF; i++) {
         header[i] = $i;
         columns[i] = i;
     }
-    total_columns = NF;
+    total_columns = NF - 1; # Exclude the first column from random selection
     next;
 }
 {
-    # save rows
+    # Save rows
     data[NR] = $0;
 }
 END {
-    # random selection of 100 columns or fewer if there are less than 100 columns
+    # Random selection of 99 columns or fewer if there are less than 100 additional columns
     selected_count = (total_columns < 100) ? total_columns : 100;
     for (i = 1; i <= selected_count; i++) {
-        idx = int(rand() * total_columns) + 1;
+        idx = int(rand() * total_columns) + 2; # Start from column 2
         while (idx in selected) {
-            idx = int(rand() * total_columns) + 1;
+            idx = int(rand() * total_columns) + 2;
         }
         selected[idx] = 1;
         selected_columns[i] = idx;
     }
 
-    # print header
-    first = 1;
+    # Print header
+    printf "%s", header[1]; # Always print the first column
     for (i = 1; i <= selected_count; i++) {
         idx = selected_columns[i];
-        printf "%s%s", (first ? "" : OFS), header[idx];
-        first = 0;
+        printf "%s%s", OFS, header[idx];
     }
     printf "\n";
 
-    # print data
+    # Print data
     for (row in data) {
         split(data[row], fields, FS);
-        first = 1;
+        printf "%s", fields[1]; # Always print the first column
         for (i = 1; i <= selected_count; i++) {
             idx = selected_columns[i];
-            printf "%s%s", (first ? "" : OFS), fields[idx];
-            first = 0;
+            printf "%s%s", OFS, fields[idx];
         }
         printf "\n";
     }
