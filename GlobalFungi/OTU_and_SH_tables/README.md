@@ -163,3 +163,20 @@ NR == 1 {
 }
 ' OFS='\t' text.txt > binary_text.txt
 ```
+
+### AWK remove all zeros raws
+
+```
+awk '
+NR == 1 { print; next } # Always print the header
+{
+    all_zero = 1;
+    for (i = 2; i <= NF; i++) {
+        if ($i != 0) {
+            all_zero = 0;
+            break;
+        }
+    }
+    if (!all_zero) print;
+}' text.txt > filtered_text.txt
+```
