@@ -141,3 +141,27 @@ END {
 ' OFS='\t' GF5_SH_IN_SAMPLES_40moreSamples.relative.txt > GF5_SH_IN_SAMPLES_40moreSamples_random100.relative.txt
 ```
 
+
+### AWK script for binary table
+
+```
+awk -F'\t' '
+NR == 1 {
+    # print headers
+    print $0;
+    next;
+}
+{
+    # process each row
+    printf "%s", $1; # První sloupec (Samples) vypíšeme beze změny
+    for (i = 2; i <= NF; i++) {
+        if ($i != "" && $i != "0") {
+            printf "\t1"; # non-zero values to 1
+        } else {
+            printf "\t0"; # zero values to 0
+        }
+    }
+    printf "\n";
+}
+' OFS='\t' text.txt > binary_text.txt
+```
