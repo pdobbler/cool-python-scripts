@@ -153,7 +153,7 @@ NR == 1 {
 }
 {
     # process each row
-    printf "%s", $1; # První sloupec (Samples) vypíšeme beze změny
+    printf "%s", $1; # first column (Samples) print unchanged
     for (i = 2; i <= NF; i++) {
         if ($i != "" && $i != "0") {
             printf "\t1"; # non-zero values to 1
