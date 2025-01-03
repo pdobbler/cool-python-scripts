@@ -85,4 +85,59 @@ END {
 ' OFS='\t' GF5_SH_IN_SAMPLES.relative.txt > GF5_SH_IN_SAMPLES_40moreSamples.relative.txt
 ```
 
+### AWK script for random selection of 100 columns
+
+```
+awk -F'\t' '
+BEGIN {
+    srand(); # initialization of the random number generator
+}
+NR == 1 {
+    # save header
+    for (i = 1; i <= NF; i++) {
+        header[i] = $i;
+        columns[i] = i;
+    }
+    total_columns = NF;
+    next;
+}
+{
+    # save rows
+    data[NR] = $0;
+}
+END {
+    # random selection of 100 columns or fewer if there are less than 100 columns
+    selected_count = (total_columns < 100) ? total_columns : 100;
+    for (i = 1; i <= selected_count; i++) {
+        idx = int(rand() * total_columns) + 1;
+        while (idx in selected) {
+            idx = int(rand() * total_columns) + 1;
+        }
+        selected[idx] = 1;
+        selected_columns[i] = idx;
+    }
+
+    # print header
+    first = 1;
+    for (i = 1; i <= selected_count; i++) {
+        idx = selected_columns[i];
+        printf "%s%s", (first ? "" : OFS), header[idx];
+        first = 0;
+    }
+    printf "\n";
+
+    # print data
+    for (row in data) {
+        split(data[row], fields, FS);
+        first = 1;
+        for (i = 1; i <= selected_count; i++) {
+            idx = selected_columns[i];
+            printf "%s%s", (first ? "" : OFS), fields[idx];
+            first = 0;
+        }
+        printf "\n";
+    }
+}
+' OFS='\t' GF5_SH_IN_SAMPLES_40moreSamples.relative.txt > GF5_SH_IN_SAMPLES_40moreSamples_random100.relative.txt
+```
 
