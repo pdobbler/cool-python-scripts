@@ -58,18 +58,18 @@ e.g.
 ```
 awk -F'\t' '
 {
-    # For each column, we check for non-zero values
+    # for each column, we check for non-zero values
     if (NR > 1) {
         for (i = 2; i <= NF; i++) {
             if ($i != "" && $i != "0") count[i]++;
         }
     } else {
-        # Uložíme hlavičku
+        # save header
         for (i = 1; i <= NF; i++) header[i] = $i;
     }
 }
 END {
-    # We print the corresponding rows
+    # print the corresponding rows
     while ((getline line < FILENAME) > 0) {
         split(line, fields, FS);
         first = 1;
