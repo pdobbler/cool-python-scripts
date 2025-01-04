@@ -414,6 +414,15 @@ END {
 
 `python2.7 get_otutab_for_clusters_REDUCED_FORMATE.py PERMANENT_CLUSTERS/GF5_ALL_SAMPLES.fa.its2.gz FINAL/GF5_ALL_SAMPLES_ITS2_CLUSTANDBINNED.fa.gz GF5_ALL_SAMPLES_ITS2_PERM_OTUTAB_REDUCED_FORMATE.txt`
 
+### S1 PROCESSING
+
+`grep '>' GF5_ALL_SAMPLES_its2_notbinned_S4_S3_without_S2.fa.gz.notbinned | grep -v '|V_1|' > VMULTI.txt`
+
+`grep --no-group-separator -A 1 -F -f VMULTI.txt GF5_ALL_SAMPLES_its2_notbinned_S4_S3_without_S2.fa.gz.notbinned > GF5_ALL_SAMPLES_its2_notbinned_S4_S3_S2_VMULTI.fa`
+
+`blastn -query GF5_ALL_SAMPLES_its2_notbinned_S4_S3_S2_VMULTI.fa -db /mnt/DATA/DATABASES/Eukaryome/EUK_ITS_v1.9_General -outfmt 6 -evalue 1E-5 -num_threads 2 -max_target_seqs 10 | sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr | sort -u -k1,1 --merge > GF5_ALL_SAMPLES_its2_notbinned_S4_S3_S2_VMULTI_best.tab`
+
+
 
 
 
