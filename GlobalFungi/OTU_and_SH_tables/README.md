@@ -180,3 +180,9 @@ NR == 1 { print; next } # Always print the header
     if (!all_zero) print;
 }' text.txt > filtered_text.txt
 ```
+
+### TRANSPOSE BIG TABLE
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/OTU_and_SH_tables/transpose_bigtab.py`
+
+`python transpose_bigtab.py OUTPUT_TAB.txt GF5_SH_IN_SAMPLES.raw.txt`
