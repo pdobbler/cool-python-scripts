@@ -1,6 +1,6 @@
 ### chimera clean
 
-vsearch --uchime_denovo input.fa.gz --nonchimeras nonchimeras.fa --chimeras chimeras.fa
+`vsearch --uchime_denovo input.fa.gz --nonchimeras nonchimeras.fa --chimeras chimeras.fa`
 
 ### INPUT DATA
 
@@ -20,4 +20,12 @@ vsearch --uchime_denovo input.fa.gz --nonchimeras nonchimeras.fa --chimeras chim
 
 ### CLUSTERING
 
-vsearch --cluster_size input.fa --sizein -id 0.97 -uc clusters.uc
+`vsearch --cluster_size input.uniq.multi --sizein -id 0.97 -uc clusters_97.uc`
+
+### GET CLUSTERS
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/clustering_vsearch/add_cluster_names_from_vsearch_uc_file.py`
+
+`python2.7 add_cluster_names_from_vsearch_uc_file.py clusters_97.uc REL4_ITS2_FUNGAL_AND_NOHIT_CLUSTERED_AND_BINNED.fa.gz.uniq.multi`
+
+
