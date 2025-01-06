@@ -28,4 +28,15 @@
 
 `python2.7 add_cluster_names_from_vsearch_uc_file.py clusters_97.uc REL4_ITS2_FUNGAL_AND_NOHIT_CLUSTERED_AND_BINNED.fa.gz.uniq.multi`
 
+### SEEDs IDENTIFICATION
+
+`blastn -query REL4_ITS2_FUNGAL_AND_NOHIT_CLUSTERED_AND_BINNED.fa.gz.uniq.multi.seeds -db /mnt/DATA/DATABASES/UNITE10/UNITE_10_SEED2_VERSION_04042024/UNITE10ECOLOGY -out REL4_ITS2_VSEARCH98_unite10.txt -evalue 1E-5 -outfmt 6 -num_threads 128 -max_target_seqs 10`
+
+```
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr REL4_ITS2_VSEARCH98_unite10.txt | sort -u -k1,1 --merge > REL4_ITS2_VSEARCH98_unite10_best.txt
+```
+
 
