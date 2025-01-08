@@ -64,6 +64,10 @@ cat sorting.sh | parallel
 
 `python2.7 PROCESS_BLAST_RESULT.py GF5_ALL_SAMPLES_ITS1_minsize2_CLUSTERED_singletons.gz GF5_ALL_SAMPLES_ITS1_minsize2_CLUSTERED_singletons_ITS1_CLUSTERS_best.tab GF5_ALL_SAMPLES_ITS1_minsize2_CLUSTERED_singletons_PROCESSED.txt ITS1`
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/clustering_usearch/bin_fasta_to_OTU_by_processed_blast.py`
+
+`python2.7 bin_fasta_to_OTU_by_processed_blast.py GF5_ALL_SAMPLES_ITS1_minsize2_CLUSTERED_singletons.gz GF5_ALL_SAMPLES_ITS1_minsize2_CLUSTERED_singletons_PROCESSED.txt`
+
 
 
 
