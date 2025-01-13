@@ -39,4 +39,12 @@ export LANG=en_US.UTF-8
 sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr REL4_ITS2_VSEARCH98_unite10.txt | sort -u -k1,1 --merge > REL4_ITS2_VSEARCH98_unite10_best.txt
 ```
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/PROCESS_BLAST_RESULT.py`
+
+`python2.7 PROCESS_BLAST_RESULT.py REL4_ITS2_FUNGAL_AND_NOHIT_CLUSTERED_AND_BINNED.fa.gz.uniq.multi.seeds REL4_ITS2_VSEARCH98_unite10_best.txt REL4_ITS2_VSEARCH98_unite10_PROCESSED.txt ITS2`
+
+e.g.: Get ectomycorrhizal clusters
+
+`grep 'ectomycorrhizal' REL4_ITS2_VSEARCH98_unite10_PROCESSED.txt > REL4_ITS2_VSEARCH98_unite10_EcM_taxonomy.txt`
+
 
