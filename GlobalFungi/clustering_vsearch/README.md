@@ -47,7 +47,15 @@ e.g.: Get ectomycorrhizal clusters
 
 `grep 'ectomycorrhizal' REL4_ITS2_VSEARCH98_unite10_PROCESSED.txt > REL4_ITS2_VSEARCH98_unite10_EcM_taxonomy.txt`
 
+`awk -F'|' '{print $1}' REL4_ITS2_VSEARCH97_unite10_EcM_taxonomy.txt > VSEARCH97_unite10_EcM_clusters.txt`
+
+`grep --no-group-separator -A 1 -F -f VSEARCH97_unite10_EcM_clusters.txt REL4_ITS2_FUNGAL_AND_NOHIT_CLUSTERED_AND_BINNED.fa.gz.uniq.multi.clustered > REL4_ITS2_FUNGAL_AND_NOHIT_CLUSTERED_AND_BINNED_EcM.fa`
+
 ### GETTING ABUNDANCE TABLE FROM CLUSTERED VARIANTS
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/clustering_vsearch/get_table_from_clustered_variants_vsearch.py`
+
+`python2.7 get_table_from_clustered_variants_vsearch.py REL4_ITS2_FUNGAL_AND_NOHIT_CLUSTERED_AND_BINNED_EcM.fa /mnt/DATA/projects/avetrot/REL4_RAW_and_CLUSTERING_FINAL/RELEASE4_RAW/REL4_ITS2_COMPLETE_CLEAN_FUNGAL_AND_NOHIT_FINAL_noReplicated.fa.gz`
 
 
 
