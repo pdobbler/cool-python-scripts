@@ -47,4 +47,8 @@ e.g.: Get ectomycorrhizal clusters
 
 `grep 'ectomycorrhizal' REL4_ITS2_VSEARCH98_unite10_PROCESSED.txt > REL4_ITS2_VSEARCH98_unite10_EcM_taxonomy.txt`
 
+### GETTING ABUNDANCE TABLE FROM CLUSTERED VARIANTS
+
+
+
 
