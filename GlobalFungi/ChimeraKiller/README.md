@@ -1,6 +1,10 @@
 ### REFERENCE BASED
 
-`vsearch --uchime_ref TEST.fa --db REFERENCE.fa --nonchimeras chimclean.fasta`
+`wget https://www.biomed.cas.cz/mbu/lbwrf/seed/archive/ITS2_PERMANENT_CLUSTERS_SEEDs.7z`
+
+`7z x ITS2_PERMANENT_CLUSTERS_SEEDs.7z`
+
+`vsearch --uchime_ref GF5_ITS2_PERM_CLUSTERS_SEEDS_ALL_SORTED_RENAMED.fa --db ITS2_PERMANENT_CLUSTERS_SEEDs.fa --nonchimeras chimclean.fasta --chimeras chimeras.fasta`
 
 vsearch v2.21.2_linux_x86_64, 5948.9GB RAM, 1152 cores
 
