@@ -37,6 +37,13 @@ I’ve included a script for retrieving a classical tab-delimited OTU table from
 
 You can replace samples or clusters lists with '-' to retrieve all possible values.
 
+### FILTERING FUNGI
+
+`zcat GF5_ALL_SAMPLES_ITS2_CLUSTERED_MOST_ABUND_unite10_PROCESSED.txt.gz | awk 'BEGIN {FS="\t"; OFS="\t"} NR == 1 || ($10 == "k__Fungi" && ($6 <= 1E-50 || ($4 + $5) >= 180))' > FUNGAL_CLUSTERS/GF5_ALL_SAMPLES_ITS2_CLUSTERED_MOST_ABUND_unite10_PROCESSED_FUNGI.txt`
+
+
+
+
 
 
 
