@@ -27,3 +27,10 @@ Found 347395 (6.5%) chimeras, 4935564 (92.6%) non-chimeras, and 45776 (0.9%) bor
 
 Taking abundance information into account, this corresponds to 347395 (6.5%) chimeras, 4935564 (92.6%) non-chimeras, and 45776 (0.9%) borderline sequences in 5328735 total sequences.
 
+### get chimera info table
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/ChimeraKiller/get_chimera_info.py`
+
+`python2.7 get_chimera_info.py GF5_ITS2_PERM_CLUSTERS_SEEDS_ALL_SORTED_RENAMED.fa chimeras.fasta GF5_ITS2_PERM_CLUSTERS_SEEDS_ALL_SORTED_RENAMED_CHIMSTATS.txt`
+
+
