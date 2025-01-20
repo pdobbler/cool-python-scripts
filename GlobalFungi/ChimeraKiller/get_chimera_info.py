@@ -31,7 +31,7 @@ for line in openfile(orig_fasta, 'r'):
     if ch == '>':
         title = line[1:].strip()
         state = "OK"
-        if chimeras.haskey(title):
+        if chimeras.has_key(title):
             state = "chimeric"
         fp.write(title + "\t" + state + "\n")
 fp.close()
