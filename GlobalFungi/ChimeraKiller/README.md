@@ -39,7 +39,16 @@ Taking abundance information into account, this corresponds to 347395 (6.5%) chi
 
 `python2.7 divide_fasta.py ITS2_PERMANENT_CLUSTERS_SEEDs_REFERENCE_5PLUS_SIMPLE.fas`
 
-makeblastdb -in ITS2_PERMANENT_CLUSTERS_SEEDs_REFERENCE_5PLUS_SIMPLE.fas.95.0.seeds -dbtype 'nucl' -out REFERENCE_5PLUS_95.fa
+`makeblastdb -in ITS2_PERMANENT_CLUSTERS_SEEDs_REFERENCE_5PLUS_SIMPLE.fas.95.0.seeds -dbtype 'nucl' -out REFERENCE_5PLUS_95.fa`
+
+```
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+blastn -query ITS2_PERMANENT_CLUSTERS_SEEDs_REFERENCE_5PLUS_SIMPLE.fas.1 -db REFERENCE_5PLUS_95.fa -outfmt 6 -evalue 1E-5 -num_threads 128 -max_target_seqs 10 | sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr | sort -u -k1,1 --merge > ITS2_PERMANENT_CLUSTERS_SEEDs_REFERENCE_5PLUS_SIMPLE.fas.1_best.tab
+
+blastn -query ITS2_PERMANENT_CLUSTERS_SEEDs_REFERENCE_5PLUS_SIMPLE.fas.2 -db REFERENCE_5PLUS_95.fa -outfmt 6 -evalue 1E-5 -num_threads 128 -max_target_seqs 10 | sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr | sort -u -k1,1 --merge > ITS2_PERMANENT_CLUSTERS_SEEDs_REFERENCE_5PLUS_SIMPLE.fas.2_best.tab
+```
 
 
 
