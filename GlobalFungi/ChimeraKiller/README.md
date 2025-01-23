@@ -33,4 +33,13 @@ Taking abundance information into account, this corresponds to 347395 (6.5%) chi
 
 `python2.7 get_chimera_info.py GF5_ITS2_PERM_CLUSTERS_SEEDS_ALL_SORTED_RENAMED.fa chimeras.fasta GF5_ITS2_PERM_CLUSTERS_SEEDS_ALL_SORTED_RENAMED_CHIMSTATS.txt`
 
+### check divided parts
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/ChimeraKiller/divide_fasta.py`  
+
+`python2.7 divide_fasta.py ITS2_PERMANENT_CLUSTERS_SEEDs_REFERENCE_5PLUS_SIMPLE.fas`
+
+makeblastdb -in ITS2_PERMANENT_CLUSTERS_SEEDs_REFERENCE_5PLUS_SIMPLE.fas.95.0.seeds -dbtype 'nucl' -out REFERENCE_5PLUS_95.fa
+
+
 
