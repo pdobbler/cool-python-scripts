@@ -29,7 +29,7 @@ for line in openfile(fasta_file, 'r'):
             mid = (len(seq) + 1) // 2  # Ensures first half is longer if odd length
             fp1.write(">" + title + "_1\n")
             fp1.write(seq[:mid] + "\n")
-            fp2.write(">" + title + "_1\n")
+            fp2.write(">" + title + "_2\n")
             fp2.write(seq[mid:] + "\n")
 fp1.close()
 fp2.close()
