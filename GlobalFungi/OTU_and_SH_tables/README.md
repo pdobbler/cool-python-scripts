@@ -186,3 +186,11 @@ NR == 1 { print; next } # Always print the header
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/OTU_and_SH_tables/transpose_bigtab.py`
 
 `python transpose_bigtab.py OUTPUT_TAB.txt GF5_SH_IN_SAMPLES.raw.txt`
+
+### ABUNDACE SAMPLES TABLE
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/OTU_and_SH_tables/get_samples_and_their_shs.py`
+
+`python2.7 get_samples_and_their_shs.py GF5_RAW_TABLE_TAB_UNITE10_SH.txt out_test.txt test_samples.txt GF5_RAW_TABLE_SAMPLES.txt.gz`
+
+
