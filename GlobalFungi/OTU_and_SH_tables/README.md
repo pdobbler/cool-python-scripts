@@ -193,4 +193,7 @@ NR == 1 { print; next } # Always print the header
 
 `python2.7 get_samples_and_their_shs.py GF5_RAW_TABLE_TAB_UNITE10_SH.txt out_test.txt test_samples.txt GF5_RAW_TABLE_SAMPLES.txt.gz`
 
+check results by row sums
+
+`awk -F'\t' 'NR>1 {sum=0; for (i=2; i<=NF; i++) sum+=$i; print $1, sum}' out_test.txt`
 
