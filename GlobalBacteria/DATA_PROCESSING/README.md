@@ -1,5 +1,6 @@
+### UNZIPPING FILES AND CHECKING
 
-# check zip files content...
+// check zip files content...
 echo "FILES" > zip_files.txt
 for file in *.zip
 do
@@ -10,8 +11,6 @@ done
 tar -xvf Cruz_2021_UF_demulti.tar.gz
 
 unzip -j archiv.zip -d rozbalene
-
-### UNZIPPING FILES AND CHECKING
 
 # create folders
 for nazev_souboru in *.zip
