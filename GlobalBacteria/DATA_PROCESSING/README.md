@@ -1,3 +1,12 @@
+### GETTING SRA FILES
+
+fasterq-dump --split-files SRRXXXXXXX
+fasterq-dump --split-files --threads 8 SRRXXXXXXX
+
+SRRxxxxxxx → NCBI SRA Run (USA)
+ERRxxxxxxx → ENA Run (Europe)
+DRRxxxxxxx → DDBJ Run (Japan)
+
 ### UNZIPPING FILES AND CHECKING
 
 - check zip files content...
@@ -51,5 +60,20 @@ echo "" > 2_GOOD_PAIRED_studies.txt
 for d in */ ; do
     echo "$d" >> 2_GOOD_PAIRED_studies.txt
 done
+
+### JOINING
+
+```
+output_file="joining.txt" > "$output_file"
+for file in *_1.fastq
+do
+  sample=${file%%_1.fastq}
+  echo -n "$sample;" >> "$output_file"
+  line_count=$(fastq-join -v " " -p 15 -m 40 ${sample}_1.fastq  ${sample}_2.fastq -o ${sample}_joined | awk '{ORS=";"; print} END {print ""}')
+  echo $line_count >> "$output_file"
+done
+```
+
+
 
 
