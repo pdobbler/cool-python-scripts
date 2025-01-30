@@ -1,6 +1,6 @@
 ### UNZIPPING FILES AND CHECKING
 
-// check zip files content...
+- check zip files content...
 echo "FILES" > zip_files.txt
 for file in *.zip
 do
@@ -12,7 +12,7 @@ tar -xvf Cruz_2021_UF_demulti.tar.gz
 
 unzip -j archiv.zip -d rozbalene
 
-# create folders
+- create folders
 for nazev_souboru in *.zip
 do
  IFS="_" read -ra casti <<< "$nazev_souboru"
@@ -20,7 +20,7 @@ do
  mkdir -p "$slozka"
 done
 
-# unzip to folder without subfolders
+- unzip to folder without subfolders
 for nazev_souboru in *.zip
 do
  IFS="_" read -ra casti <<< "$nazev_souboru"
@@ -28,19 +28,16 @@ do
  unzip -j "$nazev_souboru" -d "$slozka"
 done
 
-# unzip to folder without subfolders
+- unzip to folder without subfolders
 unzip -j Lebre_2023_BGN_seq.zip -d Lebre_2023_BGN
 
 
 mv Lebre_2023_BGN_seq.zip /mnt/DATA/projects/avetrot/RELEASE5/RAW_ZIP_BACKUP/
 
-# types
+- types
 mv Suetsugu_2021_HR /mnt/DATA1/RELEASE5/0_MANUAL_CHECK_NEEDED
-
 mv Zhuang_2020_MG /mnt/DATA1/RELEASE5/1_GOOD_SINGLE
-
 mv xxx /mnt/DATA1/RELEASE5/2_GOOD_PAIRED
-
 
 echo "" > info.txt
 for d in */ ; do
@@ -49,8 +46,10 @@ for d in */ ; do
 done
 
 
-# print folder content
+- print folder content
 echo "" > 2_GOOD_PAIRED_studies.txt
 for d in */ ; do
     echo "$d" >> 2_GOOD_PAIRED_studies.txt
 done
+
+
