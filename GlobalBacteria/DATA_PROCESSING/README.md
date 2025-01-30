@@ -82,11 +82,15 @@ export output_file
 
 parallel --bar --keep-order '
   sample={1}
-  echo -n "$sample;" >> "$output_file"
-  line_count=$(fastq-join -v " " -p 15 -m 40 ${sample}_1.fastq ${sample}_2.fastq -o ${sample}_joined | awk "{ORS=\";\"; print} END {print \"\"}")
-  echo $line_count >> "$output_file"
+  file1="${sample}_1.fastq"
+  file2="${sample}_2.fastq"
+  echo -n "$sample ($file1, $file2);" >> "$output_file"
+  line_count=$(fastq-join -v " " -p 15 -m 40 "$file1" "$file2" -o "${sample}_joined" | awk "{ORS=\";\"; print} END {print \"\"}")
+  echo "$line_count" >> "$output_file"
 ' ::: $(ls *_1.fastq | sed 's/_1.fastq//')
 ```
+
+
 
 
 
