@@ -117,3 +117,7 @@ cd RENAME
 
 `python2.7 find_and_replace_or_append_text_beginning.py Study_XXXX_YYYY_qm20.fa.gz samples.txt Study_XXXX_YYYY_qm20_renamed.fas true`
 
+This should have same counts:  
+`grep '>' Study_XXXX_YYYY_qm20_renamed.fas | wc -l`
+`grep '>GB' Study_XXXX_YYYY_qm20_renamed.fas | wc -l`
+
