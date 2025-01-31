@@ -89,6 +89,23 @@ parallel --bar --keep-order '
 
 ```
 
+### CHECK joining.txt
+
+if joining is <90% (e.g.:70%) try to cut 300 bp to 250 bp...  
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/resize_fastq_length_GZIP.py`
+
+```
+for file in *.fastq.gz
+do
+ sample=${file%%.gz}
+ echo "python2.7 resize_fastq_length_GZIP.py ${file} 250_${sample} 250"
+done > cut_fastq.sh
+
+cat cut_fastq.sh | parallel
+```
+
+
 ### QUALITY FILTERING
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/filter_fastq_by_quality_mean_GZIP.py`
