@@ -1,11 +1,26 @@
 __author__ = 'vetrot'
 
 import sys
+import gzip
 
 in_text = sys.argv[1]
 in_table = sys.argv[2]
 out_text = sys.argv[3]
 append = sys.argv[4]
+
+#############################################
+# GZIP OPENING
+#############################################
+def openfile(filename, mode='r'):
+    if filename.endswith('.gz'):
+        return gzip.open(filename, mode)
+    else:
+        return open(filename, mode)
+
+
+#############################################
+# RENAME
+#############################################
 
 app = False
 if append.lower() == 'true':
@@ -32,7 +47,7 @@ for le in repl_lenghts:
 #write down the output...
 n = 0
 fp = open(out_text, 'w')
-for line in open(in_text):
+for line in openfile(in_text):
     l = line.rstrip()
     a = ''
     for i in range(0, len(l)):
