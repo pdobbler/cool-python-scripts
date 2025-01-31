@@ -109,11 +109,11 @@ cat filter_fastq.sh | parallel
 
 ```
 mkdir RENAME
-cat QM20/*_qm20.fa.gz > RENAME/Bahram_2018_2B78_qm20.fa.gz
+cat QM20/*_qm20.fa.gz > RENAME/Study_XXXX_YYYY_qm20.fa.gz
 cd RENAME
 ```
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/find_and_replace_or_append_text_beginning.py`
 
-`python2.7 find_and_replace_or_append_text_beginning.py Bahram_2018_2B78_qm20.fa.gz samples.txt Bahram_2018_2B78_qm20_renamed.fas true`
+`python2.7 find_and_replace_or_append_text_beginning.py Study_XXXX_YYYY_qm20.fa.gz samples.txt Study_XXXX_YYYY_qm20_renamed.fas true`
 
