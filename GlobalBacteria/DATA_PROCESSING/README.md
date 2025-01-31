@@ -105,4 +105,11 @@ done > filter_fastq.sh
 cat filter_fastq.sh | parallel
 ```
 
+### RENAMING
+
+```
+mkdir RENAME
+cat QM20/*_qm20.fa.gz > RENAME/Bahram_2018_2B78_qm20.fa.gz
+cd RENAME
+```
 
