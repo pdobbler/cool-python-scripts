@@ -89,7 +89,20 @@ parallel --bar --keep-order '
 
 ```
 
+### QUALITY FILTERING
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/filter_fastq_by_quality_mean_GZIP.py`
 
+```
+mkdir QM20
+
+for file in *_joinedjoin
+do
+ sample=${file%%_joinedjoin}
+ echo "python2.7 filter_fastq_by_quality_mean_GZIP.py ${file} QM20/${sample}_qm20.fa 20 True"
+done > filter_fastq.sh
+
+cat filter_fastq.sh | parallel
+```
 
 
