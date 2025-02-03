@@ -63,6 +63,12 @@ done
 
 ### JOINING - PARALLEL WITH PERCENTAGE OF JOUNED READS IN joining.txt
 
+checking reads length  
+
+`wc -L SRR11880035_2.fastq`
+
+joining  
+
 ```
 output_file="joining.txt"
 > "$output_file"
