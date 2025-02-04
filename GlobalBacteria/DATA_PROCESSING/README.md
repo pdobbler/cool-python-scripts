@@ -9,57 +9,75 @@ DRRxxxxxxx → DDBJ Run (Japan)
 
 ### UNZIPPING FILES AND CHECKING
 
+unzipping the file
+
+`unzip Frey_2021_QQ_Bact_seq.zip`
+
+try repairing the ZIP File  (warning [Frey_2021_QQ_Bact_seq.zip]:  2824149584 extra bytes at beginning or within zipfile)
+
+`zip -FF Frey_2021_QQ_Bact_seq.zip --out Frey_2021_QQ_Bact_seq_fixed.zip`
+
 - check zip files content...
+```
 echo "FILES" > zip_files.txt
 for file in *.zip
 do
  unzip -l $file >> zip_files.txt
 done
+```
 
-/usr/libexec/p7zip/7z x Egbe_2021_JM.7z
-tar -xvf Cruz_2021_UF_demulti.tar.gz
+`/usr/libexec/p7zip/7z x Egbe_2021_JM.7z`
 
-unzip -j archiv.zip -d rozbalene
+`tar -xvf Cruz_2021_UF_demulti.tar.gz`
+
+`unzip -j archiv.zip -d rozbalene`
 
 - create folders
+```
 for nazev_souboru in *.zip
 do
  IFS="_" read -ra casti <<< "$nazev_souboru"
  slozka="${casti[0]}_${casti[1]}_${casti[2]}"
  mkdir -p "$slozka"
 done
+```
 
 - unzip to folder without subfolders
+```
 for nazev_souboru in *.zip
 do
  IFS="_" read -ra casti <<< "$nazev_souboru"
  slozka="${casti[0]}_${casti[1]}_${casti[2]}"
  unzip -j "$nazev_souboru" -d "$slozka"
 done
+```
 
 - unzip to folder without subfolders
-unzip -j Lebre_2023_BGN_seq.zip -d Lebre_2023_BGN
+`unzip -j Lebre_2023_BGN_seq.zip -d Lebre_2023_BGN`
 
-
-mv Lebre_2023_BGN_seq.zip /mnt/DATA/projects/avetrot/RELEASE5/RAW_ZIP_BACKUP/
+`mv Lebre_2023_BGN_seq.zip /mnt/DATA/projects/avetrot/RELEASE5/RAW_ZIP_BACKUP/`
 
 - types
-mv Suetsugu_2021_HR /mnt/DATA1/RELEASE5/0_MANUAL_CHECK_NEEDED
-mv Zhuang_2020_MG /mnt/DATA1/RELEASE5/1_GOOD_SINGLE
-mv xxx /mnt/DATA1/RELEASE5/2_GOOD_PAIRED
+`mv Suetsugu_2021_HR /mnt/DATA1/RELEASE5/0_MANUAL_CHECK_NEEDED`
+`mv Zhuang_2020_MG /mnt/DATA1/RELEASE5/1_GOOD_SINGLE`
+`mv xxx /mnt/DATA1/RELEASE5/2_GOOD_PAIRED`
 
+```
 echo "" > info.txt
 for d in */ ; do
     echo "$d" >> info.txt
     ls $d | head -4 >> info.txt
 done
-
+```
 
 - print folder content
+
+```
 echo "" > 2_GOOD_PAIRED_studies.txt
 for d in */ ; do
     echo "$d" >> 2_GOOD_PAIRED_studies.txt
 done
+```
 
 ### JOINING - PARALLEL WITH PERCENTAGE OF JOUNED READS IN joining.txt
 
