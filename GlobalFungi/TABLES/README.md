@@ -33,7 +33,7 @@ I’ve included a script for retrieving a classical tab-delimited OTU table from
 `GET_OTUTABLE_BY_SAMPLES_AND_SHS.py`  
 
 **Usage:**  
-`python2.7 GET_OTUTABLE_BY_SAMPLES_AND_SHS.py GF5_ALL_SAMPLES_ITS2_PERM_OTUTAB_REDUCED_FORMATE.txt.gz samples.txt clusters.txt`
+`python2.7 GET_OTUTABLE_BY_SAMPLES_AND_SHS.py GF5_ALL_SAMPLES_ITS2_PERM_OTUTAB_REDUCED_FORMATE.txt.gz samples.txt clusters.txt OUTPUT_TABLE.txt`
 
 You can replace samples or clusters lists with '-' to retrieve all possible values.
 
