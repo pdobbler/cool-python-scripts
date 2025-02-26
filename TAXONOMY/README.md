@@ -27,6 +27,7 @@
 `diamond makedb --in nr.gz --db NCBInr_diamond_datedownoload --taxonmap prot.accession2taxid.FULL.gz --taxonnodes nodes.dmp --threads 200`
 
 *activate/create environment, here is ncbi-taxonomist*
+
 `conda activate ncbi-taxonomist`
 
 *get taxonkit https://bioinf.shenwei.me/taxonkit/usage/#lineage*
