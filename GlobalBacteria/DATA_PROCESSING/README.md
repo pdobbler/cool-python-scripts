@@ -3,9 +3,9 @@
 `fasterq-dump --split-files SRRXXXXXXX`  
 `fasterq-dump --split-files --threads 8 SRRXXXXXXX`  
 
-SRRxxxxxxx → NCBI SRA Run (USA)
-ERRxxxxxxx → ENA Run (Europe)
-DRRxxxxxxx → DDBJ Run (Japan)
+SRRxxxxxxx → NCBI SRA Run (USA)  
+ERRxxxxxxx → ENA Run (Europe)  
+DRRxxxxxxx → DDBJ Run (Japan)  
 
 ### GETTING SPLITTED FILES
 
