@@ -74,15 +74,23 @@ print('Annotation processed '+str(i)+" fungal "+str(f))
 
 samples_fungal = {}
 samples_nonfun = {}
+
+samples_fungal["ITS1"] = {}
+samples_fungal["ITS2"] = {}
+
+samples_nonfun["ITS1"] = {}
+samples_nonfun["ITS2"] = {}
+
 for line in openfile(raw_table, 'r'):
     vals = line.strip().split("\t")
     code = vals[0]
     sn = vals[1].split(';') #sample names
     sa = vals[2].split(';') #sample abundances
+    marker = vals[3]
     if classification[code]:
-        samples_fungal = process_variant(samples_fungal, sn, sa, pairs)
+        samples_fungal = process_variant(samples_fungal[marker], sn, sa, pairs)
     else:
-        samples_nonfun = process_variant(samples_nonfun, sn, sa, pairs)
+        samples_nonfun = process_variant(samples_nonfun[marker], sn, sa, pairs)
 
 ############################################################
 # save output table
@@ -90,16 +98,25 @@ for line in openfile(raw_table, 'r'):
 all_keys = set(samples_fungal.keys()) | set(samples_nonfun.keys())
 
 fp = open(annotation + ".fungalbreakdown", 'w')
-fp.write("Sample_ID\tfungal_seqs\tnonfungal_seqs\ttotal_seqs\n")
+fp.write("Sample_ID\tfungal_seqs_ITS1\tnonfungal_seqs_ITS1\ttotal_seqs_ITS1\tfungal_seqs_ITS2\tnonfungal_seqs_ITS2\ttotal_seqs_ITS2\n")
 for sample in all_keys:
-    fun = 0
-    if samples_fungal.has_key(sample):
-        fun = samples_fungal[sample]
-    non = 0
-    if samples_nonfun.has_key(sample):
-        non = samples_nonfun[sample]
+    # its1
+    fun_ITS1 = 0
+    if samples_fungal["ITS1"].has_key(sample):
+        fun_ITS1 = samples_fungal["ITS1"][sample]
+    non_ITS1 = 0
+    if samples_nonfun["ITS1"].has_key(sample):
+        non_ITS1 = samples_nonfun["ITS1"][sample]
 
-    fp.write(sample + "\t" + str(fun) + "\t" + str(non) + "\t" + str(fun + non) +"\n")
+    # its2
+    fun_ITS2 = 0
+    if samples_fungal["ITS2"].has_key(sample):
+        fun_ITS2 = samples_fungal["ITS2"][sample]
+    non_ITS1 = 0
+    if samples_nonfun["ITS2"].has_key(sample):
+        non_ITS2 = samples_nonfun["ITS2"][sample]
+
+    fp.write(sample + "\t" + str(fun_ITS1) + "\t" + str(non_ITS1) + "\t" + str(fun_ITS1 + non_ITS1) + "\t" + str(fun_ITS2) + "\t" + str(non_ITS2) + "\t" + str(fun_ITS2 + non_ITS2) +"\n")
 fp.close()
 
 print("DONE :]")
