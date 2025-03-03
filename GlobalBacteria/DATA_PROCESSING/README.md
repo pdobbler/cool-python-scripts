@@ -7,6 +7,20 @@ SRRxxxxxxx → NCBI SRA Run (USA)
 ERRxxxxxxx → ENA Run (Europe)
 DRRxxxxxxx → DDBJ Run (Japan)
 
+### GETTING SPLITTED FILES
+
+```
+for file in *.fastq; do
+    # Extract the base name without extension
+    base_name="${file%.fastq}"
+    
+    # Run the fasterq-dump command
+    echo "Processing: $base_name"
+    fasterq-dump --split-files "$base_name"
+done
+```
+
+
 ### UNZIPPING FILES AND CHECKING
 
 unzipping the file
