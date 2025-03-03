@@ -422,6 +422,8 @@ END {
 
 `blastn -query GF5_ALL_SAMPLES_its2_notbinned_S4_S3_S2_VMULTI.fa -db /mnt/DATA/DATABASES/Eukaryome/EUK_ITS_v1.9_General -outfmt 6 -evalue 1E-5 -num_threads 2 -max_target_seqs 10 | sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr | sort -u -k1,1 --merge > GF5_ALL_SAMPLES_its2_notbinned_S4_S3_S2_VMULTI_best.tab`
 
+`awk -F'\t' '{print $2}' GF5_ALL_SAMPLES_its1_notbinned_S1_VMULTI_best.tab | awk -F';' '{print $4}' | sort | uniq -c > classes.txt`
+
 ### SEEDS PROCESSING
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/rename_permanent_clusters_seeds.py`
