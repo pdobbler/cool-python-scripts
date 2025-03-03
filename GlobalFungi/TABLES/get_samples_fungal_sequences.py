@@ -88,9 +88,9 @@ for line in openfile(raw_table, 'r'):
     sa = vals[2].split(';') #sample abundances
     marker = vals[3]
     if classification[code]:
-        samples_fungal = process_variant(samples_fungal[marker], sn, sa, pairs)
+        samples_fungal[marker] = process_variant(samples_fungal[marker], sn, sa, pairs)
     else:
-        samples_nonfun = process_variant(samples_nonfun[marker], sn, sa, pairs)
+        samples_nonfun[marker] = process_variant(samples_nonfun[marker], sn, sa, pairs)
 
 ############################################################
 # save output table
