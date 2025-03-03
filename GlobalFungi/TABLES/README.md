@@ -41,6 +41,12 @@ You can replace samples or clusters lists with '-' to retrieve all possible valu
 
 `zcat GF5_ALL_SAMPLES_ITS2_CLUSTERED_MOST_ABUND_unite10_PROCESSED.txt.gz | awk 'BEGIN {FS="\t"; OFS="\t"} NR == 1 || ($10 == "k__Fungi" && ($6 <= 1E-50 || ($4 + $5) >= 180))' > FUNGAL_CLUSTERS/GF5_ALL_SAMPLES_ITS2_CLUSTERED_MOST_ABUND_unite10_PROCESSED_FUNGI.txt`
 
+### GET FUNGAL BREAKDOWN
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/TABLES/get_samples_fungal_sequences.py`
+
+`python2.7 get_samples_fungal_sequences.py GF5_RAW_TABLE_PROCESSED_VARIANTS_UNITE10_PROCESSED.txt.gz REL5_REANOT_UNITE10/GF5_RAW_TABLE_PROCESSED_UNITE10.txt.gz GF5_RAW_TABLE_SAMPLES.txt.gz`
+
 
 
 
