@@ -19,7 +19,7 @@ def openfile(filename, mode='r'):
     else:
         return open(filename, mode)
 
-def process_variant(samples, sn, an):
+def process_variant(samples, sn, sa):
     for x in range(len(sn)):
         sample = sample_pairs[sn[x]]
         abund = int(sa[x])
@@ -80,9 +80,9 @@ for line in openfile(raw_table, 'r'):
     sn = vals[1].split(';') #sample names
     sa = vals[2].split(';') #sample abundances
     if classification[code]:
-        samples_fungal = process_variant(samples_fungal, sn, an)
+        samples_fungal = process_variant(samples_fungal, sn, sa)
     else:
-        samples_nonfun = process_variant(samples_nonfun, sn, an)
+        samples_nonfun = process_variant(samples_nonfun, sn, sa)
 
 ############################################################
 # save output table
