@@ -57,7 +57,7 @@ for line in openfile(annotation, 'r'):
         if vals[1] == 'NO_HIT':
             fungal = False
         else:
-            if float(vals[4]) <= 1E-50 or ((int(vals[2])+int(vals[3]))>= 180):
+            if float(vals[4]) <= 1E-50 or ((float(vals[2])+float(vals[3])) >= 180.0):
                 fungal = True
                 f += 1
             else:
@@ -88,7 +88,7 @@ for line in openfile(raw_table, 'r'):
 # save output table
 ############################################################
 
-fp = open(annotation+".fungalbreakdown", 'w')
+fp = open(annotation + ".fungalbreakdown", 'w')
 fp.write("Sample_ID\tfungal_seqs\tnonfungal_seqs\ttotal_seqs\n")
 for sample in samples_fungal:
     fp.write(sample + "\t" + str(samples_fungal[sample]) + "\t" + str(samples_nonfun[sample]) + "\t" + str(samples_fungal[sample] + samples_nonfun[sample]) +"\n")
