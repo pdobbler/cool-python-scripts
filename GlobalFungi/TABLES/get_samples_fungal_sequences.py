@@ -87,11 +87,19 @@ for line in openfile(raw_table, 'r'):
 ############################################################
 # save output table
 ############################################################
+all_keys = set(samples_fungal.keys()) | set(samples_nonfun.keys())
 
 fp = open(annotation + ".fungalbreakdown", 'w')
 fp.write("Sample_ID\tfungal_seqs\tnonfungal_seqs\ttotal_seqs\n")
-for sample in samples_fungal:
-    fp.write(sample + "\t" + str(samples_fungal[sample]) + "\t" + str(samples_nonfun[sample]) + "\t" + str(samples_fungal[sample] + samples_nonfun[sample]) +"\n")
+for sample in all_keys:
+    fun = 0
+    if samples_fungal.has_key(sample):
+        fun = samples_fungal[sample]
+    non = 0
+    if samples_nonfun.has_key(sample):
+        non = samples_nonfun[sample]
+
+    fp.write(sample + "\t" + str(fun) + "\t" + str(non) + "\t" + str(fun + non) +"\n")
 fp.close()
 
 print("DONE :]")
