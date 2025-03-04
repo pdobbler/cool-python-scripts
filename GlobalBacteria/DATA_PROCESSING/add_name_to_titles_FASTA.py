@@ -2,6 +2,7 @@ __author__ = 'vetrot'
 
 import sys
 import os
+import gzip
 
 fasta_file = sys.argv[1]
 sample_name = sys.argv[2]
