@@ -180,5 +180,5 @@ This should have same counts:
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/add_name_to_titles_FASTA.py`
 
-`python2.7 add_name_to_titles_FASTA.py 1_qm20.fa.gz GB01016506S|Delgado_2018_1aae_Bact`
+`python2.7 add_name_to_titles_FASTA.py 1_qm20.fa.gz 'GB01016506S|Delgado_2018_1aae_Bact'`
 
