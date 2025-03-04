@@ -3,7 +3,7 @@ __author__ = 'vetrot'
 import sys
 import os
 
-fastq_file = sys.argv[1]
+fasta_file = sys.argv[1]
 sample_name = sys.argv[2]
 
 print("name to add to the end of tiitles: " + sample_name)
