@@ -95,7 +95,7 @@ for line in openfile(raw_table, 'r'):
 ############################################################
 # save output table
 ############################################################
-all_keys = set(samples_fungal.keys()) | set(samples_nonfun.keys())
+all_keys = set(samples_fungal["ITS1"].keys()) | set(samples_nonfun["ITS1"].keys() | samples_fungal["ITS2"].keys()) | set(samples_nonfun["ITS2"].keys())
 
 fp = open(annotation + ".fungalbreakdown", 'w')
 fp.write("Sample_ID\tfungal_seqs_ITS1\tnonfungal_seqs_ITS1\ttotal_seqs_ITS1\tfungal_seqs_ITS2\tnonfungal_seqs_ITS2\ttotal_seqs_ITS2\n")
