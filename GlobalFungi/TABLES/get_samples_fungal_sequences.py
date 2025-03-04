@@ -112,7 +112,7 @@ for sample in all_keys:
     fun_ITS2 = 0
     if samples_fungal["ITS2"].has_key(sample):
         fun_ITS2 = samples_fungal["ITS2"][sample]
-    non_ITS1 = 0
+    non_ITS2 = 0
     if samples_nonfun["ITS2"].has_key(sample):
         non_ITS2 = samples_nonfun["ITS2"][sample]
 
