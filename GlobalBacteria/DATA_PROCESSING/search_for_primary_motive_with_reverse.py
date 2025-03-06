@@ -55,7 +55,7 @@ fwd_count = 0
 rev_count = 0
 no_hit = 0
 fp = open(FASTA + ".PRIMARY.fa", 'w')
-for n, line in enumerate(open(FASTA)):
+for n, line in enumerate(openfile(FASTA)):
     if n % 2 == 0:
         r1_0 = line.rstrip()
     else:
