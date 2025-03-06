@@ -182,3 +182,11 @@ This should have same counts:
 
 `python2.7 add_name_to_titles_FASTA.py 1_qm20.fa.gz 'GB01016506S|Delgado_2018_1aae_Bact'`
 
+---
+
+### SEARCH FOR PRIMARY MOTIVE
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/search_for_primary_motive_with_reverse.py`
+
+`python2.7 search_for_primary_motive_with_reverse.py Clavel_2021_1GT_qm20_renamed.fa AAGCTCGTAGTTGAATTT 2`
+
