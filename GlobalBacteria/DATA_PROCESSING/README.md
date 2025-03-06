@@ -186,7 +186,14 @@ This should have same counts:
 
 ### SEARCH FOR PRIMARY MOTIVE
 
+
+        Updated sequences: 515F (Parada)–806R (Apprill), forward-barcoded:
+        FWD:GTGYCAGCMGCCGCGGTAA; REV:GGACTACNVGGGTWTCTAAT
+        Original sequences: 515F (Caporaso)–806R (Caporaso), reverse-barcoded:
+        FWD:GTGCCAGCMGCCGCGGTAA; REV:GGACTACHVGGGTWTCTAAT
+
+
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/search_for_primary_motive_with_reverse.py`
 
-`python2.7 search_for_primary_motive_with_reverse.py Clavel_2021_1GT_qm20_renamed.fa AAGCTCGTAGTTGAATTT 2`
+`python2.7 search_for_primary_motive_with_reverse.py Clavel_2021_1GT_qm20_renamed.fa GTGYCAGCMGCCGCGGTAA 2`
 
