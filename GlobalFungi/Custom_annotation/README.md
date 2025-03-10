@@ -11,34 +11,21 @@
 `makeblastdb -in ErMF_isolates_seq_NCBI.fas -parse_seqids -dbtype nucl`
 
 
-### blast
-
-```
-for file in *.fas.gz
-do  
- echo "gunzip -c ${file} | blastn -query - -db ErMF_isolates_seq_NCBI -out ${file%%.fas.gz}.ErMF_NCBI.txt -evalue 1E-5 -outfmt 6 -num_threads 1 -max_target_seqs 10"
-done > blast_command.sh
-```
-
-`cat blast_command.sh | parallel`
-
-
-### sort
+### blast & sort
 
 ```
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-```
 
-```
-for file in *.txt
-do  
- echo "sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr ${file} | sort -u -k1,1 --merge > ${file%%.txt}_best.tab"
-done > sorting.sh
-```
+for file in *.fas.gz
+do
+ echo "gunzip -c ${file} | blastn -query - -db OMF_sequences.fa -outfmt 6 -evalue 1E-5 -num_threads 2 -max_target_seqs 10 | sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr | sort -u -k1,1 --merge > ${file%%.fas.gz}_OMF_best.tab"
+done > blast_and_sort_command.sh
 
-`cat sorting.sh | parallel`
-
+mkdir -p /mnt/DATA1/tmp
+export TMPDIR=/mnt/DATA1/tmp
+cat blast_and_sort_command.sh | parallel --tmpdir /mnt/DATA1/tmp
+```
 
 ### combine best results
 
