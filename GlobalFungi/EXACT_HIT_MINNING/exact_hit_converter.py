@@ -45,7 +45,7 @@ fp.write(out_line+"\n")
 for line in openfile(result_file):
         l = line.rstrip()
         vals = l.split('\t')
-        seq = vals[7]
+        seq = vals[5]
         sn = vals[1].split(';') #sample names
         sa = vals[2].split(';') #sample abundances
         #
