@@ -86,4 +86,5 @@ with gzip.open(FASTA + ".PRIMARY.fa.gz", 'wt') as fp:
                     continue
             no_hit += 1
 
-print("Total seqs: " + str(count) + " Total found: " + str(fwd_count + rev_count) + " (FWD: " + str(fwd_count) + "/REV: " + str(rev_count) + ") NO HIT: " + str(no_hit))
+print(FASTA+" Total seqs: " + str(count) + " Total found: " + str(fwd_count + rev_count) + " (FWD: " + str(fwd_count) + "/REV: " + str(rev_count) + ") NO HIT: " + str(no_hit))
+
