@@ -1,3 +1,9 @@
+### CONVERT FASTA
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/EXACT_HIT_MINNING/convert_fasta.py`
+
+`python convert_fasta.py Flexipedes_ITS1.fasta Flexipedes_ITS1_IN.txt`
+
 ### GETTING RES file
 
 `grep -v '>' Flexipedes_ITS1.fasta > Flexipedes_ITS1_seqs.txt`
