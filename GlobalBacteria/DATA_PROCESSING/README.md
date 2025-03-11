@@ -202,6 +202,6 @@ MOTIVE="GTGYCAGCMGCCGCGGTAA"
 MISMATCHES=4
 
 # Run the Python script in parallel for all .fas.gz files
-ls *.fas.gz | parallel -j $(nproc) "python2.7 search_for_primary_motive_with_reverse.py {} $MOTIVE $MISMATCHES"
+ls *_renamed.fas.gz | parallel -j $(nproc) "python2.7 search_for_primary_motive_with_reverse.py {} $MOTIVE $MISMATCHES"
 ```
 
