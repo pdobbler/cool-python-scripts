@@ -197,9 +197,21 @@ This should have same counts:
 
 `python2.7 search_for_primary_motive_with_reverse.py Clavel_2021_1GT_qm20_renamed.fa GTGYCAGCMGCCGCGGTAA 2`
 
+515F
+
 ```
 MOTIVE="GTGYCAGCMGCCGCGGTAA"
 MISMATCHES=4
+
+# Run the Python script in parallel for all .fas.gz files
+ls *_renamed.fas.gz | parallel -j $(nproc) "python2.7 search_for_primary_motive_with_reverse.py {} $MOTIVE $MISMATCHES"
+```
+
+519F
+
+```
+MOTIVE="CAGCMGCCGCGGTAA"
+MISMATCHES=3
 
 # Run the Python script in parallel for all .fas.gz files
 ls *_renamed.fas.gz | parallel -j $(nproc) "python2.7 search_for_primary_motive_with_reverse.py {} $MOTIVE $MISMATCHES"
