@@ -200,7 +200,7 @@ This should have same counts:
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/search_for_primary_motive_with_reverse_cut_primary.py`
 
-`python2.7 search_for_primary_motive_with_reverse.py Clavel_2021_1GT_qm20_renamed.fa GTGYCAGCMGCCGCGGTAA 4`
+`python2.7 search_for_primary_motive_with_reverse_cut_primary.py Clavel_2021_1GT_qm20_renamed.fa GTGYCAGCMGCCGCGGTAA 4`
 
 515F
 
