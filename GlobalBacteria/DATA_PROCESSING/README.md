@@ -252,6 +252,30 @@ for file in *PRIMARY.fa.gz; do
 done
 ```
 
+RANDOM
+
+```
+#!/bin/bash
+
+# Output file
+OUTPUT="ALIGNMENT.fa"
+> "$OUTPUT"  # Truncate or create output
+
+for file in *PRIMARY.fa.gz; do
+    # Extract prefix before _qm20_renamed.fas.gz.PRIMARY.fa.gz
+    prefix="${file%%_qm20_renamed.fas.gz.PRIMARY.fa.gz}"
+
+    # Unzip, split into records, shuffle, take 10, and relabel headers
+    zcat "$file" | awk -v RS=">" -v prefix="$prefix" '
+        NR > 1 {
+            header_line = $1;
+            $1 = ""; sub(/^ /, "", $0);
+            print ">" prefix "|" header_line "\n" $0;
+        }
+    ' | awk 'BEGIN{RS=">"; ORS=""} {print ">"$0}' | shuf | head -n 20 >> "$OUTPUT"
+done
+```
+
 ### SEARCH FOR SECONDARY MOTIVE
 
 806R - GGACTACHVGGGTWTCTAAT
