@@ -270,6 +270,6 @@ cat random_choose.sh | parallel
 
 806R - GGACTACHVGGGTWTCTAAT
 
-ATTAGA-ACCC--GTAG
+ATTAGA-ACCC--GTA
 mm 4
 
