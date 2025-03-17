@@ -254,31 +254,16 @@ done
 
 RANDOM
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/get_random_fasta_gzip.py`
+
 ```
-#!/bin/bash
+for file in *_qm20_renamed.fas.gz.PRIMARY.fa.gz
+do
+ sample=${file%%_qm20_renamed.fas.gz.PRIMARY.fa.gz}
+ echo "python2.7 get_random_fasta_gzip.py 10 ${file} ${sample}_10rand.fa"
+done > random_choose.sh
 
-# Output file
-OUTPUT="ALIGNMENT.fa"
-> "$OUTPUT"  # Truncate or create output
-
-for file in *PRIMARY.fa.gz; do
-    # Extract prefix before _qm20_renamed.fas.gz.PRIMARY.fa.gz
-    prefix="${file%%_qm20_renamed.fas.gz.PRIMARY.fa.gz}"
-
-    # Extract full sequences, shuffle, take 10, and modify headers
-    zcat "$file" | awk -v prefix="$prefix" '
-        BEGIN { RS = ">\n"; ORS = ""; }
-        NR > 1 {
-            split($0, lines, "\n");
-            header = lines[1];
-            seq = "";
-            for (i = 2; i <= length(lines); i++) {
-                seq = seq lines[i] "\n";
-            }
-            print ">" prefix "|" header "\n" seq "---SEQ_END---\n";
-        }
-    ' | awk -v RS="---SEQ_END---\n" -v ORS="" 'NR > 1 { print $0 }' | shuf -n 10 >> "$OUTPUT"
-done
+cat random_choose.sh | parallel
 ```
 
 ### SEARCH FOR SECONDARY MOTIVE
