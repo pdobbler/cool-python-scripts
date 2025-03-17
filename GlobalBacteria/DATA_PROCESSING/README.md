@@ -193,7 +193,7 @@ This should have same counts:
         FWD:GTGCCAGCMGCCGCGGTAA; REV:GGACTACHVGGGTWTCTAAT
 
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/search_for_primary_motive_with_reverse.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/search_for_primary_motive_with_reverse_cut_primary.py`
 
 `python2.7 search_for_primary_motive_with_reverse.py Clavel_2021_1GT_qm20_renamed.fa GTGYCAGCMGCCGCGGTAA 2`
 
@@ -204,7 +204,7 @@ MOTIVE="GTGYCAGCMGCCGCGGTAA"
 MISMATCHES=4
 
 # Run the Python script in parallel for all .fas.gz files
-ls *_renamed.fas.gz | parallel -j $(nproc) "python2.7 search_for_primary_motive_with_reverse.py {} $MOTIVE $MISMATCHES"
+ls *_renamed.fas.gz | parallel -j $(nproc) "python2.7 search_for_primary_motive_with_reverse_cut_primary.py {} $MOTIVE $MISMATCHES"
 ```
 
 519F
@@ -214,7 +214,7 @@ MOTIVE="CAGCMGCCGCGGTAA"
 MISMATCHES=3
 
 # Run the Python script in parallel for all .fas.gz files
-ls *_renamed.fas.gz | parallel -j $(nproc) "python2.7 search_for_primary_motive_with_reverse.py {} $MOTIVE $MISMATCHES"
+ls *_renamed.fas.gz | parallel -j $(nproc) "python2.7 search_for_primary_motive_with_reverse_cut_primary.py {} $MOTIVE $MISMATCHES"
 ```
 
 ### INVESTIGATING FILES
