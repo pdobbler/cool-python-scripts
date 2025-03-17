@@ -265,14 +265,19 @@ for file in *PRIMARY.fa.gz; do
     # Extract prefix before _qm20_renamed.fas.gz.PRIMARY.fa.gz
     prefix="${file%%_qm20_renamed.fas.gz.PRIMARY.fa.gz}"
 
-    # Unzip, split into records, shuffle, take 10, and relabel headers
-    zcat "$file" | awk -v RS=">" -v prefix="$prefix" '
+    # Extract full sequences, shuffle, take 10, and modify headers
+    zcat "$file" | awk -v prefix="$prefix" '
+        BEGIN { RS = ">\n"; ORS = ""; }
         NR > 1 {
-            header_line = $1;
-            $1 = ""; sub(/^ /, "", $0);
-            print ">" prefix "|" header_line "\n" $0;
+            split($0, lines, "\n");
+            header = lines[1];
+            seq = "";
+            for (i = 2; i <= length(lines); i++) {
+                seq = seq lines[i] "\n";
+            }
+            print ">" prefix "|" header "\n" seq "---SEQ_END---\n";
         }
-    ' | awk 'BEGIN{RS=">"; ORS=""} {print ">"$0}' | shuf | head -n 20 >> "$OUTPUT"
+    ' | awk -v RS="---SEQ_END---\n" -v ORS="" 'NR > 1 { print $0 }' | shuf -n 10 >> "$OUTPUT"
 done
 ```
 
