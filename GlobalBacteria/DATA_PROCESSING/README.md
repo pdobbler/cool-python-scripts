@@ -246,3 +246,11 @@ for file in *PRIMARY.fa.gz; do
     ' >> "$OUTPUT"
 done
 ```
+
+### SEARCH FOR SECONDARY MOTIVE
+
+806R - GGACTACHVGGGTWTCTAAT
+
+ATTAGA-ACCC--GTAG
+mm 4
+
