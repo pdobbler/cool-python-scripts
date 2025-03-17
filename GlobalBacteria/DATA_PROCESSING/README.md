@@ -217,3 +217,33 @@ MISMATCHES=3
 ls *_renamed.fas.gz | parallel -j $(nproc) "python2.7 search_for_primary_motive_with_reverse.py {} $MOTIVE $MISMATCHES"
 ```
 
+### INVESTIGATING FILES
+
+```
+#!/bin/bash
+
+# Output file
+OUTPUT="ALIGNMENT.fa"
+> "$OUTPUT"  # Empty the file if it already exists
+
+# Loop over all matching files
+for file in *PRIMARY.fa.gz; do
+    # Extract identifier before "_qm20_renamed.fas.gz.PRIMARY.fa.gz"
+    prefix="${file%%_qm20_renamed.fas.gz.PRIMARY.fa.gz}"
+
+    # Decompress and process the first 10 sequences
+    zcat "$file" | \
+    awk -v prefix="$prefix" '
+        BEGIN { RS=">"; ORS="" } 
+        NR > 1 {
+            count++;
+            if (count <= 10) {
+                # Replace newline in header with space, keep everything else
+                sub(/\n/, " ", $0);
+                # Print header with prefix
+                printf(">%s|%s\n", prefix, $0);
+            }
+        }
+    ' >> "$OUTPUT"
+done
+```
