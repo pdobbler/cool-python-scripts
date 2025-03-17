@@ -224,25 +224,24 @@ ls *_renamed.fas.gz | parallel -j $(nproc) "python2.7 search_for_primary_motive_
 
 # Output file
 OUTPUT="ALIGNMENT.fa"
-> "$OUTPUT"  # Empty the file if it already exists
+> "$OUTPUT"  # Truncate or create output
 
-# Loop over all matching files
 for file in *PRIMARY.fa.gz; do
-    # Extract identifier before "_qm20_renamed.fas.gz.PRIMARY.fa.gz"
+    # Extract prefix before _qm20_renamed.fas.gz.PRIMARY.fa.gz
     prefix="${file%%_qm20_renamed.fas.gz.PRIMARY.fa.gz}"
 
-    # Decompress and process the first 10 sequences
-    zcat "$file" | \
-    awk -v prefix="$prefix" '
-        BEGIN { RS=">"; ORS="" } 
-        NR > 1 {
-            count++;
-            if (count <= 10) {
-                # Replace newline in header with space, keep everything else
-                sub(/\n/, " ", $0);
-                # Print header with prefix
-                printf(">%s|%s\n", prefix, $0);
-            }
+    # Process 10 sequences quickly and cleanly
+    zcat "$file" | awk -v prefix="$prefix" '
+        BEGIN { seq_count = 0; printing = 0; }
+        /^>/ {
+            if (++seq_count > 10) exit;
+            header = substr($0, 2);  # strip >
+            print ">" prefix "|" header;
+            printing = 1;
+            next;
+        }
+        {
+            if (printing) print $0;
         }
     ' >> "$OUTPUT"
 done
