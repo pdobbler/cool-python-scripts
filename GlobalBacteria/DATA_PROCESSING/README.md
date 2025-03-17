@@ -193,9 +193,14 @@ This should have same counts:
         FWD:GTGCCAGCMGCCGCGGTAA; REV:GGACTACHVGGGTWTCTAAT
 
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/search_for_primary_motive_with_reverse_cut_primary.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/search_for_primary_motive_with_reverse.py`
 
 `python2.7 search_for_primary_motive_with_reverse.py Clavel_2021_1GT_qm20_renamed.fa GTGYCAGCMGCCGCGGTAA 2`
+
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/search_for_primary_motive_with_reverse_cut_primary.py`
+
+`python2.7 search_for_primary_motive_with_reverse.py Clavel_2021_1GT_qm20_renamed.fa GTGYCAGCMGCCGCGGTAA 4`
 
 515F
 
