@@ -232,8 +232,8 @@ OUTPUT="ALIGNMENT.fa"
 > "$OUTPUT"  # Truncate or create output
 
 for file in *PRIMARY.fa.gz; do
-    # Extract prefix before _qm20_renamed.fas.gz.PRIMARYCUT.fa.gz
-    prefix="${file%%_qm20_renamed.fas.gz.PRIMARYCUT.fa.gz}"
+    # Extract prefix before _qm20_renamed.fas.gz.PRIMARY.fa.gz
+    prefix="${file%%_qm20_renamed.fas.gz.PRIMARY.fa.gz}"
 
     # Process 10 sequences quickly and cleanly
     zcat "$file" | awk -v prefix="$prefix" '
@@ -257,9 +257,9 @@ RANDOM
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/get_random_fasta_gzip.py`
 
 ```
-for file in *_qm20_renamed.fas.gz.PRIMARY.fa.gz
+for file in *_qm20_renamed.fas.gz.PRIMARYCUT.fa.gz
 do
- sample=${file%%_qm20_renamed.fas.gz.PRIMARY.fa.gz}
+ sample=${file%%_qm20_renamed.fas.gz.PRIMARYCUT.fa.gz}
  echo "python2.7 get_random_fasta_gzip.py 10 ${file} ${sample}_10rand.fa"
 done > random_choose.sh
 
