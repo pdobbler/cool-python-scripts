@@ -273,3 +273,16 @@ cat random_choose.sh | parallel
 ATTAGA-ACCC--GTA
 mm 4
 
+
+806R
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/find_and_cut_secondary.py`
+
+```
+MOTIVE="ATTAGANACCCNNGTA"
+MISMATCHES=4
+
+# Run the Python script in parallel for all .PRIMARYCUT.fa.gz files
+ls *.PRIMARYCUT.fa.gz | parallel -j $(nproc) "python2.7 find_and_cut_secondary.py {} $MOTIVE $MISMATCHES"
+```
+
