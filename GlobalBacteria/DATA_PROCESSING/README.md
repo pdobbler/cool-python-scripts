@@ -307,3 +307,14 @@ MAX=283
 ls *_correct.fa.gz | parallel -j $(nproc) "python2.7 FASTA_get_lengths_profile_and_divide_by_length.py {} $MIN $MAX"
 ```
 
+### MAKE VARIANTS
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/FASTA_to_md5_variants_FASTA.py`
+
+`python2.7 FASTA_to_md5_variants_FASTA.py GB_VOL1_20251903_CLEAN.fa.gz`
+
+count singletons
+
+`zgrep ';size=1$' GB_VOL1_20251903_CLEAN.fa.gz_variants.fa.gz | wc -l`
+
+
