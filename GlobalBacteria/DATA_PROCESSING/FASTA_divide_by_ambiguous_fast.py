@@ -38,4 +38,4 @@ with openfile(fasta_file, 'rt') as infile, \
             n += 1
 
 total = i + n
-print(f"{first_part}{total} sequences processed by ambiguosity - {i} correct sequences vs {n} ambiguous sequences")
+print(f"{first_part} {total} sequences processed by ambiguosity - {i} correct sequences vs {n} ambiguous sequences")
