@@ -296,3 +296,14 @@ parallel "zgrep '>GB' {} | awk -F '|' '{print \$1}' | sort | uniq -c | sed 's/^/
 
 `ls *.gz | parallel -j $(nproc) "python FASTA_divide_by_ambiguous_fast.py {}"`
 
+### FILTER BY LENGTH CUTOFF
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/FASTA_get_lengths_profile_and_divide_by_length.py`
+
+```
+MIN=223
+MAX=283
+
+ls *_correct.fa.gz | parallel -j $(nproc) "python2.7 FASTA_get_lengths_profile_and_divide_by_length.py {} $MIN $MAX"
+```
+
