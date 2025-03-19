@@ -289,3 +289,8 @@ ls *.PRIMARYCUT.fa.gz | parallel -j $(nproc) "python2.7 find_and_cut_secondary.p
 ### STATS
 
 parallel "zgrep '>GB' {} | awk -F '|' '{print \$1}' | sort | uniq -c | sed 's/^/{}: /'" ::: *.gz > all_sample_counts.txt
+
+### REMOVE AMBIGUOUS BASES
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/get_random_fasta_gzip.py`
+
