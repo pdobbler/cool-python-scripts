@@ -292,5 +292,7 @@ parallel "zgrep '>GB' {} | awk -F '|' '{print \$1}' | sort | uniq -c | sed 's/^/
 
 ### REMOVE AMBIGUOUS BASES
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/get_random_fasta_gzip.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/FASTA_divide_by_ambiguous_fast.py`
+
+`ls *.gz | parallel -j $(nproc) "python FASTA_divide_by_ambiguous_fast.py {}"`
 
