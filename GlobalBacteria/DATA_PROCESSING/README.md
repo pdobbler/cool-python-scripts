@@ -286,3 +286,6 @@ MISMATCHES=4
 ls *.PRIMARYCUT.fa.gz | parallel -j $(nproc) "python2.7 find_and_cut_secondary.py {} $MOTIVE $MISMATCHES"
 ```
 
+### STATS
+
+parallel "zgrep '>GB' {} | awk -F '|' '{print \$1}' | sort | uniq -c | sed 's/^/{}: /'" ::: *.gz > all_sample_counts.txt
