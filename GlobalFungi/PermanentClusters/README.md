@@ -400,7 +400,24 @@ END {
 
 `grep -v "k__Fungi" GF5_ALL_SAMPLES_its2_S2_EukaryomITS_best_PROCESSED.txt | awk -F '\t' '{print $2}' > GF5_ALL_SAMPLES_its2_S2_NONFUNGAL_varaint_names.txt`
 
+`grep "k__Fungi" *_PROCESSED.txt | awk -F '\t' '$3 ~ /k__Fungi/ && $4 < 85.0 {print $2}' > GF5_ALL_SAMPLES_its1_notbinned_S1_VMULTI_below85_varaint_names.txt`  
 
+`cat *_NONFUNGAL_varaint_names.txt *_below85_varaint_names.txt > unidentified_names.txt`
+
+get sequences  
+
+`grep --no-group-separator -A 1 -F -f unidentified_names.txt GF5_ALL_SAMPLES_its1_nonqualified_notbinned_S1_VMULTI.fa > G01_UNIDENTIFIED/S1_unidentified.fa`
+
+`awk -F '\t' '$3 ~ /c__Agaricomycetes/ && $4 >= 85.0 {print $2}' GF5_ALL_SAMPLES_its1_notbinned_S1_VMULTI_best_PROCESSED.txt > c__Agaricomycetes_varaint_names.txt`  
+`grep --no-group-separator -A 1 -F -f c__Agaricomycetes_varaint_names.txt GF5_ALL_SAMPLES_its1_nonqualified_notbinned_S1_VMULTI.fa > G02_Agaricomycetes/S1_Agaricomycetes.fa`  
+
+simplified  
+
+```
+grep --no-group-separator -A 1 -F -f \
+<(awk -F '\t' '$3 ~ /c__Sordariomycetes/ && $4 >= 85.0 {print $2}' GF5_ALL_SAMPLES_its1_notbinned_S1_VMULTI_best_PROCESSED.txt) \
+GF5_ALL_SAMPLES_its1_nonqualified_notbinned_S1_VMULTI.fa > S1_Sordariomycetes.fa
+```
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/add_text_to_fasta_title.py`
 
