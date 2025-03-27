@@ -95,9 +95,9 @@ done
 ```
 
 ```
-for file in *.fa; do 
+for file in *_otus.fa; do 
     count=$(grep -c "^>" "$file")
-    echo -e "${file}\t${count}"
+    echo -e "${file%%_otus.fa}\t${count}"
 done > OTU_counts.txt
 ```
 
