@@ -94,7 +94,12 @@ for file in *.fasta.uniq; do
 done
 ```
 
-
+```
+for file in *.fa; do 
+    count=$(grep -c "^>" "$file")
+    echo -e "${file}\t${count}"
+done > OTU_counts.txt
+```
 
 
 
