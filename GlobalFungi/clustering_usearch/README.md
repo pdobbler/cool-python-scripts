@@ -78,6 +78,25 @@ all clusters and singletons included (no_singletons:false;-:means no selected OT
 
 `python2.7 GET_OTUTAB_FROM_SEQUENCES_REDUCED_FORMATE.py GF5_ALL_SAMPLES_ITS2_CLUSTERED.fa.gz false -`
 
+### CLUSTER NONBINNED SAMPLES INDIVIDUALY
+
+`awk '/^>/ {split($1,a,"|"); sample=a[1]; sub(/^>/,"",sample); print > sample".fasta"; next} {print >> sample".fasta"}' Labouyrie_2023_BBS_minsize2_CLUSTERED_singletons.fa.gz.notbinned`
+
+```
+for file in *.fasta; do
+    python2.7 make_uniques.py "$file"
+done
+```
+
+```
+for file in *.fasta.uniq; do
+    usearch -cluster_otus ${file} -minsize 1 -otus ${file%%.fasta.uniq}_otus.fa -relabel Otu -uparseout ${file%%.fasta.uniq}_uparse.txt
+done
+```
+
+
+
+
 
 
 
