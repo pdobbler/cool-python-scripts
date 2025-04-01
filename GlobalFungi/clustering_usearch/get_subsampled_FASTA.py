@@ -26,7 +26,7 @@ with openfile(fasta_file) as f:
         seq = f.readline()
         if not seq:
             break
-        if header.startswith('>GB'):
+        if header.startswith('>'):
             sample_name = header.split('|')[0][1:]  # Get 'GB01001571S' from '>GB01001571S|...'
             samples[sample_name].append((header.strip(), seq.strip()))
 
