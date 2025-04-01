@@ -12,7 +12,7 @@ discarded_file = sys.argv[4]      # file to save names of discarded samples
 # open gzip files
 def openfile(filename, mode='r'):
     if filename.endswith('.gz'):
-        return gzip.open(filename, mode)
+        return gzip.open(filename, mode + 't')
     else:
         return open(filename, mode)
 
