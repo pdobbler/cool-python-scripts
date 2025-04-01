@@ -1,54 +1,50 @@
-__author__ = 'vetrot'
-
 import sys
-from random import randint
-import array
+import random
+import gzip
+from collections import defaultdict
 
-size = int(sys.argv[1])
-fasta_file = sys.argv[2]
-subname = sys.argv[3]
+# Inputs
+size = int(sys.argv[1])           # number of sequences per sample
+fasta_file = sys.argv[2]          # input fasta file
+output_file = sys.argv[3]         # output file for selected sequences
+discarded_file = sys.argv[4]      # file to save names of discarded samples
 
-open(subname, "w")
-
-filled = False
-
-num_seqs = sum(1 for line in open(fasta_file))/2
-print "number of fasta sequences "+str(num_seqs)
-a = array.array('i',(i for i in range(0,num_seqs)))
-print "processing random choose from array of lenght "+str(len(a))
-random_list = {}
-for i in range(0,size):
-    if len(a)>0:
-        index = randint(0, len(a)-1)
-        if i % 10000 == 0:
-            print "random progress is "+str(i)
-        # print "index to remove "+str(index)
-        random_list[a[index]] = 0
-        del a[index]
-print "random chooose done..."+str(len(random_list))
-
-# check tag and save to new R1 and R2 file
-def save_fasta(r1_0,r1_1):
-    with open(subname, "a") as fileOUT:
-        # print r1_0 + " intact", best_pos
-        fileOUT.write('%s\n' % r1_0)
-        fileOUT.write('%s\n' % r1_1)
-    return;
-
-index = 0
-for n, line1 in enumerate(open(fasta_file)):
-    if n % 200000 == 0:
-        print n / 2
-    if n % 2 == 0:
-        r1_0 = line1.rstrip()
+# open gzip files
+def openfile(filename, mode='r'):
+    if filename.endswith('.gz'):
+        return gzip.open(filename, mode)
     else:
-        if n % 2 == 1:
-            r1_1 = line1.rstrip()
-            filled = True
-    if filled:
-        if random_list.has_key(index):
-            save_fasta(r1_0,r1_1)
-        index = index + 1
-        filled = False
+        return open(filename, mode)
 
-print "Done."
+# Read all sequences and group them by sample
+samples = defaultdict(list)
+with openfile(fasta_file) as f:
+    while True:
+        header = f.readline()
+        if not header:
+            break
+        seq = f.readline()
+        if not seq:
+            break
+        if header.startswith('>GB'):
+            sample_name = header.split('|')[0][1:]  # Get 'GB01001571S' from '>GB01001571S|...'
+            samples[sample_name].append((header.strip(), seq.strip()))
+
+# Select and save random sequences
+discarded_samples = []
+with open(output_file, 'w') as out:
+    for sample, seqs in samples.items():
+        if len(seqs) >= size:
+            selected = random.sample(seqs, size)
+            for header, sequence in selected:
+                out.write(f"{header}\n{sequence}\n")
+        else:
+            discarded_samples.append(sample)
+
+# Save discarded sample names
+with open(discarded_file, 'w') as dfile:
+    for sample in discarded_samples:
+        dfile.write(sample + "\n")
+
+print(f"Done. Selected sequences written to {output_file}")
+print(f"Discarded samples written to {discarded_file}")
