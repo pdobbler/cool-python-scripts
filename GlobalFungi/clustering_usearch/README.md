@@ -101,8 +101,11 @@ for file in *_otus.fa; do
 done > OTU_counts.txt
 ```
 
+### SUBSAPLE FASTA BASED ON SAMPLE SIZE (discard samples under the treshold)
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/clustering_usearch/get_subsampled_FASTA.py`
 
+`python get_subsampled_FASTA.py 12000 Labouyrie_2023_BBS_qm20_renamed_correct_ok_223_283.fa.gz Labouyrie_2023_BBS_12000SEQS/Labouyrie_2023_BBS_qm20_OK_12000seqs.fa discarded_12000.txt`
 
 
 
