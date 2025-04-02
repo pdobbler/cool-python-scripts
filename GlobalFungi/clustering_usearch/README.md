@@ -107,7 +107,11 @@ done > OTU_counts.txt
 
 `python get_subsampled_FASTA.py 12000 Labouyrie_2023_BBS_qm20_renamed_correct_ok_223_283.fa.gz Labouyrie_2023_BBS_12000SEQS/Labouyrie_2023_BBS_qm20_OK_12000seqs.fa discarded_12000.txt`
 
+### SUBSAPLE FASTA BASED ON SAMPLE SIZE RANGE (discard samples under the "discard treshold")
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/clustering_usearch/get_subsampled_FASTA_FOR_GB.py`
+
+`python get_subsampled_FASTA_FOR_GB.py 12000 GB_VOL1_20251903_CLEAN.fa.gz GB_VOL1_20251903_CLEAN_min12k_max15k.fa GB_VOL1_discarded_12k.txt 15000`
 
 
 
