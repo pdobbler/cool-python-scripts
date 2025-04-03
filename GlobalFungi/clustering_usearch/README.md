@@ -113,6 +113,11 @@ done > OTU_counts.txt
 
 `python get_subsampled_FASTA_FOR_GB.py 12000 GB_VOL1_20251903_CLEAN.fa.gz GB_VOL1_20251903_CLEAN_min12k_max15k.fa GB_VOL1_discarded_12k.txt 15000`
 
+### move OTU name in fasta headers from 6th to 1th position:
+
+`sed -E 's/>([^|]+)\|([^|]+)\|([^|]+)\|([^|]+)\|([^|]+)\|(OTU[0-9]+)/>\6|\1|\2|\3|\4|\5/' input.fasta | gzip > output.fasta.gz`
+
+
 
 
 
