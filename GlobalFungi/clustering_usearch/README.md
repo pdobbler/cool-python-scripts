@@ -117,7 +117,11 @@ done > OTU_counts.txt
 
 `sed -E 's/>([^|]+)\|([^|]+)\|([^|]+)\|([^|]+)\|([^|]+)\|(OTU[0-9]+)/>\6|\1|\2|\3|\4|\5/' input.fasta | gzip > output.fasta.gz`
 
+### Chao1
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/clustering_usearch/get_Chao1_from_commpressed_formate.py`
+
+`python get_Chao1_from_commpressed_formate.py commpressed_otu_tab.samples_to_otus.nosingle_False.txt Labouyrie_2023_BBS_qm20_OK_12000seqs_Chao1.txt`
 
 
 
