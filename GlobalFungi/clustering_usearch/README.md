@@ -123,5 +123,11 @@ done > OTU_counts.txt
 
 `python get_Chao1_from_commpressed_formate.py commpressed_otu_tab.samples_to_otus.nosingle_False.txt Labouyrie_2023_BBS_qm20_OK_12000seqs_Chao1.txt`
 
+### FILTER BACTERIA FROM SILVA 138 OUTPUT
+
+`awk -F'\t' '$5+0>=90 && $4+0>=70' Labouyrie_2023_BBS_qm20_OK_12000seqs_MOST_ABUND_SILVA_138_PROCESSED.txt > filtered_output.txt`
+
+`grep '_Bacteria' filtered_output.txt | grep -v ';Chloroplast;' | awk -F '\t' '{print $1}' | awk -F '|' '{print $1}' > BACTERIAL_OTUs.txt`
+
 
 
