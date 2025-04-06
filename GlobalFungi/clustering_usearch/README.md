@@ -129,5 +129,7 @@ done > OTU_counts.txt
 
 `grep '_Bacteria' filtered_output.txt | grep -v ';Chloroplast;' | awk -F '\t' '{print $1}' | awk -F '|' '{print $1}' > BACTERIAL_OTUs.txt`
 
+`zgrep --no-group-separator -A 1 -F -f BACTERIAL_OTUs.txt Labouyrie_2023_BBS_qm20_OK_12000seqs_CLUSTERED.fa.gz`
+
 
 
