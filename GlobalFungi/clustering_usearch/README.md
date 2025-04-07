@@ -131,5 +131,10 @@ done > OTU_counts.txt
 
 `zgrep --no-group-separator -A 1 -F -f BACTERIAL_OTUs.txt Labouyrie_2023_BBS_qm20_OK_12000seqs_CLUSTERED.fa.gz`
 
+### GENERATE OTU TABLE
+
+`(head -n 1 Labouyrie_2023_BBS_qm20_FINAL_10000seqs_OTUTABLE.txt && tail -n +2 Labouyrie_2023_BBS_qm20_FINAL_10000seqs_OTUTABLE.txt | sort -k1,1) > Labouyrie_2023_BBS_qm20_FINAL_10000seqs_OTUTABLE_sorted.txt`
+
+
 
 
