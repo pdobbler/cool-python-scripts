@@ -2,10 +2,19 @@ __author__ = 'Wietrack 2016'
 
 import sys
 import operator
+import gzip
 
 fasta_file = sys.argv[1]
 out_fasta = sys.argv[2]
 out_table = sys.argv[3]
+
+################################################
+def openfile(filename, mode='r'):
+    if filename.endswith('.gz'):
+        return gzip.open(filename, mode)
+    else:
+        return open(filename, mode)
+################################################
 
 fasta = {}
 loaded = False
@@ -14,7 +23,7 @@ titleRead = False
 i = 0
 n = 0
 #load fasta sequences
-for line in open(fasta_file):
+for line in openfile(fasta_file):
     ch = line[0]
     if ch == '>':
         titleRead=True
