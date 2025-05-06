@@ -64,14 +64,12 @@ done
 
 original headers:  
 >101_7069|VH01408:65:AAGHHTCM5:1:1101:58791:1303
-GCAT...
 
 
 `zcat SPUN2_joined_qm20_renamed.fa.gz |   sed 's/^>\(101_[0-9]*\)|/\>SP_\1|SPUN2|/' |   gzip > SPUN2_modified.fa.gz`
 
 modified headers:  
 >SP_101_7069|SPUN2|VH01408:65:AAGHHTCM5:1:1101:58791:1303
-GCAT...
 
 
 ### ITSx
