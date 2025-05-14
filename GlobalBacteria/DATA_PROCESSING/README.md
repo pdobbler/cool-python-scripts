@@ -317,4 +317,29 @@ count singletons
 
 `zgrep ';size=1$' GB_VOL1_20251903_CLEAN.fa.gz_variants.fa.gz | wc -l`
 
+### BACTERIAL ONLY v1.0
+
+Remove all sequences with COVERAGE < 90% OR SIMILARITY < 70%
+
+`awk -F'\t' 'NR==1 || ($5 + 0 >= 90 && $4 + 0 >= 70)' Labouyrie_2023_BBS_qm20_OK_12000seqs_MOST_ABUND_SILVA_138_PROCESSED.txt > filtered.txt`
+
+`awk -F'\t' '{print $4}' filtered.txt | sort -n | head`
+
+`awk -F'\t' '{print $5}' filtered.txt | sort -n | head`
+
+Exclude chimeras and non-bacterial sequences (chloroplasts, ARCHAEA, NOHITS)
+
+`grep '_Bacteria;' GB_VOL1_20251903_CLEAN_min12k_max15k_CLUSTERED_MOST_ABUND_SILVA_138_PROCESSED_min70sim90cov.txt | grep -v ';Chloroplast;' > GB_VOL1_20251903_CLEAN_min12k_max15k_CLUSTERED_MOST_ABUND_SILVA_138_PROCESSED_min70sim90cov_BAC_ONLY.txt`
+
+`awk -F'|' '{print $1}' GB_VOL1_20251903_CLEAN_min12k_max15k_CLUSTERED_MOST_ABUND_SILVA_138_PROCESSED_min70sim90cov_BAC_ONLY.txt > BAC_OTUs.txt`
+
+`zgrep --no-group-separator -A 1 -F -f BAC_OTUs.txt GB_VOL1_20251903_CLEAN_min12k_max15k_CLUSTERED_AND_BINNED.fa.gz | gzip > GB_VOL1_20251903_CLEAN_min12k_max15k_CLUSTERED_AND_BINNED_BACONLY.fa.gz`  
+
+
+
+
+
+
+
+
 
