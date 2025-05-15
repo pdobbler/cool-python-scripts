@@ -68,6 +68,15 @@ cat sorting.sh | parallel
 
 `python2.7 bin_fasta_to_OTU_by_processed_blast.py GF5_ALL_SAMPLES_ITS1_minsize2_CLUSTERED_singletons.gz GF5_ALL_SAMPLES_ITS1_minsize2_CLUSTERED_singletons_PROCESSED.txt`
 
+### GET CLASSIC OTUTABLE FROM CLUSTERED FASTA
+  
+header e.g.: >GB01020442S|An_2019_1acp_Bact|SRR5920425.6512|POS=5|POS=253|OTU00381  
+  
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/clustering_usearch/GET_OTUTAB_FROM_SEQUENCES.py`
+  
+`python2.7 GET_OTUTAB_FROM_SEQUENCES.py GB_VOL1_20251903_CLEAN_min12k_max15k_CLUSTERED_AND_BINNED_BACONLY.fa.gz GB_VOL1_20251903_CLEAN_min12k_max15k_CLUSTERED_AND_BINNED_BACONLY_OTUTAB.txt`  
+
+
 ### GET REDUCED OTUTABLE FROM CLUSTERED FASTA
 
 header e.g.: >GF05028373S|Chen12_2022_AKD1|c4327a8b28d158a0|OTU0096999
