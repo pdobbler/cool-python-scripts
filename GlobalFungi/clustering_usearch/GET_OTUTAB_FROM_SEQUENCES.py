@@ -3,10 +3,17 @@ __author__ = 'vetrot'
 import sys
 import operator
 import collections
+import gzip
 
 fasta_file = sys.argv[1]
 out_tab = sys.argv[2]
 
+# open gzip files
+def openfile(filename, mode='r'):
+    if filename.endswith('.gz'):
+        return gzip.open(filename, mode + 't')
+    else:
+        return open(filename, mode)
 
 #>GF05023557S|Fernan_2020_JZ12|e7c017be559f77ec|OTU0027655
 # fill table...
@@ -14,7 +21,7 @@ tab_dict = {}
 samples_sums = {}
 otu_sums = {}
 filled = False
-for line in open(fasta_file):
+for line in openfile(fasta_file):
     if line[0] == ">":
         vals = line[1:].rstrip().split('|')
         # sum otus...
