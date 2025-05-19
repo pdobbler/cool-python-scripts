@@ -144,6 +144,52 @@ done > OTU_counts.txt
 
 `(head -n 1 Labouyrie_2023_BBS_qm20_FINAL_10000seqs_OTUTABLE.txt && tail -n +2 Labouyrie_2023_BBS_qm20_FINAL_10000seqs_OTUTABLE.txt | sort -k1,1) > Labouyrie_2023_BBS_qm20_FINAL_10000seqs_OTUTABLE_sorted.txt`
 
+### get OTUs with at least 30 samples
 
+```
+awk -F'\t' '
+NR == 1 {
+    # Store header and initialize column counters
+    for (i = 2; i <= NF; i++) colSum[i] = 0;
+    header = $0;
+    next;
+}
+{
+    nonZero = 0;
+    for (i = 2; i <= NF; i++) {
+        if ($i + 0 > 0) {
+            nonZero++;
+            colSum[i]++;
+        }
+    }
+    if (nonZero >= 30) {
+        lines[NR] = $0;
+    }
+}
+END {
+    # Identify non-zero columns
+    keepCols[1] = 1; # always keep OTU column
+    for (i = 2; i <= length(colSum) + 1; i++) {
+        if (colSum[i] > 0) keepCols[i] = 1;
+    }
 
+    # Output header with selected columns
+    split(header, hFields, "\t");
+    outHeader = hFields[1];
+    for (i = 2; i <= length(hFields); i++) {
+        if (keepCols[i]) outHeader = outHeader "\t" hFields[i];
+    }
+    print outHeader;
+
+    # Output filtered lines with selected columns
+    for (r in lines) {
+        split(lines[r], fields, "\t");
+        outLine = fields[1];
+        for (i = 2; i <= length(fields); i++) {
+            if (keepCols[i]) outLine = outLine "\t" fields[i];
+        }
+        print outLine;
+    }
+}' GB_VOL1_20251903_CLEAN_10000seqs_CLUSTERED_AND_BINNED_BACONLY_OTUTAB_min30samples_ELIGIBLE.txt > GB_VOL1_20251903_CLEAN_10000seqs_CLUSTERED_AND_BINNED_BACONLY_OTUTAB_min30samples_ELIGIBLE_FINAL.txt
+```
 
