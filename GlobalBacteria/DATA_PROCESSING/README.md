@@ -335,6 +335,24 @@ Exclude chimeras and non-bacterial sequences (chloroplasts, ARCHAEA, NOHITS)
 
 `zgrep --no-group-separator -A 1 -F -f BAC_OTUs.txt GB_VOL1_20251903_CLEAN_min12k_max15k_CLUSTERED_AND_BINNED.fa.gz | gzip > GB_VOL1_20251903_CLEAN_min12k_max15k_CLUSTERED_AND_BINNED_BACONLY.fa.gz`  
 
+### GREENGENES TAXONOMY BREAKDOWN
+
+Blasting all variants against Greengenes2 20250505 -> process the blast best hit
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/taxonomy.zip`  
+
+`unzip taxonomy.zip`
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/taxonomy_breakdown.py`  
+
+`python2.7 taxonomy_breakdown.py TEST_PROCESSED.txt taxonomy.tsv 1 phylum_out.txt 188.0`  
+
+
+
+
+
+
+
 
 
 
