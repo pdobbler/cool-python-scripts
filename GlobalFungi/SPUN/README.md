@@ -82,7 +82,10 @@ DEREPLICATE
 
 `python2.7 dereplicate_FASTA.py SPUN2_modified.fa.gz SPUN2_joined_qm20_renamed_derep.fasta SPUN2_joined_qm20_renamed_mapping.table`
 
-  
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/split_fasta_by_group_size.py`
+
+`python2.7 split_fasta_by_group_size.py SPUN2_joined_qm20_renamed_derep.fasta.gz 550000`
+
 ### MAKE VARIANTS WITH SIZE INFO and COMPARE WITH OLD ONES
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/clustering_usearch/make_uniques.py`
