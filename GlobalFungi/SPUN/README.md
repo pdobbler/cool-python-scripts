@@ -80,6 +80,8 @@ DEREPLICATE
 
 `python2.7 dereplicate_FASTA.py SPUN2_joined_qm20_renamed.fa.gz SPUN2_joined_qm20_renamed_derep.fasta SPUN2_joined_qm20_renamed_mapping.table`
 
+`python2.7 dereplicate_FASTA.py SPUN2_modified.fa.gz SPUN2_joined_qm20_renamed_derep.fasta SPUN2_joined_qm20_renamed_mapping.table`
+
   
 ### MAKE VARIANTS WITH SIZE INFO and COMPARE WITH OLD ONES
 
@@ -91,5 +93,4 @@ DEREPLICATE
 
 
 
-`python2.7 dereplicate_FASTA.py SPUN2_modified.fa.gz SPUN2_joined_qm20_renamed_derep.fasta SPUN2_joined_qm20_renamed_mapping.table`
 
