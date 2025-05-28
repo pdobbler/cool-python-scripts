@@ -89,6 +89,10 @@ DEREPLICATE
 
 `python2.7 make_uniques.py GF5_ALL_SAMPLES_its2_and_SPUN2_uniq.fa.gz` 
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/SPUN/get_undetected_variants.py`
+
+
+
 
 
 
