@@ -86,6 +86,15 @@ DEREPLICATE
 
 `python2.7 split_fasta_by_group_size.py SPUN2_joined_qm20_renamed_derep.fasta.gz 550000`
 
+```
+for file in *.fas
+do
+ echo "/home/kdanielmorais/bioinformatics/tools/ITSx_1.0.11/ITSx -i ${file} --cpu 2 --only_full T -t F -o itsx_${file%%.fas}"
+done > itsx_command.sh
+
+cat itsx_command.sh | parallel &> out.txt
+```
+
 ### MAKE VARIANTS WITH SIZE INFO and COMPARE WITH OLD ONES
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/clustering_usearch/make_uniques.py`
