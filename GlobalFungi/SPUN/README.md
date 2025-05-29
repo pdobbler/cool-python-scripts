@@ -82,9 +82,15 @@ DEREPLICATE
 
 `python2.7 dereplicate_FASTA.py SPUN2_modified.fa.gz SPUN2_joined_qm20_renamed_derep.fasta SPUN2_joined_qm20_renamed_mapping.table`
 
+SPLIT
+
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/split_fasta_by_group_size.py`
 
 `python2.7 split_fasta_by_group_size.py SPUN2_joined_qm20_renamed_derep.fasta.gz 550000`
+
+EXTRACT ITS
+
+`mv *.fas ITSx/`
 
 ```
 for file in *.fas
@@ -95,11 +101,20 @@ done > itsx_command.sh
 cat itsx_command.sh | parallel &> out.txt
 ```
 
+`cat ITSx/*.ITS2.fasta > SPUN2_joined_qm20_renamed_derep_ITS2.fasta`
+
+RE-REPLICATE
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/Amplicons/Course_MB140P94/rereplicate_FASTA.py`
+
+`python2.7 dereplicate_FASTA.py SPUN2_joined_qm20_renamed_derep_ITS2.fasta SPUN2_joined_qm20_renamed_mapping.table SPUN2_joined_qm20_renamed_ITS2.fasta`
+
+
 ### MAKE VARIANTS WITH SIZE INFO and COMPARE WITH OLD ONES
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/clustering_usearch/make_uniques.py`
 
-`python2.7 make_uniques.py GF5_ALL_SAMPLES_its2_and_SPUN2_uniq.fa.gz` 
+`python2.7 make_uniques.py SPUN2_joined_qm20_renamed_ITS2.fasta` 
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/SPUN/get_undetected_variants.py`
 
