@@ -61,7 +61,7 @@ for n, line in enumerate(openfile(fasta_file)):
             filled = True
     if filled:
         group_name = md5_groups[title.split('|')[0]]
-        with open(output + "_" + group_name + ".fas", 'w') as fp:             # with statement safer than open/close
+        with open(output + "_" + group_name + ".fas", 'a') as fp:             # with statement safer than open/close
             fp.write(">" + title + "\n")
             fp.write(seq + "\n")
         filled = False
