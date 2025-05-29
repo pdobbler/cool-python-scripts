@@ -24,3 +24,11 @@ for file in *.fas; do
     echo -e "$file\t$count" >> counts.txt
 done
 ```
+
+### GROUP SEQUENCES
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/group_qualified_sequences_fastest_improved.py`
+
+`parallel -j $(nproc) python group_qualified_sequences_fastest_improved.py {} 97.0 false ::: *.fas`
+
+
