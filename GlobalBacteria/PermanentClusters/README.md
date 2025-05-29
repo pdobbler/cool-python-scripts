@@ -12,6 +12,6 @@ Blasting all variants against Greengenes2 20250505 -> process the blast best hit
 
 ### SPLIT FASTA BY TAXONOMY
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/split_by_taxonomy.py`  
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/split_by_taxonomy.py`  
 
 `python2.7 split_by_taxonomy.py GB_VOL1_20250526_CLEANED.fa.gz.qualified GB_VOL1_20250526_CLEANED_uniq_Greengenes2_20250505_PROCESSED.txt taxonomy.tsv 1 GB_VOL1_PHYLUM 188.0`
