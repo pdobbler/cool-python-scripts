@@ -10,6 +10,14 @@ Blasting all variants against Greengenes2 20250505 -> process the blast best hit
 
 `python2.7 taxonomy_breakdown.py GB_VOL1_20250526_CLEANED_uniq_Greengenes2_20250505_PROCESSED.txt taxonomy.tsv 1 GB_VOL1_20250526_CLEANED_ALL_Phylum_breakdown.txt 188.0`
 
+### RANK AND SORT
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/generate_SV_ranks_relative_abund.py`
+
+`python2.7 generate_SV_ranks_relative_abund.py GB_VOL1_20250526_CLEANED.fa.gz false`
+
+373 267 631 variants
+
 ### FILTER NON-SINGLETONS
 
 `awk '/^>/ {keep = ($0 !~ /\|V_1\|S_1\|/)} keep' GB_VOL1_20250526_CLEANED.fa.gz.all > GB_VOL1_20250526_CLEANED_ranked_multi.fa`
