@@ -16,13 +16,13 @@ Blasting all variants against Greengenes2 20250505 -> process the blast best hit
 
 `python2.7 generate_SV_ranks_relative_abund.py GB_VOL1_20250526_CLEANED.fa.gz false`
 
-373 267 631 variants
+373 267 631 variants (GB_VOL1_20250526_CLEANED.fa.gz.all)
 
 ### FILTER NON-SINGLETONS
 
 `awk '/^>/ {keep = ($0 !~ /\|V_1\|S_1\|/)} keep' GB_VOL1_20250526_CLEANED.fa.gz.all > GB_VOL1_20250526_CLEANED_ranked_multi.fa`
 
-51 603 682 variants
+51 603 682 variants (GB_VOL1_20250526_CLEANED_ranked_multi.fa)
 
 `awk '/^>/ {keep = ($0 ~ /\|V_1\|S_1\|/)} keep' GB_VOL1_20250526_CLEANED.fa.gz.all > GB_VOL1_20250526_CLEANED_ranked_single.fa`
 
