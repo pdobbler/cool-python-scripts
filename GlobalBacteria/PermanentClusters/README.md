@@ -12,7 +12,7 @@ Blasting all variants against Greengenes2 20250505 -> process the blast best hit
 
 ### FILTER NON-SINGLETONS
 
-`awk '/^>/ {keep = ($0 !~ /\|P_1\|V_1\|/)} keep' seqs.fa > filtered_seqs.fa`
+`awk '/^>/ {keep = ($0 !~ /\|V_1\|S_1\|/)} keep' GB_VOL1_20250526_CLEANED.fa.gz.all > GB_VOL1_20250526_CLEANED_ranked_multi.fa`
 
 
 ### SPLIT FASTA BY TAXONOMY
