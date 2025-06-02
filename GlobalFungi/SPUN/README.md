@@ -109,6 +109,11 @@ RE-REPLICATE
 
 `python2.7 rereplicate_FASTA.py SPUN2_joined_qm20_renamed_derep_ITS2.fasta SPUN2_joined_qm20_renamed_mapping.table SPUN2_joined_qm20_renamed_ITS2.fasta`
 
+### PREPARE CLUSTERING
+
+zgrep '>' GF5_ALL_SAMPLES_AND_SPUN2_ITS2.fa.gz | wc -l
+4 228 585 157
+
 
 ### MAKE VARIANTS WITH SIZE INFO and COMPARE WITH OLD ONES
 
