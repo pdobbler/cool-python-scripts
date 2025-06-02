@@ -107,7 +107,7 @@ RE-REPLICATE
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/Amplicons/Course_MB140P94/rereplicate_FASTA.py`
 
-`python2.7 dereplicate_FASTA.py SPUN2_joined_qm20_renamed_derep_ITS2.fasta SPUN2_joined_qm20_renamed_mapping.table SPUN2_joined_qm20_renamed_ITS2.fasta`
+`python2.7 rereplicate_FASTA.py SPUN2_joined_qm20_renamed_derep_ITS2.fasta SPUN2_joined_qm20_renamed_mapping.table SPUN2_joined_qm20_renamed_ITS2.fasta`
 
 
 ### MAKE VARIANTS WITH SIZE INFO and COMPARE WITH OLD ONES
