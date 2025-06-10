@@ -47,6 +47,23 @@ You can replace samples or clusters lists with '-' to retrieve all possible valu
 
 `python2.7 get_samples_fungal_sequences.py GF5_RAW_TABLE_PROCESSED_VARIANTS_UNITE10_PROCESSED.txt.gz REL5_REANOT_UNITE10/GF5_RAW_TABLE_PROCESSED_UNITE10.txt.gz GF5_RAW_TABLE_SAMPLES.txt.gz`
 
+### GET TAXA GROUPS BREAKDOWN
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/TABLES/count_taxon_groups_from_table.py`
+
+Example of taxonomy_pairs input file [taxa_pairs_ITS1_ITS2.txt]
+SH0885157.10FU	Fungi_Basidiomycota
+SH0885185.10FU	Fungi_Chytridiomycota
+SH0880802.10FU	Fungi_Ascomycota
+SH0881048.10FU	Fungi_Ascomycota
+...
+SH1958183.10FU	Fungi_Ascomycota
+all_other_fungal_sequences	Fungi_other
+
+`python2.7 count_taxon_groups_from_table.py GlobalFungi_5_SH_abundance_ITS1_ITS2.txt.gz taxa_pairs_ITS1_ITS2.txt ITS1_ITS2_phyla_counts.txt`
+
+
+
 
 
 
