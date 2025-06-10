@@ -30,6 +30,12 @@ print("Taxons loaded - taxonomy: " + str(len(taxonomy)))
 
 # process abundance file
 fp = open(output, 'w')
+# save
+line = "sample"
+for key in group_keys:
+    line += "\t" + key
+fp.write(line+"\n")
+# body
 taxonomy_groups = {}
 for index, line in enumerate(openfile(abundance_file, 'r')):
     parts = line.strip().split('\t')
