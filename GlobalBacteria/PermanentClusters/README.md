@@ -64,7 +64,11 @@ mv GB_VOL1_PHYLUM_p__Pseudomonadota.fas.undone Pseudomonadota_CONTINUE
 mv GB_VOL1_PHYLUM_p__Pseudomonadota.fas.input_seeds_seqs Pseudomonadota_CONTINUE
 ```
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/split_by_last_seed.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/group_qualified_sequences_fastest_optimized_seeds.py`
+
+`python group_qualified_sequences_fastest_optimized_seeds.py GB_VOL1_PHYLUM_p__Pseudomonadota.fas.done 97.0 false`
+
+`python group_qualified_sequences_fastest_optimized_seeds.py GB_VOL1_PHYLUM_p__Pseudomonadota.fas.undone 97.0 false GB_VOL1_PHYLUM_p__Pseudomonadota.fas.input_seeds_seqs`
 
 
 
