@@ -51,4 +51,21 @@ export TMPDIR=/mnt/DATA1/tmp
 parallel --tmpdir /mnt/DATA1/tmp -j $(nproc) python group_qualified_sequences_fastest_optimized.py {} 97.0 false ::: *.fas > output.txt
 ```
 
+### TRY TO CONTINUE
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/split_by_last_seed.py`
+
+`python2.7 split_by_last_seed.py GB_VOL1_PHYLUM_p__Pseudomonadota.fas GB_VOL1_PHYLUM_p__Pseudomonadota.fas.97.0.seed_seqs`
+
+```
+mkdir Pseudomonadota_CONTINUE
+mv GB_VOL1_PHYLUM_p__Pseudomonadota.fas.done Pseudomonadota_CONTINUE
+mv GB_VOL1_PHYLUM_p__Pseudomonadota.fas.undone Pseudomonadota_CONTINUE
+mv GB_VOL1_PHYLUM_p__Pseudomonadota.fas.input_seeds_seqs Pseudomonadota_CONTINUE
+```
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/split_by_last_seed.py`
+
+
+
 
