@@ -71,5 +71,26 @@ mv GB_VOL1_PHYLUM_p__Pseudomonadota.fas.input_seeds_seqs Pseudomonadota_CONTINUE
 `python group_qualified_sequences_fastest_optimized_seeds.py GB_VOL1_PHYLUM_p__Pseudomonadota.fas.undone 97.0 false GB_VOL1_PHYLUM_p__Pseudomonadota.fas.input_seeds_seqs`
 
 
+### MULTIPLE - CONTINUE
+
+```
+for file in *.fas
+do  
+ python2.7 split_by_last_seed.py ${file} ${file}.97.0.seed_seqs
+done
+```
+
+```
+for file in *.done
+do
+  echo "python group_qualified_sequences_fastest_optimized_seeds.py ${file} 97.0 false"
+  echo "python group_qualified_sequences_fastest_optimized_seeds.py ${file%%.done}.undone 97.0 false ${file%%.done}.input_seeds_seqs"
+done > continue.sh
+
+mkdir -p /mnt/DATA1/tmp
+export TMPDIR=/mnt/DATA1/tmp
+cat continue.sh | parallel --tmpdir /mnt/DATA1/tmp > output.txt
+```
+
 
 
