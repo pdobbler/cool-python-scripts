@@ -123,6 +123,10 @@ zgrep '>' GF5_ALL_SAMPLES_AND_SPUN2_ITS2.fa.gz | wc -l
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/SPUN/get_undetected_variants.py`
 
+### CLUSTERING - UPARSE
+
+`usearch -cluster_otus GF5_ALL_SAMPLES_AND_SPUN2_ITS2.fa.gz.uniq.multi -minsize 2 -otus GF5_ALL_SAMPLES_AND_SPUN2_ITS2_uniq_multi_minsize2_otus.fa -relabel Otu -uparseout GF5_ALL_SAMPLES_AND_SPUN2_ITS2_uniq_multi_minsize2_uparse.txt`
+
 
 
 
