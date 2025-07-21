@@ -117,5 +117,17 @@ TACG...
 
 `python2.7 split_fasta_by_group_size.py GB_VOL1_20250526_CLEANED_ranked_single.fa.gz 1290000`
 
+```
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 
+for file in *.fas
+do
+ echo "blastn -query ${file} -db SEEDS_97.0_WORKING_NAMES -outfmt 6 -evalue 1E-5 -num_threads 2 -max_target_seqs 10 | sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr | sort -u -k1,1 --merge > ${file%%.fas}_best.tab"
+done > blast_and_sort_command.sh
+
+mkdir -p /mnt/DATA1/tmp
+export TMPDIR=/mnt/DATA1/tmp
+cat blast_and_sort_command.sh | parallel --tmpdir /mnt/DATA1/tmp
+```
 
