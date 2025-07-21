@@ -94,7 +94,7 @@ cat continue.sh | parallel --tmpdir /mnt/DATA1/tmp > output.txt
 
 ### SEEDS WORKING NAMES
 
-`grep '>' SEEDS_97.0_WORKING_NAMES.fas | wc -l`  
+`grep '>' SEEDS_97.0_WORKING_NAMES.fa | wc -l`  
 3455524
 
 example:  
@@ -104,5 +104,18 @@ TACG...
 TACG...  
 >p__Pseudomonadota|CL000005|6e105f3f79341d4c6ac024b928786898|V_1211301|S_8765|P_81|r_12.7105402863|SEED  
 TACG...  
+
+`makeblastdb -in SEEDS_97.0_WORKING_NAMES.fa -dbtype 'nucl' -out SEEDS_97.0_WORKING_NAMES`
+
+
+### BINNING SINGLETONS
+
+`zgrep '>' GB_VOL1_20250526_CLEANED_ranked_single.fa.gz | wc -l`
+321663949
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/split_fasta_by_group_size.py`
+
+`python2.7 split_fasta_by_group_size.py GB_VOL1_20250526_CLEANED_ranked_single.fa.gz 1290000`
+
 
 
