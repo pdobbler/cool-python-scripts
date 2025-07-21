@@ -92,5 +92,17 @@ export TMPDIR=/mnt/DATA1/tmp
 cat continue.sh | parallel --tmpdir /mnt/DATA1/tmp > output.txt
 ```
 
+### SEEDS WORKING NAMES
+
+`grep '>' SEEDS_97.0_WORKING_NAMES.fas | wc -l`  
+3455524
+
+example:  
+>NO_HIT|CL00001|6ccb96db9d81f6f110fe7cb5be5bdf5b|V_15083|S_241|P_11|r_0.143077314152|SEED  
+TACG...  
+>NOT_PASS|CL000001|fdab42782e489ac806d35fed5867058b|V_16961|S_56|P_2|r_9.22178189031|SEED  
+TACG...  
+>p__Pseudomonadota|CL000005|6e105f3f79341d4c6ac024b928786898|V_1211301|S_8765|P_81|r_12.7105402863|SEED  
+TACG...  
 
 
