@@ -1,12 +1,19 @@
 __author__ = 'avetrot'
 
 import sys
+import gzip
 
 FASTA = sys.argv[1]
 PROCESSED_BLAST = sys.argv[2]
 
+def openfile(filename, mode='r'):
+    if filename.endswith('.gz'):
+        return gzip.open(filename, mode)
+    else:
+        return open(filename, mode)
+
 binned={}
-for n, line in enumerate(open(PROCESSED_BLAST)):
+for n, line in enumerate(openfile(PROCESSED_BLAST)):
     if n>0:
         vars = line.rstrip().split('\t')
         if vars[3] != '-':
@@ -19,7 +26,7 @@ print("Binned sequences were set...")
 fp = open(FASTA+".binned", 'w')
 fs = open(FASTA+".notbinned", 'w')
 filled = False
-for n, line in enumerate(open(FASTA)):
+for n, line in enumerate(openfile(FASTA)):
     if n % 2 == 0:
         r1_0 = line.rstrip()
     else:
