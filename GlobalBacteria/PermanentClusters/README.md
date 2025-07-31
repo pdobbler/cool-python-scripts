@@ -149,9 +149,9 @@ process clusters and set version
 
 ### CREATE VARIANTS TABLE
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/create_variants_table.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/create_variants_table_sample_pairs.py`
 
-`python2.7 create_variants_table.py GB_VOL1_20250526_CLEANED.fa.gz CLUSTERED_VARS_RANDOM_10000.fa SEEDS_97.0_WORKING_NAMES.fa.info`
+`python2.7 create_variants_table_sample_pairs.py GB_VOL1_20250526_CLEANED.fa.gz CLUSTERED_VARS_RANDOM_10000.fa SEEDS_97.0_WORKING_NAMES.fa.info`
 
 
 
