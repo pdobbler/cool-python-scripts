@@ -95,7 +95,7 @@ for seq in vars_samples:
     md5_var = hashlib.md5(seq.encode()).hexdigest()
     samples = vars_samples[seq]
     ids_str, counts_str = samples_to_strings(samples)
-    out_file.write(md5_var + '\t' + print(ids_str) + '\t' + print(counts_str) + '\t' + vars_clusters[md5_var] + '\t' + seq +'\n')
+    out_file.write(md5_var + '\t' + ids_str + '\t' + counts_str + '\t' + vars_clusters[md5_var] + '\t' + seq +'\n')
     i += 1
 out_file.close()
 
