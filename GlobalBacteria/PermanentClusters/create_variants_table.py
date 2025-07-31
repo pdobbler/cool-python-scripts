@@ -17,17 +17,6 @@ def openfile(filename, mode='r'):
         return open(filename, mode)
 
 def samples_to_strings(samples):
-    """
-    Vytvoří dva řetězce oddělené středníkem:
-    - seznam vzorků
-    - seznam počtů variant
-    
-    Args:
-        samples (dict): slovník {sample_id: count}
-        
-    Returns:
-        tuple: (sample_ids_str, counts_str)
-    """
     sample_ids = ";".join(samples.keys())
     counts = ";".join(str(samples[s]) for s in samples.keys())
     return sample_ids, counts
