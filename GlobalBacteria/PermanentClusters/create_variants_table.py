@@ -16,7 +16,7 @@ def openfile(filename, mode='r'):
     else:
         return open(filename, mode)
 
-def samples_to_strings(samples: dict) -> tuple[str, str]:
+def samples_to_strings(samples):
     """
     Vytvoří dva řetězce oddělené středníkem:
     - seznam vzorků
