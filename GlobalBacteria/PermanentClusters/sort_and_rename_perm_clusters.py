@@ -7,6 +7,7 @@ import gzip
 from collections import OrderedDict
 
 fasta_file = sys.argv[1]
+version = sys.argv[2]
 
 def openfile(filename, mode='r'):
     if filename.endswith('.gz'):
@@ -45,7 +46,7 @@ for title in ordered_ranks:
     name = 'GB';
     for k in range(0,digits-len(str(n))):
         name +='0'
-    name += str(n)  
+    name += str(n) + '.' + version  
     fp1.write(">" + name + "\n")
     fp1.write(seqs[title] + "\n")
     #    
