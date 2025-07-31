@@ -27,7 +27,7 @@ clusters={}
 i = 0
 for line in openfile(clusters_info, 'r'):
     parts1 = line.split('\t')
-    parts2 = parts1.split('|')
+    parts2 = parts1[1].split('|')
     working_name = parts2[0] + '|' + parts2[1]
     clusters[working_name] = parts1[0]
     i += 1
