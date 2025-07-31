@@ -143,7 +143,9 @@ cat blast_and_sort_command.sh | parallel --tmpdir /mnt/DATA1/tmp
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/sort_and_rename_perm_clusters.py`
 
-`python2.7 sort_and_rename_perm_clusters.py SEEDS_97.0_WORKING_NAMES.fa`
+process clusters and set version
+
+`python2.7 sort_and_rename_perm_clusters.py SEEDS_97.0_WORKING_NAMES.fa 1`
 
 
 
