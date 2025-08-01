@@ -79,36 +79,31 @@ for line in openfile(raw_fasta_samples, 'r'):
         if titleRead:
             titleRead = False
             seq = line.strip()
-            md5_var = hashlib.md5(seq.encode()).hexdigest()
-            if vars_clusters.has_key(md5_var):
-                sample_name = title.split('|')[0]
-                ###
-                if vars_samples.has_key(seq):
-                    samples = vars_samples[seq]
-                    if samples.has_key(sample_name):
-                        samples[sample_name] += 1
-                    else:
-                        samples[sample_name] = 1
-                        # count occurence
-                        if sample_occurence.has_key(sample_name):
-                            sample_occurence[sample_name] += 1
-                        else:
-                            sample_occurence[sample_name] = 1
-
-                    vars_samples[seq] = samples
+            sample_name = title.split('|')[0]
+            ###
+            if vars_samples.has_key(seq):
+                samples = vars_samples[seq]
+                if samples.has_key(sample_name):
+                    samples[sample_name] += 1
                 else:
-                    samples = {}
                     samples[sample_name] = 1
                     # count occurence
                     if sample_occurence.has_key(sample_name):
                         sample_occurence[sample_name] += 1
                     else:
                         sample_occurence[sample_name] = 1
-                    vars_samples[seq] = samples
+                vars_samples[seq] = samples
             else:
-                n += 1
+                samples = {}
+                samples[sample_name] = 1
+                # count occurence
+                if sample_occurence.has_key(sample_name):
+                    sample_occurence[sample_name] += 1
+                else:
+                    sample_occurence[sample_name] = 1
+                vars_samples[seq] = samples
 
-print("Processed raw fasta from samples: " + str(i)+" - not found variants (should be 0!): " + str(n))
+print("Processed raw fasta from samples: " + str(i))
 
 # sort sample names based on occurence
 sample_names = create_sample_names(sample_occurence)
@@ -138,7 +133,10 @@ for seq in vars_samples:
     md5_var = hashlib.md5(seq.encode()).hexdigest()
     samples = vars_samples[seq]
     ids_str, counts_str = samples_to_strings(samples)
-    out_file.write(md5_var + '\t' + ids_str + '\t' + counts_str + '\t' + vars_clusters[md5_var] + '\t' + seq +'\n')
+    if vars_clusters.has_key(md5_var):
+        out_file.write(md5_var + '\t' + ids_str + '\t' + counts_str + '\t' + vars_clusters[md5_var] + '\t' + seq +'\n')
+    else:
+        out_file.write(md5_var + '\t' + ids_str + '\t' + counts_str + '\t' + '-' + '\t' + seq +'\n')
     i += 1
 out_file.close()
 
