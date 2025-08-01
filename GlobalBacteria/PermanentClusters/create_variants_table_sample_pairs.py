@@ -17,9 +17,20 @@ def openfile(filename, mode='r'):
         return open(filename, mode)
 
 def samples_to_strings(samples):
-    sample_ids = ";".join(samples.keys())
-    counts = ";".join(str(samples[s]) for s in samples.keys())
+    sample_ids = ";".join(str(sample_names[k]) for k in samples.keys())
+    counts = ";".join(str(v) for v in samples.values())
     return sample_ids, counts
+
+# Input: dictionary of sample occurrences
+# Example: sample_occurence = {"S1": 10, "S2": 5, "S3": 15}
+def create_sample_names(sample_occurence):
+    # Sort sample names by decreasing occurrence count
+    sorted_samples = sorted(sample_occurence.items(), key=lambda x: x[1], reverse=True)
+    # Create dictionary mapping sample_name -> index (starting from 1)
+    sample_names = {}
+    for idx, (name, count) in enumerate(sorted_samples, start=1):
+        sample_names[name] = idx    
+    return sample_names
 
 # clustered info
 # GB00179323.1      NO_HIT|CL03266|5cbd58e7c6d8d123527eb1ab5719e93b|V_23|S_6|P_1|r_0.00023926054681|SEED
@@ -53,10 +64,11 @@ print("Processed sequence variants: " + str(i))
 # >GB01020442S|An_2019_1acp_Bact|SRR5920425.4|POS=5|POS=253
 # TACGTAGGGAGC...
 vars_samples = {}
-sample_names = {}
+sample_occurence = {}
 sample_id = 1
 titleRead = False
 i = 0
+n = 0
 for line in openfile(raw_fasta_samples, 'r'):
     ch = line[0]
     if ch == '>':
@@ -67,30 +79,46 @@ for line in openfile(raw_fasta_samples, 'r'):
         if titleRead:
             titleRead = False
             seq = line.strip()
-            sample_name = title.split('|')[0]
-            if not sample_names.has_key(sample_name):
-                sample_names[sample_name] = sample_id
-                sample_id += 1
-            ###
-            if vars_samples.has_key(seq):
-                samples = vars_samples[seq]
-                if samples.has_key(sample_names[sample_name]):
-                    samples[sample_names[sample_name]] += 1
-                else:
-                    samples[sample_names[sample_name]] = 1
-                vars_samples[seq] = samples
-            else:
-                samples = {}
-                samples[sample_names[sample_name]] = 1
-                vars_samples[seq] = samples
+            md5_var = hashlib.md5(seq.encode()).hexdigest()
+            if vars_clusters.has_key(md5_var):
+                sample_name = title.split('|')[0]
+                ###
+                if vars_samples.has_key(seq):
+                    samples = vars_samples[seq]
+                    if samples.has_key(sample_name):
+                        samples[sample_name] += 1
+                    else:
+                        samples[sample_name] = 1
+                        # count occurence
+                        if sample_occurence.has_key(sample_name):
+                            sample_occurence[sample_name] += 1
+                        else:
+                            sample_occurence[sample_name] = 1
 
-print("Processed raw fasta from samples: " + str(i))
+                    vars_samples[seq] = samples
+                else:
+                    samples = {}
+                    samples[sample_name] = 1
+                    # count occurence
+                    if sample_occurence.has_key(sample_name):
+                        sample_occurence[sample_name] += 1
+                    else:
+                        sample_occurence[sample_name] = 1
+                    vars_samples[seq] = samples
+            else:
+                n += 1
+
+print("Processed raw fasta from samples: " + str(i)+" - not found variants (should be 0!): " + str(n))
+
+# sort sample names based on occurence
+sample_names = create_sample_names(sample_occurence)
 
 # SAVE PAIRING TABLE
 i = 0
 fp = open("VARIANTS_TABLE_SAMPLE_PAIRS.txt", 'w')
+fp.write('SampleName\tSampleID\toccurence\n')
 for sample_name in sample_names:
-    fp.write(sample_names[sample_name] + '\t' + sample_name +'\n')
+    fp.write(str(sample_names[sample_name]) + '\t' + sample_name + '\t' + str(sample_occurence[sample_name]) +'\n')
     i += 1
 fp.close()
 
@@ -99,7 +127,7 @@ print("Sample pairs were saved: " + str(i))
 
 # CREATE TABLE IF NOT EXISTS `variants` (
 #   `hash` varchar(32) NOT NULL,
-#   `samples` TEXT NOT NULL,
+#   `samples` MEDIUMTEXT NOT NULL,
 #   `abundances` MEDIUMTEXT NOT NULL,
 #   `cluster` varchar(12) NOT NULL,
 #   `sequence` TEXT NOT NULL
