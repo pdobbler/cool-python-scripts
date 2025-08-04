@@ -153,6 +153,12 @@ process clusters and set version
 
 `python2.7 create_variants_table_sample_pairs.py GB_VOL1_20250526_CLEANED.fa.gz CLUSTERED_VARS_RANDOM_10000.fa SEEDS_97.0_WORKING_NAMES.fa.info`
 
+### CREATE TAXONOMY TABLE
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/taxonomy_for_clusters.py`
+
+`python2.7 taxonomy_for_clusters.py VARIANTS_TABLE_CLUSTER_PAIRS.txt SEEDS_97.0_WORKING_NAMES_TAXONOMY.txt`
+
 
 
 
