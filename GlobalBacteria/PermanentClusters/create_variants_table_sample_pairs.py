@@ -36,12 +36,15 @@ def create_sample_names(sample_occurence):
 # GB00179323.1      NO_HIT|CL03266|5cbd58e7c6d8d123527eb1ab5719e93b|V_23|S_6|P_1|r_0.00023926054681|SEED
 clusters={}
 i = 0
+fp = open("VARIANTS_TABLE_CLUSTER_PAIRS.txt", 'w')
 for line in openfile(clusters_info, 'r'):
+    i += 1
     parts1 = line.split('\t')
     parts2 = parts1[1].split('|')
     working_name = parts2[0] + '|' + parts2[1]
-    clusters[working_name] = parts1[0]
-    i += 1
+    clusters[working_name] = str(i)
+    fp.write(str(i) + '\t' + parts1[0] + '\t' + parts2[2] + '\n')
+fp.close()
 
 print("Clusters loaded: " + str(i))
 
@@ -143,6 +146,7 @@ out_file.close()
 print("Variants created: " + str(i))
 print("DONE :)")
             
+
 
 
 
