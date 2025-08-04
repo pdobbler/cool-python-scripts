@@ -36,7 +36,7 @@ print("Clusters loaded: " + str(i))
 sp_taxonomy = {}
 gen_taxonomy = {}
 i = 0
-fp = open("CLUSTERS_TAXONOMY.txt", 'w')
+fp = open("TAXONOMY_CLUSTERS.txt", 'w')
 for line in openfile(taxonomy_ident):
     line = line.rstrip()
     parts = line.split("\t")
@@ -67,7 +67,7 @@ fp.close()
 
 print("Taxonomy loaded: " + str(i) + " - the size should be the same as clusters!")
 
-fp = open("SP_GEN_TAXONOMY.txt", 'w')
+fp = open("TAXONOMY_SP_GEN.txt", 'w')
 for species in sp_taxonomy:
     taxons = sp_taxonomy[species]
     gen = taxons.split(';')[5].replace(" g__", "")
