@@ -122,7 +122,7 @@ BLAST SINGLETONS
 ```
 for file in *.fas
  do
-  echo "blastn -query ${file} -db /mnt/DATA1/GLOBAL_BACTERIA/FINAL/BINNING/SEEDS_97.0_WORKING_NAMES -out ${file%%.fas}_SEEDS97.txt -outfmt 6 -evalue 1E-5 -num_threads 2 -max_target_seqs 10"
+  echo "blastn -query ${file} -db /mnt/DATA1/GLOBAL_BACTERIA/FINAL/BINNING/SEEDS_97.0_WORKING_NAMES -out ${file%%.fas}_SEEDS97.txt -outfmt 6 -evalue 1E-5 -num_threads 1 -max_target_seqs 10"
  done > blast_command.sh
 
 cat blast_command.sh | parallel 
