@@ -125,7 +125,7 @@ for file in *.fas
   echo "blastn -query ${file} -db /mnt/DATA1/GLOBAL_BACTERIA/SEEDS_97.0_WORKING_NAMES -out ${file%%.fas}_SEEDS97.txt -outfmt 6 -evalue 1E-5 -num_threads 2 -max_target_seqs 10"
  done > blast_command.sh
 
-cat blast_and_sort_command.sh | parallel 
+cat blast_command.sh | parallel 
 ```
 
 ```
