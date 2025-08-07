@@ -56,7 +56,7 @@ for line in openfile(taxonomy_ident):
                 if not gen == '':
                     genus = gen
                     gen_taxonomy[genus] = taxons
-                if sim + cov >= thr_g:
+                if sim + cov >= thr_s:
                     sp = taxons.split(';')[6].replace(" s__", "")
                     if not sp == '':
                         species = sp
