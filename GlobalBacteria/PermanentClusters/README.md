@@ -117,6 +117,17 @@ TACG...
 
 `python2.7 split_fasta_by_group_size.py GB_VOL1_20250526_CLEANED_ranked_single.fa.gz 1290000`
 
+BLAST SINGLETONS  
+
+```
+for file in *.fas
+ do
+  echo "blastn -query ${file} -db /mnt/DATA1/GLOBAL_BACTERIA/SEEDS_97.0_WORKING_NAMES -out ${file%%.fas}_SEEDS97.txt -outfmt 6 -evalue 1E-5 -num_threads 2 -max_target_seqs 10"
+ done > blast_command.sh
+
+cat blast_and_sort_command.sh | parallel 
+```
+
 ```
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
