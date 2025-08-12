@@ -164,17 +164,33 @@ process clusters and set version
 
 `python2.7 create_variants_table_sample_pairs.py GB_VOL1_20250526_CLEANED.fa.gz CLUSTERED_VARS_RANDOM_10000.fa SEEDS_97.0_WORKING_NAMES.fa.info`
 
+OUTPUTS:  
+VARIANTS_TABLE_CLUSTER_PAIRS.txt  
+VARIANTS_TABLE_SAMPLE_PAIRS.txt  
+VARIANTS_TABLE.txt.gz  
+
 ### CREATE TAXONOMY TABLES
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/taxonomy_for_clusters.py`
 
 `python2.7 taxonomy_for_clusters.py VARIANTS_TABLE_CLUSTER_PAIRS.txt SEEDS_97.0_WORKING_NAMES_TAXONOMY.txt`
 
+OUTPUTS:  
+TAXONOMY_CLUSTERS.txt  
+TAXONOMY_SP_GEN.txt  
+
 CLUSTERS - SPECIES - GENUS ABUNDANCE TABLES
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/create_taxonomy_tables.py`
 
 `python2.7 create_taxonomy_tables.py VARIANTS_TABLE_TEST.txt TAXONOMY_CLUSTERS.txt`
+
+OUTPUTS:  
+ABUND_TABLE_CLUSTERS.txt  
+ABUND_TABLE_SPECIES.txt  
+ABUND_TABLE_GENERA.txt  
+
+  
 
 
 
