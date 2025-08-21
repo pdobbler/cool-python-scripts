@@ -503,7 +503,13 @@ CREATE TABLE IF NOT EXISTS `samplevar` (
 `LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/VARIANTS_samplevar.txt' INTO TABLE samplevar FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
 
 
-  
+### Docker app
+
+/home/ubuntu/Docker_GlobalFungi
+
+check Dockerfile
+
+
 
 
 
