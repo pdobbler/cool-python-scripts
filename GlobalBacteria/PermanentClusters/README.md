@@ -276,7 +276,7 @@ CONTAINER ID   IMAGE
 
 # Connect from host:
 `docker exec -it mariadb_ok mariadb -u root -p`
-
+[root]
 
 
 
