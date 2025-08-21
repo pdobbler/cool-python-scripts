@@ -169,6 +169,12 @@ VARIANTS_TABLE_CLUSTER_PAIRS.txt
 VARIANTS_TABLE_SAMPLE_PAIRS.txt  
 VARIANTS_TABLE.txt.gz  
 
+### CONVERT VARIANTS TABLE
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/convert_variants_table.py`
+
+`python2.7 convert_variants_table.py VARIANTS_TABLE_CL.txt.gz`
+
 ### CREATE TAXONOMY TABLES
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/taxonomy_for_clusters.py`
