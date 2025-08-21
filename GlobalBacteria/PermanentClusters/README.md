@@ -190,6 +190,22 @@ ABUND_TABLE_CLUSTERS.txt
 ABUND_TABLE_SPECIES.txt  
 ABUND_TABLE_GENERA.txt  
 
+### CREATE SAMPLE AND PAPER TABLES
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/gb1_samples_metadata.txt.gz`
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/VARIANTS_TABLE_SAMPLE_PAIRS.txt`
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/GB_PROCESS_SAMPLES.py`
+
+`python2.7 GB_PROCESS_SAMPLES.py gb1_samples_metadata.txt.gz VARIANTS_TABLE_SAMPLE_PAIRS.txt`
+
+
+
+
+
+
+
   
 
 
