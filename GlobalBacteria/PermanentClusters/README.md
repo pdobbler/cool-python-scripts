@@ -490,6 +490,17 @@ CREATE TABLE IF NOT EXISTS `variants` (
 
 ALTER TABLE samples_basic ADD INDEX(cl_id);
 
+```
+CREATE TABLE IF NOT EXISTS `samplevar` (
+  `id` bigint(20) unsigned NOT NULL,
+  `variant` int(10) unsigned NOT NULL,
+  `sample` int(10) unsigned NOT NULL,
+  `abundance` int(10) unsigned NOT NULL,
+  `cl_id` int(10) unsigned NOT NULL
+);
+```
+
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/VARIANTS_samplevar.txt' INTO TABLE samplevar FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
 
 
   
