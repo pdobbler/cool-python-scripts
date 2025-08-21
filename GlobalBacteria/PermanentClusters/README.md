@@ -222,7 +222,23 @@ SAMPLES_PAPERS.txt
 
 ### SAMPLES
 
-python2.7 GENERATE_SAMPLES_FASTA_GB1.py GF5_RAW_TABLE_PROCESSED_NO_SIGLENOHIT.txt GF5_SampleID_to_PermanentID.txt SAMPLES/
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/GENERATE_SAMPLES_FASTA_GB1.py`
+
+`mkdir SAMPLES`
+
+`python2.7 GENERATE_SAMPLES_FASTA_GB1.py VARIANTS_TABLE.txt.gz DATABASE_TABLES_NO_SINGLETONS/VARIANTS_TABLE_SAMPLE_PAIRS.txt SAMPLES/`
+
+```
+for file in *.fasta
+ do zip -j ${file%%.fas}.zip $file
+done
+
+for file in *.fasta 
+do
+ rm -rf $file
+done
+```
 
 #####################
 ### SERVER SET UP ###
