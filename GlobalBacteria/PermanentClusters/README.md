@@ -469,12 +469,26 @@ CREATE TABLE IF NOT EXISTS `clusters_tax` (
 ```
 
 `LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/TAXONOMY_CLUSTERS.txt' INTO TABLE clusters_tax FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
+
+```
 ALTER TABLE clusters_tax ADD INDEX(id);
 ALTER TABLE clusters_tax ADD INDEX(cluster);
 ALTER TABLE clusters_tax ADD INDEX(Species);
 ALTER TABLE clusters_tax ADD INDEX(Genus);
+```
 
+```
+CREATE TABLE IF NOT EXISTS `variants` (
+  `id` int(10) unsigned NOT NULL,
+  `cl_id` int(10) unsigned NOT NULL,
+  `hash` varchar(32) NOT NULL,
+  `sequence` TEXT NOT NULL
+);
+```
 
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/VARIANTS_variants.txt' INTO TABLE variants FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
+
+ALTER TABLE samples_basic ADD INDEX(cl_id);
 
 
 
