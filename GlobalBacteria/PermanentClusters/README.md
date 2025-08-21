@@ -211,6 +211,15 @@ SAMPLES_ADVANCED.txt
 SAMPLES_BASIC.txt
 SAMPLES_PAPERS.txt
 
+### ALL FILES NEEDED FOR DATABASE
+
+- on database server
+`mkdir /mnt/data/mysql-data/GB1_TABLES_RAW`
+`sudo chmod -R 777 /mnt/data/mysql-data/GB1_TABLES_RAW`
+
+- copy files to database server
+`scp -i /mnt/DATA1/KEYS/xxx.pem TAXONOMY_CLUSTERS.txt ubuntu@xxx.xxx.xxx.xxx:/mnt/data/mysql-data/GB1_TABLES_RAW`
+
 #####################
 ### SERVER SET UP ###
 #####################
