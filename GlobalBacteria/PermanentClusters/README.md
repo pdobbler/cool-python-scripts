@@ -502,6 +502,7 @@ CREATE TABLE IF NOT EXISTS `samplevar` (
 
 `LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/VARIANTS_samplevar.txt' INTO TABLE samplevar FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
 
+`alter table samplevar add index idx_samplevar_clid_sample_abundance (cl_id, sample, abundance);`
 
 ### Docker app
 
@@ -517,6 +518,17 @@ cd /home/ubuntu/Docker_GlobalFungi/
 docker build --network host -t fungi_test . 
 ```
 
+### Docker VOLUME
+
+mkdir /mnt/data/databases_docker
+
+docker volume create -d local-persist -o mountpoint=/mnt/data/databases_docker --name=databases
+
+docker volume inspect databases
+
+docker container create --name temp -v databases:/home/fungal/databases busybox
+
+docker run --volume databases:/home/fungal/databases -it fungi_test bash
 
 
 
