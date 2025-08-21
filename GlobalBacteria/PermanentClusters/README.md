@@ -288,6 +288,20 @@ CONTAINER ID   IMAGE
 [root]
 
 
+### FILL DATABASE
+
+CREATE TABLE IF NOT EXISTS `clusters_tax` (
+  `id` int NOT NULL PRIMARY KEY,
+  `cluster` VARCHAR(12) NOT NULL,
+  `Species` varchar(64) NOT NULL,
+  `Genus` varchar(32) NOT NULL,
+  `sim` FLOAT,
+  `cov` FLOAT,
+  `full_tax` TEXT NOT NULL,
+  `hash` varchar(32) NOT NULL
+);
+
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/TAXONOMY_CLUSTERS.txt' INTO TABLE clusters_tax FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
 
 
 
