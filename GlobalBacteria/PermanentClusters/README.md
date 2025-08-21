@@ -220,6 +220,10 @@ SAMPLES_PAPERS.txt
 - copy files to database server
 `scp -i /mnt/DATA1/KEYS/xxx.pem TAXONOMY_CLUSTERS.txt ubuntu@xxx.xxx.xxx.xxx:/mnt/data/mysql-data/GB1_TABLES_RAW`
 
+### SAMPLES
+
+python2.7 GENERATE_SAMPLES_FASTA_GB1.py GF5_RAW_TABLE_PROCESSED_NO_SIGLENOHIT.txt GF5_SampleID_to_PermanentID.txt SAMPLES/
+
 #####################
 ### SERVER SET UP ###
 #####################
@@ -452,7 +456,7 @@ CREATE TABLE IF NOT EXISTS `clusters_tax` (
 ALTER TABLE clusters_tax ADD INDEX(id);
 ALTER TABLE clusters_tax ADD INDEX(cluster);
 ALTER TABLE clusters_tax ADD INDEX(Species);
-
+ALTER TABLE clusters_tax ADD INDEX(Genus);
 
 
 
