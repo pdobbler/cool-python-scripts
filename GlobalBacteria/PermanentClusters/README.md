@@ -238,6 +238,46 @@ Check installation
 If you want to see all containers (running + stopped):
 `sudo docker ps -a`
 
+### MariaDB - MySQL
+
+# create a persistent volume
+`docker volume create mariadb_data`
+
+# run MariaDB 11 with persistence and basic init
+`docker run -d --name mariadb_ok \
+  --restart unless-stopped \
+  -p 3306:3306 \
+  -e TZ=Europe/Prague \
+  -e MARIADB_ROOT_PASSWORD='yourStrongRootPwd' \
+  -e MARIADB_DATABASE='GB1' \
+  -v mariadb_data:/var/lib/mysql \
+  mariadb:12`
+
+# watch startup
+docker logs -f mariadb_ok
+
+# RESTART MariaDB
+
+`docker ps -a`
+CONTAINER ID   IMAGE
+2d19a8877979   mariadb:11
+
+`docker stop <container-id>`
+`docker rm <container-id>`
+
+# kill all dockers
+`docker kill $(docker ps -aq)`
+`docker rm mariadb_ok`
+
+- be sure you mkdir `/mnt/data/mysql-data/GB1`
+
+# RUN DATABASE
+`docker run --mount type=bind,source=/mnt/data/mysql-data,target=/var/lib/mysql --name mariadb_ok -e MYSQL_USER=test -e MYSQL_ROOT_PASSWORD=root mariadb --tmpdir=/var/lib/mysql/GB1`
+
+# Connect from host:
+`docker exec -it mariadb_ok mariadb -u root -p`
+
+
 
 
 
