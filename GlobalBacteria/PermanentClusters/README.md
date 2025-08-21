@@ -509,6 +509,13 @@ CREATE TABLE IF NOT EXISTS `samplevar` (
 
 check Dockerfile
 
+```
+mv /home/ubuntu/FIX/* /home/ubuntu/Docker_GlobalFungi/app/
+
+cd /home/ubuntu/Docker_GlobalFungi/
+
+docker build --network host -t fungi_test . 
+```
 
 
 
