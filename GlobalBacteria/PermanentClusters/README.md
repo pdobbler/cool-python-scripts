@@ -522,14 +522,39 @@ docker build --network host -t fungi_test .
 
 mkdir /mnt/data/databases_docker
 
-docker volume create -d local-persist -o mountpoint=/mnt/data/databases_docker --name=databases
+#docker volume create -d local-persist -o mountpoint=/mnt/data/databases_docker --name=databases
+```
+docker volume create \
+  --driver local \
+  --opt type=none \
+  --opt o=bind \
+  --opt device=/mnt/data/databases_docker \
+  databases
+```
+
+`docker volume inspect databases`
 
 docker volume inspect databases
+[
+    {
+        "CreatedAt": "2025-08-21T23:10:32Z",
+        "Driver": "local",
+        "Labels": null,
+        "Mountpoint": "/var/lib/docker/volumes/databases/_data",
+        "Name": "databases",
+        "Options": {
+            "device": "/mnt/data/databases_docker",
+            "o": "bind",
+            "type": "none"
+        },
+        "Scope": "local"
+    }
+]
 
-docker container create --name temp -v databases:/home/fungal/databases busybox
+`docker container create --name temp -v databases:/home/fungal/databases busybox`
 
-docker run --volume databases:/home/fungal/databases -it fungi_test bash
-
+`docker run --volume databases:/home/fungal/databases -it fungi_test bash`
+Leave and stop the container [Ctrl-D]
 
 
 
