@@ -310,8 +310,40 @@ CONTAINER ID   IMAGE
 
 ### FILL DATABASE
 
+```
+CREATE TABLE `info` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `name` text NOT NULL,
+  `version` text NOT NULL,
+  `release` text NOT NULL,
+  `annotation_version` text NOT NULL,
+  `variants_count` int(11) NOT NULL,
+  `raw_count` int(11) NOT NULL,
+  `info` text NOT NULL,
+  `citation` text NOT NULL,
+  `date` varchar(32) NOT NULL
+);
+```
 
+ALTER TABLE taxonomy CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+SET NAMES 'utf8mb4' COLLATE 'utf8mb4_unicode_ci';
 
+```
+INSERT INTO `info` (`id`, `name`, `version`, `release`, `annotation_version`, `variants_count`, `raw_count`, `info`, `citation`, `date`) VALUES
+(1, 'GlobalBacteria', 'v1.0', '1', '2 (4.2.2020)', 30000, 100000, 'First release', 'Větrovský T., Kyselková M., Baldrian P.: GlobalBacteria, a global database of bacterial occurrences from high-throughput-sequencing metabarcoding studies.', '5.8.2025');
+```
+
+```
+CREATE TABLE `traffic` (
+  `id` int NOT NULL PRIMARY KEY,
+  `session` int(11) NOT NULL,
+  `category` varchar(32) DEFAULT NULL,
+  `value` varchar(64) DEFAULT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
+);
+```
+
+```
 CREATE TABLE IF NOT EXISTS `samples_basic` (
   `id` int NOT NULL PRIMARY KEY,
   `paper` int NOT NULL,
@@ -331,7 +363,7 @@ CREATE TABLE IF NOT EXISTS `samples_basic` (
   `ITS_total` int NOT NULL,
   `manipulated` TINYINT(1) NOT NULL
 );
-
+```
 # TRUNCATE TABLE `samples_basic`;
 
 ```
