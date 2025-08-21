@@ -377,6 +377,7 @@ CREATE TABLE IF NOT EXISTS `samples_advanced` (
 );
 ```
 
+```
 LOAD DATA INFILE '/var/lib/mysql/GB1_TABLES_RAW/SAMPLES_ADVANCED.txt'
 INTO TABLE `samples_advanced`
 FIELDS TERMINATED BY '\t'
@@ -412,9 +413,27 @@ SET
 `total_K` = NULLIF(@total_K, 'NULL'),
 `area_GPS_from` = NULLIF(@area_GPS_from, 'NULL'),
 `area_GPS_to` = NULLIF(@area_GPS_to, 'NULL');
+```
 
 ALTER TABLE samples_advanced ADD INDEX(id);
 
+```
+CREATE TABLE IF NOT EXISTS `samples_papers` (
+  `id` int NOT NULL PRIMARY KEY,
+  `add_date` VARCHAR(10) NOT NULL,
+  `year` int NOT NULL,
+  `title` TEXT NOT NULL,
+  `authors` TEXT NOT NULL,
+  `journal` VARCHAR(128) NOT NULL,
+  `doi` VARCHAR(64) NOT NULL,
+  `contact` TEXT NOT NULL,
+  `manipulated` TINYINT(1) NOT NULL
+);  
+```
+
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/SAMPLES_PAPERS.txt' INTO TABLE samples_papers FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
+
+`ALTER TABLE samples_papers ADD INDEX(id);`
 
 ```
 CREATE TABLE IF NOT EXISTS `clusters_tax` (
@@ -432,6 +451,7 @@ CREATE TABLE IF NOT EXISTS `clusters_tax` (
 `LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/TAXONOMY_CLUSTERS.txt' INTO TABLE clusters_tax FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
 ALTER TABLE clusters_tax ADD INDEX(id);
 ALTER TABLE clusters_tax ADD INDEX(cluster);
+ALTER TABLE clusters_tax ADD INDEX(Species);
 
 
 
