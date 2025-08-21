@@ -290,6 +290,35 @@ CONTAINER ID   IMAGE
 
 ### FILL DATABASE
 
+CREATE TABLE IF NOT EXISTS `samples_basic` (
+  `id` int NOT NULL PRIMARY KEY,
+  `paper` int NOT NULL,
+  `permanent_id` VARCHAR(16) NOT NULL,
+  `sample_type` VARCHAR(32) NOT NULL,
+  `latitude` float NOT NULL,
+  `longitude` float NOT NULL,
+  `continent` VARCHAR(14) NOT NULL,
+  `year_of_sampling_from` int,
+  `year_of_sampling_to` int,
+  `Biome` VARCHAR(32) NOT NULL,
+  `primers` VARCHAR(128) NOT NULL,
+  `MAT` FLOAT,
+  `MAP` FLOAT,
+  `pH` FLOAT,
+  `SOC` FLOAT,
+  `ITS_total` int NOT NULL,
+  `manipulated` TINYINT(1) NOT NULL
+);
+
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/SAMPLES_BASIC.txt' INTO TABLE samples_basic FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
+
+ALTER TABLE samples_basic ADD INDEX(id);
+
+ALTER TABLE samples_basic
+CHANGE ITS_total seqs_total INT;
+
+
+
 CREATE TABLE IF NOT EXISTS `clusters_tax` (
   `id` int NOT NULL PRIMARY KEY,
   `cluster` VARCHAR(12) NOT NULL,
