@@ -307,6 +307,10 @@ CONTAINER ID   IMAGE
 `docker exec -it mariadb_ok mariadb -u root -p`
 [root]
 
+```
+use GB1;
+SELECT * FROM  maillist LIMIT 20;
+```
 
 ### FILL DATABASE
 
