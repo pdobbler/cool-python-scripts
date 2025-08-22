@@ -591,6 +591,18 @@ cd /home/ubuntu/Docker_GlobalFungi/
 docker build --network host -t fungi_test . 
 ```
 
+test app
+`docker run --network host --mount type=bind,source=/mnt/data/databases_docker,target=/home/fungal/databases fungi_test R -e 'shiny::runApp(appDir = "/srv/shiny-server")'`
+
+Use a terminal browser
+
+```
+sudo apt-get update
+sudo apt-get install -y w3m   # or: lynx, links2
+w3m http://127.0.0.1:3838
+```
+
+
 ### Docker VOLUME
 
 mkdir /mnt/data/databases_docker
