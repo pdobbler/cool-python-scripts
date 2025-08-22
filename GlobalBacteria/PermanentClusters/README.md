@@ -613,7 +613,7 @@ Leave and stop the container [Ctrl-D]
 ### RUN THE DATABASE
 
 stop testing proadcast
-sudo systemctl stop shiny-server
+`sudo systemctl stop shiny-server`
 
 sudo apt-get update
 sudo apt-get install -y temurin-8-jdk
