@@ -542,7 +542,7 @@ CREATE TABLE IF NOT EXISTS `variants` (
 
 `LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/VARIANTS_variants.txt' INTO TABLE variants FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
 
-ALTER TABLE samples_basic ADD INDEX(cl_id);
+ALTER TABLE variants add index idx_variants_id_clid_hash INDEX(id, cl_id, hash);
 
 ```
 CREATE TABLE IF NOT EXISTS `samplevar` (
