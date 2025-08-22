@@ -561,6 +561,22 @@ CREATE TABLE IF NOT EXISTS `samplevar` (
 
 `alter table samplevar add index idx_samplevar_clid_sample_abundance (cl_id, sample, abundance);`
 
+GRANT ALL privileges ON GB1.* TO 'test'@'%';
+FLUSH PRIVILEGES;
+
+SELECT User,Host FROM mysql.user;
+REVOKE ALL PRIVILEGES, GRANT OPTION FROM 'test'@'%';
+DROP USER 'test'@'%';
+CREATE USER 'test' IDENTIFIED BY 'ubuntu';
+GRANT ALL privileges ON GB1.* TO 'test'@'%';
+FLUSH PRIVILEGES;
+
+CREATE USER 'test'@'localhost' IDENTIFIED BY 'ubuntu';
+GRANT ALL privileges ON GB1.* TO 'test'@'localhost';
+FLUSH PRIVILEGES;
+
+SHOW GRANTS FOR 'test'@'localhost';
+
 ### Docker app
 
 /home/ubuntu/Docker_GlobalFungi
