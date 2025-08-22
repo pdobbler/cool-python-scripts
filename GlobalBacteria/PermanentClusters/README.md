@@ -533,6 +533,7 @@ ALTER TABLE clusters_tax ADD INDEX(id);
 ALTER TABLE clusters_tax ADD INDEX(cluster);
 ALTER TABLE clusters_tax ADD INDEX(Species);
 ALTER TABLE clusters_tax ADD INDEX(Genus);
+CREATE INDEX idx_clusters_tax_species_id ON clusters_tax (Species, id);
 ```
 
 ```
