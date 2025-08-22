@@ -602,6 +602,9 @@ docker build --network host -t fungi_test .
 test app
 `docker run --network host --mount type=bind,source=/mnt/data/databases_docker,target=/home/fungal/databases fungi_test R -e 'shiny::runApp(appDir = "/srv/shiny-server")'`
 
+check it out
+ `sensible-browser` 
+
 Use a terminal browser
 
 ```
