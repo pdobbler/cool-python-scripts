@@ -613,6 +613,12 @@ docker volume inspect databases
 `docker run --volume databases:/home/fungal/databases -it fungi_test bash`
 Leave and stop the container [Ctrl-D]
 
+### SET THE NGINX
+
+`nginx -t`
+
+`/etc/nginx/nginx.conf`
+
 ### RUN THE DATABASE
 
 stop testing proadcast
