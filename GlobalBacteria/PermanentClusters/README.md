@@ -325,12 +325,12 @@ CREATE TABLE `info` (
 );
 ```
 
-ALTER TABLE taxonomy CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+ALTER TABLE info CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 SET NAMES 'utf8mb4' COLLATE 'utf8mb4_unicode_ci';
 
 ```
 INSERT INTO `info` (`id`, `name`, `version`, `release`, `annotation_version`, `variants_count`, `raw_count`, `info`, `citation`, `date`) VALUES
-(1, 'GlobalBacteria', 'v1.0', '1', '2 (4.2.2020)', 30000, 100000, 'First release', 'Větrovský T., Kyselková M., Baldrian P.: GlobalBacteria, a global database of bacterial occurrences from high-throughput-sequencing metabarcoding studies.', '5.8.2025');
+(1, 'GlobalBacteria', 'v1.0', '1', '2 (4.2.2020)', 51603682, 1116074647, 'First release', 'Větrovský T., Kyselková M., Baldrian P.: GlobalBacteria, a global database of bacterial occurrences from high-throughput-sequencing metabarcoding studies.', '5.8.2025');
 ```
 
 ```
