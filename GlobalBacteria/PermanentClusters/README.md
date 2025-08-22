@@ -610,6 +610,18 @@ docker volume inspect databases
 `docker run --volume databases:/home/fungal/databases -it fungi_test bash`
 Leave and stop the container [Ctrl-D]
 
+### RUN THE DATABASE
+
+stop testing proadcast
+sudo systemctl stop shiny-server
+
+sudo apt-get update
+sudo apt-get install -y temurin-8-jdk
+
+java -jar shinyproxy-2.1.0.jar -Xloggc:shinyproxy_loggc.txt -Xmx12000m &> out_shinyproxy-2.1.0_20250000_12_31_01.txt
+
+
+
 
 
 
