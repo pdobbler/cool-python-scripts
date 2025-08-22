@@ -567,7 +567,10 @@ CREATE TABLE IF NOT EXISTS `samplevar` (
 `LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/VARIANTS_samplevar.txt' INTO TABLE samplevar FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
 
 - taxa search
-`alter table samplevar add index idx_samplevar_clid_sample_abundance (cl_id, sample, abundance);`
+```
+alter table samplevar add index idx_samplevar_clid_sample_abundance (cl_id, sample, abundance);
+ALTER TABLE samplevar ADD INDEX idx_samplevar_variant_sample_abundance (variant, sample, abundance);
+```
 
 -geosearch
 `CREATE INDEX idx_samplevar_sample_clid ON samplevar (sample, cl_id);`
