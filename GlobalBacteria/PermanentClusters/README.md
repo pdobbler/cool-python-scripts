@@ -344,6 +344,26 @@ CREATE TABLE `traffic` (
 ```
 
 ```
+CREATE TABLE IF NOT EXISTS `maillist` (
+  `id` int unsigned NOT NULL auto_increment PRIMARY KEY,
+  `name` TEXT NOT NULL,
+  `email` TEXT NOT NULL,
+  `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+```
+CREATE TABLE IF NOT EXISTS `messages` (
+  `id` int unsigned NOT NULL auto_increment PRIMARY KEY,
+  `email` TEXT NOT NULL,
+  `subject` TEXT NOT NULL,
+  `message` TEXT NOT NULL,
+  `processed` boolean not null default 0,
+  `date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+```
 CREATE TABLE IF NOT EXISTS `samples_basic` (
   `id` int NOT NULL PRIMARY KEY,
   `paper` int NOT NULL,
