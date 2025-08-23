@@ -301,7 +301,7 @@ CONTAINER ID   IMAGE
 - be sure you mkdir `/mnt/data/mysql-data/GB1`
 
 # RUN DATABASE
-`docker run --mount type=bind,source=/mnt/data/mysql-data,target=/var/lib/mysql --name mariadb_ok -e MYSQL_USER=test -e MYSQL_ROOT_PASSWORD=root mariadb --tmpdir=/var/lib/mysql/GB1`
+`docker run --mount type=bind,source=/mnt/data/mysql-data,target=/var/lib/mysql --name mariadb_ok -e MARIADB_INNODB_BUFFER_POOL_SIZE=16G -e MYSQL_USER=test -e MYSQL_ROOT_PASSWORD=root mariadb --tmpdir=/var/lib/mysql/GB1`
 
 # Connect from host:
 `docker exec -it mariadb_ok mariadb -u root -p`
@@ -673,6 +673,14 @@ sudo apt-get update
 sudo apt-get install -y temurin-8-jdk
 
 java -jar shinyproxy-2.1.0.jar -Xloggc:shinyproxy_loggc.txt -Xmx12000m &> out_shinyproxy-2.1.0_20250000_12_31_01.txt
+
+
+### FIXING MySQL OVER
+
+# Basic ping / processlist
+docker exec -it mariadb_ok bash -lc 'mariadb-admin -uroot -p ping || true'
+docker exec -it mariadb_ok bash -lc 'mariadb -uroot -p -e "SHOW FULL PROCESSLIST;"'
+
 
 
 
