@@ -303,7 +303,19 @@ CONTAINER ID   IMAGE
 - be sure you mkdir `/mnt/data/mysql-data/GB1`
 
 # RUN DATABASE
-`docker run --mount type=bind,source=/mnt/data/mysql-data,target=/var/lib/mysql --name mariadb_ok -e MARIADB_INNODB_BUFFER_POOL_SIZE=16G -e MYSQL_USER=test -e MYSQL_ROOT_PASSWORD=root mariadb --tmpdir=/var/lib/mysql/GB1`
+```
+docker rm -f mariadb_ok 2>/dev/null
+
+docker run \
+  --name mariadb_ok \
+  --mount type=bind,source=/mnt/data/mysql-data,target=/var/lib/mysql \
+  -e MARIADB_ROOT_PASSWORD=root \
+  -e MYSQL_USER=test \
+  mariadb:12 \
+  --innodb-buffer-pool-size=64G \
+  --innodb-buffer-pool-instances=8 \
+  --tmpdir=/var/lib/mysql/GB1
+```
 
 # Connect from host:
 `docker exec -it mariadb_ok mariadb -u root -p`
@@ -573,9 +585,13 @@ CREATE TABLE IF NOT EXISTS `samplevar` (
 alter table samplevar add index idx_samplevar_clid_sample_abundance (cl_id, sample, abundance);
 ALTER TABLE samplevar ADD INDEX idx_samplevar_variant_sample_abundance (variant, sample, abundance);
 ```
-
 -geosearch
 `CREATE INDEX idx_samplevar_sample_clid ON samplevar (sample, cl_id);`
+
+Update stats after creating indexes
+`ANALYZE TABLE variants, samplevar, clusters_tax;`
+
+### SET APP USER
 
 GRANT ALL privileges ON GB1.* TO 'test'@'%';
 FLUSH PRIVILEGES;
@@ -688,6 +704,9 @@ docker restart crazy_jang
 # Basic ping / processlist
 docker exec -it mariadb_ok bash -lc 'mariadb-admin -uroot -p ping || true'  
 docker exec -it mariadb_ok bash -lc 'mariadb -uroot -p -e "SHOW FULL PROCESSLIST;"'
+
+Reduce “aborted connection” noise if clients are chatty/slow:
+`SET GLOBAL wait_timeout=600, net_read_timeout=120, net_write_timeout=120;`
 
 
 
