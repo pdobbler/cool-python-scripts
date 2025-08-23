@@ -291,6 +291,8 @@ docker logs -f mariadb_ok
 CONTAINER ID   IMAGE
 2d19a8877979   mariadb:11
 
+`docker container prune`  
+
 `docker stop <container-id>`
 `docker rm <container-id>`
 
@@ -677,8 +679,14 @@ java -jar shinyproxy-2.1.0.jar -Xloggc:shinyproxy_loggc.txt -Xmx12000m &> out_sh
 
 ### FIXING MySQL OVER
 
+# 1) Restart DB (graceful)
+docker restart mariadb_ok
+
+# 2) Also restart the app container to reset its connection pool
+docker restart crazy_jang
+
 # Basic ping / processlist
-docker exec -it mariadb_ok bash -lc 'mariadb-admin -uroot -p ping || true'
+docker exec -it mariadb_ok bash -lc 'mariadb-admin -uroot -p ping || true'  
 docker exec -it mariadb_ok bash -lc 'mariadb -uroot -p -e "SHOW FULL PROCESSLIST;"'
 
 
