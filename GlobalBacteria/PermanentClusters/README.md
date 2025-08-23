@@ -272,7 +272,7 @@ If you want to see all containers (running + stopped):
 # create a persistent volume
 `docker volume create mariadb_data`
 
-# run MariaDB 11 with persistence and basic init
+# run MariaDB with persistence and basic init
 `docker run -d --name mariadb_ok \
   --restart unless-stopped \
   -p 3306:3306 \
