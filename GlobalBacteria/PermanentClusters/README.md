@@ -689,9 +689,11 @@ stop testing proadcast
 
 sudo apt-get update
 sudo apt-get install -y temurin-8-jdk
-
-java -jar shinyproxy-2.1.0.jar -Xloggc:shinyproxy_loggc.txt -Xmx12000m &> out_shinyproxy-2.1.0_20250000_12_31_01.txt
-
+  
+`java -jar shinyproxy-2.1.0.jar -Xloggc:shinyproxy_loggc.txt -Xmx12000m &> out_shinyproxy-2.1.0_20250000_12_31_01.txt`  
+  
+NEW!!!  
+`java -Xms1g -Xmx12g -Xlog:gc*:file=shinyproxy_gc.log:time,uptime,level,tags -jar shinyproxy-3.2.0.jar`
 
 ### FIXING MySQL OVER
 
@@ -707,6 +709,10 @@ docker exec -it mariadb_ok bash -lc 'mariadb -uroot -p -e "SHOW FULL PROCESSLIST
 
 Reduce “aborted connection” noise if clients are chatty/slow:
 `SET GLOBAL wait_timeout=600, net_read_timeout=120, net_write_timeout=120;`
+  
+Warm it up  
+```
+
 
 
 
