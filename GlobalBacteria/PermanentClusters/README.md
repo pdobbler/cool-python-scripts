@@ -787,5 +787,15 @@ server {
 }
 ```
 
+### BLAST
+
+/mnt/data/databases_docker/variants_fasta
+`sudo apt install ncbi-blast+`
+
+make database  
+`makeblastdb -in GB1_CLUSTERS.fa -parse_seqids -title "GB_1.0_cluster_seeds" -dbtype nucl`
+
+index database  
+`makembindex -input GB1_CLUSTERS.fa -iformat blastdb`
 
 
