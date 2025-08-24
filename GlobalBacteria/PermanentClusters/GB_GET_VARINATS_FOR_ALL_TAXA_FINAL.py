@@ -61,7 +61,7 @@ index = 0
 #1  `samples` MEDIUMTEXT NOT NULL,
 #2  `abundances` MEDIUMTEXT NOT NULL,
 #3  `BG` int NOT NULL,
-#7  `sequence` TEXT NOT NULL
+#4  `sequence` TEXT NOT NULL
 #);
 
 # 6c8c16ea9ff8a0964d2444f30ddb5650        5404;1835;2061  1;1;2   218777  TACAGAGGGTGCGAGCGTTGTCCGGATTTATTGGGCGTAAAGAGCGTGTAGGCGGTTCGGTAGGTCCGTTGTGAAAACTCGAGGCTCAACCTCGAGACGCCGATGGAAACCCCCGAACTAGAGTCCGGAAGAGGAGAGTGGAATTCCCGGTGTAGCGGTGAAATGCGCAGATATCGGGAAGAACACCCGTGGCTAAGGCGGCTCTCTAGTACGGTACTGACGCTGAGACGCGAAAGCGTGGGGAGCGAACAGG
@@ -73,7 +73,7 @@ for line in openfile(variants_table):
     abundances[index] = vals[2].split(';')
     if vals[3] != '-': # cluste is defined
         hash[index] = vals[0]
-        sequences[index] = vals[7]
+        sequences[index] = vals[4]
         #######################
         cl_name = sh_names[vals[3]]
         if sh_vars.has_key(cl_name):
