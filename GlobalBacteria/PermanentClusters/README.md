@@ -204,6 +204,13 @@ ABUND_TABLE_GENERA.txt
 
 `python2.7 GB_GET_VARINATS_FOR_ALL_TAXA_FINAL.py VARIANTS_TABLE.txt.gz TAXONOMY_CLUSTERS.txt VARIANTS/`
 
+output: VARIANTS/ #of annotated variants is 51603681  
+ #genera 6893  
+ #species 10446  
+ #SH 3455524  
+
+`find VARIANTS -maxdepth 1 -type f | wc -l`
+
 ### SAMPLES FASTA
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/GENERATE_SAMPLES_FASTA_GB1.py`
