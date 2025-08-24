@@ -196,7 +196,15 @@ ABUND_TABLE_CLUSTERS.txt
 ABUND_TABLE_SPECIES.txt  
 ABUND_TABLE_GENERA.txt  
 
-### SAMPLES
+### VARIANTS FASTA
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/GB_GET_VARINATS_FOR_ALL_TAXA_FINAL.py`
+
+`mkdir VARIANTS`
+
+`python2.7 GB_GET_VARINATS_FOR_ALL_TAXA_FINAL.py VARIANTS_TABLE.txt.gz TAXONOMY_CLUSTERS.txt VARIANTS/`
+
+### SAMPLES FASTA
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/GENERATE_SAMPLES_FASTA_GB1.py`
 
