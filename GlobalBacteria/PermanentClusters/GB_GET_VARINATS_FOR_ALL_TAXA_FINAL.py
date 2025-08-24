@@ -123,8 +123,8 @@ print(" #SH " + str(len(sh_vars)))
 # sh
 for name in sh_vars:
     i = 1
-    fp = gzip.open(output_dir + "SH_" + name+".fas", "wb")
-    for index in sh_vars[id]:
+    fp = gzip.open(output_dir + "GB_" + name+".fas", "wb")
+    for index in sh_vars[name]:
         for i in range(len(samples[index])):
             s = samples[index][i]
             a = abundances[index][i]
@@ -140,7 +140,7 @@ for name in sp_vars:
     if "_sp." not in name:
         i = 1
         fp = gzip.open(output_dir + "species_" + name+".fas", "wb")
-        for index in sp_vars[id]:
+        for index in sp_vars[name]:
             for i in range(len(samples[index])):
                 s = samples[index][i]
                 a = abundances[index][i]
@@ -157,7 +157,7 @@ print("Species variants were written...")
 for name in gen_vars:
     i = 1
     fp = gzip.open(output_dir + "genus_" + name+".fas", "wb")
-    for index in gen_vars[id]:
+    for index in gen_vars[name]:
         for i in range(len(samples[index])):
             s = samples[index][i]
             a = abundances[index][i]
