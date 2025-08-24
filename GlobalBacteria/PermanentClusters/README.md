@@ -196,7 +196,34 @@ ABUND_TABLE_CLUSTERS.txt
 ABUND_TABLE_SPECIES.txt  
 ABUND_TABLE_GENERA.txt  
 
+### SAMPLES
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/GENERATE_SAMPLES_FASTA_GB1.py`
+
+`mkdir SAMPLES`
+
+`python2.7 GENERATE_SAMPLES_FASTA_GB1.py VARIANTS_TABLE.txt.gz DATABASE_TABLES_NO_SINGLETONS/VARIANTS_TABLE_SAMPLE_PAIRS.txt SAMPLES/`
+
+```
+for file in *.fasta
+ do zip -j ${file%%.fas}.zip $file
+done
+
+for file in *.fasta 
+do
+ rm -rf $file
+done
+```
+
 ### CREATE SAMPLE AND PAPER TABLES
+
+count sample sequences from splited samples
+```
+for f in *.fasta.zip; do
+   sum=$(unzip -p "$f" | grep "^>" | sed -E 's/.*size=([0-9]+).*/\1/' | awk '{s+=$1} END{print s+0}')
+   echo -e "$f\t$sum"
+ done > sample_counts.txt
+```
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/gb1_samples_metadata.txt.gz`
 
@@ -220,25 +247,6 @@ SAMPLES_PAPERS.txt
 - copy files to database server
 `scp -i /mnt/DATA1/KEYS/xxx.pem TAXONOMY_CLUSTERS.txt ubuntu@xxx.xxx.xxx.xxx:/mnt/data/mysql-data/GB1_TABLES_RAW`
 
-### SAMPLES
-
-
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/GENERATE_SAMPLES_FASTA_GB1.py`
-
-`mkdir SAMPLES`
-
-`python2.7 GENERATE_SAMPLES_FASTA_GB1.py VARIANTS_TABLE.txt.gz DATABASE_TABLES_NO_SINGLETONS/VARIANTS_TABLE_SAMPLE_PAIRS.txt SAMPLES/`
-
-```
-for file in *.fasta
- do zip -j ${file%%.fas}.zip $file
-done
-
-for file in *.fasta 
-do
- rm -rf $file
-done
-```
 
 #####################
 ### SERVER SET UP ###
