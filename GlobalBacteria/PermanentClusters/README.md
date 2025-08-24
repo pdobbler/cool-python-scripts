@@ -726,14 +726,59 @@ docker exec -it mariadb_ok bash -lc 'mariadb -uroot -p -e "SHOW FULL PROCESSLIST
 Reduce “aborted connection” noise if clients are chatty/slow:
 `SET GLOBAL wait_timeout=600, net_read_timeout=120, net_write_timeout=120;`
   
-Warm it up  
+### SET APP 
+
+```
+sudo mkdir -p /var/www/globalfungi-root
+sudo tee /var/www/globalfungi-root/index.html >/dev/null <<'HTML'
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>GlobalBacteria</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>html,body{height:100%;margin:0} iframe{display:block;border:0;width:100%;height:100vh}</style>
+</head>
+<body>
+  <iframe src="/app/GlobalFungi/" allow="clipboard-read; clipboard-write; fullscreen"></iframe>
+</body>
+</html>
+HTML
 ```
 
+Adjust your HTTPS server block to serve that file at /, and keep proxying everything else to ShinyProxy (8080):  
+```
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+    server_name _;
 
+    ssl_certificate     /etc/ssl/your.crt;
+    ssl_certificate_key /etc/ssl/your.key;
 
+    # exact root → serve the iframe page (URL stays "/")
+    location = / {
+        root /var/www/globalfungi-root;
+        try_files /index.html =404;
+        add_header X-Frame-Options SAMEORIGIN always;
+    }
 
-
-
+    # proxy everything else (incl. /app/*, /heartbeat/*) to ShinyProxy
+    location / {
+        proxy_pass http://127.0.0.1:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_read_timeout 600s;
+        proxy_send_timeout 600s;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_buffering off;
+    }
+}
+```
 
 
 
