@@ -741,13 +741,19 @@ sudo tee /var/www/globalfungi-root/index.html >/dev/null <<'HTML'
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
+  <meta charset="utf-8" />
   <title>GlobalBacteria</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>html,body{height:100%;margin:0} iframe{display:block;border:0;width:100%;height:100vh}</style>
 </head>
 <body>
-  <iframe src="/app/GlobalFungi/" allow="clipboard-read; clipboard-write; fullscreen"></iframe>
+  <iframe id="appframe" src="about:blank" allow="clipboard-read; clipboard-write; fullscreen"></iframe>
+  <script>
+    (function () {
+      var qs = window.location.search || "";
+      document.getElementById("appframe").src = "/app/GlobalFungi/" + qs;
+    })();
+  </script>
 </body>
 </html>
 HTML
