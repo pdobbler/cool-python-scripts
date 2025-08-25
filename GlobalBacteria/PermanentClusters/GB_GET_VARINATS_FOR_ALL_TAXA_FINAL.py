@@ -128,7 +128,7 @@ for name in sh_vars:
         for i in range(len(samples[index])):
             s = samples[index][i]
             a = abundances[index][i]
-            fp.write(">" + hash[index] + "|SampleID_" + s + "|sh_" + name + "|marker_16S|abund_"  + a +"_total_" + str(total[s]) + "\n")
+            fp.write(">" + hash[index] + "|SampleID_" + s + "|" + name + "|marker_16S|abund_"  + a +"_total_" + str(total[s]) + "\n")
             fp.write(sequences[index] + "\n")
             i += 1
     fp.close()
