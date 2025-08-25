@@ -215,6 +215,16 @@ output: VARIANTS/ #of annotated variants is 51603681
 find VARIANTS -maxdepth 1 -type f -print0 | \
 xargs -0 -I {} scp -i /mnt/DATA1/KEYS/globalFungi.pem {} ubuntu@147.251.115.216:/mnt/data/databases_docker/variants_fasta/
 ```
+tooo many!!!  
+RUN ON SERVER DIRECTLY!!!  
+
+```
+docker run --rm \
+  -v "$PWD":/work \
+  -w /work \
+  python:2.7 \
+  python GB_GET_VARINATS_FOR_ALL_TAXA_FINAL.py VARIANTS_TABLE_CL.txt.gz TAXONOMY_CLUSTERS.txt variants_fasta/
+```
 
 ### SAMPLES FASTA
 
