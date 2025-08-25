@@ -211,6 +211,11 @@ output: VARIANTS/ #of annotated variants is 51603681
 
 `find VARIANTS -maxdepth 1 -type f | wc -l`
 
+```
+find VARIANTS -maxdepth 1 -type f -print0 | \
+xargs -0 -I {} scp -i /mnt/DATA1/KEYS/globalFungi.pem {} ubuntu@147.251.115.216:/mnt/data/databases_docker/variants_fasta/
+```
+
 ### SAMPLES FASTA
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/GENERATE_SAMPLES_FASTA_GB1.py`
