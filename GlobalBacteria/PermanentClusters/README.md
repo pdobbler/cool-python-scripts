@@ -145,20 +145,31 @@ cat blast_and_sort_command.sh | parallel --tmpdir /mnt/DATA1/tmp
 ### FIX UNFINISHED BLASTs
 
 ```
-export -f
-parallel --halt now,fail=1 '
-  f={1}; base=${f%.fas.gz}; hits=${base}_SEEDS97.txt;
+#!/usr/bin/env bash
+set -euo pipefail
+
+export LC_ALL=C
+export PATH
+
+parallel --will-cite --jobs 8 --bar --halt now,fail=1 '
+  f={1}; base=${f%.fas.gz}; hits="${base}_SEEDS97.txt";
   [[ -f "$hits" ]] || { echo "WARN: missing $hits for $f" >&2; exit 0; }
-  comm -23 <(zgrep -h "^>" "$f" | sed -E "s/^>//; s/[ \t].*$//" | sort -u) \
-           <(awk -F"\t" "{print \$1}" "$hits" | sort -u) \
-  | awk -v F="$f" '"'"'
-      NR==FNR {want[$0]=1; next}
-      /^>/ { split(substr($0,2), a, /[ \t]/); id=a[1]; printseq=(id in want) }
-      { if (printseq) print }
-    '"'"' - <(zcat "$f") > {1/.}.nohits.fa
+
+  zgrep -h "^>" "$f" | sed -E "s/^>//; s/[ \t].*$//" | sort -u > "${base}.ids"
+  awk -F"\t" "{print \$1}" "$hits" | sort -u > "${base}.hit"
+  comm -23 "${base}.ids" "${base}.hit" > "${base}.nohit_ids"
+
+  awk '"'"'NR==FNR {want[$1]=1; next}
+       /^>/ {id=substr($0,2); sub(/[ \t].*/,"",id); printseq = (id in want)}
+       { if (printseq) print }'"'"' \
+      "${base}.nohit_ids" <(zcat "$f") > "${base}.nohits.fa"
+
+  rm -f "${base}.ids" "${base}.hit" "${base}.nohit_ids"
 ' ::: *.fas.gz
 
-cat *.nohits.fa > NO_HITS.fa
+# Merge per-file results
+: > NO_HITS.fa
+cat *.nohits.fa >> NO_HITS.fa
 rm -f *.nohits.fa
 ```
 
