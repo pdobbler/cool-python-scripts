@@ -142,6 +142,25 @@ export TMPDIR=/mnt/DATA1/tmp
 cat blast_and_sort_command.sh | parallel --tmpdir /mnt/DATA1/tmp
 ```
 
+### FIX UNFINISHED BLASTs
+
+```
+export -f
+parallel --halt now,fail=1 '
+  f={1}; base=${f%.fas.gz}; hits=${base}_SEEDS97.txt;
+  [[ -f "$hits" ]] || { echo "WARN: missing $hits for $f" >&2; exit 0; }
+  comm -23 <(zgrep -h "^>" "$f" | sed -E "s/^>//; s/[ \t].*$//" | sort -u) \
+           <(awk -F"\t" "{print \$1}" "$hits" | sort -u) \
+  | awk -v F="$f" '"'"'
+      NR==FNR {want[$0]=1; next}
+      /^>/ { split(substr($0,2), a, /[ \t]/); id=a[1]; printseq=(id in want) }
+      { if (printseq) print }
+    '"'"' - <(zcat "$f") > {1/.}.nohits.fa
+' ::: *.fas.gz
+
+cat *.nohits.fa > NO_HITS.fa
+rm -f *.nohits.fa
+```
 
 ### TAXONOMY FOR CLUSTERS
 
