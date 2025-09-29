@@ -179,13 +179,22 @@ rm -f *.nohits.fa
 ```
 for file in *.fas.gz
  do
-  echo "python2.7 pick_the_best_hit_by_cluster_and_update_cluster_name.py ${file%%.fas.gz}_SEEDS97.txt ${file} /mnt/DATA1/GLOBAL_BACTERIA/FINAL/SEEDS_97.0_WORKING_NAMES.fa.info 197.0 top ${file%%.fas.gz}_SEEDS97_top.fa"
+  echo "python2.7 pick_the_best_hit_by_cluster_and_update_cluster_name.py ${file%%.fas.gz}_SEEDS97.txt.gz ${file} /mnt/DATA1/GLOBAL_BACTERIA/FINAL/SEEDS_97.0_WORKING_NAMES.fa.info 197.0 top ${file%%.fas.gz}_SEEDS97_top.fa"
  done > filter_command.sh
 
 cat filter_command.sh | parallel 
 ```
 
+RE-BLAST ALL PASS
 
+```
+for file in *.fa.all_pass
+ do
+  echo "blastn -query ${file} -db /mnt/DATA1/GLOBAL_BACTERIA/FINAL/BINNING/SEEDS_97.0_WORKING_NAMES -out ${file%%.fa.all_pass}_100SEQ.txt -outfmt 6 -evalue 1E-5 -num_threads 1 -max_target_seqs 100"
+ done > blast_command.sh
+
+cat blast_command.sh | parallel 
+```
 
 ### TAXONOMY FOR CLUSTERS
 
