@@ -172,6 +172,20 @@ parallel --will-cite --jobs 8 --bar --halt now,fail=1 '
 cat *.nohits.fa >> NO_HITS.fa
 rm -f *.nohits.fa
 ```
+### GET TOP CLUSTERS HITS
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/pick_the_best_hit_by_cluster_and_update_cluster_name.py`
+
+```
+for file in *.fas.gz
+ do
+  echo "python2.7 pick_the_best_hit_by_cluster_and_update_cluster_name.py ${file%%.fas.gz}_SEEDS97.txt ${file} /mnt/DATA1/GLOBAL_BACTERIA/FINAL/SEEDS_97.0_WORKING_NAMES.fa.info 197.0 top ${file%%.fas.gz}_SEEDS97_top.fa"
+ done > filter_command.sh
+
+cat filter_command.sh | parallel 
+```
+
+
 
 ### TAXONOMY FOR CLUSTERS
 
