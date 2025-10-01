@@ -217,6 +217,10 @@ cd ALL_PASS2
 blastn -query GB_VOL1_20250526_CLEANED_ranked_single1_SEEDS97_top_SEEDS97_top_final.fa -db /mnt/DATA1/GLOBAL_BACTERIA/FINAL/BINNING/SEEDS_97.0_WORKING_NAMES -out GB_VOL1_20250526_CLEANED_ranked_single1_SEEDS97_top_SEEDS97_top_final_1000SEQ.txt -outfmt 6 -evalue 1E-5 -num_threads 128 -max_target_seqs 1000
 ```
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/pick_the_best_hit_by_cluster_and_update_cluster_name.py`
+
+`python2.7 pick_the_best_hit_by_cluster_and_update_cluster_name.py GB_VOL1_20250526_CLEANED_ranked_single1_SEEDS97_top_SEEDS97_top_final_1000SEQ.txt GB_VOL1_20250526_CLEANED_ranked_single1_SEEDS97_top_SEEDS97_top_final.fa /mnt/DATA1/GLOBAL_BACTERIA/FINAL/SEEDS_97.0_WORKING_NAMES.fa.info 197.0 top GB_VOL1_20250526_CLEANED_ranked_single1_SEEDS97_top_SEEDS97_top_reblast1000.fa`
+
 ### TAXONOMY FOR CLUSTERS
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/get_taxonomy_for_clusters.py`
