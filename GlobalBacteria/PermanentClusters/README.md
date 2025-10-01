@@ -210,7 +210,7 @@ cat filter_command.sh | parallel
 ```
 mkdir ALL_PASS2
 
-cat *_reblast100.fa.all_pass > GB_VOL1_20250526_CLEANED_ranked_single1_SEEDS97_top_SEEDS97_top_final.fa
+cat *_reblast100.fa.all_pass > ALL_PASS2/GB_VOL1_20250526_CLEANED_ranked_single1_SEEDS97_top_SEEDS97_top_final.fa
 
 cd ALL_PASS2
 
