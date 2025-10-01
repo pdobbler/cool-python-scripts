@@ -196,6 +196,18 @@ for file in *.fa.all_pass
 cat blast_command.sh | parallel 
 ```
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/pick_the_best_hit_by_cluster_and_update_cluster_name.py`
+
+```
+for file in *.fa.all_pass
+ do
+  echo "python2.7 pick_the_best_hit_by_cluster_and_update_cluster_name.py ${file%%.fa.all_pass}_100SEQ.txt ${file} /mnt/DATA1/GLOBAL_BACTERIA/FINAL/SEEDS_97.0_WORKING_NAMES.fa.info 197.0 top ${file%%.fa.all_pass}_SEEDS97_top_reblast100.fa"
+ done > filter_command.sh
+
+cat filter_command.sh | parallel 
+```
+
+
 ### TAXONOMY FOR CLUSTERS
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/get_taxonomy_for_clusters.py`
