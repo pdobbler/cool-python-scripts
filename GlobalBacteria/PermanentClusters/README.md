@@ -207,6 +207,15 @@ for file in *.fa.all_pass
 cat filter_command.sh | parallel 
 ```
 
+```
+mkdir ALL_PASS2
+
+cat *_reblast100.fa.all_pass > GB_VOL1_20250526_CLEANED_ranked_single1_SEEDS97_top_SEEDS97_top_final.fa
+
+cd ALL_PASS2
+
+blastn -query GB_VOL1_20250526_CLEANED_ranked_single1_SEEDS97_top_SEEDS97_top_final.fa -db /mnt/DATA1/GLOBAL_BACTERIA/FINAL/BINNING/SEEDS_97.0_WORKING_NAMES -out GB_VOL1_20250526_CLEANED_ranked_single1_SEEDS97_top_SEEDS97_top_final_1000SEQ.txt -outfmt 6 -evalue 1E-5 -num_threads 128 -max_target_seqs 1000
+```
 
 ### TAXONOMY FOR CLUSTERS
 
