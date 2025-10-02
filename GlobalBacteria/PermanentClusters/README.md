@@ -221,6 +221,14 @@ blastn -query GB_VOL1_20250526_CLEANED_ranked_single1_SEEDS97_top_SEEDS97_top_fi
 
 `python2.7 pick_the_best_hit_by_cluster_and_update_cluster_name.py GB_VOL1_20250526_CLEANED_ranked_single1_SEEDS97_top_SEEDS97_top_final_1000SEQ.txt GB_VOL1_20250526_CLEANED_ranked_single1_SEEDS97_top_SEEDS97_top_final.fa /mnt/DATA1/GLOBAL_BACTERIA/FINAL/SEEDS_97.0_WORKING_NAMES.fa.info 197.0 top GB_VOL1_20250526_CLEANED_ranked_single1_SEEDS97_top_SEEDS97_top_reblast1000.fa`
 
+FINAL RENAME 
+
+```
+zcat GB_VOL1_20250526_CLEANED_ranked_single4_SEEDS97_top_SEEDS97_top_reblast1000.fa.gz \
+  | sed '/^>/ s/_all_pass/_ok/' \
+  | gzip > GB_VOL1_20250526_CLEANED_ranked_single4_SEEDS97_top_SEEDS97_top_reblast1000_fixed.fa.gz
+```
+
 ### TAXONOMY FOR CLUSTERS
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/get_taxonomy_for_clusters.py`
