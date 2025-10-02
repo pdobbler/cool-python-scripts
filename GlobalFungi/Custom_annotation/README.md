@@ -61,3 +61,10 @@ cat blast_and_sort_command.sh | parallel --tmpdir /mnt/DATA1/tmp
 
 `python2.7 GET_TABLE_FROM_PROCESSEDBL_AND_DEREPFILES.py NAKI_castleparks_vlk_corrected_derep.map NAKI_castleparks_clean_UNITE10_PROCESSED.txt NAKI_OTU_TAB_s98_5_c95.txt 98.5 95.0`
 
+### MAKE OTUTABLE FROM PROCESSED BLAST of UNIQUE variants and EXTRACTED ITS2
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/Custom_annotation/GET_TABLE_FROM_PROCESSEDBL_AND_EXTRACTED_ITS_SEQS.py`
+
+`python2.7 GET_TABLE_FROM_PROCESSEDBL_AND_EXTRACTED_ITS_SEQS.py GSSP_CLEANED_EXTRACTED_ITS2.fasta.gz GSSP_CLEANED_EXTRACTED_ITS2_uniq_UNITE10ECO_PROCESSED.txt GSSP_SH_TABLE_98_5sim_98cov.txt 98.5 98.0`
+
+
