@@ -71,7 +71,10 @@ for line in openfile(extracted_fasta):
                 sh_name = variant_tax[gname]
                 if sh_samples.has_key(sh_name):
                     samples = sh_samples[sh_name]
-                    samples[sample] += 1
+                    if samples.has_key(sample):
+                        samples[sample] += 1
+                    else:
+                        samples[sample] = 1
                     sh_samples[sh_name] = samples
                 else:
                     samples = {}
