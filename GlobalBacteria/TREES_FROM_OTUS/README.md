@@ -13,5 +13,7 @@ iqtree2 -s otus_0.1_threshold_aligned_precise.fasta \
         -m MFP \
         -B 1000 \
         -alrt 1000 \
-        -T AUTO
+        -T AUTO \
+        --test-composition
+
 ```
