@@ -25,3 +25,11 @@ Analyzing sequences: done in 0.0248304 secs using 2.949e+04% CPU
 
 
 `mafft --thread 250 --maxiterate 1000 --globalpair otus_0.1_threshold_GOOD_composition.fas > otus_0.1_threshold_GOOD_composition_aligned_precise.fasta`
+
+```
+iqtree2 -s otus_0.1_threshold_GOOD_composition_aligned_precise.fasta \
+        -m MFP \
+        -B 1000 \
+        -alrt 1000 \
+        -T AUTO
+```
