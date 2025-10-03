@@ -246,9 +246,18 @@ process clusters and set version
 
 ### CREATE VARIANTS TABLE
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/create_variants_table_sample_pairs.py`
+# `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/create_variants_table_sample_pairs.py`
+# `python2.7 create_variants_table_sample_pairs.py GB_VOL1_20250526_CLEANED.fa.gz CLUSTERED_VARS_RANDOM_10000.fa SEEDS_97.0_WORKING_NAMES.fa.info`
 
-`python2.7 create_variants_table_sample_pairs.py GB_VOL1_20250526_CLEANED.fa.gz CLUSTERED_VARS_RANDOM_10000.fa SEEDS_97.0_WORKING_NAMES.fa.info`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/rename_clusters.py`
+
+`python2.7 rename_clusters.py /mnt/DATA1/GLOBAL_BACTERIA/FINAL/SEEDS_97.0_WORKING_NAMES.fa.info GB_VOL1_20250526_CLEANED_ranked_multi_CLUSTERED.gz GB_VOL1_20250526_CLEANED_ranked_multi_CLUSTERED_RENAMED`
+
+`cat GB_VOL1_20250526_CLEANED_ranked_multi_CLUSTERED_RENAMED.gz BINNING2/*_top_FINAL.fa.gz > GB_VOL1_20250526_CLEANED_ranked_ALL_CLUSTERED_RENAMED.gz`
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/create_variants_table_sample_pairs_for_renamed.py`
+
+`python2.7 create_variants_table_sample_pairs_for_renamed.py GB_VOL1_20250526_CLEANED.fa.gz GB_VOL1_20250526_CLEANED_ranked_ALL_CLUSTERED_RENAMED.gz`
 
 Processed sequence variants: 373 267 631  
 Processed raw fasta from samples: 1 437 738 596  
