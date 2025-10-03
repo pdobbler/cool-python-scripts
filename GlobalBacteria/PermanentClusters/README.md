@@ -250,6 +250,12 @@ process clusters and set version
 
 `python2.7 create_variants_table_sample_pairs.py GB_VOL1_20250526_CLEANED.fa.gz CLUSTERED_VARS_RANDOM_10000.fa SEEDS_97.0_WORKING_NAMES.fa.info`
 
+Processed sequence variants: 373 267 631  
+Processed raw fasta from samples: 1 437 738 596  
+Sample pairs were saved: 18 774  
+Variants created: 373 267 631  
+  
+
 OUTPUTS:  
 VARIANTS_TABLE_CLUSTER_PAIRS.txt  
 VARIANTS_TABLE_SAMPLE_PAIRS.txt  
