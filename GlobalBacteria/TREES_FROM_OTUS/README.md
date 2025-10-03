@@ -9,9 +9,9 @@
 `conda activate phyml`
 
 ```
-phyml -i otus_0.1_threshold_aligned_precise.fasta \
-      -d nt \
-      --sms BEST \
-      -b 1000 \
-      -o tlr
+iqtree2 -s otus_0.1_threshold_aligned_precise.fasta \
+        -m MFP \
+        -B 1000 \
+        -alrt 1000 \
+        -T AUTO
 ```
