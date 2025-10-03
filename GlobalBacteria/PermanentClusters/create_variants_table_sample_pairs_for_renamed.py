@@ -135,7 +135,7 @@ for seq in vars_samples:
     samples = vars_samples[seq]
     ids_str, counts_str = samples_to_strings(samples)
     if vars_clusters.has_key(md5_var):
-        out_file.write(md5_var + '\t' + ids_str + '\t' + counts_str + '\t' + hit_numeric_key(vars_clusters[md5_var]) + '\t' + seq +'\n')
+        out_file.write(md5_var + '\t' + ids_str + '\t' + counts_str + '\t' + str(hit_numeric_key(vars_clusters[md5_var])) + '\t' + seq +'\n')
     else:
         out_file.write(md5_var + '\t' + ids_str + '\t' + counts_str + '\t' + '-' + '\t' + seq +'\n')
     i += 1
@@ -143,10 +143,3 @@ out_file.close()
 
 print("Variants created: " + str(i))
 print("DONE :)")
-            
-
-
-
-
-
-
