@@ -14,6 +14,4 @@ iqtree2 -s otus_0.1_threshold_aligned_precise.fasta \
         -B 1000 \
         -alrt 1000 \
         -T AUTO \
-        --test-composition
-
 ```
