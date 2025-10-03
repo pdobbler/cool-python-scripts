@@ -31,6 +31,21 @@ def create_sample_names(sample_occurence):
         sample_names[name] = idx    
     return sample_names
 
+def hit_numeric_key(hit):
+    """
+    Extract the main numeric ID from a hit name like 'GB00002469.1' -> 2469.
+    If multiple numeric groups are present, ignore the final version suffix.
+    """
+    import re
+    # Match GB + digits + .version
+    m = re.match(r'^[A-Z]+0*(\d+)\.\d+$', hit)
+    if m:
+        return int(m.group(1))
+    # Fallback: take first integer group
+    m = re.search(r'(\d+)', hit)
+    return int(m.group(1)) if m else 10**12
+
+
 # clustered variants
 # >GB00002469.1|6ccb96db9d81f6f110fe7cb5be5bdf5b|V_15083|S_241|P_11|r_0.143077314152|100.0
 i = 0
@@ -40,7 +55,7 @@ for line in openfile(clustered_vars, 'r'):
     if ch == '>':
         title = line[1:].strip()
         parts = title.split('|')
-        md5_var = parts[2]
+        md5_var = parts[1]
         vars_clusters[md5_var] = parts[0]
         i += 1
 
@@ -120,7 +135,7 @@ for seq in vars_samples:
     samples = vars_samples[seq]
     ids_str, counts_str = samples_to_strings(samples)
     if vars_clusters.has_key(md5_var):
-        out_file.write(md5_var + '\t' + ids_str + '\t' + counts_str + '\t' + vars_clusters[md5_var] + '\t' + seq +'\n')
+        out_file.write(md5_var + '\t' + ids_str + '\t' + counts_str + '\t' + hit_numeric_key(vars_clusters[md5_var]) + '\t' + seq +'\n')
     else:
         out_file.write(md5_var + '\t' + ids_str + '\t' + counts_str + '\t' + '-' + '\t' + seq +'\n')
     i += 1
