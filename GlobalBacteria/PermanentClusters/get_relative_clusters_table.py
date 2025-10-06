@@ -6,7 +6,7 @@ import collections
 import gzip
 import hashlib
 
-samplevar_file = sys.argv[1] # GB_VOL1_20250526_CLEANED.fa.gz
+samplevar_file = sys.argv[1] # VARIANTS_samplevar.txt.gz
 sample_pairs = sys.argv[2]   # VARIANTS_TABLE_SAMPLE_PAIRS.txt
 cl_max = int(sys.argv[3])    # 100000
 
