@@ -275,6 +275,12 @@ VARIANTS_TABLE.txt.gz
 
 `python2.7 convert_variants_table.py VARIANTS_TABLE_CL.txt.gz`
 
+### GET RELATIVE CLUSTER TABLE FOR TOP X CLUSTERS
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/get_relative_clusters_table.py`
+
+`python2.7 get_relative_clusters_table.py VARIANTS_samplevar.txt.gz VARIANTS_TABLE_SAMPLE_PAIRS.txt 100000`
+
 ### CREATE TAXONOMY TABLES
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/taxonomy_for_clusters.py`
