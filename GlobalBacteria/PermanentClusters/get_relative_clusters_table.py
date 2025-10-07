@@ -78,7 +78,7 @@ print("sample names: "+str(len(sample_list)))
 fp = open("OTUTABLE_TOP_CLUSTERS_"+str(cl_max)+".txt", 'w')
 line = "GB_CLUSTER"
 for sam_name in sample_list:
-    line += sam_name
+    line += "\t" + sam_name
 fp.write(line +'\n')
 for i in range(1, cl_max + 1):
     sample_ab = cl_samples[i]
