@@ -33,3 +33,11 @@ iqtree2 -s otus_0.1_threshold_GOOD_composition_aligned_precise.fasta \
         -alrt 1000 \
         -T AUTO
 ```
+### ROOT TREE
+
+```
+conda install -c bioconda gotree
+gotree reroot midpoint \
+  -i otus_0.1_threshold_aligned_precise.fasta.treefile \
+  -o tree_rooted_midpoint.nwk
+```
