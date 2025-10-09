@@ -35,12 +35,17 @@ def hit_numeric_key(hit):
     """
     Extract the main numeric ID from a hit name like 'GB00002469.1' -> 2469.
     If multiple numeric groups are present, ignore the final version suffix.
+    Return '-' if hit == 'NO_HIT'.
     """
     import re
+    if hit == "NO_HIT":
+        return '-'
+
     # Match GB + digits + .version
     m = re.match(r'^[A-Z]+0*(\d+)\.\d+$', hit)
     if m:
         return int(m.group(1))
+
     # Fallback: take first integer group
     m = re.search(r'(\d+)', hit)
     return int(m.group(1)) if m else 10**12
@@ -137,7 +142,8 @@ for seq in vars_samples:
     if vars_clusters.has_key(md5_var):
         out_file.write(md5_var + '\t' + ids_str + '\t' + counts_str + '\t' + str(hit_numeric_key(vars_clusters[md5_var])) + '\t' + seq +'\n')
     else:
-        out_file.write(md5_var + '\t' + ids_str + '\t' + counts_str + '\t' + '-' + '\t' + seq +'\n')
+        out_file.write(md5_var + '\t' + ids_str + '\t' + counts_str + '\t' + 'NA' + '\t' + seq +'\n')
+        print("Warning! MD5 has no cluster nor NO_HIT: "+md5_var)
     i += 1
 out_file.close()
 
