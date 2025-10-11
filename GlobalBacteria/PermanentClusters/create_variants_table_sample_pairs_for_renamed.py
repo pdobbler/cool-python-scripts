@@ -91,22 +91,15 @@ for line in openfile(raw_fasta_samples, 'r'):
                 samples = vars_samples[seq]
                 if samples.has_key(sample_name):
                     samples[sample_name] += 1
+                    sample_occurence[sample_name] += 1
                 else:
                     samples[sample_name] = 1
-                    # count occurence
-                    if sample_occurence.has_key(sample_name):
-                        sample_occurence[sample_name] += 1
-                    else:
-                        sample_occurence[sample_name] = 1
+                    sample_occurence[sample_name] = 1
                 vars_samples[seq] = samples
             else:
                 samples = {}
                 samples[sample_name] = 1
-                # count occurence
-                if sample_occurence.has_key(sample_name):
-                    sample_occurence[sample_name] += 1
-                else:
-                    sample_occurence[sample_name] = 1
+                sample_occurence[sample_name] = 1
                 vars_samples[seq] = samples
 
 print("Processed raw fasta from samples: " + str(i))
