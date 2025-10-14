@@ -39,7 +39,7 @@ def hit_numeric_key(hit):
 #GB00458257.1    1       GB_GCA_039795895.1~JBDKKW010000026.1
 #GB00132115.1    1       GB_GCA_016713305.1~JADJPK010000007.1
 
-fp = open("VARIANTS_TABLE_SAMPLE_PAIRS.txt", 'w')
+fp = open(out_table, 'w')
 i = 0
 for line in openfile(cluster_vs_gtdb16S):
     if i>0:
