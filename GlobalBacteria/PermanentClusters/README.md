@@ -735,6 +735,32 @@ ALTER TABLE samplevar ADD INDEX idx_samplevar_variant_sample_abundance (variant,
 Update stats after creating indexes
 `ANALYZE TABLE variants, samplevar, clusters_tax;`
 
+### GTDB
+
+```
+CREATE TABLE IF NOT EXISTS `gtdbcl` (
+  `id` bigint(20) unsigned NOT NULL,
+  `cl_id` int(10) unsigned NOT NULL,
+  `gtdb_acc` VARCHAR(15) NOT NULL
+);
+```
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/GB1_GTDB_CLUSTERS97sim.txt' INTO TABLE gtdbcl FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
+
+`ALTER TABLE gtdbcl ADD INDEX(cl_id);`
+
+
+```
+CREATE TABLE IF NOT EXISTS `gtdbvar` (
+  `id` bigint(20) unsigned NOT NULL,
+  `variant` int(10) unsigned NOT NULL,
+  `gtdb_acc` VARCHAR(15) NOT NULL
+);
+```
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/GB1_GTDB_CLUSTERS97sim.txt' INTO TABLE gtdbvar FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
+
+`ALTER TABLE gtdbvar ADD INDEX(variant);`
+
+  
 ### SET APP USER
 
 GRANT ALL privileges ON GB1.* TO 'test'@'%';
