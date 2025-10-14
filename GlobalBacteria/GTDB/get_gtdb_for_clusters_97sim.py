@@ -41,14 +41,19 @@ def hit_numeric_key(hit):
 
 fp = open(out_table, 'w')
 i = 0
+n = 0
 for line in openfile(cluster_vs_gtdb16S):
     if i>0:
         vals = line.rstrip().split('\t')
         cluster_id = hit_numeric_key(vals[0])
+        gtdb_set = set()
         for gtdb_acc in vals[2].split(';'):
             parts = gtdb_acc.split('~')[0].split('_')
             gtdb_id = parts[1] + '_' + parts[2]
-            fp.write(str(i) + '\t' + str(cluster_id) + '\t' +  gtdb_id + '\n')
+            gtdb_set.add(gtdb_id)
+        for gtdb_id in gtdb_set:
+            n += 1
+            fp.write(str(n) + '\t' + str(cluster_id) + '\t' +  gtdb_id + '\n')
     i += 1
 fp.close()
 
