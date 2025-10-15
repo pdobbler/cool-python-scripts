@@ -754,7 +754,7 @@ CREATE TABLE IF NOT EXISTS `gtdbvar` (
   `gtdb_acc` VARCHAR(15) NOT NULL
 );
 ```
-`LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/GB1_GTDB_CLUSTERS97sim.txt' INTO TABLE gtdbvar FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/GB1_GTDB_variants.txt' INTO TABLE gtdbvar FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
 
 ```
 -- Make sure there's a PK (helps clustering; optional AUTO_INCREMENT)
