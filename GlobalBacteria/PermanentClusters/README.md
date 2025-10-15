@@ -746,8 +746,6 @@ CREATE TABLE IF NOT EXISTS `gtdbcl` (
 ```
 `LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/GB1_GTDB_CLUSTERS97sim.txt' INTO TABLE gtdbcl FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
 
-`ALTER TABLE gtdbcl ADD INDEX(cl_id);`
-
 
 ```
 CREATE TABLE IF NOT EXISTS `gtdbvar` (
@@ -758,7 +756,20 @@ CREATE TABLE IF NOT EXISTS `gtdbvar` (
 ```
 `LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/GB1_GTDB_CLUSTERS97sim.txt' INTO TABLE gtdbvar FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
 
-`ALTER TABLE gtdbvar ADD INDEX(variant);`
+```
+-- Make sure there's a PK (helps clustering; optional AUTO_INCREMENT)
+ALTER TABLE gtdbcl  ADD PRIMARY KEY (id);
+ALTER TABLE gtdbvar ADD PRIMARY KEY (id);
+
+-- Queries: WHERE cl_id IN (...) GROUP BY gtdb_acc
+-- Good filters and covering scans:
+CREATE INDEX idx_gtdbcl_clid_acc   ON gtdbcl  (cl_id,  gtdb_acc);
+CREATE INDEX idx_gtdbcl_acc_clid   ON gtdbcl  (gtdb_acc, cl_id);
+
+-- Queries: WHERE variant IN (...) GROUP BY gtdb_acc
+CREATE INDEX idx_gtdbvar_var_acc   ON gtdbvar (variant, gtdb_acc);
+CREATE INDEX idx_gtdbvar_acc_var   ON gtdbvar (gtdb_acc, variant);
+```
 
   
 ### SET APP USER
