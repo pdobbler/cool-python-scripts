@@ -74,12 +74,12 @@ for sam_name in sample_names:
 
 print("sample names: "+str(len(sample_list)))
 
-fp = gzip.open("OTUTABLE_RAWTOP_CLUSTERS.txt", 'wb')
+fp = gzip.open("OTUTABLE_RAWTOP_CLUSTERS.txt.gz", 'wb')
 line = "GB_CLUSTER"
 for sam_name in sample_list:
     line += "\t" + sam_name
 fp.write(line +'\n')
-for i in len(cl_samples):
+for i in range(1, len(cl_samples) + 1):
     sample_ab = cl_samples[i]
     line = make_cluster_name(i)
     for sam_name in sample_list:
