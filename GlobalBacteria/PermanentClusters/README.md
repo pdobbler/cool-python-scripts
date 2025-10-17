@@ -281,6 +281,12 @@ VARIANTS_TABLE.txt.gz
 
 `python2.7 get_relative_clusters_table.py VARIANTS_samplevar.txt.gz VARIANTS_TABLE_SAMPLE_PAIRS.txt 100000`
 
+### GET CLUSTER TABLE (CLASSICAL OTU TABLE)
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/get_otu_clusters_table.py`
+
+`python2.7 get_otu_clusters_table.py VARIANTS_samplevar.txt.gz VARIANTS_TABLE_SAMPLE_PAIRS.txt`
+
 ### CREATE TAXONOMY TABLES
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/taxonomy_for_clusters.py`
