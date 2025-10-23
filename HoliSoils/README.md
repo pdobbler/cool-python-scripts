@@ -38,7 +38,6 @@ specs:
     container-cmd: ["/usr/bin/shiny-server.sh"]
     # separate name of volume:
     container-volumes: ["holisoils_databases:/home/fungal/databases"]
-
 spring:
     servlet:
       multipart:
