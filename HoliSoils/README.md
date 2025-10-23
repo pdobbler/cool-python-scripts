@@ -10,6 +10,12 @@
 
 `python get_subsampled_FASTA_FOR_GB.py 10000 GB1_samples_holisoils.fa.gz GB1_samples_holisoils_min10k_max10k.fa GB1_samples_holisoils_discarded_10k.txt 10000`
 
+### GENERATE Chao1 Richness and Phylum breakdown table
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/HoliSoils/convert_variants_table_fungi.py`
+
+`python2.7 get_otutab_from_seqs_and_vartable.py VARIANTS_variants_holisoils.txt.gz GB1_samples_holisoils_min10k_max10k.fa.gz Chao1_Rich_Phylum_TAB_GB1_10k_samples.txt TAXONOMY_CLUSTERS_holisoil.txt`  
+
 ### ESTABLISH APP ON EXISTING SERVER
 
 ```
