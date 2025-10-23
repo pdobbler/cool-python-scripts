@@ -9,3 +9,40 @@
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/clustering_usearch/get_subsampled_FASTA_FOR_GB.py`
 
 `python get_subsampled_FASTA_FOR_GB.py 10000 GB1_samples_holisoils.fa.gz GB1_samples_holisoils_min10k_max10k.fa GB1_samples_holisoils_discarded_10k.txt 10000`
+
+### ESTABLISH APP ON EXISTING SERVER
+
+```
+cd /home/ubuntu/Docker_holisoils
+docker build --network host -t holisoils .
+```
+
+edit 
+```
+proxy:
+  port: 8080
+  landing-page: /
+  heartbeat-rate: 10000
+  heartbeat-timeout: 60000
+  authentication: none
+  hide-navbar: true
+specs:
+  - id: GlobalFungi
+    display-name: GlobalAMFungi
+    container-cmd: ["/usr/bin/shiny-server.sh"]
+    container-volumes: ["databases:/home/fungal/databases"]
+    container-image: fungi_test
+  - id: Holisoils
+    display-name: Holisoils
+    container-image: holisoils
+    container-cmd: ["/usr/bin/shiny-server.sh"]
+    # separate name of volume:
+    container-volumes: ["holisoils_databases:/home/fungal/databases"]
+
+spring:
+    servlet:
+      multipart:
+        max-file-size: 10000MB
+        max-request-size: 10000MB
+
+```
