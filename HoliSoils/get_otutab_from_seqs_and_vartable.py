@@ -165,26 +165,16 @@ for line in openfile(taxonomy):
     phl = get_phylum(vals[6])
     cl_phylum[cl_id] = phl
     allph.add(phl)
-    if not sp == '-':
-        if cl_sp_ph.has_key(cl_id):
-            phl_sp = cl_sp_ph[cl_id]
-            if phl_sp.has_key(sp):
-                phl_sp[sp] += 1
-            else:
-                phl_sp[sp] = 1
-            cl_sp_ph[cl_id] = phl_sp
-        else:
-            phl_sp = {}
-            phl_sp[sp] = 1
-            cl_sp_ph[cl_id] = phl_sp
+    if sp == '-':
+        cl_sp_ph[cl_id] = 0
+    else:
+        cl_sp_ph[cl_id] = 1
 
 phylum_list = []
 for phl in allph:
     phylum_list.append(phl)
 
 print("taxonomy loaded... "+str(len(allph)))
-
-
 
 phylum_counts = {}
 for sample_name in samples_taxa:
@@ -200,9 +190,10 @@ for sample_name in samples_taxa:
             else:
                 phl_abbund[phl] = taxa_abbund[cl_id]
             # sp counts
-            if cl_sp_ph.has_key(cl_id):
-                phl_sp = cl_sp_ph[cl_id]
-                phl_spp[phl] = len(phl_sp)
+            if phl_spp.has_key(phl):
+                phl_spp[phl] += cl_sp_ph[cl_id]
+            else:
+                phl_spp[phl] = cl_sp_ph[cl_id]
     # get phylum abbund
     line = ""
     for phl in phylum_list:
