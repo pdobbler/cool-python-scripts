@@ -12,7 +12,7 @@
 
 ### GENERATE Chao1 Richness and Phylum breakdown table
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/HoliSoils/convert_variants_table_fungi.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/HoliSoils/get_otutab_from_seqs_and_vartable.py`
 
 `python2.7 get_otutab_from_seqs_and_vartable.py VARIANTS_variants_holisoils.txt.gz GB1_samples_holisoils_min10k_max10k.fa.gz Chao1_Rich_Phylum_TAB_GB1_10k_samples.txt TAXONOMY_CLUSTERS_holisoil.txt`  
 
