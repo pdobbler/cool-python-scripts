@@ -54,6 +54,14 @@ spring:
 
 ### TABLE PREPARATION
 
+- get subsaples papers
+
+```
+zcat SAMPLES_PAPERS.txt.gz \
+| awk -F'\t' 'NR==FNR { ids[$2]; next } ($1 in ids)' SAMPLES_BASIC_filtered.txt - \
+> SAMPLES_PAPERS_finalsamples.txt
+```
+
 - get subsaples samplevar data
 
 ```
