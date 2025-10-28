@@ -73,3 +73,11 @@ zcat VARIANTS_FUN_samplevar.txt.gz \
 - get varians for selected samples
 
 `awk -F'\t' '!seen[$2]++ {ids[$2]} END {for (i in ids) print i}' VARIANTS_FUN_samplevar_finalsamples.txt | awk 'NR==FNR {ids[$1]; next} $1 in ids' - <(zcat VARIANTS_FUN_variants.txt.gz) > VARIANTS_FUN_variants_finalsamples.txt`
+
+### CREATE mySQL TABLES
+
+```
+ALTER TABLE variants_bac
+ADD COLUMN marker VARCHAR(4) NOT NULL DEFAULT '16S';
+```
+
