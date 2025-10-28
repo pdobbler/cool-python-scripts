@@ -97,3 +97,8 @@ ALTER TABLE variants_bac
 ALTER TABLE variants_fun
   ADD INDEX idx_variants_hash_id_clid (hash, id, cl_id);
 ```
+
+```
+UPDATE clusters_tax_fun
+SET hash = '-';
+```
