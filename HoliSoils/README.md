@@ -81,3 +81,12 @@ ALTER TABLE variants_bac
 ADD COLUMN marker VARCHAR(4) NOT NULL DEFAULT '16S';
 ```
 
+```
+CREATE TABLE IF NOT EXISTS `variants_fun` (
+  `id` int(10) unsigned NOT NULL,
+  `cl_id` int(10) unsigned NOT NULL,
+  `hash` varchar(32) NOT NULL,
+  `sequence` TEXT NOT NULL,
+  `marker` VARCHAR(4) NOT NULL
+);
+```
