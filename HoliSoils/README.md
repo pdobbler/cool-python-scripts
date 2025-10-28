@@ -51,3 +51,17 @@ spring:
         max-request-size: 10000MB
 
 ```
+
+### TABLE PREPARATION
+
+- get subsaples samplevar data
+
+```
+zcat VARIANTS_FUN_samplevar.txt.gz \
+| awk -F'\t' 'NR==FNR { ids[$1]; next } ($3 in ids)' SAMPLES_BASIC_filtered.txt - \
+> VARIANTS_FUN_samplevar_finalsamples.txt
+```
+
+- get varians for selected samples
+
+`awk -F'\t' '!seen[$2]++ {ids[$2]} END {for (i in ids) print i}' VARIANTS_FUN_samplevar_finalsamples.txt | awk 'NR==FNR {ids[$1]; next} $1 in ids' - <(zcat VARIANTS_FUN_variants.txt.gz) > VARIANTS_FUN_variants_finalsamples.txt`
