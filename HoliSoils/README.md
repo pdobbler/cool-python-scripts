@@ -90,3 +90,10 @@ CREATE TABLE IF NOT EXISTS `variants_fun` (
   `marker` VARCHAR(4) NOT NULL
 );
 ```
+
+```
+ALTER TABLE variants_bac
+  ADD INDEX idx_variants_hash_id_clid (hash, id, cl_id);
+ALTER TABLE variants_fun
+  ADD INDEX idx_variants_hash_id_clid (hash, id, cl_id);
+```
