@@ -521,7 +521,7 @@ CREATE INDEX idx_clusters_tax_genus_id ON clusters_tax_bac (Genus, id);
 - VARIANTS
 
 ```
-CREATE TABLE IF NOT EXISTS `variants` (
+CREATE TABLE IF NOT EXISTS `variants_fun` (
   `id` int(10) unsigned NOT NULL,
   `cl_id` int(10) unsigned NOT NULL,
   `hash` varchar(32) NOT NULL,
@@ -529,12 +529,24 @@ CREATE TABLE IF NOT EXISTS `variants` (
 );
 ```
 
-`LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/VARIANTS_variants.txt' INTO TABLE variants FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/HOLISOILS/FUN_VARIANTS_variants_finalsamples.txt' INTO TABLE variants_fun FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
+
+`ALTER TABLE variants_fun ADD INDEX idx_variants_hash_id_clid (hash, id, cl_id);`
 
 ```
-ALTER TABLE variants
-  ADD INDEX idx_variants_hash_id_clid (hash, id, cl_id);
+CREATE TABLE IF NOT EXISTS `variants_bac` (
+  `id` int(10) unsigned NOT NULL,
+  `cl_id` int(10) unsigned NOT NULL,
+  `hash` varchar(32) NOT NULL,
+  `sequence` TEXT NOT NULL
+);
 ```
+
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/HOLISOILS/BAC_VARIANTS_variants_finalsamples.txt' INTO TABLE variants_bac FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
+
+`ALTER TABLE variants_bac ADD INDEX idx_variants_hash_id_clid (hash, id, cl_id);`
+
+- SAMPLEVARS
 
 ```
 CREATE TABLE IF NOT EXISTS `samplevar` (
@@ -558,3 +570,25 @@ ALTER TABLE samplevar ADD INDEX idx_samplevar_variant_sample_abundance (variant,
 
 Update stats after creating indexes
 `ANALYZE TABLE variants, samplevar, clusters_tax;`
+
+
+# kill all dockers
+`docker kill $(docker ps -aq)`
+`docker rm mariadb_ok`
+
+- be sure you mkdir `/mnt/data/mysql-data/GB1`
+
+# RUN DATABASE
+```
+docker rm -f mariadb_ok 2>/dev/null
+
+docker run \
+  --name mariadb_ok \
+  --mount type=bind,source=/mnt/data/mysql-data,target=/var/lib/mysql \
+  -e MARIADB_ROOT_PASSWORD=root \
+  -e MYSQL_USER=test \
+  mariadb:12 \
+  --innodb-buffer-pool-size=64G \
+  --innodb-buffer-pool-instances=8 \
+  --tmpdir=/var/lib/mysql/GB1
+```
