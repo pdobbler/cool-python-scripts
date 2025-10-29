@@ -539,8 +539,7 @@ CREATE TABLE IF NOT EXISTS `variants_bac` (
   `id` int(10) unsigned NOT NULL,
   `cl_id` int(10) unsigned NOT NULL,
   `hash` varchar(32) NOT NULL,
-  `sequence` TEXT NOT NULL,
-  `marker` varchar(4) NOT NULL DEFAULT '16S';
+  `sequence` TEXT NOT NULL
 );
 ```
 
@@ -548,14 +547,14 @@ CREATE TABLE IF NOT EXISTS `variants_bac` (
 
 `ALTER TABLE variants_bac ADD COLUMN marker VARCHAR(4);`
 
-
+`ALTER TABLE variants_bac MODIFY COLUMN marker VARCHAR(4) NOT NULL DEFAULT '16S';`
 
 `ALTER TABLE variants_bac ADD INDEX idx_variants_hash_id_clid (hash, id, cl_id);`
 
 - SAMPLEVARS
 
 ```
-CREATE TABLE IF NOT EXISTS `samplevar` (
+CREATE TABLE IF NOT EXISTS `samplevar_fun` (
   `id` bigint(20) unsigned NOT NULL,
   `variant` int(10) unsigned NOT NULL,
   `sample` int(10) unsigned NOT NULL,
@@ -564,18 +563,18 @@ CREATE TABLE IF NOT EXISTS `samplevar` (
 );
 ```
 
-`LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/VARIANTS_samplevar.txt' INTO TABLE samplevar FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/HOLISOILS/FUN_VARIANTS_samplevar_finalsamples.txt' INTO TABLE samplevar_fun FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
 
 - taxa search
 ```
-alter table samplevar add index idx_samplevar_clid_sample_abundance (cl_id, sample, abundance);
-ALTER TABLE samplevar ADD INDEX idx_samplevar_variant_sample_abundance (variant, sample, abundance);
+alter table samplevar_fun add index idx_samplevar_clid_sample_abundance (cl_id, sample, abundance);
+ALTER TABLE samplevar_fun ADD INDEX idx_samplevar_variant_sample_abundance (variant, sample, abundance);
 ```
 -geosearch
-`CREATE INDEX idx_samplevar_sample_clid ON samplevar (sample, cl_id);`
+`CREATE INDEX idx_samplevar_sample_clid ON samplevar_fun (sample, cl_id);`
 
 Update stats after creating indexes
-`ANALYZE TABLE variants, samplevar, clusters_tax;`
+`ANALYZE TABLE variants_fun, samplevar_fun, clusters_tax_fun, variants_bac, samplevar_bac, clusters_tax_bac;`
 
 
 # kill all dockers
