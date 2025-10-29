@@ -74,6 +74,21 @@ zcat VARIANTS_FUN_samplevar.txt.gz \
 
 `awk -F'\t' '!seen[$2]++ {ids[$2]} END {for (i in ids) print i}' VARIANTS_FUN_samplevar_finalsamples.txt | awk 'NR==FNR {ids[$1]; next} $1 in ids' - <(zcat VARIANTS_FUN_variants.txt.gz) > VARIANTS_FUN_variants_finalsamples.txt`
 
+- get taxonomy for selected variants
+
+```
+zcat GF5_UNITE10_TAXONOMY_TABLE_processed.txt.gz \
+| awk -F'\t' 'NR==FNR { ids[$2]; next } ($1 in ids)' FUN_VARIANTS_variants_finalsamples.txt - \
+> GF5_UNITE10_TAXONOMY_TABLE_finalsamples.txt
+```
+
+### PREPARE DATABASE
+
+`/home/ubuntu/mysql-data/HOLISOILS`
+`scp -i /mnt/DATA1/KEYS/FMT_2.pem FUN_* ubuntu@XXX.XXX.XXX.XXX:/home/ubuntu/mysql-data/HOLISOILS`
+
+`docker run --mount type=bind,source=/home/ubuntu/mysql-data,target=/var/lib/mysql --name mariadb_ok -e MYSQL_USER=test -e MYSQL_ROOT_PASSWORD=ubuntu mariadb`
+
 ### CREATE mySQL TABLES
 
 ```
