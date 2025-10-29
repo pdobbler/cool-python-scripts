@@ -87,7 +87,8 @@ zcat GF5_UNITE10_TAXONOMY_TABLE_processed.txt.gz \
 `/home/ubuntu/mysql-data/HOLISOILS`
 `scp -i /mnt/DATA1/KEYS/FMT_2.pem FUN_* ubuntu@XXX.XXX.XXX.XXX:/home/ubuntu/mysql-data/HOLISOILS`
 
-`docker run --mount type=bind,source=/home/ubuntu/mysql-data,target=/var/lib/mysql --name mariadb_ok -e MYSQL_USER=test -e MYSQL_ROOT_PASSWORD=ubuntu mariadb`
+`docker exec -it mariadb_ok mariadb -u root -p`
+[root]
 
 ### CREATE mySQL TABLES
 
