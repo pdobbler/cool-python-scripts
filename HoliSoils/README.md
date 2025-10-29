@@ -525,7 +525,8 @@ CREATE TABLE IF NOT EXISTS `variants_fun` (
   `id` int(10) unsigned NOT NULL,
   `cl_id` int(10) unsigned NOT NULL,
   `hash` varchar(32) NOT NULL,
-  `sequence` TEXT NOT NULL
+  `sequence` TEXT NOT NULL,
+  `marker` varchar(4) NOT NULL
 );
 ```
 
@@ -538,11 +539,16 @@ CREATE TABLE IF NOT EXISTS `variants_bac` (
   `id` int(10) unsigned NOT NULL,
   `cl_id` int(10) unsigned NOT NULL,
   `hash` varchar(32) NOT NULL,
-  `sequence` TEXT NOT NULL
+  `sequence` TEXT NOT NULL,
+  `marker` varchar(4) NOT NULL DEFAULT '16S';
 );
 ```
 
 `LOAD DATA LOCAL INFILE '/var/lib/mysql/HOLISOILS/BAC_VARIANTS_variants_finalsamples.txt' INTO TABLE variants_bac FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
+
+`ALTER TABLE variants_bac ADD COLUMN marker VARCHAR(4);`
+
+
 
 `ALTER TABLE variants_bac ADD INDEX idx_variants_hash_id_clid (hash, id, cl_id);`
 
