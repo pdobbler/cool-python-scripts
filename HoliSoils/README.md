@@ -571,7 +571,31 @@ alter table samplevar_fun add index idx_samplevar_clid_sample_abundance (cl_id, 
 ALTER TABLE samplevar_fun ADD INDEX idx_samplevar_variant_sample_abundance (variant, sample, abundance);
 ```
 -geosearch
+
 `CREATE INDEX idx_samplevar_sample_clid ON samplevar_fun (sample, cl_id);`
+
+```
+CREATE TABLE IF NOT EXISTS `samplevar_bac` (
+  `id` bigint(20) unsigned NOT NULL,
+  `variant` int(10) unsigned NOT NULL,
+  `sample` int(10) unsigned NOT NULL,
+  `abundance` int(10) unsigned NOT NULL,
+  `cl_id` int(10) unsigned NOT NULL
+);
+```
+
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/HOLISOILS/BAC_VARIANTS_samplevar_finalsamples.txt' INTO TABLE samplevar_bac FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
+
+- taxa search
+```
+alter table samplevar_bac add index idx_samplevar_clid_sample_abundance (cl_id, sample, abundance);
+ALTER TABLE samplevar_bac ADD INDEX idx_samplevar_variant_sample_abundance (variant, sample, abundance);
+```
+-geosearch
+
+`CREATE INDEX idx_samplevar_sample_clid ON samplevar_bac (sample, cl_id);`
+
+- FINAL UPDATE
 
 Update stats after creating indexes
 `ANALYZE TABLE variants_fun, samplevar_fun, clusters_tax_fun, variants_bac, samplevar_bac, clusters_tax_bac;`
