@@ -151,7 +151,7 @@ INSERT INTO `info` (`id`, `name`, `version`, `release`, `annotation_version`, `v
 
 ```
 CREATE TABLE `traffic` (
-  `id` int NOT NULL PRIMARY KEY,
+  `id` int NOT NULL AUTO_INCREMENT,
   `session` int(11) NOT NULL,
   `category` varchar(32) DEFAULT NULL,
   `value` varchar(64) DEFAULT NULL,
