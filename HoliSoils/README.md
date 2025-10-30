@@ -618,13 +618,30 @@ Update stats after creating indexes
 ```
 docker rm -f mariadb_ok 2>/dev/null
 
+# docker run --mount type=bind,source=/home/ubuntu/mysql-data,target=/var/lib/mysql --name mariadb_ok -e MYSQL_USER=test -e MYSQL_ROOT_PASSWORD=ubuntu mariadb
+
 docker run \
   --name mariadb_ok \
-  --mount type=bind,source=/mnt/data/mysql-data,target=/var/lib/mysql \
-  -e MARIADB_ROOT_PASSWORD=root \
+  --mount type=bind,source=/home/ubuntu/mysql-data,target=/var/lib/mysql \
+  -e MARIADB_ROOT_PASSWORD=ubuntu \
   -e MYSQL_USER=test \
   mariadb:12 \
   --innodb-buffer-pool-size=64G \
   --innodb-buffer-pool-instances=8 \
-  --tmpdir=/var/lib/mysql/GB1
+  --tmpdir=/home/ubuntu/mysql-data/temp
+
+# prepare host dirs with proper ownership
+sudo mkdir -p /home/ubuntu/mysql-data/tmp
+sudo chown -R 999:999 /home/ubuntu/mysql-data   # mysql user in the image is uid 999
+
+docker rm -f mariadb_ok 2>/dev/null
+
+docker run -d \
+  --name mariadb_ok \
+  -v /home/ubuntu/mysql-data:/var/lib/mysql \
+  -e MARIADB_ROOT_PASSWORD=ubuntu \
+  -e MYSQL_USER=test \
+  mariadb:12 \
+  --innodb-buffer-pool-size=64G \
+  --tmpdir=/var/lib/mysql/tmp
 ```
