@@ -90,6 +90,11 @@ zcat GF5_UNITE10_TAXONOMY_TABLE_processed.txt.gz \
 `docker exec -it mariadb_ok mariadb -u root -p`
 [root]
 
+```
+GRANT ALL privileges ON HOLISOILS.* TO 'test'@'%';
+FLUSH PRIVILEGES;
+```
+
 ### CREATE mySQL TABLES
 
 ```
