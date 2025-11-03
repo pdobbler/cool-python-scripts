@@ -665,16 +665,11 @@ proxy:
     display-name: GlobalAMFungi
     container-cmd: ["/usr/bin/shiny-server.sh"]
     container-volumes: ["databases:/home/fungal/databases"]
-    #container-volumes: ["/home/fungal/:/var/lib/docker/volumes/databases/data"]
-    #container-volumes: ["/var/lib/docker/volumes/databases/:/data"]
-    #container-cmd: ["R", "-e", 'shiny::runApp(appDir = "/srv/shiny-server")']
-    #container-image: shiny_app
     container-image: fungi_test
   - id: Holisoils
     display-name: Holisoils
     container-image: holisoils
     container-cmd: ["/usr/bin/shiny-server.sh"]
-    # separate name of volume:
     container-volumes: ["/mnt/HD2/databases:/home/fungal/databases:rw"]
 
 spring:
