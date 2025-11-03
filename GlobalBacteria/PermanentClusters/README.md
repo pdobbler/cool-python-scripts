@@ -968,4 +968,9 @@ make database
 index database  
 `makembindex -input GB1_CLUSTERS.fa -iformat blastdb`
 
+### GB CLUSTERS OVERVIEW
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/BG_clusters_overview.py`
+
+`python2.7 BG_clusters_overview.py TAXONOMY_CLUSTERS.sorted.txt ARIANTS_variants.txt.gz VARIANTS_samplevar.txt.gz SAMPLES_BASIC3.txt GB1_OVERVIEW.txt`
 
