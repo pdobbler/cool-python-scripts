@@ -645,3 +645,42 @@ docker run -d \
   --innodb-buffer-pool-size=64G \
   --tmpdir=/var/lib/mysql/tmp
 ```
+
+### Docker VOLUME
+
+```
+proxy:
+  port: 8080
+  landing-page: /
+  heartbeat-rate: 10000
+  heartbeat-timeout: 60000
+  authentication: none
+  hide-navbar: true
+  docker:
+    # internal-networking: false
+    #    url: http://localhost:2375
+    #    url: http://172.17.0.3:2375
+  specs:
+  - id: GlobalFungi
+    display-name: GlobalAMFungi
+    container-cmd: ["/usr/bin/shiny-server.sh"]
+    container-volumes: ["databases:/home/fungal/databases"]
+    #container-volumes: ["/home/fungal/:/var/lib/docker/volumes/databases/data"]
+    #container-volumes: ["/var/lib/docker/volumes/databases/:/data"]
+    #container-cmd: ["R", "-e", 'shiny::runApp(appDir = "/srv/shiny-server")']
+    #container-image: shiny_app
+    container-image: fungi_test
+  - id: Holisoils
+    display-name: Holisoils
+    container-image: holisoils
+    container-cmd: ["/usr/bin/shiny-server.sh"]
+    # separate name of volume:
+    container-volumes: ["/mnt/HD2/databases:/home/fungal/databases:rw"]
+
+spring:
+    servlet:
+      multipart:
+        max-file-size: 10000MB
+        max-request-size: 10000MB
+```
+
