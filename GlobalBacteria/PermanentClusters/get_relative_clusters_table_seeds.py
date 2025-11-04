@@ -40,11 +40,12 @@ for line in openfile(tax_file):
 # 1       7933    7b26301f5893e689b354a0a981910c02        TACGGAGGGTGCAATCGTTATTCGGATTTACTGGGCTTAAAGCGCGCGTAGGCGGCCGTTTAAGTCAGATGTGAAAGCCCGGGGCTCAACCCTGGAAGTGCATTTGATACTATTCGGCTTGAGTATGGGAGAGGGAAGTGGAATTCCTGGTGTAGAGGTGAAATTCGTAGATATCAGGAGGAACACCGGTGGCGAAGGCGACTTCCTGGACCAATACTGACGCTGAGGCGCGAAGGCGTGGGGAGCAAACAGG
 # 2       375     99a556f970834de4c7d9eda6d9a4b423        GACGA
 cl_vars = {}
-for line in openfile(tax_file):
+for line in openfile(vars_file):
     vals = line.rstrip().split('\t')
     md5 = vals[2]
     var_id = vals[0]
-    cl_vars[var_id] = cl_seeds_md5[md5]
+    if cl_seeds_md5.has_key(md5):
+        cl_vars[var_id] = cl_seeds_md5[md5]
 
 # SampleName      SampleID        occurence
 # 16349   GB01007340S     5521
