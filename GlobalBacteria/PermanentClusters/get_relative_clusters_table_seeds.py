@@ -99,7 +99,7 @@ for sam_name in sample_names:
 
 print("sample names: "+str(len(sample_list)))
 
-fp = open("OTUTABLE_TOP_CLUSTERS_"+str(cl_max)+".txt", 'w')
+fp = open("OTUTABLE_TOP_SEEDS_"+str(cl_max)+".txt", 'w')
 line = "GB_CLUSTER"
 for sam_name in sample_list:
     line += "\t" + sam_name
