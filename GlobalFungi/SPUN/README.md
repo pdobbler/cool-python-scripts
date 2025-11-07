@@ -127,6 +127,73 @@ zgrep '>' GF5_ALL_SAMPLES_AND_SPUN2_ITS2.fa.gz | wc -l
 
 `usearch -cluster_otus GF5_ALL_SAMPLES_AND_SPUN2_ITS2.fa.gz.uniq.multi -minsize 2 -otus GF5_ALL_SAMPLES_AND_SPUN2_ITS2_uniq_multi_minsize2_otus.fa -relabel Otu -uparseout GF5_ALL_SAMPLES_AND_SPUN2_ITS2_uniq_multi_minsize2_uparse.txt`
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/SPUN/PROCESS_UPARSE_v11.0.667_RESULTS.py`
+
+`python2.7 PROCESS_UPARSE_v11.0.667_RESULTS.py GF5_ALL_SAMPLES_AND_SPUN2_ITS2.fa.gz GF5_ALL_SAMPLES_AND_SPUN2_ITS2_minsize2_CLUSTERED.fa.gz GF5_ALL_SAMPLES_AND_SPUN2_ITS2.fa.gz.uniq.multi GF5_ALL_SAMPLES_AND_SPUN2_ITS2_uniq_multi_minsize2_uparse.txt.gz`
+
+- GF5_ALL_SAMPLES_AND_SPUN2_ITS2_minsize2_CLUSTERED.fa.gz
+- GF5_ALL_SAMPLES_AND_SPUN2_ITS2_minsize2_CLUSTERED.fa.gz.chimeric
+- GF5_ALL_SAMPLES_AND_SPUN2_ITS2_minsize2_CLUSTERED.fa.singletons
+
+### GET MOST ABUNDANT
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/SPUN/GET_OTUS_MOST_ABUND_SEQUNCES.py`
+
+`python2.7 GET_OTUS_MOST_ABUND_SEQUNCES.py GF5_ALL_SAMPLES_AND_SPUN2_ITS2_minsize2_CLUSTERED.fa.gz GF5_ALL_SAMPLES_AND_SPUN2_ITS2_CLUSTERED_MOST_ABUND.fa`
+
+- GF5_ALL_SAMPLES_AND_SPUN2_ITS2_CLUSTERED_MOST_ABUND.fa
+
+### BINNING SINGLETONS TO CLUSTERS
+
+```
+mkdir SPLIT
+makeblastdb -in GF5_ALL_SAMPLES_AND_SPUN2_ITS2_CLUSTERED_MOST_ABUND.fa -dbtype 'nucl' -out SPLIT/ITS2_CLUSTERS
+```
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/split_fasta_by_group_size.py`
+
+`python2.7 split_fasta_by_group_size.py GF5_ALL_SAMPLES_AND_SPUN2_ITS2_minsize2_CLUSTERED.fa.singletons 900000`
+
+```
+for file in *.fas
+do  
+ echo "blastn -query ${file} -db ITS2_CLUSTERS -out ${file%%.fas}.ITS2_CLUSTERS.txt -evalue 1E-5 -outfmt 6 -num_threads 2 -max_target_seqs 10"
+done > blast_command.sh
+
+cat blast_command.sh | parallel
+```
+
+```
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+for file in *.txt
+do  
+ echo "sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr ${file} | sort -u -k1,1 --merge > ${file%%.txt}_best.tab"
+done > sorting.sh
+
+cat sorting.sh | parallel
+```
+
+```
+cat SPLIT/*_best.tab > GF5_ALL_SAMPLES_AND_SPUN2_ITS2_SINGLETONS_BINNED_best.tab
+```
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/PROCESS_BLAST_RESULT.py`
+
+`python2.7 PROCESS_BLAST_RESULT.py GF5_ALL_SAMPLES_AND_SPUN2_ITS2_minsize2_CLUSTERED.fa.singletons.gz GF5_ALL_SAMPLES_AND_SPUN2_ITS2_SINGLETONS_BINNED_best.tab GF5_ALL_SAMPLES_AND_SPUN2_ITS2_SINGLETONS_BINNED_PROCESSED.txt ITS2`
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/SPUN/bin_fasta_to_OTU_by_processed_blast.py`
+
+`python2.7 bin_fasta_to_OTU_by_processed_blast.py GF5_ALL_SAMPLES_AND_SPUN2_ITS2_minsize2_CLUSTERED.fa.singletons.gz GF5_ALL_SAMPLES_AND_SPUN2_ITS2_SINGLETONS_BINNED_PROCESSED.txt`
+
+```
+mkdir FINAL
+cat GF5_ALL_SAMPLES_AND_SPUN2_ITS2_minsize2_CLUSTERED.fa.gz GF5_ALL_SAMPLES_AND_SPUN2_ITS2_minsize2_CLUSTERED.fa.singletons.gz.binned.gz > GF5_ALL_SAMPLES_AND_SPUN2_ITS2_CLUSTERED_AND_BNNED.fa.gz
+```
+
+
+
 
 
 
