@@ -8,3 +8,6 @@ for f in *.sra; do
     fasterq-dump --split-files "$f"
 done
 ```
+  
+`conda env list`  
+`conda activate sra_env`  
