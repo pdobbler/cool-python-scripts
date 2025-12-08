@@ -1,3 +1,5 @@
 ### PROCESS SRA
 
-`find /path/to/folder -type f -name "*.sra" -exec cp {} . \;`
+
+`mkdir SRAs`
+`find /path/to/folder -type f -name "*.sra" -exec mv {} SRAs/ \;`
