@@ -38,3 +38,17 @@ parallel --bar --keep-order '
 ' ::: $(ls *_1.fastq | sed 's/_1.fastq//')
 
 ```
+
+if joining is <90% (e.g.:70%) try to cut 300 bp to 250 bp...  
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/resize_fastq_length_GZIP.py`
+
+```
+for file in *.fastq
+do
+ sample=${file%%.fastq}
+ echo "python2.7 resize_fastq_length_GZIP.py ${file} 250_${sample}.fastq 250"
+done > cut_fastq.sh
+
+cat cut_fastq.sh | parallel
+```
