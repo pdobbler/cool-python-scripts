@@ -809,6 +809,49 @@ awk -F'\t' '($3+0 > 90) && ($4+0 < 2)' bac120_metadata.filtered_all.txt > bac120
 awk -F'\t' '!(($3+0 > 90) && ($4+0 < 2))' bac120_metadata.filtered_all.txt > bac120_metadata.filtered_qc_failed.txt
 ```
 
+a na základě udělat tuto tabulku:
+
+Seznam GB klastrů
+Počet GTDB genomů, které do něj patří a jsou z isolátů
+
+ncbi_genome_category
+```
+awk -F'\t' '{print $59}' bac120_metadata.filtered_CL97_qc_failed.txt | sort | uniq -c
+```
+
+```
+awk -F'\t' '
+  FNR==NR {
+    clusters[++n] = $0
+    need[$3] = 1
+    next
+  }
+  ($3 in need) {
+    v1[$3] = $1   # 1st col from VARIANTS
+    v2[$3] = $2   # 2nd col from VARIANTS
+  }
+  END {
+    for (i=1; i<=n; i++) {
+      split(clusters[i], f, "\t")
+      k = f[3]
+      printf "%s\t%s\t%s\n", clusters[i], (k in v1 ? v1[k] : "NA"), (k in v2 ? v2[k] : "NA")
+    }
+  }
+' CLUSTERS_AND_SEEDS.txt <(zcat VARIANTS_variants.txt.gz) \
+> CLUSTERS_AND_SEEDS.with_variants.txt
+```
+Počet GTDB genomů, které do něj patří a jsou z MAG
+Počet GTDB genomů, které do něj patří a jsou z SAG
+Počet GTDB genomů, které mají identickou sekvenci jako GB SEED sekvence a jsou z isolátů
+Počet GTDB genomů, které mají identickou sekvenci jako GB SEED sekvence a jsou z MAG
+Počet GTDB genomů, které mají identickou sekvenci jako GB SEED sekvence a jsou z SAG
+Seznam GTDB genomů, které do něj patří a jsou z isolátů
+Seznam GTDB genomů, které do něj patří a jsou z MAG
+Seznam GTDB genomů, které do něj patří a jsou z SAG
+Seznam GTDB genomů, které mají identickou sekvenci jako GB SEED sekvence a jsou z isolátů
+Seznam GTDB genomů, které mají identickou sekvenci jako GB SEED sekvence a jsou z MAG
+Seznam GTDB genomů, které mají identickou sekvenci jako GB SEED sekvence a jsou z SAG
+
 ### SET APP USER
 
 GRANT ALL privileges ON GB1.* TO 'test'@'%';
