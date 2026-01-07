@@ -783,7 +783,32 @@ CREATE INDEX idx_gtdbvar_var_acc   ON gtdbvar (variant, gtdb_acc);
 CREATE INDEX idx_gtdbvar_acc_var   ON gtdbvar (gtdb_acc, variant);
 ```
 
-  
+ADITIONAL INFO FROM GTDB
+
+```
+awk '
+  NR==FNR {a[$1]=1; next}
+  {
+    key=$1
+    sub(/^[^_]*_/, "", key)
+    if (key in a) print
+  }
+' GB1_GTDB_all_accessions.txt <(zcat bac120_metadata.tsv.gz) > bac120_metadata.filtered_all.txt
+```
+
+```
+zcat bac120_metadata.tsv.gz | tail -n +2 | cut -f1 | sed 's/^[^_]*_//' | sort -u > have.txt
+comm -23 GB1_GTDB_all_accessions.txt have.txt > missing.txt
+```
+
+checkM2 completeness  >90%
+checkM2 contamination <2%
+
+```
+awk -F'\t' '($3+0 > 90) && ($4+0 < 2)' bac120_metadata.filtered_all.txt > bac120_metadata.filtered_qc.txt
+awk -F'\t' '!(($3+0 > 90) && ($4+0 < 2))' bac120_metadata.filtered_all.txt > bac120_metadata.filtered_qc_failed.txt
+```
+
 ### SET APP USER
 
 GRANT ALL privileges ON GB1.* TO 'test'@'%';
