@@ -864,8 +864,16 @@ GCF_029946345.1 none
 2       84      GCA_035538875.1 GB00000084.1
 
 awk '
-  NR==FNR { map[$1]=$2; next }
-  { key=$3; print $0 "\t" (key in map ? map[key] : "NA") }
+  NR==FNR {
+    key = $1
+    sub(/^[^ \t]+[ \t]+/, "", $0)   # remove first column + whitespace
+    map[key] = $0
+    next
+  }
+  {
+    k = $3
+    print $0 "\t" (k in map ? map[k] : "NA")
+  }
 ' bac120_metadata.filtered_CL97_qc_type.txt GB1_GTDB_CLUSTERS97sim.with_clustername.txt \
 > GB1_GTDB_CLUSTERS97sim.with_clustername.plus_type.txt
 ```
