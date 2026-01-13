@@ -852,6 +852,24 @@ Seznam GTDB genomů, které mají identickou sekvenci jako GB SEED sekvence a js
 Seznam GTDB genomů, které mají identickou sekvenci jako GB SEED sekvence a jsou z MAG
 Seznam GTDB genomů, které mají identickou sekvenci jako GB SEED sekvence a jsou z SAG
 
+```
+Now append value from 2nd column of bac120_metadata.filtered_CL97_qc_type.txt to GB1_GTDB_CLUSTERS97sim.with_clustername.txt based match of 3rd column of GB1_GTDB_CLUSTERS97sim.with_clustername.txt and 1st of bac120_metadata.filtered_CL97_qc_type.txt, if the string for matching is missing in bac120_metadata.filtered_CL97_qc_type.txt just put there "NA"
+
+# head bac120_metadata.filtered_CL97_qc_type.txt
+GCF_034719275.1 none
+GCF_029946345.1 none
+
+# head GB1_GTDB_CLUSTERS97sim.with_clustername.txt
+1       84      GCA_035307685.1 GB00000084.1
+2       84      GCA_035538875.1 GB00000084.1
+
+awk '
+  NR==FNR { map[$1]=$2; next }
+  { key=$3; print $0 "\t" (key in map ? map[key] : "NA") }
+' bac120_metadata.filtered_CL97_qc_type.txt GB1_GTDB_CLUSTERS97sim.with_clustername.txt \
+> GB1_GTDB_CLUSTERS97sim.with_clustername.plus_type.txt
+```
+
 ### SET APP USER
 
 GRANT ALL privileges ON GB1.* TO 'test'@'%';
