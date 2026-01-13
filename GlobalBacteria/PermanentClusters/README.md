@@ -878,6 +878,30 @@ awk '
 > GB1_GTDB_CLUSTERS97sim.with_clustername.plus_type.txt
 ```
 
+```
+awk -F'\t' '
+BEGIN{OFS="\t"}
+{
+  c=$1
+  # genome type may contain spaces from $3..end → rebuild it
+  t=$3
+  for(i=4;i<=NF;i++) t=t" "$i
+
+  if(t=="derived from environmental sample") env[c]++
+  else if(t=="derived from metagenome") meta[c]++
+  else if(t=="derived from single cell") sc[c]++
+  else if(t=="NA") na[c]++
+  else if(t=="none") none[c]++
+  clusters[c]=1
+}
+END{
+  print "cluster_id","derived_env","derived_metagenome","derived_single_cell","NA","none"
+  for(c in clusters)
+    print c, env[c]+0, meta[c]+0, sc[c]+0, na[c]+0, none[c]+0
+}' GB1_GTDB_CLUSTERS97sim_genome_types.txt \
+| sort -k1,1 > GB1_GTDB_CLUSTERS97sim_genome_type_counts.tsv
+```
+
 ### SET APP USER
 
 GRANT ALL privileges ON GB1.* TO 'test'@'%';
