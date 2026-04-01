@@ -311,6 +311,10 @@ for f in *.fa.gz.SECONDARYCUT.fa.gz; do
 done
 ```
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/DATA_PROCESSING/fasta_length_counts.py`
+
+`python fasta_length_counts.py Enright_2022_ADV_joinedjoin_qm20.fa.gz -o Enright_2022_ADV_lens.txt`
+
 ### STATS
 
 parallel "zgrep '>GB' {} | awk -F '|' '{print \$1}' | sort | uniq -c | sed 's/^/{}: /'" ::: *.gz > all_sample_counts.txt
