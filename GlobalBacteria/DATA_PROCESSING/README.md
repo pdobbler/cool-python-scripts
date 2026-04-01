@@ -280,11 +280,14 @@ mm 4
 
 ```
 MOTIVE="ATTAGANACCCNNGTA"
-MISMATCHES=4
+MISMATCHES=5
 
 # Run the Python script in parallel for all .PRIMARYCUT.fa.gz files
 ls *.PRIMARYCUT.fa.gz | parallel -j $(nproc) "python2.7 find_and_cut_secondary.py {} $MOTIVE $MISMATCHES"
 ```
+### STUDIES WITH CUT PRIMERS BY PRIMERS
+
+
 
 ### STATS
 
