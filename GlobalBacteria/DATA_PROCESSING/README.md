@@ -296,6 +296,21 @@ BEGIN{FS="\n"}
 ' | sort | uniq -c | awk '{print $2 "\t" $1}' > first5nt_variant_counts.tsv
 ```
 
+```
+for f in *.fa.gz.SECONDARYCUT.fa.gz; do
+    out="${f}.last5nt.tsv"
+    zcat "$f" | \
+    awk '
+    BEGIN{FS="\n"}
+    /^>/ {next}
+    {
+        seq=toupper($0)
+        if(length(seq)>=5) print substr(seq, length(seq)-4, 5)
+    }
+    ' | sort | uniq -c | awk '{print $2 "\t" $1}' > "$out"
+done
+```
+
 ### STATS
 
 parallel "zgrep '>GB' {} | awk -F '|' '{print \$1}' | sort | uniq -c | sed 's/^/{}: /'" ::: *.gz > all_sample_counts.txt
