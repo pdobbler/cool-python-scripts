@@ -287,7 +287,14 @@ ls *.PRIMARYCUT.fa.gz | parallel -j $(nproc) "python2.7 find_and_cut_secondary.p
 ```
 ### STUDIES WITH CUT PRIMERS BY PRIMERS
 
-
+```
+zcat *.fa.gz.SECONDARYCUT.fa.gz | \
+awk '
+BEGIN{FS="\n"}
+/^>/ {next}
+{seq=toupper($0); if(length(seq)>=5) print substr(seq,1,5)}
+' | sort | uniq -c | awk '{print $2 "\t" $1}' > first5nt_variant_counts.tsv
+```
 
 ### STATS
 
