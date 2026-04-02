@@ -315,6 +315,18 @@ done
 
 `python fasta_length_counts.py Enright_2022_ADV_joinedjoin_qm20.fa.gz -o Enright_2022_ADV_lens.txt`
 
+### COUNT SRA IN FILES
+
+```
+for f in *.gz; do
+  zgrep '^>' "$f" |
+    awk -v file="$f" -F'[>.|]' '{print file "\t" $2}' |
+    sort |
+    uniq -c |
+    awk '{print $2 "\t" $3 "\t" $1}'
+done > counts.txt
+```
+
 ### STATS
 
 parallel "zgrep '>GB' {} | awk -F '|' '{print \$1}' | sort | uniq -c | sed 's/^/{}: /'" ::: *.gz > all_sample_counts.txt
