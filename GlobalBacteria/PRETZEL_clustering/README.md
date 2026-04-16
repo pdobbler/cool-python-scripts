@@ -1,7 +1,11 @@
 ### RANK AND SORT
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/generate_SV_ranks_relative_abund.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PRETZEL_clustering/score_variants.py`
 
-`python2.7 generate_SV_ranks_relative_abund.py GB_VOL1_20250526_CLEANED.fa.gz false`
+`python2.7 score_variants.py GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz`
 
-Processed sequences 2001205289 to variants 514364177 (GB_VOL1_20250526_CLEANED.fa.gz.all)
+Processed sequences 2001205289 to variants 514364177 (GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz)
+
+### CLUSTERING
+
+`/home/pretzel/ali`
