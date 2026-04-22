@@ -23,3 +23,35 @@ Max threads can be set to 'serial' for single-threaded execution or a positive i
 `/mnt/DATA1/Align/align512 GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.gz 97.0 -m 512`
 IjaClust ver 3.2
 Path: GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.gz zipped Similarity threshold: 97 Max threads: 512
+
+
+### RESULTS
+processed 
+created 87684198 clusters within 73.48h
+numberOfsequences_sum   514364177
+sumOfsizes_sum  2001205289
+
+```
+(
+echo -e "clusterName\tnumberOfsequences\tsumOfsizes"
+zgrep '^>' GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.97.clustered.gz \
+| awk -F'[|;=]' '
+{
+    cluster = substr($1, 2)
+    size = 0
+    for (i = 1; i <= NF; i++) {
+        if ($i == "size") {
+            size = $(i+1)
+            break
+        }
+    }
+    count[cluster]++
+    sum[cluster] += size
+}
+END {
+    for (c in count) {
+        print c "\t" count[c] "\t" sum[c]
+    }
+}' | sort
+) > cluster_stats.tsv
+```
