@@ -26,10 +26,11 @@ Path: GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.gz zipped S
 
 
 ### RESULTS
-processed 
-created 87684198 clusters within 73.48h
-numberOfsequences_sum   514364177
-sumOfsizes_sum  2001205289
+
+numberOfsequences_sum   514 364 177;  
+created 87684198 clusters;  
+duration 73.48h  
+(sumOfsizes_sum  2 001 205 289)  
 
 ```
 (
