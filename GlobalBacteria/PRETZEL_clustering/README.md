@@ -63,3 +63,4 @@ number of singletons
 singletons (clusters with one variant of size 1) 69 754 077  
 17 930 121 clusters with at least doubletons  
 
+`awk -F '\t' 'NR>1 {print $3}' cluster_stats.tsv | sort | uniq -c > cluster_size_info.txt`
