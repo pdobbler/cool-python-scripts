@@ -59,3 +59,5 @@ END {
 
 number of singletons  
 `awk 'NR>1 && $2==1 && $3==1 {n++} END {print n+0}' cluster_stats.tsv`
+
+singletons (clusters with one variant of size 1) 69 754 077
