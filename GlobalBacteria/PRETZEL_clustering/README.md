@@ -27,14 +27,14 @@ Path: GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.gz zipped S
 
 ### RESULTS
 
-numberOfsequences_sum   514 364 177;  
+number of variants  514 364 177;  
 created 87684198 clusters;  
 duration 73.48h  
-(sumOfsizes_sum  2 001 205 289)  
+(total sequences  2 001 205 289)  
 
 ```
 (
-echo -e "clusterName\tnumberOfsequences\tsumOfsizes"
+echo -e "clusterName\tnumberOfVariants\tnumberOfSequences"
 zgrep '^>' GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.97.clustered.gz \
 | awk -F'[|;=]' '
 {
@@ -56,3 +56,6 @@ END {
 }' | sort
 ) > cluster_stats.tsv
 ```
+
+number of singletons  
+`awk 'NR>1 && $2==1 && $3==1 {n++} END {print n+0}' cluster_stats.tsv`
