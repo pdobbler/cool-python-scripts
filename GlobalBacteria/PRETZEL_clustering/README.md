@@ -21,8 +21,9 @@ Max threads can be set to 'serial' for single-threaded execution or a positive i
 ```
 
 `/mnt/DATA1/Align/align512 GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.gz 97.0 -m 512`
-IjaClust ver 3.2
-Path: GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.gz zipped Similarity threshold: 97 Max threads: 512
+
+IjaClust ver 3.2  
+Path: GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.gz zipped Similarity threshold: 97 Max threads: 512  
 
 
 ### RESULTS
