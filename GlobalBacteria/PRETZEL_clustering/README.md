@@ -69,6 +69,8 @@ singletons (clusters with one variant of size 1) 69 754 077
 
 ### IDENTIFICATION OF CLUSTERS
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PRETZEL_clustering/select_cluster_representatives.py`
+
 ```
 python select_cluster_representatives.py \
   -i GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.97.clustered.gz \
