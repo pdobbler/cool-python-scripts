@@ -89,6 +89,4 @@ python2.7 split_fasta_by_group_size.py cluster_representatives.fa 350800
 ```
 
 
-```
-makeblastdb -in greengenes2 -dbtype 'nucl' -out greenegenes2
-```
+`makeblastdb -in Greengenes2_2024_09_backbone_taxonomy.fas -dbtype 'nucl' -out greenegenes2_2024_09`
