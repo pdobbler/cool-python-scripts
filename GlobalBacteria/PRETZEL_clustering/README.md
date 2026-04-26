@@ -90,3 +90,17 @@ python2.7 split_fasta_by_group_size.py cluster_representatives.fa 350800
 
 
 `makeblastdb -in Greengenes2_2024_09_backbone_taxonomy.fas -dbtype 'nucl' -out greenegenes2_2024_09`
+
+```
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+for file in *.fas
+do
+ echo "blastn -query ${file} -db greenegenes2_2024_09 -outfmt 6 -evalue 1E-5 -num_threads 2 -max_target_seqs 10 | sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr | sort -u -k1,1 --merge > ${file%%.fas}_best.tab"
+done > blast_and_sort_command.sh
+
+mkdir -p /mnt/DATA1/tmp
+export TMPDIR=/mnt/DATA1/tmp
+cat blast_and_sort_command.sh | parallel --tmpdir /mnt/DATA1/tmp
+```
