@@ -65,3 +65,21 @@ singletons (clusters with one variant of size 1) 69 754 077
 17 930 121 clusters with at least doubletons  
 
 `awk -F '\t' 'NR>1 {print $3}' cluster_stats.tsv | sort | uniq -c > cluster_size_info.txt`
+
+
+### IDENTIFICATION OF CLUSTERS
+
+get most abundant sequence from cluster
+
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/split_fasta_by_group_size.py`
+
+
+```
+python2.7 split_fasta_by_group_size.py xxx.fa.gz 1565100
+```
+
+
+```
+makeblastdb -in greengenes2 -dbtype 'nucl' -out greenegenes2
+```
