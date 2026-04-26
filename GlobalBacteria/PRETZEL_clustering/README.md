@@ -85,7 +85,7 @@ get most abundant sequence from cluster
 
 
 ```
-python2.7 split_fasta_by_group_size.py xxx.fa.gz 1565100
+python2.7 split_fasta_by_group_size.py cluster_representatives.fa 350800
 ```
 
 
