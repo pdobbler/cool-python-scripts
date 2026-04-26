@@ -9,6 +9,7 @@ from collections import defaultdict
 
 SIZE_RE = re.compile(r";size=(\d+)")
 CLUSTER_RE = re.compile(r"^(CL\d+)\|")
+MD5_RE = re.compile(r"^CL\d+\|([^;|]+)")
 
 
 def open_maybe_gzip(filename, mode="rt"):
@@ -41,25 +42,25 @@ def parse_fasta(filename):
             yield header, "".join(seq_lines)
 
 
-def get_cluster_and_size(header):
+def get_cluster_md5_and_size(header):
     cluster_match = CLUSTER_RE.search(header)
+    md5_match = MD5_RE.search(header)
     size_match = SIZE_RE.search(header)
 
     if cluster_match is None:
         raise ValueError(f"Could not find cluster name in header: {header}")
 
+    if md5_match is None:
+        raise ValueError(f"Could not find MD5/hash in header: {header}")
+
     if size_match is None:
         raise ValueError(f"Could not find size= in header: {header}")
 
     cluster = cluster_match.group(1)
+    md5 = md5_match.group(1)
     size = int(size_match.group(1))
 
-    return cluster, size
-
-
-def wrap_sequence(seq, width=80):
-    for i in range(0, len(seq), width):
-        yield seq[i:i + width]
+    return cluster, md5, size
 
 
 def main():
@@ -76,7 +77,7 @@ def main():
     parser.add_argument(
         "-o", "--output",
         required=True,
-        help="Output FASTA file"
+        help="Output FASTA file. Use .gz extension to write gzipped output."
     )
 
     parser.add_argument(
@@ -94,14 +95,15 @@ def main():
     clusters = defaultdict(list)
 
     for header, seq in parse_fasta(args.input):
-        cluster, size = get_cluster_and_size(header)
+        cluster, md5, size = get_cluster_md5_and_size(header)
+
         clusters[cluster].append({
-            "header": header,
             "seq": seq,
+            "md5": md5,
             "size": size
         })
 
-    with open(args.output, "w") as out:
+    with open_maybe_gzip(args.output, "wt") as out:
         for cluster in sorted(clusters):
             records = clusters[cluster]
 
@@ -115,11 +117,15 @@ def main():
 
             representative = random.choice(best_records)
 
-            new_header = f">{cluster}|total_size={total_size}|size={representative['size']}"
-            out.write(new_header + "\n")
+            new_header = (
+                f">{cluster}"
+                f"|{representative['md5']}"
+                f"|total_size={total_size}"
+                f"|representative_size={representative['size']}"
+            )
 
-            for line in wrap_sequence(representative["seq"]):
-                out.write(line + "\n")
+            out.write(new_header + "\n")
+            out.write(representative["seq"] + "\n")
 
 
 if __name__ == "__main__":
