@@ -109,5 +109,5 @@ cat blast_and_sort_command.sh | parallel --tmpdir /mnt/DATA1/tmp
 
 
 ```
-python2.7 PROCESS_BLAST_RESULT.py cluster_representatives.fa cluster_representatives_greenegenes2_2024_09_best.txt cluster_representatives_greenegenes2_2024_09_PROCESSED.txt ITS2
+python2.7 PROCESS_BLAST_RESULT.py cluster_representatives.fa cluster_representatives_greenegenes2_2024_09_best.txt cluster_representatives_greenegenes2_2024_09_PROCESSED.txt 16S
 ```
