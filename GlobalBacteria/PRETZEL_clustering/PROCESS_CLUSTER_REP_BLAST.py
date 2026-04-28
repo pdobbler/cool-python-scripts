@@ -8,7 +8,6 @@ import gzip
 fasta_file = sys.argv[1]
 blast_out6 = sys.argv[2]
 out_table = sys.argv[3]
-marker_name = sys.argv[4]
 
 #############################################
 # GZIP OPENING
@@ -65,7 +64,11 @@ for line in openfile(fasta_file):
             if slen>0:
                 if blast_info.has_key(title):
                     values = blast_info[title].split("\t")
-                    ot.write(clInfo+"\t"+values[0]+"\t"+values[1].split("|")[0]+"\t"+values[1].split("|")[1]+"\t"+str((float(values[2])/slen)*100)+"\t"+ values[3]+"\t"+ values[4]+"\t"+seq+"\n")
+                    idents = values[0].split("|")
+                    if len(idents)>1:
+                        ot.write(clInfo+"\t"+idents[0]+"\t"+idents[1]+"\t"+values[1]+"\t"+str((float(values[2])/slen)*100)+"\t"+ values[3]+"\t"+ values[4]+"\t"+seq+"\n")
+                    else:
+                        print('Error:' + blast_info[title])
                     f = f + 1
                 else:
                     ot.write(clInfo+"\tNO_HIT\tUNKNOWN\t-\t-\t-\t-\t"+seq+"\n")
