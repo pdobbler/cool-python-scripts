@@ -105,9 +105,9 @@ export TMPDIR=/mnt/DATA1/tmp
 cat blast_and_sort_command.sh | parallel --tmpdir /mnt/DATA1/tmp
 ```
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/PROCESS_BLAST_RESULT.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PRETZEL_clustering/PROCESS_CLUSTER_REP_BLAST.py`
 
 
 ```
-python2.7 PROCESS_BLAST_RESULT.py cluster_representatives.fa cluster_representatives_greenegenes2_2024_09_best.txt cluster_representatives_greenegenes2_2024_09_PROCESSED.txt 16S
+python2.7 PROCESS_CLUSTER_REP_BLAST.py cluster_representatives.fa cluster_representatives_greenegenes2_2024_09_best.txt cluster_representatives_greenegenes2_2024_09_PROCESSED.txt 16S
 ```
