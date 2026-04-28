@@ -1,6 +1,6 @@
 ### RANK AND SORT
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PRETZEL_clustering/score_variants.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/score_variants.py`
 
 `python2.7 score_variants.py GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz`
 
@@ -69,7 +69,7 @@ singletons (clusters with one variant of size 1) 69 754 077
 
 ### IDENTIFICATION OF CLUSTERS
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PRETZEL_clustering/select_cluster_representatives.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/select_cluster_representatives.py`
 
 ```
 python select_cluster_representatives.py \
@@ -105,7 +105,7 @@ export TMPDIR=/mnt/DATA1/tmp
 cat blast_and_sort_command.sh | parallel --tmpdir /mnt/DATA1/tmp
 ```
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PRETZEL_clustering/PROCESS_CLUSTER_REP_BLAST.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/PROCESS_CLUSTER_REP_BLAST.py`
 
 
 ```
