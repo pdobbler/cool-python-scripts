@@ -78,6 +78,12 @@ python select_cluster_representatives.py \
   --seed 123
 ```
 
+get SEED sequence from cluster
+
+```
+zgrep -A 1 --no-group-separator '|100.0' GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.97.clustered.gz | gzip > GB_BOTH_VOL_20260413_97_clustered_SEEDs.fa.gz
+```
+
 get most abundant sequence from cluster
 
 
