@@ -114,7 +114,7 @@ python2.7 PROCESS_CLUSTER_REP_BLAST.py cluster_representatives.fa cluster_repres
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/get_cluster_info.py`
 
 ```
-python2.7 get_cluster_info.py GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.97.clustered.gz CLUSTERS_IDENT_greenegenes2_2024_09_PROCESSED.txt GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz samples_and_studies.txt
+python2.7 get_cluster_info.py GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.97.clustered.gz CLUSTERS_IDENT_greenegenes2_2024_09_PROCESSED.txt GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz samples_and_studies.txt CLUSTERS_INFO_FINAL.txt
 ```
 
 
