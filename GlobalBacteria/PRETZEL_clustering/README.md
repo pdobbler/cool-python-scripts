@@ -69,13 +69,13 @@ singletons (clusters with one variant of size 1) 69 754 077
 
 ### IDENTIFICATION OF CLUSTERS
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/select_cluster_representatives.py`
+`# wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/select_cluster_representatives.py`
 
 ```
-python select_cluster_representatives.py \
-  -i GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.97.clustered.gz \
-  -o cluster_representatives.fa \
-  --seed 123
+# python select_cluster_representatives.py \
+#   -i GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.97.clustered.gz \
+#   -o cluster_representatives.fa \
+#   --seed 123
 ```
 
 get SEED sequence from cluster
@@ -86,14 +86,11 @@ zcat GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.97.clustered
   | grep -A 1 --no-group-separator '|100\.0$' > GB_BOTH_VOL_20260413_97_clustered_SEEDs.fa
 ```
 
-get most abundant sequence from cluster
-
-
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/PermanentClusters/split_fasta_by_group_size.py`
 
 
 ```
-python2.7 split_fasta_by_group_size.py cluster_representatives.fa 350800
+python2.7 split_fasta_by_group_size.py GB_BOTH_VOL_20260413_97_clustered_SEEDs.fa 350800
 ```
 
 
@@ -113,10 +110,14 @@ export TMPDIR=/mnt/DATA1/tmp
 cat blast_and_sort_command.sh | parallel --tmpdir /mnt/DATA1/tmp
 ```
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/PROCESS_CLUSTER_REP_BLAST.py`
+```
+awk 'BEGIN{FS=OFS="\t"} {sub(/;.*/, "", $1); print}' GB_BOTH_VOL_20260413_97_clustered_SEEDs_MISSED_COMPLETE_best.txt > SEEDs_BLAST_COMPLETE_greenegenes2_2024_09_best.txt
+```
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/PROCESS_CLUSTER_REP_BLAST_NEW.py`
 
 ```
-python2.7 PROCESS_CLUSTER_REP_BLAST.py cluster_representatives.fa cluster_representatives_greenegenes2_2024_09_best.txt cluster_representatives_greenegenes2_2024_09_PROCESSED.txt
+python2.7 PROCESS_CLUSTER_REP_BLAST_NEW.py GB_BOTH_VOL_20260413_97_clustered_SEEDs.fa.gz SEEDs_BLAST_COMPLETE_greenegenes2_2024_09_best.txt SEEDs_BLAST_COMPLETE_greenegenes2_2024_09_PROCESSED.txt
 ```
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/get_cluster_info.py`
