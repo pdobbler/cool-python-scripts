@@ -74,6 +74,7 @@ print('Rep variants loaded...')
 # >GB01020442S|An_2019_1acp_Bact|SRR5920425.11|POS=3|POS=253
 # TACAGAGGTCCCAAGCGTTGTTCGGATTTACTGGGCGTAAAGGGCGCGTAGGCGGTTTAGCAAGTTAGAGGTGAAAGGCCCGGGCTTAACCTGGGAACTGCCTTTAAGACTGCTAGGCTTGAGTTCGGAAGAGGATAGCGGAATTCCTAGTGTAGAGGTGAAATTCGTAGATATTAGGAAGAACACCAGTGGCGAAGGCGGCTATCTGGTCCGAAACTGACGCTGAAGCGCGACAGCGTGGGGAGCGAACGGG
 
+clCounts = {}
 clStats = {}
 clRepStats = {}
 titleRead = False
@@ -96,6 +97,8 @@ for line in openfile(all_seqs_fasta, 'r'):
                     clStud.add(studName)
                     clStats[clName]['samples'] = clSamp
                     clStats[clName]['studies'] = clStud
+                    # counts
+                    clCounts[clName] += 1
                 else:
                     clStats[clName] = {}
                     clSamp = set()
@@ -104,6 +107,8 @@ for line in openfile(all_seqs_fasta, 'r'):
                     clStud.add(studName)
                     clStats[clName]['samples'] = clSamp
                     clStats[clName]['studies'] = clStud
+                    # counts
+                    clCounts[clName] = 1
                 # representative
                 if clRep.has_key(seq):
                     if clRepStats.has_key(clName):
@@ -141,9 +146,9 @@ for line in openfile(processed_blast, 'r'):
     parts = line.split("\t")
     clName = parts[0]
     if i == 0:
-        fp.write(line+"\ttotalSamples\ttotalStudies\trepSamples\trepStudies\n")
+        fp.write(line+"\ttotalSeqs\ttotalSamples\ttotalStudies\trepSamples\trepStudies\n")
     else:
-        fp.write(line+"\t"+str(len(clStats[clName]['samples']))+"\t"+str(len(clStats[clName]['studies']))+str(len(clRepStats[clName]['samples']))+"\t"+str(len(clRepStats[clName]['studies']))+"\n")
+        fp.write(line+"\t"+str(clCounts[clName])+"\t"+str(len(clStats[clName]['samples']))+"\t"+str(len(clStats[clName]['studies']))+"\t"+str(len(clRepStats[clName]['samples']))+"\t"+str(len(clRepStats[clName]['studies']))+"\n")
     i = i + 1
 fp.close()
 
