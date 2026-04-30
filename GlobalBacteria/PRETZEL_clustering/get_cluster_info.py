@@ -58,12 +58,13 @@ print("Samples and study names loaded: " + str(len(sam_stud)))
 #####################
 
 # clName  md5     totSeqSize      totRepSize      HIT     TAXONOMY        SIMILARITY      COVERAGE        EVALUE  BITSCORE        SEQ
+# clName  md5     repSamples      repRelAbund_sum repSeqs HIT     TAXONOMY        SIMILARITY      COVERAGE        EVALUE  BITSCORE        SEQ
 clRep = {}
 with openfile(processed_blast, "r") as f:
     next(f)  # skip header
     for line in f:
         parts = line.strip().split("\t")
-        seq = parts[10]
+        seq = parts[11]
         clRep[seq] = parts[0]
 print('Rep variants loaded...')
 
