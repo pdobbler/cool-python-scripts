@@ -66,6 +66,13 @@ singletons (clusters with one variant of size 1) 69 754 077
 
 `awk -F '\t' 'NR>1 {print $3}' cluster_stats.tsv | sort | uniq -c > cluster_size_info.txt`
 
+### GET OTU TAB - REDUCED FORMATE
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/GET_OTUTAB_REDUCED_FORMATE.py`
+
+```
+python2.7 GET_OTUTAB_REDUCED_FORMATE.py GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.97.clustered.gz GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz
+```
 
 ### IDENTIFICATION OF CLUSTERS
 
