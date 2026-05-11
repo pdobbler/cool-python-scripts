@@ -127,10 +127,10 @@ awk 'BEGIN{FS=OFS="\t"} {sub(/;.*/, "", $1); print}' GB_BOTH_VOL_20260413_97_clu
 python2.7 PROCESS_CLUSTER_REP_BLAST_NEW.py GB_BOTH_VOL_20260413_97_clustered_SEEDs.fa.gz SEEDs_BLAST_COMPLETE_greenegenes2_2024_09_best.txt SEEDs_BLAST_COMPLETE_greenegenes2_2024_09_PROCESSED.txt
 ```
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/get_cluster_info.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/get_cluster_info_final.py`
 
 ```
-python2.7 get_cluster_info.py GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.97.clustered.gz CLUSTERS_IDENT_greenegenes2_2024_09_PROCESSED.txt GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz samples_and_studies.txt CLUSTERS_INFO_FINAL.txt
+python2.7 get_cluster_info_final.py GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.97.clustered.gz CLUSTERS_IDENT_greenegenes2_2024_09_PROCESSED.txt GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz samples_and_studies.txt CLUSTERS_INFO_FINAL.txt
 ```
 
 
