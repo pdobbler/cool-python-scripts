@@ -96,7 +96,7 @@ with openfile(processed_blast, "r") as f:
     next(f)  # skip header
     for line in f:
         parts = line.strip().split("\t")
-        seq = parts[11]
+        seq = parts[10]
         clRep[seq] = parts[0]
 print('Rep variants loaded...')
 
