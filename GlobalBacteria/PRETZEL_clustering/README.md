@@ -132,6 +132,23 @@ python2.7 PROCESS_CLUSTER_REP_BLAST_NEW.py GB_BOTH_VOL_20260413_97_clustered_SEE
 ```
 python2.7 get_cluster_info_final.py GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.97.clustered.gz CLUSTERS_IDENT_greenegenes2_2024_09_PROCESSED.txt GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz samples_and_studies.txt CLUSTERS_INFO_FINAL.txt
 ```
+### SILVA
+
+`makeblastdb -in silva_138_1_fixed_taxa_MithoChloro_FINAL_20230818.fasta -dbtype 'nucl' -out SILVA_138_1_MitoChloro`
+
+```
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+for file in *.fas
+do
+ echo "blastn -query ${file} -db SILVA_138_1_MitoChloro -outfmt 6 -evalue 1E-5 -num_threads 2 -max_target_seqs 10 | sort -t$'\t' -k1,1 -k12,12gr -k11,11g -k3,3gr | sort -u -k1,1 --merge > ${file%%.fas}_best.tab"
+done > blast_and_sort_command.sh
+
+mkdir -p /mnt/DATA1/tmp
+export TMPDIR=/mnt/DATA1/tmp
+cat blast_and_sort_command.sh | parallel --tmpdir /mnt/DATA1/tmp
+```
 
 
 
