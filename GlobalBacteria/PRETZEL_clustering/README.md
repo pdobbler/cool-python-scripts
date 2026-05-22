@@ -150,8 +150,13 @@ export TMPDIR=/mnt/DATA1/tmp
 cat blast_and_sort_command.sh | parallel --tmpdir /mnt/DATA1/tmp
 ```
 
+### VARIANTS TABLE
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/create_variants_table_and_sample_pairs.py`
 
+```
+python2.7 create_variants_table_and_sample_pairs.py GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.97.clustered.gz
+```
 
 
 
