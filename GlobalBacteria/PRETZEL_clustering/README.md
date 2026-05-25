@@ -158,6 +158,14 @@ cat blast_and_sort_command.sh | parallel --tmpdir /mnt/DATA1/tmp
 python2.7 create_variants_table_and_sample_pairs.py GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.97.clustered.gz
 ```
 
+### TAXONOMY TABLE
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/taxonomy_for_clusters_new.py`
+
+```
+python2.7 taxonomy_for_clusters_new.py CLUSTERS_INFO_TOTAL_FINAL.txt
+```
+
 
 
 
