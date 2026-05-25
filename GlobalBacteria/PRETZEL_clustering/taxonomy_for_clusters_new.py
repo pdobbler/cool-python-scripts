@@ -38,16 +38,16 @@ for line in openfile(taxonomy_ident):
             sim = float(parts[6])
             cov = float(parts[7])
             if sim + cov >= thr_g:
-                gen = taxons.split(';')[5].replace(" g__", "")
+                gen = taxons.split(';')[5].replace("g__", "")
                 if not gen == '':
                     genus = gen
                     gen_taxonomy[genus] = taxons
                 if sim + cov >= thr_s:
-                    sp = taxons.split(';')[6].replace(" s__", "")
+                    sp = taxons.split(';')[6].replace("s__", "")
                     if not sp == '':
                         species = sp
                         sp_taxonomy[species] = taxons
-        fp.write(cl + '\t' + species + '\t' + genus + '\t' + str(sim) + '\t' + str(cov) + '\t' + taxons + '\t' + md5 + '\n')
+        fp.write(cl + '\t' + species + '\t' + genus + '\t' + str(sim) + '\t' + str(cov) + '\t' + taxons.replace(";", "; ") + '\t' + md5 + '\n')
     i += 1
 fp.close()
 
@@ -56,7 +56,7 @@ print("Taxonomy loaded: " + str(i) + " - the size should be the same as clusters
 fp = open("TAXONOMY_SP_GEN.txt", 'w')
 for species in sp_taxonomy:
     taxons = sp_taxonomy[species]
-    gen = taxons.split(';')[5].replace(" g__", "")
+    gen = taxons.split(';')[5].replace("g__", "")
     if gen_taxonomy.has_key(gen):
         del gen_taxonomy[gen]
     fp.write('sp\t' + species + '\t' + taxons + '\n')
