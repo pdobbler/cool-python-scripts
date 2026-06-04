@@ -167,6 +167,19 @@ https://ftp.microbio.me/greengenes_release/current/
 python2.7 taxonomy_for_clusters_new.py CLUSTERS_INFO_TOTAL_FINAL.txt.gz 2024.09.taxonomy.id.tsv.gz
 ```
 
+### CLUSTERS - SPECIES - GENUS ABUNDANCE TABLES
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/create_taxonomy_tables.py`
+
+`python2.7 create_taxonomy_tables.py VARIANTS_TABLE.txt.gz TAXONOMY_CLUSTERS.txt`
+
+OUTPUTS:  
+ABUND_TABLE_CLUSTERS.txt  
+ABUND_TABLE_SPECIES.txt  
+ABUND_TABLE_GENERA.txt  
+
+`awk 'BEGIN{OFS="\t"} {$1=$1".2"; print}' ABUND_TABLE_CLUSTERS.txt > ABUND_TABLE_CLUSTERS_v2.txt`
+
 ### SIMPLIFY CLUSTER NAMES
 
 `zcat VARIANTS_TABLE.txt.gz | awk 'BEGIN{OFS="\t"} {sub(/^CL0*/, "", $4); print}' | gzip > VARIANTS_TABLE_CLNUM.txt.gz`
