@@ -184,6 +184,12 @@ ABUND_TABLE_GENERA.txt
 
 `zcat VARIANTS_TABLE.txt.gz | awk 'BEGIN{OFS="\t"} {sub(/^CL0*/, "", $4); print}' | gzip > VARIANTS_TABLE_CLNUM.txt.gz`
 
+### CONVERT VARIANTS TABLE
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/convert_variants_table.py`
+
+`python2.7 convert_variants_table.py VARIANTS_TABLE_CLNUM.txt.gz`
+
 
 
 
