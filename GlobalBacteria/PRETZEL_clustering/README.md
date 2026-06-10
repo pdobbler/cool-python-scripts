@@ -191,6 +191,51 @@ ABUND_TABLE_GENERA.txt
 `python2.7 convert_variants_table.py VARIANTS_TABLE_CLNUM.txt.gz`
 
 
+### BINNING NEW SEQUENCES
+
+sample names at the beggining  
+```
+gzip -dc Bacteria_joined_qm30_trimmed_noambi.fa.gz | awk '/^>/ {
+  split($0, a, "|")
+  print ">" a[2] "|" substr(a[1], 2)
+  next
+}
+{ print }' | gzip > Bacteria_joined_qm30_trimmed_noambi_samplefirst.fa.gz
+```
+
+generate scored variants   
+```
+python2.7 score_variants.py Bacteria_joined_qm30_trimmed_noambi_samplefirst.fa.gz
+```
+
+combine the original seed representatives with scored variants  
+```
+cat /mnt/DATA/projects/avetrot/GLOBAL_BACTERIA_BOTH_VOLUMES/FINAL/FINAL_TABLES/GTDB/GB_VOL2_AS_DATABASE/GB_BOTH_VOL_20260413_97_clustered_SEEDs.short.fa.gz  Bacteria_joined_qm30_trimmed_noambi_samplefirst.fa.gz_scored_variants.fa.gz > Bacteria_scored_variants_for97sim_clusters.fa.gz
+```
+cluster all together  
+```
+/mnt/DATA1/Align/align512 Bacteria_scored_variants_for97sim_clusters.fa.gz 97.0 -m 512
+```
+remove the original seed representatives  
+```
+gzip -dc Bacteria_scored_variants_for97sim_clusters.fa.97.clustered.gz | awk '
+  /^>/ {
+    keep = ($0 !~ /\|CL/)
+  }
+  keep
+' | gzip > Bacteria_scored_variants_for97sim_clusters.fa.97.clustered_onlyDeadWood.gz
+```
+make reduced otu table  
+```
+python make_otu_table_multi.py \
+  --cl-vars old_variants.clustered.gz new_variants.clustered.gz \
+  --fasta old_reads.fa.gz new_reads.fa.gz \
+  -o compressed_otu_tab_otus_to_samples.txt
+```
+
+
+
+
 
 
 
