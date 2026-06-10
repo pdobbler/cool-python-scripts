@@ -228,9 +228,9 @@ gzip -dc Bacteria_scored_variants_for97sim_clusters.fa.97.clustered.gz | awk '
 make reduced otu table  
 ```
 python make_otu_table_multi.py \
-  --cl-vars GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.97.clustered.gz FOR_SAILEE/new_variants.clustered.gz \
-  --fasta old_reads.fa.gz new_reads.fa.gz \
-  -o compressed_otu_tab_otus_to_samples.txt
+  --cl-vars GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.97.clustered.gz FOR_SAILEE/Bacteria_scored_variants_for97sim_clusters.fa.97.clustered_onlyDeadWood.gz \
+  --fasta GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz FOR_SAILEE/Bacteria_joined_qm30_trimmed_noambi_samplefirst.fa.gz \
+  -o FOR_SAILEE/compressed_otu_tab_otus_to_samples.txt
 ```
 
 
