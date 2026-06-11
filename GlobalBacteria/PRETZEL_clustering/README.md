@@ -190,6 +190,9 @@ ABUND_TABLE_GENERA.txt
 
 `python2.7 convert_variants_table.py VARIANTS_TABLE_CLNUM.txt.gz`
 
+VARIANTS_variants.txt.gz - columns: id(int); cl_id(int); hash(varchar); sequence(text);  
+VARIANTS_samplevar.txt.gz - columns: id(bigint); variant(int); sample(int); abundance(int); cl_id(int);   
+
 
 ### BINNING NEW SEQUENCES
 
