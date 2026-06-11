@@ -180,6 +180,17 @@ ABUND_TABLE_GENERA.txt
 
 `awk 'BEGIN{OFS="\t"} {$1=$1".2"; print}' ABUND_TABLE_CLUSTERS.txt > ABUND_TABLE_CLUSTERS_v2.txt`
 
+### UPDATE TAXONOMY CLUSTERS
+
+```
+gzip -dc TAXONOMY_CLUSTERS.txt.gz |
+awk 'BEGIN { OFS="\t" } {
+  $1 = $1 ".2"
+  print NR, $0
+}' |
+gzip > TAXONOMY_CLUSTERS_GOOOD.txt.gz
+```
+
 ### SIMPLIFY CLUSTER NAMES
 
 `zcat VARIANTS_TABLE.txt.gz | awk 'BEGIN{OFS="\t"} {sub(/^CL0*/, "", $4); print}' | gzip > VARIANTS_TABLE_CLNUM.txt.gz`
