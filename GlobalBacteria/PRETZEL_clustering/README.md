@@ -195,6 +195,14 @@ gzip > TAXONOMY_CLUSTERS_GOOOD.txt.gz
 
 `zcat VARIANTS_TABLE.txt.gz | awk 'BEGIN{OFS="\t"} {sub(/^CL0*/, "", $4); print}' | gzip > VARIANTS_TABLE_CLNUM.txt.gz`
 
+### VARIANTS FASTA
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/GB_GET_VARINATS_FOR_ALL_TAXA_FINAL.py`
+
+`mkdir VARIANTS`
+
+`python2.7 GB_GET_VARINATS_FOR_ALL_TAXA_FINAL.py VARIANTS_TABLE_CLNUM.txt.gz TAXONOMY_CLUSTERS_GOOOD.txt.gz VARIANTS/`
+
 ### CONVERT VARIANTS TABLE
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/convert_variants_table.py`
