@@ -164,7 +164,7 @@ python2.7 create_variants_table_and_sample_pairs.py GB_BOTH_VOL_20260413_RENAMED
   
 https://ftp.microbio.me/greengenes_release/current/
 ```
-python2.7 taxonomy_for_clusters_new.py CLUSTERS_INFO_TOTAL_FINAL.txt.gz 2024.09.taxonomy.id.tsv.gz
+python2.7 taxonomy_for_clusters_new.py CLUSTERS_INFO_TOTAL_FINAL.txt.gz 2024.09.taxonomy.id.tsv.gz 2
 ```
 
 ### CLUSTERS - SPECIES - GENUS ABUNDANCE TABLES
