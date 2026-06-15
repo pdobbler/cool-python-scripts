@@ -6,6 +6,7 @@ import gzip
 
 taxonomy_ident = sys.argv[1]        # CLUSTERS_INFO_TOTAL_FINAL.txt
 greengenes2_tax = sys.argv[2]       # 2024.09.taxonomy.id.tsv.gz
+release = sys.argv[3]               # 2
 
 thr_s = 197.0
 thr_g = 190.0
@@ -15,6 +16,13 @@ def openfile(filename, mode='r'):
         return gzip.open(filename, mode)
     else:
         return open(filename, mode)
+
+def convert_cl_code(value):
+    # Remove "CL" prefix, then remove leading zeroes
+    result = value[2:].lstrip('0')
+
+    # Return "0" if the remaining value was all zeroes
+    return result or '0'
 
 #Feature ID      Taxon   Confidence
 # GB-GCA-003568775.1-MWMI01000008.1       d__Bacteria; p__; c__; o__; f__; g__; s__       0.3
@@ -57,7 +65,7 @@ for line in openfile(taxonomy_ident):
                     if not sp == '':
                         species = sp
                         sp_taxonomy[species] = taxons
-        fp.write(cl + '\t' + species + '\t' + genus + '\t' + str(sim) + '\t' + str(cov) + '\t' + taxons + '\t' + md5 + '\n')
+        fp.write(convert_cl_code(cl) + '\t' + cl + "." + str(release) + '\t' + species + '\t' + genus + '\t' + str(sim) + '\t' + str(cov) + '\t' + taxons + '\t' + md5 + '\n')
     i += 1
 fp.close()
 
@@ -78,3 +86,4 @@ for genus in gen_taxonomy:
 fp.close()
 
 print("Done :]")
+
