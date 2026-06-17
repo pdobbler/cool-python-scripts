@@ -255,6 +255,45 @@ python make_otu_table_multi.py \
   -o FOR_SAILEE/compressed_otu_tab_otus_to_samples.txt
 ```
 
+### GTDB
+
+binning to extracted ssu  
+```
+/mnt/DATA1/Align/align512 ssu_all_r232_GB_EXTRACTED_for97sim_clusters.fa.gz 97.0 -m 320
+```
+Total clusters: 87694333  
+Timings: read=40.85min cluster=51.74h total=52.42h  
+cluster file: ssu_all_r232_GB_EXTRACTED_for97sim_clusters.fa.97.clustered.gz  
+
+remove the original seed representatives 
+```
+gzip -dc ssu_all_r232_GB_EXTRACTED_for97sim_clusters.fa.97.clustered.gz | awk '
+>   /^>/ {
+>     keep = ($0 !~ /\|CL/)
+>   }
+>   keep
+> ' | gzip > ssu_all_r232_GB_EXTRACTED_for97sim_clusters.fa.97.clustered_onlyGTDB.gz
+```
+get only GTDB ssu binned to existing GB clusters
+```
+gzip -cd ssu_all_r232_GB_EXTRACTED_for97sim_clusters.fa.97.clustered_onlyGTDB.gz |
+awk -v max=87684198 '
+BEGIN { RS=">"; ORS="" }
+NR > 1 {
+    header = substr($0, 1, index($0, "\n") - 1)
+    cluster = header
+    sub(/^CL/, "", cluster)
+    sub(/\|.*/, "", cluster)
+
+    if ((cluster + 0) <= max)
+        print ">" $0
+}
+' |
+gzip > ssu_all_r232_GB_EXTRACTED_for97sim_clusters.fa.97.clustered_onlyGTDB_onlyGBclusters.gz
+```
+
+
+
 
 
 
