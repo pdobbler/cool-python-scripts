@@ -585,7 +585,7 @@ CREATE TABLE IF NOT EXISTS `samples_advanced` (
   `sample_name` VARCHAR(128) NOT NULL,
   `sample_description` TEXT NOT NULL,
   `sequencing_platform` VARCHAR(16) NOT NULL,
-  `target_gene` VARCHAR(7) NOT NULL,
+  `target_gene` VARCHAR(16) NOT NULL,
   `primers_sequence` VARCHAR(256) NOT NULL,
   `sample_seqid` VARCHAR(256) NOT NULL,
   `sample_barcode` VARCHAR(128) NOT NULL,
