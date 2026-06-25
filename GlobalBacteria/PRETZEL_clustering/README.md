@@ -300,7 +300,7 @@ GTDB to cluster variants representatives
 ```
 zcat ssu_all_r232_GB_EXTRACTED_for97sim_clusters.fa.97.clustered_onlyGTDB_onlyGBclusters.gz \
   | tr -d '\r' \
-  | grep --no-group-separator '|100\.0$' | awk -F'>' '{print $2}' | awk -F'~' '{print $1}' | awk -F'|' '{print $1"\t"$2}' | sort | uniq
+  | grep --no-group-separator '|100\.0$' | awk -F'>' '{print $2}' | awk -F'~' '{print $1}' | awk -F'|' '{print $1"\t"$2}' | sort | uniq > FINAL/RAW_GTDB_CLUSTERS_vars.txt
 ```
 
 
