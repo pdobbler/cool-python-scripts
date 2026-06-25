@@ -43,11 +43,11 @@ def hit_numeric_key(hit):
 fp = open(out_table, 'w')
 n = 0
 for line in openfile(cluster_vs_gtdb16S):
-        vals = line.rstrip().split('\t')
-        cluster_id = hit_numeric_key(vals[0])
-        gtdb_id = vals[1]
-        n += 1
-        fp.write(str(n) + '\t' + str(cluster_id) + '\t' +  gtdb_id + '\n')
+    vals = line.rstrip().split('\t')
+    cluster_id = hit_numeric_key(vals[0])
+    gtdb_id = vals[1]
+    n += 1
+    fp.write(str(n) + '\t' + str(cluster_id) + '\t' +  gtdb_id + '\n')
 fp.close()
 
 print("Done :)")
