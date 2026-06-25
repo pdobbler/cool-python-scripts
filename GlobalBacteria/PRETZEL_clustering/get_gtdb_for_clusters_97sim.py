@@ -43,7 +43,6 @@ def hit_numeric_key(hit):
 fp = open(out_table, 'w')
 n = 0
 for line in openfile(cluster_vs_gtdb16S):
-    if i>0:
         vals = line.rstrip().split('\t')
         cluster_id = hit_numeric_key(vals[0])
         gtdb_id = vals[1]
