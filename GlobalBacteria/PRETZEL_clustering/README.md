@@ -303,9 +303,13 @@ zcat ssu_all_r232_GB_EXTRACTED_for97sim_clusters.fa.97.clustered_onlyGTDB_onlyGB
   | grep --no-group-separator '|100\.0$' | awk -F'>' '{print $2}' | awk -F'~' '{print $1}' | awk -F'|' '{print $1"\t"$2}' | sort | uniq > FINAL/RAW_GTDB_CLUSTERS_vars.txt
 ```
 
-
-
-
+```
+wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/dereplicate_to_md5_gz.py
+python2.7 dereplicate_to_md5_gz.py ssu_all_r232_GB_EXTRACTED.fas.gz ssu_all_r232_GB_EXTRACTED_md5_derep.fas ssu_all_r232_GB_EXTRACTED_md5_derep.tab
+grep '>' ssu_all_r232_GB_EXTRACTED_md5_derep.fas | awk -F'>' '{print $2}' > FINAL/GTDB_md5.txt
+zgrep --no-group-separator -F -f GTDB/FINAL/GTDB_md5.txt VARIANTS_variants.txt.gz > GTDB/FINAL/VARIANTS_variants_GTDBonly.txt
+awk -F'~' '{print $1}' ssu_all_r232_GB_EXTRACTED_md5_derep.tab | sort | uniq > FINAL/ssu_all_r232_GB_EXTRACTED_md5_uniq_acc.txt
+```
 
 
 
