@@ -311,6 +311,8 @@ zgrep --no-group-separator -F -f GTDB/FINAL/GTDB_md5.txt VARIANTS_variants.txt.g
 awk -F'~' '{print $1}' ssu_all_r232_GB_EXTRACTED_md5_derep.tab | sort | uniq > FINAL/ssu_all_r232_GB_EXTRACTED_md5_uniq_acc.txt
 ```
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/get_gtdb_for_exact_vars.py`
+`python2.7 get_gtdb_for_exact_vars.py VARIANTS_variants_GTDBonly.txt ssu_all_r232_GB_EXTRACTED_md5_uniq_acc.txt GB2_GTDB_variants.txt`
 
 
 
