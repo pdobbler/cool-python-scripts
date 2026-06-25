@@ -310,3 +310,6 @@ zcat ssu_all_r232_GB_EXTRACTED_for97sim_clusters.fa.97.clustered_onlyGTDB_onlyGB
 
 
 
+
+
+
