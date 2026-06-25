@@ -314,6 +314,10 @@ awk -F'~' '{print $1}' ssu_all_r232_GB_EXTRACTED_md5_derep.tab | sort | uniq > F
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/get_gtdb_for_exact_vars.py`
 `python2.7 get_gtdb_for_exact_vars.py VARIANTS_variants_GTDBonly.txt ssu_all_r232_GB_EXTRACTED_md5_uniq_acc.txt GB2_GTDB_variants.txt`
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/get_gtdb_for_clusters_97sim.py`
+`python2.7 get_gtdb_for_clusters_97sim.py RAW_GTDB_CLUSTERS97sim.txt GB2_GTDB_CLUSTERS97sim.txt`
+
+
 
 
 
