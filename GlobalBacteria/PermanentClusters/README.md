@@ -353,14 +353,12 @@ docker run --rm \
 `python2.7 GENERATE_SAMPLES_FASTA_GB1.py VARIANTS_TABLE.txt.gz DATABASE_TABLES_NO_SINGLETONS/VARIANTS_TABLE_SAMPLE_PAIRS.txt SAMPLES/`
 
 ```
-for file in *.fasta
- do zip -j ${file%%.fas}.zip $file
-done
-
-for file in *.fasta 
-do
- rm -rf $file
-done
+printf '%s\0' ./*.fasta |
+parallel -0 -j 24 '
+    file={};
+    zip -j "${file}.zip" "$file" &&
+    rm -- "$file"
+'
 ```
 
 ### CREATE SAMPLE AND PAPER TABLES
