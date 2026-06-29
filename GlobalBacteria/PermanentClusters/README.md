@@ -781,7 +781,87 @@ CREATE INDEX idx_gtdbvar_var_acc   ON gtdbvar (variant, gtdb_acc);
 CREATE INDEX idx_gtdbvar_acc_var   ON gtdbvar (gtdb_acc, variant);
 ```
 
-ADITIONAL INFO FROM GTDB
+GENUS SUBTABLE  
+```
+CREATE TABLE genus_abund_new AS
+SELECT
+  ct.Genus AS Genus,
+  sv.sample AS sample,
+  SUM(sv.abundance) AS abundance,
+  COUNT(*) AS row_count
+FROM samplevar sv
+JOIN clusters_tax ct ON ct.id = sv.cl_id
+WHERE ct.Genus <> '-'
+GROUP BY ct.Genus, sv.sample;
+
+ALTER TABLE genus_abund_new
+  ADD INDEX idx_genus_sample (Genus, sample);
+
+CREATE TABLE genus_stats_new AS
+SELECT
+  Genus,
+  SUM(row_count) AS total_matches,
+  COUNT(*) AS sample_count
+FROM genus_abund_new
+GROUP BY Genus;
+
+ALTER TABLE genus_stats_new
+  ADD PRIMARY KEY (Genus);
+```
+
+Swith to the current tables...  
+```
+DROP TABLE IF EXISTS genus_abund_old;
+DROP TABLE IF EXISTS genus_stats_old;
+
+RENAME TABLE
+  genus_abund TO genus_abund_old,
+  genus_abund_new TO genus_abund,
+  genus_stats TO genus_stats_old,
+  genus_stats_new TO genus_stats;
+```
+If the genus_*_old not exists  
+```
+RENAME TABLE genus_abund_new TO genus_abund;
+RENAME TABLE genus_stats_new TO genus_stats;
+```
+
+SPECIES SUBTABBLE  
+```
+CREATE TABLE species_abund_new AS
+SELECT
+  ct.Species AS Species,
+  sv.sample AS sample,
+  SUM(sv.abundance) AS abundance,
+  COUNT(*) AS row_count
+FROM samplevar sv
+JOIN clusters_tax ct ON ct.id = sv.cl_id
+WHERE ct.Species <> '-'
+GROUP BY ct.Species, sv.sample;
+
+ALTER TABLE species_abund_new
+  ADD INDEX idx_species_sample (Species, sample);
+
+CREATE TABLE species_stats_new AS
+SELECT
+  Species,
+  SUM(row_count) AS total_matches,
+  COUNT(*) AS sample_count
+FROM species_abund_new
+GROUP BY Species;
+
+ALTER TABLE species_stats_new
+  ADD PRIMARY KEY (Species);
+```
+
+Swith to the current tables...  
+```
+RENAME TABLE genus_abund_new TO genus_abund;
+RENAME TABLE genus_stats_new TO genus_stats;
+```
+
+
+ADITIONAL INFO FROM GTDB  
 
 ```
 awk '
