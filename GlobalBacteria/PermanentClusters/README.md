@@ -316,32 +316,26 @@ ABUND_TABLE_GENERA.txt
 
 ### VARIANTS FASTA
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/GB_GET_VARINATS_FOR_ALL_TAXA_FINAL.py`
-
-`mkdir VARIANTS`
-
-`python2.7 GB_GET_VARINATS_FOR_ALL_TAXA_FINAL.py VARIANTS_TABLE.txt.gz TAXONOMY_CLUSTERS.txt VARIANTS/`
-
-output: VARIANTS/ #of annotated variants is 51603681  
- #genera 6893  
- #species 10446  
- #SH 3455524  
-
-`find VARIANTS -maxdepth 1 -type f | wc -l`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/prepare_downloads_sharded.py`  
 
 ```
-find VARIANTS -maxdepth 1 -type f -print0 | \
-xargs -0 -I {} scp -i /mnt/DATA1/KEYS/globalFungi.pem {} ubuntu@147.251.115.216:/mnt/data/databases_docker/variants_fasta/
+ulimit -n 1024
+df -h .
+df -i .
 ```
-tooo many!!!  
-RUN ON SERVER DIRECTLY!!!  
 
 ```
-docker run --rm \
-  -v "$PWD":/work \
-  -w /work \
-  python:2.7 \
-  python GB_GET_VARINATS_FOR_ALL_TAXA_FINAL.py VARIANTS_TABLE_CL.txt.gz TAXONOMY_CLUSTERS.txt variants_fasta/
+mkdir -p VARIANTS VARIANTS_WORK
+
+python3 prepare_downloads_sharded.py \
+    VARIANTS_TABLE_CLNUM.txt.gz \
+    TAXONOMY_CLUSTERS.txt \
+    VARIANTS \
+    VARIANTS_WORK \
+    --range-size 500000 \
+    --sort-memory 8G \
+    --sort-parallel 4 \
+    --gzip-level 1
 ```
 
 ### SAMPLES FASTA
