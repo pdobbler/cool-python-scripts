@@ -255,6 +255,21 @@ python make_otu_table_multi.py \
   -o FOR_SAILEE/compressed_otu_tab_otus_to_samples.txt
 ```
 
+### GET SELECTED CLUSTERS SUBTABLE
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/GET_OTUTAB_REDUCED_FORMATE_MOD.py`
+
+1) ALL sequences  
+`python2.7 GET_OTUTAB_REDUCED_FORMATE_MOD.py GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.97.clustered.gz GB_BOTH_VOL_20260413_RENAMED_filtered_samplefix.fa.gz`
+
+2) SEED sequences  
+`python2.7 GET_OTUTAB_REDUCED_FORMATE_MOD.py GB_BOTH_VOL_20260413_97_clustered_SEEDs.fa.gz GB_BOTH_VOL_20260413_RENAMED_filtered_samplefix.fa.gz`
+
+output:  
+compressed_otu_tab_otus_to_samples.txt  
+
+
+
 ### GTDB
 
 binning to extracted ssu  
