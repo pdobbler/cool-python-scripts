@@ -743,37 +743,57 @@ Update stats after creating indexes
 
 ```
 CREATE TABLE IF NOT EXISTS `gtdbcl` (
-  `id` bigint(20) unsigned NOT NULL,
-  `cl_id` int(10) unsigned NOT NULL,
-  `gtdb_acc` VARCHAR(15) NOT NULL
-);
+  `id` BIGINT(20) UNSIGNED NOT NULL,
+  `cl_id` INT(10) UNSIGNED NOT NULL,
+  `gtdb_id` INT(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_gtdbcl_cl_gtdb` (`cl_id`, `gtdb_id`),
+  KEY `idx_gtdbcl_gtdb_cl` (`gtdb_id`, `cl_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
-`LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/GB1_GTDB_CLUSTERS97sim.txt' INTO TABLE gtdbcl FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
 
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/GB2_TABLES_RAW/GB2_gtdbcl.tsv' INTO TABLE gtdbcl FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
 
 ```
 CREATE TABLE IF NOT EXISTS `gtdbvar` (
-  `id` bigint(20) unsigned NOT NULL,
-  `variant` int(10) unsigned NOT NULL,
-  `gtdb_acc` VARCHAR(15) NOT NULL
-);
+  `id` BIGINT(20) UNSIGNED NOT NULL,
+  `variant` INT(10) UNSIGNED NOT NULL,
+  `gtdb_id` INT(10) UNSIGNED NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_gtdbvar_variant_gtdb` (`variant`, `gtdb_id`),
+  KEY `idx_gtdbvar_gtdb_variant` (`gtdb_id`, `variant`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
-`LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/GB1_GTDB_variants.txt' INTO TABLE gtdbvar FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
+
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/GB2_TABLES_RAW/GB2_gtdbvar.tsv' INTO TABLE gtdbvar FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
 
 ```
--- Make sure there's a PK (helps clustering; optional AUTO_INCREMENT)
-ALTER TABLE gtdbcl  ADD PRIMARY KEY (id);
-ALTER TABLE gtdbvar ADD PRIMARY KEY (id);
-
--- Queries: WHERE cl_id IN (...) GROUP BY gtdb_acc
--- Good filters and covering scans:
-CREATE INDEX idx_gtdbcl_clid_acc   ON gtdbcl  (cl_id,  gtdb_acc);
-CREATE INDEX idx_gtdbcl_acc_clid   ON gtdbcl  (gtdb_acc, cl_id);
-
--- Queries: WHERE variant IN (...) GROUP BY gtdb_acc
-CREATE INDEX idx_gtdbvar_var_acc   ON gtdbvar (variant, gtdb_acc);
-CREATE INDEX idx_gtdbvar_acc_var   ON gtdbvar (gtdb_acc, variant);
+CREATE TABLE IF NOT EXISTS `gtdbacc` (
+  `id` INT(10) UNSIGNED NOT NULL,
+  `gtdb_acc` VARCHAR(15) NOT NULL,
+  `isolate` TINYINT(1) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uq_gtdb_acc` (`gtdb_acc`),
+  KEY `idx_isolate` (`isolate`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ```
+
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/GB2_TABLES_RAW/GB2_gtdbacc.tsv' INTO TABLE gtdbacc FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
+
+```
+CREATE INDEX idx_gtdbcl_cl_gtdb
+  ON gtdbcl (cl_id, gtdb_id);
+
+CREATE INDEX idx_gtdbcl_gtdb_cl
+  ON gtdbcl (gtdb_id, cl_id);
+
+CREATE INDEX idx_gtdbvar_variant_gtdb
+  ON gtdbvar (variant, gtdb_id);
+
+CREATE INDEX idx_gtdbvar_gtdb_variant
+  ON gtdbvar (gtdb_id, variant);
+```
+
 
 GENUS SUBTABLE  
 ```
