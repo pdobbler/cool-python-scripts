@@ -268,6 +268,24 @@ python make_otu_table_multi.py \
 output:  
 compressed_otu_tab_otus_to_samples.txt  
 
+```
+grep --no-group-separator -A 1 -F -f selected_clusters_01.txt compressed_otu_tab_otus_to_samples.txt > GB_REL2_CL97_SEEDSONLY_NOCHLORO_NOMITO_OTU_TAB_REDUCED_SEL01.txt
+```
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/create_relative_otu_table_sorted.py`
+
+reads_per_sample.tsv:  
+sample  reads  
+GB01047202S     22732  
+GB01026761S     27066  
+GB01003500S     281430  
+
+
+`python3 create_relative_otu_table_sorted.py GB_REL2_CL97_SEEDSONLY_NOCHLORO_NOMITO_OTU_TAB_REDUCED_SEL01.txt.gz reads_per_sample.tsv OTU_relative_abundance_table_01_SEEDvariants.tsv`
+
+```
+split -n l/4 -d --additional-suffix=.txt Selected_GBSEEDvariants_over40samples_relative_abundance_in_samples.txt Selected_GBSEEDvariants_over40samples_relative_abundance_in_samples_part_
+```
 
 
 ### GTDB
