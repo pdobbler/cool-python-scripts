@@ -287,6 +287,14 @@ GB01003500S     281430
 split -n l/4 -d --additional-suffix=.txt Selected_GBSEEDvariants_over40samples_relative_abundance_in_samples.txt Selected_GBSEEDvariants_over40samples_relative_abundance_in_samples_part_
 ```
 
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/create_absolut_otu_table_sorted_sel_samples.py`
+
+```
+python3 create_absolut_otu_table_sorted_sel_samples.py \
+    GB_REL2_CL97_SEEDSONLY_NOCHLORO_NOMITO_OTU_TAB_REDUCED_SEL01.txt.gz \
+    list_of_samples.txt \
+    Selected_GBclusters_over40samples_absolute_soil_samples.txt
+```
 
 ### GTDB
 
