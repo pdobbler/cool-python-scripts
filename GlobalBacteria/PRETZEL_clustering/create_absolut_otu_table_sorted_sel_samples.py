@@ -30,9 +30,9 @@ def open_text(filename: str, mode: str = "rt") -> TextIO:
     return open(filename, mode, encoding="utf-8", newline="")
 
 
-def read_selected_samples(filename: str) -> list[str]:
+def read_selected_samples(filename):
     """Read one sample ID per line, preserving order and removing duplicates."""
-    samples: list[str] = []
+    samples = []
     seen: set[str] = set()
 
     with open_text(filename, "rt") as handle:
@@ -67,7 +67,7 @@ def create_absolute_otu_table(
     selected_samples = read_selected_samples(selected_samples_file)
     selected_set = set(selected_samples)
     samples_seen_in_otu: set[str] = set()
-    rows: list[list[object]] = []
+    rows = []
 
     with open_text(otu_file, "rt") as fin:
         for line_number, line in enumerate(fin, start=1):
@@ -126,7 +126,7 @@ def create_absolute_otu_table(
             if not row_is_valid:
                 continue
 
-            row: list[object] = [cluster_id]
+            row = [cluster_id]
             row.extend(absolute_counts[sample] for sample in selected_samples)
             rows.append(row)
 
