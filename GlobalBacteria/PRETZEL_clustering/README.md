@@ -158,13 +158,21 @@ cat blast_and_sort_command.sh | parallel --tmpdir /mnt/DATA1/tmp
 python2.7 create_variants_table_and_sample_pairs.py GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz GB_BOTH_VOL_20260413_RENAMED_filtered.fa.gz_scored_variants.fa.97.clustered.gz
 ```
 
-### TAXONOMY TABLE
+### TAXONOMY TABLE - FIXED GREENEGENES TAXONOMY 
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/taxonomy_for_clusters_new.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/PROCESS_CLUSTER_BLAST_FIXEDTAXONOMY.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/Greengenes2_2024_09_backbone_515_806_MIN223_MAX283_NOAMB_SIMPLE.fa.gz`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/Greengenes2_2024_09_backbone_515_806_FINAL_FIXED_TAX_TABLE.txt.gz`
+
+BLASTn SEEDs against fixed taxonomy "Greengenes2_2024_09_backbone_515_806_MIN223_MAX283_NOAMB_SIMPLE.fa"  
   
-https://ftp.microbio.me/greengenes_release/current/
+GB_BOTH_VOL_20260413_97_clustered_SEEDs_best.tab.gz
+===================================================
+CL34729200|8fa4d5c68ea4bbcd124d1a64c0907b69;samples=1;relabund_sum=0.0000128559;size=1|100.0    g0083103        91.304  253     22      0       1       253     1       253     2.61e-95        346  
+CL34729201|ca0165ab368aad953816a8436f04675c;samples=1;relabund_sum=0.0000128559;size=1|100.0    g0070140        92.857  252     18      0       2       253     2       253     2.00e-101       366  
+  
 ```
-python2.7 taxonomy_for_clusters_new.py CLUSTERS_INFO_TOTAL_FINAL.txt.gz 2024.09.taxonomy.id.tsv.gz 2
+python2.7 PROCESS_CLUSTER_BLAST_FIXEDTAXONOMY.py /mnt/DATA/projects/avetrot/GLOBAL_BACTERIA_BOTH_VOLUMES/GB_BOTH_VOL_20260413_97_clustered_SEEDs.fa.gz GB_BOTH_VOL_20260413_97_clustered_SEEDs_best.tab.gz Greengenes2_2024_09_backbone_515_806_FINAL_FIXED_TAX_TABLE.txt TAXONOMY_FOR_CLUSTERS_FINAL.txt 2
 ```
 
 ### CLUSTERS - SPECIES - GENUS ABUNDANCE TABLES
