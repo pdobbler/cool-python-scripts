@@ -166,8 +166,7 @@ python2.7 create_variants_table_and_sample_pairs.py GB_BOTH_VOL_20260413_RENAMED
 
 BLASTn SEEDs against fixed taxonomy "Greengenes2_2024_09_backbone_515_806_MIN223_MAX283_NOAMB_SIMPLE.fa"  
   
-GB_BOTH_VOL_20260413_97_clustered_SEEDs_best.tab.gz
-===================================================
+GB_BOTH_VOL_20260413_97_clustered_SEEDs_best.tab.gz  
 CL34729200|8fa4d5c68ea4bbcd124d1a64c0907b69;samples=1;relabund_sum=0.0000128559;size=1|100.0    g0083103        91.304  253     22      0       1       253     1       253     2.61e-95        346  
 CL34729201|ca0165ab368aad953816a8436f04675c;samples=1;relabund_sum=0.0000128559;size=1|100.0    g0070140        92.857  252     18      0       2       253     2       253     2.00e-101       366  
   
