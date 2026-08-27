@@ -688,7 +688,26 @@ CREATE TABLE IF NOT EXISTS `clusters_tax` (
 );
 ```
 
-`LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/TAXONOMY_CLUSTERS.txt' INTO TABLE clusters_tax FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
+```
+LOAD DATA LOCAL INFILE
+'/var/lib/mysql/GB2_TABLES_RAW/TAXONOMY_FOR_CLUSTERS_FINAL.txt'
+INTO TABLE clusters_tax_correct
+FIELDS TERMINATED BY '\t'
+ESCAPED BY '\b'
+(
+    id,
+    cluster,
+    Species,
+    Genus,
+    @sim,
+    @cov,
+    full_tax,
+    hash
+)
+SET
+    sim = NULLIF(@sim, 'NA'),
+    cov = NULLIF(@cov, 'NA');
+```
 
 ```
 ALTER TABLE clusters_tax ADD INDEX(id);
