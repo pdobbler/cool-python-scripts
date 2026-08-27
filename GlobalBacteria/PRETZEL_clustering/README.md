@@ -160,9 +160,12 @@ python2.7 create_variants_table_and_sample_pairs.py GB_BOTH_VOL_20260413_RENAMED
 
 ### TAXONOMY TABLE - FIXED GREENEGENES TAXONOMY 
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/PROCESS_CLUSTER_BLAST_FIXEDTAXONOMY.py`
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/Greengenes2_2024_09_backbone_515_806_MIN223_MAX283_NOAMB_SIMPLE.fa.gz`
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/Greengenes2_2024_09_backbone_515_806_FINAL_FIXED_TAX_TABLE.txt.gz`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/PROCESS_CLUSTER_BLAST_FIXEDTAXONOMY.py`  
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/Greengenes2_2024_09_backbone_515_806_MIN223_MAX283_NOAMB_SIMPLE.fa.gz`  
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PRETZEL_clustering/Greengenes2_2024_09_backbone_515_806_FINAL_FIXED_TAX_TABLE.txt.gz`  
+
 
 BLASTn SEEDs against fixed taxonomy "Greengenes2_2024_09_backbone_515_806_MIN223_MAX283_NOAMB_SIMPLE.fa"  
   
