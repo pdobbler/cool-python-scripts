@@ -344,7 +344,7 @@ python3 prepare_downloads_sharded.py \
 
 `mkdir SAMPLES`
 
-`python2.7 GENERATE_SAMPLES_FASTA_GB2.py VARIANTS_TABLE_CLNUM.txt.gz VARIANTS_TABLE_SAMPLE_PAIRS.txt SAMPLES/`
+`python3 GENERATE_SAMPLES_FASTA_GB2.py VARIANTS_TABLE_CLNUM.txt.gz VARIANTS_TABLE_SAMPLE_PAIRS.txt SAMPLES/`
 
 ```
 printf '%s\0' ./*.fasta |
