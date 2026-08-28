@@ -691,7 +691,7 @@ CREATE TABLE IF NOT EXISTS `clusters_tax` (
 ```
 LOAD DATA LOCAL INFILE
 '/var/lib/mysql/GB2_TABLES_RAW/TAXONOMY_FOR_CLUSTERS_FINAL.txt'
-INTO TABLE clusters_tax_correct
+INTO TABLE clusters_tax
 FIELDS TERMINATED BY '\t'
 ESCAPED BY '\b'
 (
