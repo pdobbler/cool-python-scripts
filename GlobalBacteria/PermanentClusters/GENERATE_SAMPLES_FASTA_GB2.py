@@ -13,11 +13,11 @@ out_folder = sys.argv[3]
 #############################################
 # GZIP OPENING
 #############################################
-def openfile(filename, mode='r'):
-    if filename.endswith('.gz'):
-        return gzip.open(filename, mode)
+def openfile(filename):
+    if filename.endswith(".gz"):
+        return gzip.open(filename, "rt")
     else:
-        return open(filename, mode)
+        return open(filename, "r")
 
 def number_to_cluster(number, release="2"):
     return "GB{0:08d}.{1}".format(int(number), release)
@@ -57,7 +57,7 @@ for line in openfile(variants_table):
         fp.close()
     n += 1
 
-print "DONE FOR " + str(n) + " VARIANTS - SEQ.COUNT: " + str(seqcount)
+print("DONE FOR " + str(n) + " VARIANTS - SEQ.COUNT: " + str(seqcount))
 
 #############################################
 # CHECK EMPTY FILES / DELETE
@@ -72,7 +72,7 @@ for sid in sample_names:
         os.remove(sfile)
         k -= 1
 
-print "FILLED FILES: " + str(k) + " EMPTY FILES: " + str(len(sample_names)-k) + " (It should be zero!)"
+print("FILLED FILES: " + str(k) + " EMPTY FILES: " + str(len(sample_names)-k) + " (It should be zero!)")
 
 
 
