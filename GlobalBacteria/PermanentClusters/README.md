@@ -340,11 +340,11 @@ python3 prepare_downloads_sharded.py \
 
 ### SAMPLES FASTA
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/GENERATE_SAMPLES_FASTA_GB1.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/GENERATE_SAMPLES_FASTA_GB2.py`
 
 `mkdir SAMPLES`
 
-`python2.7 GENERATE_SAMPLES_FASTA_GB1.py VARIANTS_TABLE.txt.gz DATABASE_TABLES_NO_SINGLETONS/VARIANTS_TABLE_SAMPLE_PAIRS.txt SAMPLES/`
+`python2.7 GENERATE_SAMPLES_FASTA_GB2.py VARIANTS_TABLE_CLNUM.txt.gz VARIANTS_TABLE_SAMPLE_PAIRS.txt SAMPLES/`
 
 ```
 printf '%s\0' ./*.fasta |
