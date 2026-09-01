@@ -867,6 +867,29 @@ ALTER TABLE species_stats ADD PRIMARY KEY (Species);
 
 ANALYZE TABLE genus_abund, genus_stats, species_abund, species_stats;
 ```
+  
+  
+API TRAFFIC    
+```
+CREATE TABLE api_traffic (
+  id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  request_id VARCHAR(64) NULL,
+  method VARCHAR(8) NOT NULL,
+  path VARCHAR(255) NOT NULL,
+  query_hash CHAR(64) NULL,
+  status_code SMALLINT UNSIGNED NULL,
+  duration_ms INT UNSIGNED NULL,
+  data_release VARCHAR(32) NULL,
+  ip_hash CHAR(64) NULL,
+  user_agent_hash CHAR(64) NULL,
+  PRIMARY KEY (id),
+  KEY idx_created_at (created_at),
+  KEY idx_path_created (path, created_at),
+  KEY idx_status_created (status_code, created_at)
+);
+```
+
 
 Restart of the container...  
 ```
