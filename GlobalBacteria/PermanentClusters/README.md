@@ -877,6 +877,7 @@ CREATE TABLE api_traffic (
   request_id VARCHAR(64) NULL,
   method VARCHAR(8) NOT NULL,
   path VARCHAR(255) NOT NULL,
+  query_string VARCHAR(2048) NULL,
   query_hash CHAR(64) NULL,
   status_code SMALLINT UNSIGNED NULL,
   duration_ms INT UNSIGNED NULL,
