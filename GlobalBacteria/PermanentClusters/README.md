@@ -680,6 +680,12 @@ CREATE TABLE IF NOT EXISTS `samples_papers` (
 
 `ALTER TABLE samples_papers ADD INDEX(id);`
 
+
+!!! RESET TAXONOMY CACHE IF CHANGED !!!  
+```
+sudo find /mnt/data/databases_docker/cache -type f -name '*.rds' -delete
+```
+
 ```
 CREATE TABLE IF NOT EXISTS `clusters_tax` (
   `id` int NOT NULL PRIMARY KEY,
@@ -722,11 +728,6 @@ ALTER TABLE clusters_tax ADD INDEX(Genus);
 CREATE INDEX idx_clusters_tax_species_id ON clusters_tax (Species, id);
 CREATE INDEX idx_clusters_tax_genus_id ON clusters_tax (Genus, id);
 ANALYZE TABLE clusters_tax, samplevar;
-```
-
-!!! RESET TAXONOMY CACHE IF CHANGED !!!  
-```
-sudo find /mnt/data/databases_docker/cache -type f -name '*.rds' -delete
 ```
 
 ```
