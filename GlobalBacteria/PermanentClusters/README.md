@@ -325,18 +325,21 @@ df -i .
 ```
 
 ```
+rm -rf VARIANTS/
+rm -rf VARIANTS_WORK/
+
 mkdir -p VARIANTS VARIANTS_WORK
 
 python3 prepare_downloads_sharded_with_samples.py \
-    VARIANTS_TABLE_CLNUM.txt.gz \
-    TAXONOMY_FOR_CLUSTERS_FINAL.txt \
-    VARIANTS \
-    VARIANTS_WORK \
-    SAMPLES_BASIC.txt \
-    --range-size 500000 \
-    --sort-memory 8G \
-    --sort-parallel 4 \
-    --gzip-level 1
+  VARIANTS_TABLE_CLNUM.txt.gz \
+  TAXONOMY_FOR_CLUSTERS_FINAL.txt \
+  VARIANTS \
+  VARIANTS_WORK \
+  SAMPLES_BASIC.txt \
+  --range-size 500000 \
+  --sort-memory 8G \
+  --sort-parallel 4 \
+  --gzip-level 1
 ```
 
 ### SAMPLES FASTA
