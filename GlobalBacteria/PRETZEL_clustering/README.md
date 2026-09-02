@@ -177,6 +177,11 @@ CL34729201|ca0165ab368aad953816a8436f04675c;samples=1;relabund_sum=0.0000128559;
 python2.7 PROCESS_CLUSTER_BLAST_FIXEDTAXONOMY.py /mnt/DATA/projects/avetrot/GLOBAL_BACTERIA_BOTH_VOLUMES/GB_BOTH_VOL_20260413_97_clustered_SEEDs.fa.gz GB_BOTH_VOL_20260413_97_clustered_SEEDs_best.tab.gz Greengenes2_2024_09_backbone_515_806_FINAL_FIXED_TAX_TABLE.txt TAXONOMY_FOR_CLUSTERS_FINAL.txt 2
 ```
 
+TABLE for download  
+```
+{ head -n 1 header.txt; cat TAXONOMY_FOR_CLUSTERS_FINAL.txt | awk -F'\t' '{print $2"|"$8"\t"$5"\t"$6"\t"$3"\t"$4"\t"$7}'; } | gzip > GB2_CLUSTERS_IDENTIFICATION.txt.gz
+```
+
 ### CLUSTERS - SPECIES - GENUS ABUNDANCE TABLES
 
 `wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/create_taxonomy_tables.py`
