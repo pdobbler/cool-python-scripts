@@ -316,7 +316,7 @@ ABUND_TABLE_GENERA.txt
 
 ### VARIANTS FASTA
 
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/prepare_downloads_sharded.py`  
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalBacteria/PermanentClusters/prepare_downloads_sharded_with_samples.py`  
 
 ```
 ulimit -n 1024
@@ -327,11 +327,12 @@ df -i .
 ```
 mkdir -p VARIANTS VARIANTS_WORK
 
-python3 prepare_downloads_sharded.py \
+python3 prepare_downloads_sharded_with_samples.py \
     VARIANTS_TABLE_CLNUM.txt.gz \
-    TAXONOMY_CLUSTERS.txt \
+    TAXONOMY_FOR_CLUSTERS_FINAL.txt \
     VARIANTS \
     VARIANTS_WORK \
+    SAMPLES_BASIC.txt \
     --range-size 500000 \
     --sort-memory 8G \
     --sort-parallel 4 \
