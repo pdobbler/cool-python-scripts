@@ -814,6 +814,9 @@ END//
 
 DELIMITER ;
 ```
+```
+CALL fill_clusters_tax_full_tax_id();
+```
 
 then:    
 ```
