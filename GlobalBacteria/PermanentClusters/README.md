@@ -733,6 +733,98 @@ CREATE INDEX idx_clusters_tax_species_id ON clusters_tax (Species, id);
 CREATE INDEX idx_clusters_tax_genus_id ON clusters_tax (Genus, id);
 ANALYZE TABLE clusters_tax, samplevar;
 ```
+  
+!!! UPDATE FOR FULL TAX  
+
+```
+CREATE TABLE clusters_taxonomy (
+  tax_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  full_tax_hash BINARY(32) NOT NULL,
+  full_tax TEXT NOT NULL,
+  full_tax_search TEXT NOT NULL,
+  PRIMARY KEY (tax_id),
+  UNIQUE KEY uq_full_tax_hash (full_tax_hash),
+  FULLTEXT KEY ft_full_tax_search (full_tax_search)
+) ENGINE=InnoDB;
+```
+fill uniq taxonomy  
+```
+INSERT INTO clusters_taxonomy (full_tax_hash, full_tax, full_tax_search)
+SELECT
+  UNHEX(SHA2(full_tax, 256)) AS full_tax_hash,
+  full_tax,
+  LOWER(
+    TRIM(
+      REPLACE(
+      REPLACE(
+      REPLACE(
+      REPLACE(
+      REPLACE(
+      REPLACE(
+      REPLACE(
+      REPLACE(full_tax, 'd__', ' '),
+                        'p__', ' '),
+                        'c__', ' '),
+                        'o__', ' '),
+                        'f__', ' '),
+                        'g__', ' '),
+                        's__', ' '),
+                        ';',  ' ')
+    )
+  ) AS full_tax_search
+FROM (
+  SELECT DISTINCT full_tax
+  FROM clusters_tax
+  WHERE full_tax IS NOT NULL AND TRIM(full_tax) <> ''
+) x;
+```
+add ID do clusters_tax  
+```
+ALTER TABLE clusters_tax
+  ADD COLUMN full_tax_id INT UNSIGNED NULL,
+  ADD INDEX idx_clusters_tax_full_tax_id (full_tax_id),
+  ADD INDEX idx_clusters_tax_full_tax_id_id (full_tax_id, id);
+```
+fill  
+```
+DELIMITER //
+
+CREATE PROCEDURE fill_clusters_tax_full_tax_id()
+BEGIN
+  DECLARE start_id BIGINT UNSIGNED DEFAULT 1;
+  DECLARE max_id BIGINT UNSIGNED;
+  DECLARE step_size BIGINT UNSIGNED DEFAULT 5000000;
+
+  SELECT MAX(id) INTO max_id FROM clusters_tax;
+
+  WHILE start_id <= max_id DO
+    UPDATE clusters_tax ct
+    JOIN clusters_taxonomy tx
+      ON tx.full_tax_hash = UNHEX(SHA2(ct.full_tax, 256))
+    SET ct.full_tax_id = tx.tax_id
+    WHERE ct.id >= start_id
+      AND ct.id < start_id + step_size
+      AND ct.full_tax_id IS NULL;
+
+    SELECT CONCAT('finished up to id ', start_id + step_size - 1) AS progress;
+
+    SET start_id = start_id + step_size;
+  END WHILE;
+END//
+
+DELIMITER ;
+```
+
+then:    
+```
+SELECT COUNT(*) AS missing
+FROM clusters_tax
+WHERE full_tax_id IS NULL
+  AND full_tax IS NOT NULL
+  AND TRIM(full_tax) <> '';
+```
+if missing = 0 it is ready  
+
 
 ```
 CREATE TABLE IF NOT EXISTS `variants` (
