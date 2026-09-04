@@ -827,8 +827,12 @@ WHERE full_tax_id IS NULL
   AND TRIM(full_tax) <> '';
 ```
 if missing = 0 it is ready  
+```
+ANALYZE TABLE clusters_tax;
+ANALYZE TABLE clusters_taxonomy;
+```
 
-
+  
 ```
 CREATE TABLE IF NOT EXISTS `variants` (
   `id` int(10) unsigned NOT NULL,
