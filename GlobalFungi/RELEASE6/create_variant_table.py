@@ -155,10 +155,11 @@ def read_identification_table(filename):
     identifications : dict
         QUERY -> {
             "hit": str,
-            "similarity": float,
+            "similarity": float or None,
             "similarity_text": str,
-            "coverage": float,
-            "coverage_text": str
+            "coverage": float or None,
+            "coverage_text": str,
+            "no_hit": bool
         }
 
     duplicate_queries : Counter
@@ -214,26 +215,54 @@ def read_identification_table(filename):
             similarity_text = fields[col["SIMILARITY"]]
             coverage_text = fields[col["COVERAGE"]]
 
+            query_counts[query] += 1
+
+            # If QUERY occurs more than once, keep only the first row.
+            if query in identifications:
+                continue
+
+            # ---------------------------------------------------------
+            # No HIT case
+            # ---------------------------------------------------------
+            # Robustly treat a row as "no hit" if HIT, SIMILARITY
+            # or COVERAGE contains "-".
+            if (
+                hit == "NO_HIT"
+                or similarity_text == "-"
+                or coverage_text == "-"
+            ):
+                identifications[query] = {
+                    "hit": "-",
+                    "similarity": None,
+                    "similarity_text": "-",
+                    "coverage": None,
+                    "coverage_text": "-",
+                    "no_hit": True
+                }
+
+                continue
+
+            # ---------------------------------------------------------
+            # Normal HIT
+            # ---------------------------------------------------------
             try:
                 similarity = float(similarity_text)
                 coverage = float(coverage_text)
+
             except ValueError:
                 raise ValueError(
                     f"Invalid SIMILARITY or COVERAGE at line {line_number}: "
                     f"{similarity_text}, {coverage_text}"
                 )
 
-            query_counts[query] += 1
-
-            # Keep the first row if QUERY occurs more than once.
-            if query not in identifications:
-                identifications[query] = {
-                    "hit": hit,
-                    "similarity": similarity,
-                    "similarity_text": similarity_text,
-                    "coverage": coverage,
-                    "coverage_text": coverage_text
-                }
+            identifications[query] = {
+                "hit": hit,
+                "similarity": similarity,
+                "similarity_text": similarity_text,
+                "coverage": coverage,
+                "coverage_text": coverage_text,
+                "no_hit": False
+            }
 
     duplicate_queries = Counter(
         {
