@@ -59,7 +59,17 @@ awk 'BEGIN{OFS="\t"} NR==1{print; next} {sub(/;.*/, "", $1); print}' \
 GF6_ALL_SAMPLES_its1_scored_variants_UNITE10_PROCESSED.txt \
 > GF6_ALL_SAMPLES_its1_scored_variants_UNITE10_PROCESSED_clean.txt
 ```
+### CREATE VARIANTS TABLE
 
+```
+python3 create_variant_table.py \
+    --fasta GF6_ALL_SAMPLES.fa.its1.gz \
+    --table GF6_ALL_SAMPLES_its1_scored_variants_UNITE10_PROCESSED_clean.txt.gz \
+    --similarity 98.5 \
+    --coverage 90.0 \
+    --marker ITS1 \
+    --output GF6_ALL_SAMPLES_ITS1_variants.tsv
+```
 
 
 ### DATABASE STRUCTURE
