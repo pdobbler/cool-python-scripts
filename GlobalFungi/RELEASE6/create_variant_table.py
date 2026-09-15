@@ -65,14 +65,21 @@ def read_fasta(filename):
     """
     Read gzipped FASTA and aggregate identical sequences.
 
+    For each sequence:
+      - sample name is taken from FASTA header before the first "|"
+      - seqID is calculated as md5(sequence)
+      - abundance is counted separately for each sample
+
     Returns
     -------
     variants : OrderedDict
-        {
-            seqID: {
-                "sequence": sequence,
-                "samples": Counter({sample1: count, sample2: count, ...})
-            }
+        seqID -> {
+            "sequence": sequence,
+            "samples": Counter({
+                sample1: count,
+                sample2: count,
+                ...
+            })
         }
 
     fasta_records : int
@@ -100,10 +107,10 @@ def read_fasta(filename):
             )
             return
 
-        # Sample name = everything before the first "|"
+        # Sample name = everything before first "|"
         sample = record_header.split("|", 1)[0]
 
-        # seqID according to the requested method
+        # seqID calculated exactly from sequence
         seq_id = hashlib.md5(sequence.encode()).hexdigest()
 
         if seq_id not in variants:
@@ -111,8 +118,9 @@ def read_fasta(filename):
                 "sequence": sequence,
                 "samples": Counter()
             }
+
         else:
-            # MD5 collision / unexpected inconsistency check
+            # Extremely unlikely, but check for MD5 collision
             if variants[seq_id]["sequence"] != sequence:
                 raise RuntimeError(
                     f"MD5 collision detected for seqID {seq_id}"
@@ -129,18 +137,21 @@ def read_fasta(filename):
                 continue
 
             if line.startswith(">"):
+                # Process previous record
                 process_record(header, sequence_parts)
 
                 header = line[1:]
                 sequence_parts = []
+
             else:
                 if header is None:
                     raise ValueError(
                         "FASTA sequence encountered before the first header."
                     )
+
                 sequence_parts.append(line)
 
-        # Last FASTA record
+        # Process final FASTA record
         process_record(header, sequence_parts)
 
     return variants, fasta_records
@@ -150,24 +161,43 @@ def read_identification_table(filename):
     """
     Read gzipped identification table.
 
+    Expected columns include:
+
+        QUERY
+        HIT
+        SIMILARITY
+        COVERAGE
+
+    Special cases:
+
+    1) Normal HIT:
+       similarity and coverage are parsed as floats.
+
+    2) No HIT:
+       HIT, SIMILARITY or COVERAGE contains "-"
+       -> stored internally as no_hit=True
+
+    3) Duplicate QUERY:
+       the first occurrence is used and duplicates are reported.
+
     Returns
     -------
     identifications : dict
-        QUERY -> {
-            "hit": str,
-            "similarity": float or None,
-            "similarity_text": str,
-            "coverage": float or None,
-            "coverage_text": str,
-            "no_hit": bool
-        }
 
     duplicate_queries : Counter
-        QUERY IDs occurring more than once.
+
+    table_rows : int
+        Number of non-empty data rows.
+
+    no_hit_rows : int
+        Number of unique QUERY entries without HIT.
     """
 
     identifications = {}
     query_counts = Counter()
+
+    table_rows = 0
+    no_hit_rows = 0
 
     required_columns = {
         "QUERY",
@@ -180,19 +210,31 @@ def read_identification_table(filename):
         header_line = handle.readline()
 
         if not header_line:
-            raise ValueError("Identification table is empty.")
+            raise ValueError(
+                "Identification table is empty."
+            )
 
         header = header_line.strip().split()
 
-        missing = required_columns - set(header)
+        missing_columns = required_columns - set(header)
 
-        if missing:
+        if missing_columns:
             raise ValueError(
                 "Missing required column(s) in identification table: "
-                + ", ".join(sorted(missing))
+                + ", ".join(sorted(missing_columns))
             )
 
-        col = {name: i for i, name in enumerate(header)}
+        col = {
+            name: index
+            for index, name in enumerate(header)
+        }
+
+        max_required_index = max(
+            col["QUERY"],
+            col["HIT"],
+            col["SIMILARITY"],
+            col["COVERAGE"]
+        )
 
         for line_number, line in enumerate(handle, start=2):
             line = line.strip()
@@ -200,12 +242,18 @@ def read_identification_table(filename):
             if not line:
                 continue
 
+            table_rows += 1
+
             fields = line.split()
 
-            if len(fields) < len(header):
+            if len(fields) <= max_required_index:
                 print(
-                    f"WARNING: Skipping malformed line {line_number} "
-                    f"in identification table.",
+                    f"WARNING: Skipping malformed line "
+                    f"{line_number} in identification table:",
+                    file=sys.stderr
+                )
+                print(
+                    f"  {line}",
                     file=sys.stderr
                 )
                 continue
@@ -217,17 +265,25 @@ def read_identification_table(filename):
 
             query_counts[query] += 1
 
-            # If QUERY occurs more than once, keep only the first row.
+            # If QUERY occurs more than once,
+            # keep only the first occurrence.
             if query in identifications:
                 continue
 
             # ---------------------------------------------------------
-            # No HIT case
+            # NO HIT
             # ---------------------------------------------------------
-            # Robustly treat a row as "no hit" if HIT, SIMILARITY
-            # or COVERAGE contains "-".
+            #
+            # Examples:
+            #
+            # QUERY   HIT   SIMILARITY   COVERAGE
+            # xxx     -     -            -
+            #
+            # If any of these values is "-", treat the complete
+            # identification as absent.
+            #
             if (
-                hit == "NO_HIT"
+                hit == "-"
                 or similarity_text == "-"
                 or coverage_text == "-"
             ):
@@ -240,18 +296,21 @@ def read_identification_table(filename):
                     "no_hit": True
                 }
 
+                no_hit_rows += 1
                 continue
 
             # ---------------------------------------------------------
-            # Normal HIT
+            # NORMAL HIT
             # ---------------------------------------------------------
+
             try:
                 similarity = float(similarity_text)
                 coverage = float(coverage_text)
 
             except ValueError:
                 raise ValueError(
-                    f"Invalid SIMILARITY or COVERAGE at line {line_number}: "
+                    f"Invalid SIMILARITY or COVERAGE "
+                    f"at line {line_number}: "
                     f"{similarity_text}, {coverage_text}"
                 )
 
@@ -272,7 +331,12 @@ def read_identification_table(filename):
         }
     )
 
-    return identifications, duplicate_queries
+    return (
+        identifications,
+        duplicate_queries,
+        table_rows,
+        no_hit_rows
+    )
 
 
 def write_output(
@@ -286,22 +350,49 @@ def write_output(
     """
     Write output TSV.
 
-    Identification values:
-        matching QUERY + thresholds fulfilled -> HIT/similarity/coverage
-        matching QUERY + thresholds not fulfilled -> -/-/-
-        QUERY absent from identification table -> NA/NA/NA
+    Rules:
+
+    QUERY absent from identification table:
+        HIT        NA
+        similarity NA
+        coverage   NA
+
+    QUERY exists but has no HIT:
+        HIT        -
+        similarity -
+        coverage   -
+
+    QUERY exists, HIT exists, but threshold is not satisfied:
+        HIT        -
+        similarity -
+        coverage   -
+
+    QUERY exists and passes thresholds:
+        HIT        original HIT
+        similarity original similarity
+        coverage   original coverage
     """
 
     if output_filename == "-":
         out = sys.stdout
         close_output = False
+
     else:
-        out = open(output_filename, "w", encoding="utf-8")
+        out = open(
+            output_filename,
+            "w",
+            encoding="utf-8"
+        )
         close_output = True
 
     missing_queries = []
 
+    passed_threshold = 0
+    failed_threshold = 0
+    no_hit_count = 0
+
     try:
+        # Output header
         print(
             "\t".join([
                 "seqID",
@@ -318,9 +409,10 @@ def write_output(
 
         for seq_id, data in variants.items():
 
-            # Counter preserves insertion order of samples because we
-            # populate it while reading the FASTA.
-            sample_names = list(data["samples"].keys())
+            # Keep samples and abundance in exactly the same order.
+            sample_names = list(
+                data["samples"].keys()
+            )
 
             samples = ";".join(sample_names)
 
@@ -329,34 +421,74 @@ def write_output(
                 for sample in sample_names
             )
 
+            # ---------------------------------------------------------
+            # QUERY NOT PRESENT AT ALL
+            # ---------------------------------------------------------
+
             if seq_id not in identifications:
-                hit = "NA"
+
+                hit_out = "NA"
                 similarity_out = "NA"
                 coverage_out = "NA"
+
                 missing_queries.append(seq_id)
 
             else:
+
                 identification = identifications[seq_id]
 
-                if (
-                    identification["similarity"] >= min_similarity
-                    and identification["coverage"] >= min_coverage
-                ):
-                    hit = identification["hit"]
-                    similarity_out = identification["similarity_text"]
-                    coverage_out = identification["coverage_text"]
+                # -----------------------------------------------------
+                # QUERY EXISTS, BUT THERE IS NO HIT
+                # -----------------------------------------------------
 
-                else:
-                    hit = "-"
+                if identification["no_hit"]:
+
+                    hit_out = "-"
                     similarity_out = "-"
                     coverage_out = "-"
+
+                    no_hit_count += 1
+
+                # -----------------------------------------------------
+                # HIT EXISTS AND PASSES THRESHOLDS
+                # -----------------------------------------------------
+
+                elif (
+                    identification["similarity"] >= min_similarity
+                    and
+                    identification["coverage"] >= min_coverage
+                ):
+
+                    hit_out = identification["hit"]
+
+                    similarity_out = (
+                        identification["similarity_text"]
+                    )
+
+                    coverage_out = (
+                        identification["coverage_text"]
+                    )
+
+                    passed_threshold += 1
+
+                # -----------------------------------------------------
+                # HIT EXISTS BUT FAILS THRESHOLDS
+                # -----------------------------------------------------
+
+                else:
+
+                    hit_out = "-"
+                    similarity_out = "-"
+                    coverage_out = "-"
+
+                    failed_threshold += 1
 
             print(
                 "\t".join([
                     seq_id,
                     samples,
                     abundances,
-                    hit,
+                    hit_out,
                     similarity_out,
                     coverage_out,
                     marker,
@@ -369,10 +501,16 @@ def write_output(
         if close_output:
             out.close()
 
-    return missing_queries
+    return {
+        "missing_queries": missing_queries,
+        "passed_threshold": passed_threshold,
+        "failed_threshold": failed_threshold,
+        "no_hit_count": no_hit_count
+    }
 
 
 def main():
+
     args = parse_arguments()
 
     print(
@@ -380,7 +518,9 @@ def main():
         file=sys.stderr
     )
 
-    variants, fasta_records = read_fasta(args.fasta)
+    variants, fasta_records = read_fasta(
+        args.fasta
+    )
 
     print(
         f"FASTA records: {fasta_records}",
@@ -397,8 +537,18 @@ def main():
         file=sys.stderr
     )
 
-    identifications, duplicate_queries = read_identification_table(
+    (
+        identifications,
+        duplicate_queries,
+        table_rows,
+        identification_no_hit_rows
+    ) = read_identification_table(
         args.table
+    )
+
+    print(
+        f"Identification table rows: {table_rows}",
+        file=sys.stderr
     )
 
     print(
@@ -407,7 +557,18 @@ def main():
         file=sys.stderr
     )
 
-    missing_queries = write_output(
+    print(
+        f"QUERY IDs without HIT: "
+        f"{identification_no_hit_rows}",
+        file=sys.stderr
+    )
+
+    print(
+        f"Writing output: {args.output}",
+        file=sys.stderr
+    )
+
+    statistics = write_output(
         variants=variants,
         identifications=identifications,
         min_similarity=args.similarity,
@@ -416,59 +577,129 @@ def main():
         output_filename=args.output
     )
 
-    # Final report
-    print("", file=sys.stderr)
-    print("=== FINAL REPORT ===", file=sys.stderr)
+    missing_queries = statistics["missing_queries"]
+
+    # =============================================================
+    # FINAL REPORT
+    # =============================================================
+
     print(
-        f"FASTA records:               {fasta_records}",
-        file=sys.stderr
-    )
-    print(
-        f"Unique sequence variants:    {len(variants)}",
-        file=sys.stderr
-    )
-    print(
-        f"Identification QUERY IDs:    {len(identifications)}",
-        file=sys.stderr
-    )
-    print(
-        f"FASTA seqIDs without QUERY:  {len(missing_queries)}",
-        file=sys.stderr
-    )
-    print(
-        f"Duplicated QUERY IDs:         {len(duplicate_queries)}",
+        "",
         file=sys.stderr
     )
 
+    print(
+        "=== FINAL REPORT ===",
+        file=sys.stderr
+    )
+
+    print(
+        f"FASTA records:                  "
+        f"{fasta_records}",
+        file=sys.stderr
+    )
+
+    print(
+        f"Unique sequence variants:       "
+        f"{len(variants)}",
+        file=sys.stderr
+    )
+
+    print(
+        f"Identification table rows:      "
+        f"{table_rows}",
+        file=sys.stderr
+    )
+
+    print(
+        f"Unique identification QUERYs:   "
+        f"{len(identifications)}",
+        file=sys.stderr
+    )
+
+    print(
+        f"Passed thresholds:              "
+        f"{statistics['passed_threshold']}",
+        file=sys.stderr
+    )
+
+    print(
+        f"Failed thresholds:              "
+        f"{statistics['failed_threshold']}",
+        file=sys.stderr
+    )
+
+    print(
+        f"QUERYs without HIT (-):         "
+        f"{statistics['no_hit_count']}",
+        file=sys.stderr
+    )
+
+    print(
+        f"FASTA seqIDs without QUERY:     "
+        f"{len(missing_queries)}",
+        file=sys.stderr
+    )
+
+    print(
+        f"Duplicated QUERY IDs:           "
+        f"{len(duplicate_queries)}",
+        file=sys.stderr
+    )
+
+    # =============================================================
+    # MISSING QUERY WARNING
+    # =============================================================
+
     if missing_queries:
+
         print(
-            "\nWARNING: Some FASTA seqIDs were not found as QUERY "
-            "in the identification table.",
+            "",
             file=sys.stderr
         )
 
         print(
-            "Their HIT/SIMILARITY/COVERAGE values were set to NA.",
+            "WARNING: Some FASTA seqIDs were not found "
+            "as QUERY in the identification table.",
+            file=sys.stderr
+        )
+
+        print(
+            "Their HIT/SIMILARITY/COVERAGE values "
+            "were set to NA.",
             file=sys.stderr
         )
 
         max_show = 20
 
         for seq_id in missing_queries[:max_show]:
+
             print(
                 f"  missing QUERY: {seq_id}",
                 file=sys.stderr
             )
 
         if len(missing_queries) > max_show:
+
             print(
-                f"  ... and {len(missing_queries) - max_show} more",
+                f"  ... and "
+                f"{len(missing_queries) - max_show} more",
                 file=sys.stderr
             )
 
+    # =============================================================
+    # DUPLICATE QUERY WARNING
+    # =============================================================
+
     if duplicate_queries:
+
         print(
-            "\nWARNING: Some QUERY IDs occur more than once "
+            "",
+            file=sys.stderr
+        )
+
+        print(
+            "WARNING: Some QUERY IDs occur more than once "
             "in the identification table.",
             file=sys.stderr
         )
@@ -480,25 +711,52 @@ def main():
 
         max_show = 20
 
-        for query, count in list(duplicate_queries.items())[:max_show]:
+        duplicate_items = list(
+            duplicate_queries.items()
+        )
+
+        for query, count in duplicate_items[:max_show]:
+
             print(
-                f"  duplicate QUERY: {query} ({count} rows)",
+                f"  duplicate QUERY: "
+                f"{query} ({count} rows)",
                 file=sys.stderr
             )
 
         if len(duplicate_queries) > max_show:
+
             print(
-                f"  ... and {len(duplicate_queries) - max_show} more",
+                f"  ... and "
+                f"{len(duplicate_queries) - max_show} more",
                 file=sys.stderr
             )
 
-    if not missing_queries and not duplicate_queries:
+    if (
+        not missing_queries
+        and
+        not duplicate_queries
+    ):
+
+        print(
+            "",
+            file=sys.stderr
+        )
+
         print(
             "No missing or duplicated QUERY IDs detected.",
             file=sys.stderr
         )
 
+    print(
+        "",
+        file=sys.stderr
+    )
+
+    print(
+        "Finished.",
+        file=sys.stderr
+    )
+
 
 if __name__ == "__main__":
     main()
-
