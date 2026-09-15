@@ -60,7 +60,9 @@ GF6_ALL_SAMPLES_its1_scored_variants_UNITE10_PROCESSED.txt \
 > GF6_ALL_SAMPLES_its1_scored_variants_UNITE10_PROCESSED_clean.txt
 ```
 ### CREATE VARIANTS TABLE
-
+  
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/RELESE6/create_variant_table.py`
+  
 ```
 python3 create_variant_table.py \
     --fasta GF6_ALL_SAMPLES.fa.its1.gz \
