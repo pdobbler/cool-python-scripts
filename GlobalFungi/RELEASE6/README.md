@@ -62,3 +62,44 @@ GF6_ALL_SAMPLES_its1_scored_variants_UNITE10_PROCESSED.txt \
 
 
 
+### DATABASE STRUCTURE
+  
+```
+CREATE TABLE IF NOT EXISTS `variants` (
+  `id` int(10) unsigned NOT NULL,
+  `cl_id` int(10) unsigned NOT NULL,
+  `marker` varchar(4) NOT NULL,  
+  `hash` varchar(32) NOT NULL,
+  `sequence` TEXT NOT NULL
+);
+```
+
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/VARIANTS_variants.txt' INTO TABLE variants FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
+
+```
+ALTER TABLE variants
+  ADD INDEX idx_variants_hash_id_clid (hash, id, cl_id);
+```
+
+```
+CREATE TABLE IF NOT EXISTS `samplevar` (
+  `id` bigint(20) unsigned NOT NULL,
+  `variant` int(10) unsigned NOT NULL,
+  `sample` int(10) unsigned NOT NULL,
+  `abundance` int(10) unsigned NOT NULL,
+  `cl_id` int(10) unsigned NOT NULL
+);
+```
+
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/VARIANTS_samplevar.txt' INTO TABLE samplevar FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
+
+- taxa search
+```
+alter table samplevar add index idx_samplevar_clid_sample_abundance (cl_id, sample, abundance);
+ALTER TABLE samplevar ADD INDEX idx_samplevar_variant_sample_abundance (variant, sample, abundance);
+```
+-geosearch
+`CREATE INDEX idx_samplevar_sample_clid ON samplevar (sample, cl_id);`
+
+Update stats after creating indexes
+`ANALYZE TABLE variants, samplevar, clusters_tax;`
