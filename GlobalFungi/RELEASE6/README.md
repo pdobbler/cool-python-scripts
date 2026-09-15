@@ -41,3 +41,24 @@ mkdir -p /mnt/DATA1/tmp
 export TMPDIR=/mnt/DATA1/tmp
 cat blast_and_sort_command.sh | parallel --tmpdir /mnt/DATA1/tmp
 ```
+  
+### get best hits
+  
+`cat ANNOT_ITS1_UNITE10/*_best.tab > GF6_ALL_SAMPLES_its1_scored_variants_UNITE10_best.tab`
+`cat ANNOT_ITS2_UNITE10/*_best.tab > GF6_ALL_SAMPLES_its2_scored_variants_UNITE10_best.tab`
+
+  
+### get processed blast file
+
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/Custom_annotation/PROCESS_BLAST_RESULTS_SIMPLE.py`
+
+`python2.7 PROCESS_BLAST_RESULTS_SIMPLE.py GF6_ALL_SAMPLES.fa.its1.gz_scored_variants.fa.gz GF6_ALL_SAMPLES_its1_scored_variants_UNITE10_best.tab GF6_ALL_SAMPLES_its1_scored_variants_UNITE10_PROCESSED.txt`
+
+```
+awk 'BEGIN{OFS="\t"} NR==1{print; next} {sub(/;.*/, "", $1); print}' \
+GF6_ALL_SAMPLES_its1_scored_variants_UNITE10_PROCESSED.txt \
+> GF6_ALL_SAMPLES_its1_scored_variants_UNITE10_PROCESSED_clean.txt
+```
+
+
+
