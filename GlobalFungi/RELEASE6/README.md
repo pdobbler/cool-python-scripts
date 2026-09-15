@@ -73,6 +73,32 @@ python3 create_variant_table.py \
     --output GF6_ALL_SAMPLES_ITS1_variants.tsv
 ```
 
+```
+Reading FASTA: GF6_ALL_SAMPLES.fa.its1.gz
+FASTA records: 1845276525
+Unique sequence variants: 274525757
+Reading identification table: GF6_ALL_SAMPLES_its1_scored_variants_UNITE10_PROCESSED_clean.txt.gz
+Identification table rows: 274525757
+Unique QUERY IDs in identification table: 274525757
+QUERY IDs without HIT: 50605033
+Writing output: GF6_ALL_SAMPLES_ITS1_variants.tsv
+
+=== FINAL REPORT ===
+FASTA records:                  1845276525
+Unique sequence variants:       274525757
+Identification table rows:      274525757
+Unique identification QUERYs:   274525757
+Passed thresholds:              27611454
+Failed thresholds:              196309270
+QUERYs without HIT (-):         50605033
+FASTA seqIDs without QUERY:     0
+Duplicated QUERY IDs:           0
+
+No missing or duplicated QUERY IDs detected.
+
+Finished.
+```
+
 
 ### DATABASE STRUCTURE
   
