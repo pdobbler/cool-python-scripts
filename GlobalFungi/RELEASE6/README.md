@@ -100,16 +100,6 @@ Finished.
 ```
 
 ```
-Reading FASTA: GF6_ALL_SAMPLES.fa.its1.gz
-FASTA records: 1845276525
-Unique sequence variants: 274525757
-Reading identification table: GF6_ALL_SAMPLES_its1_scored_variants_UNITE10_PROCESSED_clean.txt.gz
-Identification table rows: 274525757
-Unique QUERY IDs in identification table: 274525757
-QUERY IDs without HIT: 50605033
-Writing output: GF6_ALL_SAMPLES_ITS1_variants.tsv
-
-=== FINAL REPORT ===
 Reading FASTA: GF6_ALL_SAMPLES.fa.its2.gz
 FASTA records: 4579522152
 Unique sequence variants: 490801868
