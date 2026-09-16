@@ -99,7 +99,42 @@ No missing or duplicated QUERY IDs detected.
 Finished.
 ```
 
+```
+Reading FASTA: GF6_ALL_SAMPLES.fa.its1.gz
+FASTA records: 1845276525
+Unique sequence variants: 274525757
+Reading identification table: GF6_ALL_SAMPLES_its1_scored_variants_UNITE10_PROCESSED_clean.txt.gz
+Identification table rows: 274525757
+Unique QUERY IDs in identification table: 274525757
+QUERY IDs without HIT: 50605033
+Writing output: GF6_ALL_SAMPLES_ITS1_variants.tsv
 
+=== FINAL REPORT ===
+Reading FASTA: GF6_ALL_SAMPLES.fa.its2.gz
+FASTA records: 4579522152
+Unique sequence variants: 490801868
+Reading identification table: GF6_ALL_SAMPLES_its2_scored_variants_UNITE10_PROCESSED_clean.txt.gz
+Identification table rows: 490801868
+Unique QUERY IDs in identification table: 490801868
+QUERY IDs without HIT: 34835151
+Writing output: GF6_ALL_SAMPLES_ITS2_variants.tsv
+
+=== FINAL REPORT ===
+FASTA records:                  4579522152
+Unique sequence variants:       490801868
+Identification table rows:      490801868
+Unique identification QUERYs:   490801868
+Passed thresholds:              65904385
+Failed thresholds:              390062332
+QUERYs without HIT (-):         34835151
+FASTA seqIDs without QUERY:     0
+Duplicated QUERY IDs:           0
+
+No missing or duplicated QUERY IDs detected.
+
+Finished.
+```
+  
 ### DATABASE STRUCTURE
   
 ```
