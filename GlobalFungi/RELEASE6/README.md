@@ -65,7 +65,7 @@ GF6_ALL_SAMPLES_its1_scored_variants_UNITE10_PROCESSED.txt \
   
 ```
 python3 create_variant_table.py \
-    --fasta GF6_ALL_SAMPLES.fa.its1.gz \
+    --fasta GF6_ALL_SAMPLES.renamed.fa.its1.gz \
     --table GF6_ALL_SAMPLES_its1_scored_variants_UNITE10_PROCESSED_clean.txt.gz \
     --similarity 98.5 \
     --coverage 90.0 \
