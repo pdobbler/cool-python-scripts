@@ -98,7 +98,17 @@ No missing or duplicated QUERY IDs detected.
 
 Finished.
 ```
-
+  
+```
+python3 create_variant_table.py \
+    --fasta GF6_ALL_SAMPLES.renamed.fa.its2.gz \
+    --table GF6_ALL_SAMPLES_its2_scored_variants_UNITE10_PROCESSED_clean.txt.gz \
+    --similarity 98.5 \
+    --coverage 90.0 \
+    --marker ITS2 \
+    --output GF6_ALL_SAMPLES_ITS2_variants.tsv
+```
+  
 ```
 Reading FASTA: GF6_ALL_SAMPLES.fa.its2.gz
 FASTA records: 4579522152
