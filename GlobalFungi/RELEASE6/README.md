@@ -61,7 +61,7 @@ GF6_ALL_SAMPLES_its1_scored_variants_UNITE10_PROCESSED.txt \
 ```
 ### CREATE VARIANTS TABLE
   
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/RELESE6/create_variant_table.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/RELEASE6/create_variant_table.py`
   
 ```
 python3 create_variant_table.py \
@@ -127,7 +127,7 @@ Finished.
   
 ### CREATE SQL TABLES
   
-`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/RELESE6/create_sql_tables.py`
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/RELEASE6/create_sql_tables.py`
   
 `cat GF6_ALL_SAMPLES_ITS*_variants.tsv > GF6_ALL_SAMPLES_variants_ALL.tsv`  
   
