@@ -125,6 +125,18 @@ No missing or duplicated QUERY IDs detected.
 Finished.
 ```
   
+### CREATE SQL TABLES
+  
+`wget https://raw.githubusercontent.com/pdobbler/cool-python-scripts/main/GlobalFungi/RELESE6/create_sql_tables.py`
+  
+`cat GF6_ALL_SAMPLES_ITS*_variants.tsv > GF6_ALL_SAMPLES_variants_ALL.tsv`  
+  
+```
+python3 create_sql_tables.py \
+    --input GF6_ALL_SAMPLES_variants_ALL.tsv \
+    --outdir GF6_SQL
+```
+  
 ### DATABASE STRUCTURE
   
 ```
