@@ -146,6 +146,45 @@ python3 create_sql_tables.py \
     --input GF6_ALL_SAMPLES_variants_ALL.tsv \
     --outdir GF6_SQL
 ```
+
+```
+=== FINAL REPORT ===
+Variants:                 765,327,625
+Samplevar records:        1,265,795,928
+Unique samples:           121,054
+Unique SH IDs:            95,765
+Identified variants:      93,515,839
+Variants without HIT:     671,811,786
+Total abundance:          6,424,798,677
+Duplicate seqID occurrences: 14
+Unique seqIDs:            765,327,611
+
+WARNING: Duplicate seqIDs detected!
+Duplicate records were NOT skipped.
+First 20 duplicate occurrences:
+  Line 277482785: f3874e362bc6e944ba8030fce5683e80
+  Line 277486566: e1faffb3e614e6c2fba74296962386b7
+  Line 305955872: bd140bb5b3c0a2ed58590dd92984ff5f
+  Line 306034067: 69259935241d8e4ff8b51f91e1d1fa0c
+  Line 310036553: 9dae984b83b8ef9c995eb9f4b10a0114
+  Line 310889542: fb258af26e64ce2e43f7c764ac204a14
+  Line 310942034: 432d84d3faed2ed5312ba059a5b59d6d
+  Line 321200524: cd6a9bd2a175104eed40f0d33a8b4020
+  Line 321369724: 4144e097d2fa7a491cec2a7a4322f2bc
+  Line 322857358: c523e684755a087b7f37dc137b8759ed
+  Line 326184410: 890a10788493e3d572586e991cd43543
+  Line 348365839: df1f3edb9115acb0a1e04209b7a9937b
+  Line 362033703: 30371fc8df00f2c901ad80a227fe48a9
+  Line 364341210: 03fbfecfc197dfd65038d31e6e0a162d
+
+Output files:
+  variants: GF6_SQL/variants.tsv
+  samplevar: GF6_SQL/samplevar.tsv
+  sh_table: GF6_SQL/sh_table.tsv
+  sample_table: GF6_SQL/sample_table.tsv
+
+Finished successfully.
+```
   
 ### DATABASE STRUCTURE
   
