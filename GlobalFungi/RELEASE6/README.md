@@ -232,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `samplevar` (
 );
 ```
 
-`LOAD DATA LOCAL INFILE '/var/lib/mysql/GB1_TABLES_RAW/VARIANTS_samplevar.txt' INTO TABLE samplevar FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/RELEASE6/samplevar.tsv' INTO TABLE samplevar FIELDS TERMINATED BY '\t' ESCAPED BY '\b' LINES TERMINATED BY '\n' IGNORE 1 LINES;`
 
 - taxa search
 ```
