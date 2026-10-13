@@ -234,13 +234,26 @@ CREATE TABLE IF NOT EXISTS `samplevar` (
 
 `LOAD DATA LOCAL INFILE '/var/lib/mysql/RELEASE6/samplevar.tsv' INTO TABLE samplevar FIELDS TERMINATED BY '\t' ESCAPED BY '\b' LINES TERMINATED BY '\n' IGNORE 1 LINES;`
 
-- taxa search
+USE gf6;
+
 ```
-alter table samplevar add index idx_samplevar_clid_sample_abundance (cl_id, sample, abundance);
-ALTER TABLE samplevar ADD INDEX idx_samplevar_variant_sample_abundance (variant, sample, abundance);
+SHOW INDEX FROM samplevar;
+
+ALTER TABLE samplevar
+  ADD PRIMARY KEY (id);
+
+ALTER TABLE samplevar
+  ADD INDEX IF NOT EXISTS idx_samplevar_clid_sample_abundance
+    (cl_id, sample, abundance),
+  ADD INDEX IF NOT EXISTS idx_samplevar_variant_sample_abundance
+    (variant, sample, abundance),
+  ADD INDEX IF NOT EXISTS idx_samplevar_sample_clid
+    (sample, cl_id);
+
+ANALYZE TABLE samplevar;
 ```
--geosearch
-`CREATE INDEX idx_samplevar_sample_clid ON samplevar (sample, cl_id);`
+
+
 
 Update stats after creating indexes
 `ANALYZE TABLE variants, samplevar, clusters_tax;`
