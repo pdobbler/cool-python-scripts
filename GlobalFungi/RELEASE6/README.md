@@ -185,6 +185,14 @@ Output files:
 
 Finished successfully.
 ```
+
+### MOVING FILES TO SERVER
+
+GF server
+`sudo chmod -R 777 /mnt/DATA/mysql-data/RELEASE6/`
+
+PROCESSING server
+`scp -i /mnt/DATA1/KEYS/FMT_2.pem samplevar.tsv.gz ubuntu@147.251.245.145:/mnt/DATA/mysql-data/RELEASE6/`
   
 ### DATABASE STRUCTURE
   
