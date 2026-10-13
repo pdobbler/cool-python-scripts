@@ -257,3 +257,27 @@ ANALYZE TABLE samplevar;
 
 Update stats after creating indexes
 `ANALYZE TABLE variants, samplevar, clusters_tax;`
+
+```
+CREATE TABLE clusters_tax (
+  `id`      INT UNSIGNED NOT NULL,
+  `SH`      VARCHAR(32) NOT NULL,
+  `Kingdom` VARCHAR(64) NOT NULL,
+  `Phylum`  VARCHAR(64) NOT NULL,
+  `Class`   VARCHAR(64) NOT NULL,
+  `Order`   VARCHAR(64) NOT NULL,
+  `Family`  VARCHAR(64) NOT NULL,
+  `Genus`   VARCHAR(64) NOT NULL,
+  `Species` VARCHAR(64) NOT NULL,
+
+  KEY idx_clusters_tax_id (id),
+  KEY idx_clusters_tax_sh_id (SH, id),
+  KEY idx_clusters_tax_genus_id (Genus, id),
+  KEY idx_clusters_tax_species_id (Species, id)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_unicode_ci;
+```
+
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/RELEASE6/tax_table.tsv' INTO TABLE clusters_tax FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
