@@ -195,9 +195,13 @@ PROCESSING server
 `scp -i /mnt/DATA1/KEYS/FMT_2.pem samplevar.tsv.gz ubuntu@147.251.245.145:/mnt/DATA/mysql-data/RELEASE6/`
 
   
-### Connect from host:
+### SET UP DATABASE
 
+connect
 `docker exec -it mariadb_ok mariadb -u root -p` [ubuntu]
+
+`CREATE DATABASE gf6;`
+`USE gf6;`
   
 ### DATABASE STRUCTURE
   
