@@ -280,4 +280,4 @@ DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_unicode_ci;
 ```
 
-`LOAD DATA LOCAL INFILE '/var/lib/mysql/RELEASE6/tax_table.tsv' INTO TABLE clusters_tax FIELDS TERMINATED BY '\t' ESCAPED BY '\b';`
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/RELEASE6/tax_table.tsv' INTO TABLE clusters_tax FIELDS TERMINATED BY '\t' ESCAPED BY '\b' LINES TERMINATED BY '\n' IGNORE 1 LINES;`
