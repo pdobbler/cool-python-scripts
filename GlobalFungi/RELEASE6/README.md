@@ -433,3 +433,63 @@ COLLATE=utf8mb4_unicode_ci;
 ```
 
 `LOAD DATA LOCAL INFILE '/var/lib/mysql/RELEASE6/metadata/SAMPLES_PAPERS.txt' INTO TABLE samples_papers FIELDS TERMINATED BY '\t' ESCAPED BY '\b' LINES TERMINATED BY '\r\n';`
+
+
+```
+CREATE TABLE IF NOT EXISTS app_submissions (
+    id            INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    token         VARCHAR(32) NOT NULL,
+    created_at    TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    title         TEXT NOT NULL,
+    authors       TEXT NOT NULL,
+    year          VARCHAR(4) NOT NULL,
+    email         VARCHAR(254) NOT NULL,
+    affiliation   TEXT NOT NULL,
+    country       VARCHAR(100) NOT NULL,
+    journal       TEXT NOT NULL,
+    doi           VARCHAR(255) NOT NULL,
+    repository    TEXT NOT NULL,
+    notes         TEXT NOT NULL,
+    metadata_path TEXT NOT NULL,
+    sequence_path TEXT NOT NULL,
+    status        VARCHAR(32) NOT NULL DEFAULT 'submitted',
+
+    PRIMARY KEY (id),
+    UNIQUE KEY uq_app_submissions_token (token)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_unicode_ci;
+```
+
+```
+CREATE TABLE IF NOT EXISTS app_messages (
+    id         INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    email      VARCHAR(254) NOT NULL,
+    subject    VARCHAR(255) NOT NULL,
+    message    TEXT NOT NULL,
+    status     VARCHAR(32) NOT NULL DEFAULT 'new',
+
+    PRIMARY KEY (id)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_unicode_ci;
+```
+
+```
+CREATE TABLE IF NOT EXISTS app_mailing_list (
+    id         INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    name       VARCHAR(255) NOT NULL,
+    email      VARCHAR(254) NOT NULL,
+    consent    TINYINT(1) NOT NULL,
+
+    PRIMARY KEY (id),
+    UNIQUE KEY uq_app_mailing_list_email (email)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_unicode_ci;
+```
