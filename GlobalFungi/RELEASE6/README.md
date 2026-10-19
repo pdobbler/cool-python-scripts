@@ -432,3 +432,4 @@ DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_unicode_ci;
 ```
 
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/RELEASE6/metadata/SAMPLES_PAPERS.txt' INTO TABLE samples_papers FIELDS TERMINATED BY '\t' ESCAPED BY '\b' LINES TERMINATED BY '\r\n';`
