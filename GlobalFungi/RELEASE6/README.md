@@ -281,3 +281,106 @@ COLLATE=utf8mb4_unicode_ci;
 ```
 
 `LOAD DATA LOCAL INFILE '/var/lib/mysql/RELEASE6/tax_table.tsv' INTO TABLE clusters_tax FIELDS TERMINATED BY '\t' ESCAPED BY '\b' LINES TERMINATED BY '\n' IGNORE 1 LINES;`
+
+
+```
+CREATE TABLE IF NOT EXISTS samples_basic (
+    id                    INT NOT NULL,
+    paper                 INT NOT NULL,
+    permanent_id          VARCHAR(16) NOT NULL,
+    sample_type           VARCHAR(32) NOT NULL,
+    latitude              FLOAT NOT NULL,
+    longitude             FLOAT NOT NULL,
+    continent             VARCHAR(14) NOT NULL,
+    year_of_sampling_from INT NULL,
+    year_of_sampling_to   INT NULL,
+    Biome                 VARCHAR(32) NOT NULL,
+    primers               VARCHAR(128) NOT NULL,
+    MAT                   FLOAT NULL,
+    MAP                   FLOAT NULL,
+    pH                    FLOAT NULL,
+    SOC                   FLOAT NULL,
+    ITS_total             INT NOT NULL,
+    manipulated           TINYINT(1) NOT NULL,
+
+    PRIMARY KEY (id),
+    KEY idx_samples_basic_paper (paper)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_unicode_ci;
+```
+
+`LOAD DATA LOCAL INFILE '/var/lib/mysql/RELEASE6/metadata/SAMPLES_BASIC.txt' INTO TABLE samples_basic FIELDS TERMINATED BY '\t' ESCAPED BY '\b' LINES TERMINATED BY '\n';`
+
+
+```
+CREATE TABLE IF NOT EXISTS samples_advanced (
+    id                        INT NOT NULL,
+    sample_name               VARCHAR(128) NOT NULL,
+    sample_description        TEXT NOT NULL,
+    sequencing_platform       VARCHAR(16) NOT NULL,
+    target_gene               VARCHAR(7) NOT NULL,
+    primers_sequence          VARCHAR(256) NOT NULL,
+    sample_seqid              VARCHAR(256) NOT NULL,
+    sample_barcode            VARCHAR(128) NOT NULL,
+    elevation                 INT NULL,
+    MAT_study                 FLOAT NULL,
+    MAP_study                 FLOAT NULL,
+    Biome_detail              VARCHAR(64) NOT NULL,
+    country                   VARCHAR(64) NOT NULL,
+    month_of_sampling         VARCHAR(32) NOT NULL,
+    day_of_sampling           VARCHAR(16) NOT NULL,
+    plants_dominant           TEXT NOT NULL,
+    plants_all                TEXT NOT NULL,
+    area_sampled              FLOAT NULL,
+    number_of_subsamples_from INT NULL,
+    number_of_subsamples_to   INT NULL,
+    sampling_info             TEXT NOT NULL,
+    sample_depth_from         FLOAT NULL,
+    sample_depth_to           FLOAT NULL,
+    extraction_DNA_mass_from  FLOAT NULL,
+    extraction_DNA_mass_to    FLOAT NULL,
+    extraction_DNA_size       VARCHAR(256) NOT NULL,
+    extraction_DNA_method     VARCHAR(256) NOT NULL,
+    total_C_content           FLOAT NULL,
+    total_N_content           FLOAT NULL,
+    organic_matter_content    FLOAT NULL,
+    pH_study                  FLOAT NULL,
+    pH_method                 VARCHAR(12) NOT NULL,
+    total_Ca                  FLOAT NULL,
+    total_P                   FLOAT NULL,
+    total_K                   FLOAT NULL,
+    sample_info               TEXT NOT NULL,
+    location                  VARCHAR(256) NOT NULL,
+    area_GPS_from             FLOAT NULL,
+    area_GPS_to               FLOAT NULL,
+    ITS1_extracted            INT NOT NULL,
+    ITS2_extracted            INT NOT NULL,
+
+    PRIMARY KEY (id)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_unicode_ci;
+```
+
+```
+CREATE TABLE IF NOT EXISTS samples_papers (
+    id          INT NOT NULL,
+    add_date    VARCHAR(10) NOT NULL,
+    year        INT NOT NULL,
+    title       TEXT NOT NULL,
+    authors     TEXT NOT NULL,
+    journal     VARCHAR(128) NOT NULL,
+    doi         VARCHAR(64) NOT NULL,
+    contact     TEXT NOT NULL,
+    manipulated TINYINT(1) NOT NULL,
+
+    PRIMARY KEY (id)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_unicode_ci;
+```
+
