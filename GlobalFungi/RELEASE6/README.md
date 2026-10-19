@@ -284,34 +284,44 @@ COLLATE=utf8mb4_unicode_ci;
 
 
 ```
-CREATE TABLE IF NOT EXISTS samples_basic (
-    id                    INT NOT NULL,
-    paper                 INT NOT NULL,
-    permanent_id          VARCHAR(16) NOT NULL,
-    sample_type           VARCHAR(32) NOT NULL,
-    latitude              FLOAT NOT NULL,
-    longitude             FLOAT NOT NULL,
-    continent             VARCHAR(14) NOT NULL,
-    year_of_sampling_from INT NULL,
-    year_of_sampling_to   INT NULL,
-    Biome                 VARCHAR(32) NOT NULL,
-    primers               VARCHAR(128) NOT NULL,
-    MAT                   FLOAT NULL,
-    MAP                   FLOAT NULL,
-    pH                    FLOAT NULL,
-    SOC                   FLOAT NULL,
-    ITS_total             INT NOT NULL,
-    manipulated           TINYINT(1) NOT NULL,
-
-    PRIMARY KEY (id),
-    KEY idx_samples_basic_paper (paper)
-)
-ENGINE=InnoDB
-DEFAULT CHARSET=utf8mb4
-COLLATE=utf8mb4_unicode_ci;
+CREATE TABLE IF NOT EXISTS `samples_basic` (
+  `id` int NOT NULL PRIMARY KEY,
+  `paper` int NOT NULL,
+  `permanent_id` VARCHAR(16) NOT NULL,
+  `sample_type` VARCHAR(32) NOT NULL,
+  `latitude` float NOT NULL,
+  `longitude` float NOT NULL,
+  `continent` VARCHAR(14) NOT NULL,
+  `year_of_sampling_from` int,
+  `year_of_sampling_to` int,
+  `Biome` VARCHAR(32) NOT NULL,
+  `primers` VARCHAR(128) NOT NULL,
+  `MAT` FLOAT,
+  `MAP` FLOAT,
+  `pH` FLOAT,
+  `SOC` FLOAT,
+  `ITS_total` int NOT NULL,
+  `manipulated` TINYINT(1) NOT NULL
+);
 ```
 
-`LOAD DATA LOCAL INFILE '/var/lib/mysql/RELEASE6/metadata/SAMPLES_BASIC.txt' INTO TABLE samples_basic FIELDS TERMINATED BY '\t' ESCAPED BY '\b' LINES TERMINATED BY '\n';`
+```
+LOAD DATA INFILE '/var/lib/mysql/RELEASE6/metadata/SAMPLES_BASIC.txt'
+INTO TABLE samples_basic
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\r\n'
+(id, paper, permanent_id, sample_type, latitude, longitude,
+ continent, @year_of_sampling_from, @year_of_sampling_to,
+ Biome, primers, @MAT, @MAP, @pH, @SOC, ITS_total, manipulated)
+SET
+  year_of_sampling_from = NULLIF(@year_of_sampling_from, 'NULL'),
+  year_of_sampling_to = NULLIF(@year_of_sampling_to, 'NULL'),
+  MAT = NULLIF(@MAT, 'NULL'),
+  MAP = NULLIF(@MAP, 'NULL'),
+  pH = NULLIF(@pH, 'NULL'),
+  SOC = NULLIF(@SOC, 'NULL');
+```
+
 
 
 ```
