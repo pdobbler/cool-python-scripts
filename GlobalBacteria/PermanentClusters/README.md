@@ -1327,3 +1327,32 @@ index database
 
 `python2.7 BG_clusters_overview.py TAXONOMY_CLUSTERS.sorted.txt ARIANTS_variants.txt.gz VARIANTS_samplevar.txt.gz SAMPLES_BASIC3.txt GB1_OVERVIEW.txt`
 
+
+### RESTART - AFTER SERVER RESET
+
+root
+```
+sudo systemctl start docker
+sudo docker ps -a --format 'table {{.Names}}\t{{.Image}}\t{{.Status}}\t{{.Ports}}'
+sudo docker inspect mariadb_ok \
+  --format '{{range .Mounts}}{{println .Source "->" .Destination}}{{end}}'
+findmnt -T /mnt/data/mysql-data
+sudo ls -ld /mnt/data/mysql-data/GB2
+
+sudo docker start mariadb_ok
+sudo docker logs --tail 100 mariadb_ok
+
+sudo systemctl status shinyproxy nginx --no-pager
+pgrep -af '[s]hinyproxy'
+sudo ss -ltnp 'sport = :8080'
+curl -i --max-time 15 http://127.0.0.1:8000/ready
+
+cd /home/ubuntu
+ls -lh shinyproxy-3.2.0.jar application.yml
+
+nohup java -Xms1g -Xmx12g \
+  '-Xlog:gc*:file=shinyproxy_gc.log:time,uptime,level,tags' \
+  -jar /home/ubuntu/shinyproxy-3.2.0.jar \
+  >> /home/ubuntu/shinyproxy.out 2>&1 < /dev/null &
+```
+
