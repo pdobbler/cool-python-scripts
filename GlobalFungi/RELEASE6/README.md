@@ -322,7 +322,7 @@ SET
   SOC = NULLIF(@SOC, 'NULL');
 ```
 
-
+`ALTER TABLE samples_basic ADD INDEX(id);`
 
 ```
 CREATE TABLE IF NOT EXISTS samples_advanced (
@@ -373,6 +373,44 @@ CREATE TABLE IF NOT EXISTS samples_advanced (
 ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_unicode_ci;
+```
+
+```
+LOAD DATA INFILE '/var/lib/mysql/RELEASE6/metadata/SAMPLES_ADVANCED.txt'
+INTO TABLE `samples_advanced`
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\r\n'
+(
+  `id`, `sample_name`, `sample_description`, `sequencing_platform`, `target_gene`, 
+  `primers_sequence`, `sample_seqid`, `sample_barcode`, @elevation, @MAT_study, 
+  @MAP_study, `Biome_detail`, `country`, `month_of_sampling`, `day_of_sampling`, 
+  `plants_dominant`, `plants_all`, @area_sampled, @number_of_subsamples_from, 
+  @number_of_subsamples_to, sampling_info, @sample_depth_from, @sample_depth_to, 
+  @extraction_DNA_mass_from, @extraction_DNA_mass_to, `extraction_DNA_size`, 
+  `extraction_DNA_method`, @total_C_content, @total_N_content, @organic_matter_content, 
+  @pH_study, `pH_method`, @total_Ca, @total_P, @total_K, sample_info, `location`, 
+  @area_GPS_from, @area_GPS_to, `ITS1_extracted`, `ITS2_extracted`
+)
+SET
+`elevation` = NULLIF(@elevation, 'NULL'),
+`MAT_study` = NULLIF(@MAT_study, 'NULL'),
+`MAP_study` = NULLIF(@MAP_study, 'NULL'),
+`area_sampled` = NULLIF(@area_sampled, 'NULL'),
+`number_of_subsamples_from` = NULLIF(@number_of_subsamples_from, 'NULL'),
+`number_of_subsamples_to` = NULLIF(@number_of_subsamples_to, 'NULL'),
+`sample_depth_from` = NULLIF(@sample_depth_from, 'NULL'),
+`sample_depth_to` = NULLIF(@sample_depth_to, 'NULL'),
+`extraction_DNA_mass_from` = NULLIF(@extraction_DNA_mass_from, 'NULL'),
+`extraction_DNA_mass_to` = NULLIF(@extraction_DNA_mass_to, 'NULL'),
+`total_C_content` = NULLIF(@total_C_content, 'NULL'),
+`total_N_content` = NULLIF(@total_N_content, 'NULL'),
+`organic_matter_content` = NULLIF(@organic_matter_content, 'NULL'),
+`pH_study` = NULLIF(@pH_study, 'NULL'),
+`total_Ca` = NULLIF(@total_Ca, 'NULL'),
+`total_P` = NULLIF(@total_P, 'NULL'),
+`total_K` = NULLIF(@total_K, 'NULL'),
+`area_GPS_from` = NULLIF(@area_GPS_from, 'NULL'),
+`area_GPS_to` = NULLIF(@area_GPS_to, 'NULL');
 ```
 
 ```
