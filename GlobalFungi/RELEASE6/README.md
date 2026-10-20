@@ -493,3 +493,19 @@ ENGINE=InnoDB
 DEFAULT CHARSET=utf8mb4
 COLLATE=utf8mb4_unicode_ci;
 ```
+
+```
+CREATE TABLE IF NOT EXISTS traffic (
+  id       INT NOT NULL AUTO_INCREMENT,
+  session  INT NOT NULL,
+  category VARCHAR(32) DEFAULT NULL,
+  value    VARCHAR(64) DEFAULT NULL,
+  date     TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id),
+  KEY idx_traffic_session_date (session, date),
+  KEY idx_traffic_date (date),
+  KEY idx_traffic_category_date (category, date)
+) ENGINE=InnoDB
+  DEFAULT CHARSET=utf8mb4
+  COLLATE=utf8mb4_unicode_ci;
+```
